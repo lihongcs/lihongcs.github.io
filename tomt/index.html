@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</title>
+    <style>
+        :root {
+            --bg-color: #FAF9F6;
+            --text-color: #1c1917;
+            --secondary-text: #57534e;
+        }
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
+        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
+        .links a {
+            display: inline-block;
+            margin-right: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid #e7e5e4;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+        }
+        .links a:hover { background: var(--text-color); color: var(--bg-color); }
+        .teaser { margin: 3rem 0; text-align: center; }
+        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
+        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
+        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
+        .home-link:hover { color: var(--text-color); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../index.html" class="home-link">← Back to Home</a>
+    <h1>Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</h1>
+    <div class="authors">Pengbo Hu, Ji Qi, Xingyu Li, <strong>Hong Li</strong>, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou</div>
+    <div class="venue">ArXiv 2023</div>
+    <div class="links">
+        <a href="http://arxiv.org/abs/2308.09658v2" target="_blank">arXiv</a>
+        <a href="https://arxiv.org/pdf/2308.09658v2" target="_blank">PDF</a>
+    </div>
+    
+    <div class="teaser">
+        <img src="../images/tomt/tomt.png" alt="Teaser">
+    </div>
+
+    <h2>Abstract</h2>
+    <div class="abstract">
+        There emerges a promising trend of using large language models (LLMs) to generate code-like plans for complex inference tasks such as visual reasoning. This paradigm, known as LLM-based planning, provides flexibility in problem solving and endows better interpretability. However, current research is mostly limited to basic scenarios of simple questions that can be straightforward answered in a few inference steps. Planning for the more challenging multi-hop visual reasoning tasks remains under-explored. Specifically, under multi-hop reasoning situations, the trade-off between accuracy and the complexity of plan-searching becomes prominent. The prevailing algorithms either address the efficiency issue by employing the fast one-stop generation or adopt a complex iterative generation method to improve accuracy. Both fail to balance the need for efficiency and performance. Drawing inspiration from the dual system of cognition in the human brain, the fast and the slow think processes, we propose a hierarchical plan-searching algorithm that integrates the one-stop reasoning (fast) and the Tree-of-thought (slow). Our approach succeeds in performance while significantly saving inference steps. Moreover, we repurpose the PTR and the CLEVER datasets, developing a systematic framework for evaluating the performance and efficiency of LLMs-based plan-search algorithms under reasoning tasks at different levels of difficulty. Extensive experiments demonstrate the superiority of our proposed algorithm in terms of performance and efficiency. The dataset and code will be release soon.
+    </div>
+</div>
+</body>
+</html>
