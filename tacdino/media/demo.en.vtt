@@ -1,0 +1,184 @@
+WEBVTT
+
+00:06.000 --> 00:14.000
+We collect tactile observations together with
+RGB, depth, and scanned object geometry.
+
+00:14.000 --> 00:20.000
+A handheld 3D scanner captures the object shape for contact annotation.
+
+00:20.000 --> 00:25.000
+Each tactile observation is linked to a marked location on the 3D scan.
+
+00:25.000 --> 00:30.000
+This links a local surface contact to its tactile record.
+
+00:30.000 --> 00:36.000
+We render the scanned object from multiple viewpoints.
+
+00:36.000 --> 00:42.000
+Contact-visible views link the same touch to RGB and visible pointmaps.
+
+00:42.000 --> 00:50.000
+One object contains many contacts, each paired with a tactile observation.
+
+00:50.000 --> 01:00.000
+These contact locations connect local touch to the full object.
+
+01:00.000 --> 01:09.000
+We now follow one annotated contact on a hammer.
+
+01:09.000 --> 01:18.000
+The highlighted location is paired with its recorded tactile sequence.
+
+01:18.000 --> 01:25.000
+The same object is represented by RGB, depth, and pointmap.
+
+01:25.000 --> 01:32.000
+Local observations use a shared crop centered on the selected contact.
+
+01:32.000 --> 01:35.000
+Tactile images also contain information about contact deformation.
+
+01:35.000 --> 01:44.000
+From the same tactile frame, we reconstruct contact depth and a pointmap.
+
+01:44.000 --> 01:52.000
+Material labels follow the contact location; one object can contain different materials.
+
+01:52.000 --> 01:58.000
+Touch3D contains 505 objects and 20,025 tactile contacts.
+
+01:58.000 --> 02:04.000
+Objects span six everyday scene groups.
+
+02:04.000 --> 02:11.000
+Touch3D expands object coverage from 100 to 505 objects.
+
+02:11.000 --> 02:18.000
+Our ObjectFolder Real evaluation subset contains 85 objects and 2,839 contacts.
+
+02:18.000 --> 02:27.000
+CoMT-Bench first tests whether local touch retrieves the same global object.
+
+02:27.000 --> 02:36.000
+Patch-level retrieval tests exact contact matching across RGB, depth, and pointmap.
+
+02:36.000 --> 02:44.000
+Material and category classification test what tactile features describe.
+
+02:44.000 --> 02:48.000
+GeoTAC combines tactile-centered alignment,
+DINO supervision, and geometry-relation distillation.
+
+02:48.000 --> 02:54.000
+Local tactile features align with RGB, depth, and pointmap from the same contact.
+
+02:54.000 --> 02:58.000
+All three alignment terms use touch as the common reference.
+
+02:58.000 --> 03:04.000
+A global RGB teacher supervises a local tactile student.
+
+03:04.000 --> 03:08.000
+This transfers global visual information to local tactile representations.
+
+03:08.000 --> 03:14.000
+Reconstructed tactile geometry provides an additional training signal.
+
+03:14.000 --> 03:20.000
+Geometry-relation distillation transfers
+local-to-global depth and pointmap similarities.
+
+03:20.000 --> 03:26.000
+The three objectives jointly train the tactile representation.
+
+03:26.000 --> 03:34.000
+Next, UniVTAC simulation demonstrations show
+synchronized RGB and tactile observations.
+
+03:34.000 --> 03:42.000
+The head and wrist views show motion while tactile images show local contact.
+
+03:42.000 --> 03:50.000
+Grasp Classify shows the object and observations from both tactile sensors.
+
+03:50.000 --> 03:58.000
+These are dataset demonstrations, not trained-policy success rollouts.
+
+03:58.000 --> 04:06.000
+We compare vision-tactile methods on Touch3D
+using the paper's four reported metrics.
+
+04:06.000 --> 04:14.000
+Patch alignment improves the contrastive baseline by 5.32 points.
+
+04:14.000 --> 04:22.000
+The same methods are evaluated on
+ObjectFolder Real without training on that dataset.
+
+04:22.000 --> 04:30.000
+Patch Tac with contrastive learning also gives the highest average here.
+
+04:30.000 --> 04:37.000
+GeoTAC improves global RGB, depth, and pointmap retrieval.
+
+04:37.000 --> 04:44.000
+The comparison includes both vision-tactile and multimodal baselines.
+
+04:44.000 --> 04:51.000
+Patch-level scores measure exact contact retrieval within the top five.
+
+04:51.000 --> 04:58.000
+GeoTAC leads all three local modality comparisons shown in the paper.
+
+04:58.000 --> 05:05.000
+Material and category labels test the information captured by tactile features.
+
+05:05.000 --> 05:12.000
+GeoTAC achieves the highest material and
+category scores among the methods shown.
+
+05:12.000 --> 05:19.000
+The vision-tactile average uses the same four metrics for every method.
+
+05:19.000 --> 05:26.000
+The separate eight-metric average also includes depth and pointmap retrieval.
+
+05:26.000 --> 05:32.000
+Finally, we compare the paper's tactile-conditioned attention maps.
+
+05:32.000 --> 05:38.000
+The three views cover RGB, depth, and pointmap.
+
+05:38.000 --> 05:44.000
+These maps are qualitative, not a localization accuracy metric.
+
+05:44.000 --> 05:52.000
+Both cross-modal alignment and geometry
+distillation improve tactile representations.
+
+05:52.000 --> 06:00.000
+Together, GeoTAC reaches a vision-tactile average of 42.10.
+
+06:00.000 --> 06:12.000
+Lift Can remains challenging: GeoTAC completes
+6 of 40 rollouts, with 20.01% task progress.
+
+06:12.000 --> 06:24.000
+On Lift Bottle, GeoTAC completes 5 of 40 rollouts, with 72.38% task progress.
+
+06:24.000 --> 06:36.000
+On Grasp Classify, ImageBind, Patch Tac +
+CL, and GeoTAC each complete all 40 rollouts.
+
+06:36.000 --> 06:48.000
+On Insert Tube, GeoTAC completes 12 of 40 rollouts, with 92.63% task progress.
+
+06:48.000 --> 06:58.000
+Across four simulated tasks, GeoTAC achieves
+39.38% average success and 71.26% task progress.
+
+06:58.000 --> 07:08.000
+Average task progress improves by 11.34
+percentage points over DINOv2 (Vision-Tactile).

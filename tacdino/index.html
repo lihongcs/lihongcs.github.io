@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tac-DINO: Learning Tactile Features with Patch Alignment</title>
+  <meta name="description" content="Touch3D, CoMT-Bench, and GeoTAC: learning tactile representations from contact-aligned RGB, depth, and pointmaps.">
+  <meta property="og:title" content="Tac-DINO: Learning Tactile Features with Patch Alignment">
+  <meta property="og:description" content="505 objects. 20,025 contacts. Connecting local touch to visual and geometric observations.">
+  <meta property="og:image" content="https://lihongcs.github.io/tacdino/media/teaser.webp">
+  <meta property="og:url" content="https://lihongcs.github.io/tacdino/">
+  <link rel="canonical" href="https://lihongcs.github.io/tacdino/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="wordmark" href="../">← Hong Li</a>
+      <div class="nav-links"><a href="#dataset">Touch3D</a><a href="#method">Method</a><a href="#results">Results</a><a href="#demos">Demos</a></div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap">
+      <h1><span>Tac-DINO</span><br>Learning Tactile Features<br class="wide-only"> with Patch Alignment</h1>
+      <p class="authors"><a href="../">Hong Li</a>, Yankang Dong, Yue Xu, Yihan Tang, Mingzhu Li, Jiamin Qiu,<br class="wide-only"> Qihang Yao, Xing Zhu, Yujun Shen, Nan Xue, Yong-Lu Li</p>
+      <div class="actions"><a class="button primary" href="https://arxiv.org/abs/2606.12069" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a><a class="button" href="#demo">▶ Full video</a><a class="button" href="#results">Explore results ↓</a></div>
+      <figure class="hero-figure"><a href="media/teaser.webp" target="_blank" rel="noopener" aria-label="Open full-size Tac-DINO overview"><img width="2000" height="1108" src="media/teaser.webp" alt="Tac-DINO overview: contact-level alignment, 3D vision-tactile collection hardware, and CoMT-Bench retrieval and property tasks" fetchpriority="high"></a><figcaption>Touch is local. Learning should know <em>where</em> the contact happened.</figcaption></figure>
+    </section>
+    <section class="section wrap intro" aria-labelledby="abstract-title">
+      <p class="eyebrow">The idea</p><h2 id="abstract-title">From whole objects to local contact.</h2>
+      <p class="lead">A tactile observation describes a small surface region, not an entire object. Tac-DINO studies what changes when tactile learning respects that physical correspondence.</p>
+      <p>We introduce <strong>Touch3D</strong>, a dataset of scanned objects and localized tactile contacts; <strong>CoMT-Bench</strong>, an evaluation spanning global retrieval, exact-contact matching, and tactile properties; and <strong>GeoTAC</strong>, a method that learns from contact-aligned RGB, depth, and pointmaps.</p>
+      <div class="highlights" aria-label="Main reported findings">
+        <div><strong>+5.32<span> pts</span></strong><p>Patch-aligned vs. object-aligned contrastive learning on Touch3D.</p></div>
+        <div><strong>+4.48<span> pts</span></strong><p>Further gain with GeoTAC on the shared vision–tactile average.</p></div>
+        <div><strong>+11.34<span> pts</span></strong><p>Average simulation task progress over DINOv2 (Vision–Tactile).</p></div>
+      </div>
+    </section>
+    <section class="section band" id="dataset"><div class="wrap">
+      <p class="eyebrow">01 / Dataset</p><h2>Touch3D</h2><p class="lead narrow">One contact, connected across modalities.</p>
+      <div class="dataset-counts"><div><strong>505</strong><span>real objects</span></div><div><strong>20,025</strong><span>tactile contacts</span></div><div><strong>18</strong><span>material labels</span></div><div><strong>6</strong><span>everyday scene groups</span></div></div>
+      <p class="narrow">A GelSight Mini records contact, while RGB observations and scanned 3D geometry provide visual and spatial context. Each tactile sample is associated with an annotated location on the object and material labels at that contact.</p>
+      <div class="split media-split">
+        <figure class="loop-figure"><video class="loop-video" muted loop playsinline controls preload="none" poster="media/contact-overview.jpg" data-src="media/contact-overview.mp4" aria-label="Animated correspondence between annotated contacts on a bowl and tactile observations"></video><figcaption>Many contacts on one scanned object. The animation visualizes the annotated correspondences.</figcaption></figure>
+        <div class="side-copy"><h3>Collected, localized, paired.</h3><p>Scanned shapes and contact-center annotations link touch to visible regions in rendered views. RGB, depth, and pointmap crops share the same contact-centered region.</p><p>Contact-visible views are retained for matching. Material labels can vary between contact locations on the same object.</p><a class="text-link" href="media/data_process.webp" target="_blank" rel="noopener">View the annotation pipeline ↗</a></div>
+      </div>
+      <figure class="paper-figure"><a href="media/data_distribution.webp" target="_blank" rel="noopener"><img width="2000" height="1026" src="media/data_distribution.webp" alt="Touch3D object groups, scene distribution, and object, contact, and material comparisons with ObjectFolder Real" loading="lazy"></a><figcaption>From kitchenware and clothing to tools and toys: six everyday scene groups.</figcaption></figure>
+      <div class="comparison"><div><h3>Compared with ObjectFolder Real</h3><p>Touch3D expands object and contact coverage, with material annotations that can vary within one object.</p></div><div class="table-scroll" tabindex="0" role="region" aria-label="Dataset scale comparison"><table><thead><tr><th scope="col">Dataset</th><th scope="col">Objects</th><th scope="col">Contacts</th><th scope="col">Materials</th></tr></thead><tbody><tr><th scope="row">ObjectFolder Real <small>evaluation subset</small></th><td>85</td><td>2,839</td><td>6</td></tr><tr class="ours"><th scope="row">Touch3D</th><td>505</td><td>20,025</td><td>18</td></tr></tbody></table><p class="note">ObjectFolder Real contains 100 objects in the original release. Our evaluation uses 85 objects after filtering incomplete annotations.</p></div></div>
+    </div></section>
+    <section class="section wrap" id="benchmark">
+      <p class="eyebrow">02 / Benchmark</p><h2>CoMT-Bench</h2><p class="lead narrow">What can a tactile representation tell us?</p>
+      <div class="three-columns">
+        <div><span class="number">01</span><h3>Object-level</h3><p>Retrieve global RGB, depth, or pointmap observations from a local tactile query.</p><p class="metric">Top-5 retrieval</p></div>
+        <div><span class="number">02</span><h3>Patch-level</h3><p>Match a tactile observation to the local RGB, depth, or pointmap observation of the same contact.</p><p class="metric">Exact-contact E@5 · both directions</p></div>
+        <div><span class="number">03</span><h3>Tactile properties</h3><p>Predict material labels and object category using the tactile representation.</p><p class="metric">Material mAP · category accuracy</p></div>
+      </div>
+      <figure class="loop-figure wide-loop"><video class="loop-video" muted loop playsinline controls preload="none" poster="media/matched-modalities.jpg" data-src="media/matched-modalities.mp4" aria-label="Global and local RGB, depth and pointmap observations paired with the same tactile contact"></video><figcaption>The same hammer contact, shown at global and local scales across RGB, depth, and pointmap.</figcaption></figure>
+    </section>
+    <section class="section band" id="method"><div class="wrap">
+      <p class="eyebrow">03 / Method</p><h2>GeoTAC</h2><p class="lead narrow">Geometry-Relation Distilled Tactile-Centric Cross-Modal Learning.</p><p class="narrow">Three complementary training signals connect local touch to visual semantics and geometric relationships.</p>
+      <figure class="paper-figure method-figure"><a href="media/methods.webp" target="_blank" rel="noopener"><img width="2000" height="1006" src="media/methods.webp" alt="GeoTAC framework combining tactile-centered cross-modal alignment, DINO supervision, and geometry-relation distillation" loading="lazy"></a></figure>
+      <div class="three-columns method-steps">
+        <div><span class="number">01</span><h3>Tactile-centered alignment</h3><p>Align the same contact through three pairs: RGB ↔ tactile, depth ↔ tactile, and pointmap ↔ tactile. Touch is the common reference.</p></div>
+        <div><span class="number">02</span><h3>DINO supervision</h3><p>A global RGB teacher supervises local tactile representations. The training objective retains global DINO, iBOT, and KoLeo terms alongside local-to-global distillation.</p></div>
+        <div><span class="number">03</span><h3>Geometry-relation distillation</h3><p>Reconstructed tactile depth and point clouds provide geometric relations that supervise RGB–tactile matching. These auxiliary tactile geometry observations are used only during training.</p></div>
+      </div>
+      <div class="split media-split"><div class="side-copy"><h3>Geometry as supervision.</h3><p>The teacher transfers similarity relationships from depth and point clouds, rather than requiring reconstructed tactile geometry as input at test time.</p><p class="note">The animation shows the reconstructed contact depth and pointmap associated with a tactile observation.</p></div><figure class="loop-figure"><video class="loop-video" muted loop playsinline controls preload="none" poster="media/tactile-geometry.jpg" data-src="media/tactile-geometry.mp4" aria-label="Tactile image with reconstructed depth and pointmap"></video></figure></div>
+    </div></section>
+    <section class="section wrap" id="results">
+      <p class="eyebrow">04 / Results</p><h2>Does patch alignment help?</h2><p class="lead narrow">The same contrastive objective. A more precise contact correspondence.</p><p class="narrow">On Touch3D, Patch Tac + CL improves the four-metric average from <strong>32.30 to 37.62</strong> compared with object-aligned Tac + CL. ObjectFolder Real is evaluated without training on that dataset.</p>
+      <div class="tab-buttons" role="tablist" aria-label="Evaluation dataset"><button id="tab-touch3d" role="tab" aria-selected="true" aria-controls="vt-panel" data-dataset="touch3d">Touch3D</button><button id="tab-objectfolder" role="tab" aria-selected="false" tabindex="-1" aria-controls="vt-panel" data-dataset="objectfolder">ObjectFolder Real</button></div>
+      <div id="vt-panel" role="tabpanel" aria-labelledby="tab-touch3d"><div id="vt-table" class="table-scroll" tabindex="0" role="region" aria-label="Vision-tactile representation results"><p>Loading paper results…</p></div></div><p class="note">All scores are percentages. Avg. uses object-level RGB Top-5, bidirectional patch-level RGB E@5, material mAP, and category accuracy.</p>
+      <div class="subsection"><h3 class="section-subtitle">Learning from all four modalities</h3><p class="narrow">GeoTAC reaches a reported <strong>42.10</strong> on the shared vision–tactile average and <strong>32.11</strong> across all eight metrics. The two averages are shown separately to keep the comparison with vision–tactile methods explicit.</p>
+        <figure class="paper-figure"><a href="media/touch3d_bar_comparison.webp" target="_blank" rel="noopener"><img width="2000" height="512" src="media/touch3d_bar_comparison.webp" alt="Paper results comparing object-level retrieval, patch-level retrieval, and separate vision-tactile and all-metric averages" loading="lazy"></a></figure>
+        <details><summary>View full multimodal results</summary><div id="multimodal-table" class="table-scroll" tabindex="0" role="region" aria-label="Full eight-metric multimodal results"></div><p class="note">Multimodal baselines include local vision–tactile alignment. V–T averages the four metrics shared with the table above; All includes depth and pointmap retrieval. A dash indicates an unsupported modality, not zero.</p></details>
+      </div>
+      <div class="subsection split"><div><h3 class="section-subtitle">What does each component add?</h3><p>Both tactile-centered cross-modal alignment (CMA) and geometry-relation distillation (GD) improve over Patch Tac in the paper's ablation. GeoTAC combines the objectives.</p></div><div id="ablation-chart" class="bar-chart" role="img" aria-label="Reported ablation averages on Touch3D"></div></div>
+      <div class="subsection"><h3 class="section-subtitle">Tactile-conditioned visualizations</h3><figure class="paper-figure"><a href="media/attention.webp" target="_blank" rel="noopener"><img width="2000" height="1006" src="media/attention.webp" alt="Tactile-conditioned heatmaps for RGB, depth, and pointmap across ImageBind, UniTouch, ViT-Lens and GeoTAC" loading="lazy"></a><figcaption>Qualitative feature visualizations from the paper, not a localization-accuracy metric. Select the figure to inspect it at full size.</figcaption></figure></div>
+    </section>
+    <section class="section" id="demos"><div class="wrap">
+      <p class="eyebrow">05 / Robot manipulation</p><h2>UniVTAC, in motion.</h2><p class="lead narrow">Synchronized visual and tactile observations across four simulation tasks.</p><p class="narrow muted">These clips are dataset demonstrations, not trained-policy success rollouts. Quantitative policy evaluation is reported separately below.</p>
+      <div class="demo-grid">
+        <figure><video class="loop-video" muted loop playsinline controls preload="none" poster="media/lift-can.jpg" data-src="media/lift-can.mp4" aria-label="Lift Can simulation dataset demonstration with RGB and tactile views"></video><figcaption>Lift Can</figcaption></figure>
+        <figure><video class="loop-video" muted loop playsinline controls preload="none" poster="media/lift-bottle.jpg" data-src="media/lift-bottle.mp4" aria-label="Lift Bottle simulation dataset demonstration with RGB and tactile views"></video><figcaption>Lift Bottle</figcaption></figure>
+        <figure><video class="loop-video" muted loop playsinline controls preload="none" poster="media/grasp-classify.jpg" data-src="media/grasp-classify.mp4" aria-label="Grasp Classify simulation dataset demonstration with RGB and tactile views"></video><figcaption>Grasp Classify</figcaption></figure>
+        <figure><video class="loop-video" muted loop playsinline controls preload="none" poster="media/insert-tube.jpg" data-src="media/insert-tube.mp4" aria-label="Insert Tube simulation dataset demonstration with RGB and tactile views"></video><figcaption>Insert Tube</figcaption></figure>
+      </div><button id="motion-toggle" class="button motion-button" type="button" aria-pressed="false">Pause animations</button>
+    </div></section>
+    <section class="section wrap" id="policy-results"><p class="eyebrow">Simulation evaluation</p><h2>From representations to policies.</h2><p class="lead narrow">GeoTAC: 71.26% average task progress and 39.38% average success rate.</p><p class="narrow">The paper evaluates each task over 40 rollouts per method. Success rate and task progress are different measurements; they are kept separate throughout.</p><div id="policy-table" class="table-scroll" tabindex="0" role="region" aria-label="UniVTAC simulation policy results"></div><p class="note">SR: success rate. TP: task progress. Both are percentages; averages are over the four tasks. Values follow the paper's reported rounding.</p></section>
+    <section class="section band" id="demo"><div class="wrap"><h2>Demo</h2><video class="full-video" controls playsinline preload="none" width="1280" height="720" poster="media/demo-poster.jpg" aria-label="Tac-DINO demo"><source src="media/demo.mp4" type="video/mp4"><track kind="captions" src="media/demo.en.vtt" srclang="en" label="English"><a href="media/demo.mp4">Download the video</a></video></div></section>
+  </main>
+  <footer class="wrap"><a href="../">Back to Hong Li's homepage ↗</a></footer>
+  <noscript><p class="wrap">JavaScript is disabled. Paper figures and the full video remain available; enable JavaScript for detailed result tables and inline animations.</p></noscript>
+</body>
+</html>

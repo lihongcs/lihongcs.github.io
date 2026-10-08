@@ -1,0 +1,355 @@
+{
+  "touch3d": [
+    {
+      "name": "Tac",
+      "values": [
+        27.49,
+        4.32,
+        25.94,
+        56.73,
+        28.62
+      ]
+    },
+    {
+      "name": "Tac + CL",
+      "values": [
+        37.68,
+        3.72,
+        28.81,
+        58.98,
+        32.3
+      ]
+    },
+    {
+      "name": "Patch Tac",
+      "values": [
+        46.5,
+        6.46,
+        30.37,
+        56.42,
+        34.94
+      ]
+    },
+    {
+      "name": "Patch Tac + CL",
+      "values": [
+        42.94,
+        13.95,
+        34.5,
+        59.08,
+        37.62
+      ]
+    },
+    {
+      "name": "Patch Tac + DAR",
+      "values": [
+        47.39,
+        7.62,
+        31.72,
+        56.81,
+        35.89
+      ]
+    }
+  ],
+  "objectfolder": [
+    {
+      "name": "Tac",
+      "values": [
+        26.41,
+        1.92,
+        14.97,
+        0.07,
+        10.84
+      ]
+    },
+    {
+      "name": "Tac + CL",
+      "values": [
+        27.13,
+        1.82,
+        15.95,
+        0.33,
+        11.31
+      ]
+    },
+    {
+      "name": "Patch Tac",
+      "values": [
+        30.26,
+        1.92,
+        16.62,
+        1.51,
+        12.58
+      ]
+    },
+    {
+      "name": "Patch Tac + CL",
+      "values": [
+        30.77,
+        3.85,
+        21.71,
+        2.13,
+        14.62
+      ]
+    },
+    {
+      "name": "Patch Tac + DAR",
+      "values": [
+        33.08,
+        2.05,
+        17.85,
+        3.12,
+        14.03
+      ]
+    }
+  ],
+  "multimodal": [
+    {
+      "name": "Tac + CL",
+      "values": [
+        37.68,
+        null,
+        null,
+        3.72,
+        null,
+        null,
+        28.81,
+        58.98,
+        32.3,
+        null
+      ]
+    },
+    {
+      "name": "Patch Tac + CL",
+      "values": [
+        42.94,
+        null,
+        null,
+        13.95,
+        null,
+        null,
+        34.5,
+        59.08,
+        37.62,
+        null
+      ]
+    },
+    {
+      "name": "ImageBind",
+      "values": [
+        44.33,
+        19.28,
+        29.26,
+        8.95,
+        0.34,
+        0.91,
+        31.7,
+        55.65,
+        35.16,
+        23.8
+      ]
+    },
+    {
+      "name": "UniTouch",
+      "values": [
+        28.77,
+        16.35,
+        20.79,
+        3.27,
+        0.2,
+        0.81,
+        19.84,
+        39.1,
+        22.75,
+        16.14
+      ]
+    },
+    {
+      "name": "ViT-Lens",
+      "values": [
+        29.86,
+        16.9,
+        23.58,
+        3.14,
+        0.32,
+        0.43,
+        25.24,
+        44.8,
+        25.76,
+        18.03
+      ]
+    },
+    {
+      "name": "GeoTAC",
+      "values": [
+        50.59,
+        45.05,
+        38.54,
+        16.37,
+        3.14,
+        1.71,
+        38.75,
+        62.69,
+        42.1,
+        32.11
+      ]
+    }
+  ],
+  "ablation": [
+    {
+      "name": "Patch Tac",
+      "average": 34.94
+    },
+    {
+      "name": "Patch Tac + CL",
+      "average": 37.62
+    },
+    {
+      "name": "Patch Tac + CMA",
+      "average": 40.42
+    },
+    {
+      "name": "Patch Tac + GD",
+      "average": 39.4
+    },
+    {
+      "name": "GeoTAC",
+      "average": 42.1
+    }
+  ],
+  "policy": [
+    {
+      "name": "DINOv2 (Vision-only)",
+      "successes": [
+        2,
+        0,
+        24,
+        0
+      ],
+      "trials": 40,
+      "task_progress": [
+        7.34,
+        40.01,
+        73.02,
+        88.08
+      ],
+      "average_sr": 16.25,
+      "average_tp": 52.11
+    },
+    {
+      "name": "DINOv2 (Vision-Tactile)",
+      "successes": [
+        4,
+        2,
+        24,
+        0
+      ],
+      "trials": 40,
+      "task_progress": [
+        9.32,
+        50.45,
+        90.0,
+        89.9
+      ],
+      "average_sr": 18.75,
+      "average_tp": 59.92
+    },
+    {
+      "name": "ImageBind",
+      "successes": [
+        5,
+        4,
+        40,
+        1
+      ],
+      "trials": 40,
+      "task_progress": [
+        9.78,
+        55.07,
+        100.0,
+        85.81
+      ],
+      "average_sr": 31.25,
+      "average_tp": 62.67
+    },
+    {
+      "name": "UniTouch",
+      "successes": [
+        1,
+        1,
+        23,
+        0
+      ],
+      "trials": 40,
+      "task_progress": [
+        1.2,
+        42.08,
+        69.58,
+        76.15
+      ],
+      "average_sr": 15.63,
+      "average_tp": 47.25
+    },
+    {
+      "name": "ViT-Lens",
+      "successes": [
+        2,
+        2,
+        24,
+        0
+      ],
+      "trials": 40,
+      "task_progress": [
+        5.78,
+        49.62,
+        71.95,
+        77.7
+      ],
+      "average_sr": 17.5,
+      "average_tp": 51.26
+    },
+    {
+      "name": "Patch Tac + CL",
+      "successes": [
+        6,
+        4,
+        40,
+        8
+      ],
+      "trials": 40,
+      "task_progress": [
+        10.08,
+        65.51,
+        100.0,
+        90.77
+      ],
+      "average_sr": 36.25,
+      "average_tp": 66.59
+    },
+    {
+      "name": "GeoTAC",
+      "successes": [
+        6,
+        5,
+        40,
+        12
+      ],
+      "trials": 40,
+      "task_progress": [
+        20.01,
+        72.38,
+        100.0,
+        92.63
+      ],
+      "average_sr": 39.38,
+      "average_tp": 71.26
+    }
+  ],
+  "tasks": [
+    "Lift Can",
+    "Lift Bottle",
+    "Grasp Classify",
+    "Insert Tube"
+  ],
+  "source": "Paper snapshot used for the supplementary video, 2026-09-26. Reported values, not a fresh evaluation."
+}
