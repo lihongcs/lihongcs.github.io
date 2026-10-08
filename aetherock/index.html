@@ -1,82 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://lihongcs.github.io/aetherock/">
-    <title>AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .demo-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #101010; border-radius: 12px; }
-        .video-download { color: var(--secondary-text); font-size: 0.95rem; }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AetheRock — Force-Guided Vision-Tactile Learning</title>
+  <meta name="description" content="AetheRock is an arm-worn robot teaching system. GelSlim-Mini brings low-cost tactile sensing to the gripper; ForceVT uses force and vision to guide tactile learning.">
+  <link rel="canonical" href="https://lihongcs.github.io/aetherock/">
+  <meta property="og:title" content="AetheRock: Force-Guided Vision-Tactile Learning">
+  <meta property="og:description" content="An arm-worn teaching system, an affordable tactile sensor, and force-guided learning for contact-rich manipulation.">
+  <meta property="og:image" content="https://lihongcs.github.io/aetherock/assets/teaser.webp">
+  <meta property="og:url" content="https://lihongcs.github.io/aetherock/">
+  <meta name="theme-color" content="#f8f7f3">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning</h1>
-    <div class="authors"><strong>Hong Li</strong>, Y. Xu, Y. Tang, Y. Dong, C. Liu, C. Yu, X. Li, S. Huang, Y. Shen, N. Xue, ...</div>
-    <div class="venue">ArXiv 2026</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2606.09777v2" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2606.09777v2" target="_blank">PDF</a>
-        <a href="#demo">Demo</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="teaser.png" alt="Teaser">
-    </div>
+<a class="skip" href="#overview">Skip to content</a>
+<header class="site-header"><nav class="nav wrap" aria-label="Main navigation">
+  <a class="wordmark" href="#top"><span class="brand-mark" aria-hidden="true">A</span>AetheRock<span class="brand-dot">.</span></a>
+  <div class="nav-links"><a href="#hardware">Hardware</a><a href="#method">Method</a><a href="#results">Results</a><a href="#demos">Demos <span aria-hidden="true">↗</span></a></div>
+</nav></header>
+<main id="top">
+  <section class="hero wrap">
+    <p class="eyebrow"><span class="status-dot"></span> ROBOT LEARNING · HARDWARE + ALGORITHM</p>
+    <h1>AetheRock</h1>
+    <p class="hero-title">An Arm-Worn Robot Teaching System<br class="desktop-break"> for <span>Force-Guided Vision-Tactile Learning</span></p>
+    <p class="authors"><a href="../">Hong Li</a>, Yue Xu, Yihan Tang, Yankang Dong, Chenyuan Liu, Chenyang Yu,<br class="desktop-break"> Xuyang Li, Siyuan Huang, Yujun Shen, Nan Xue, Yong-Lu Li</p>
+    <div class="hero-links"><a class="button primary" href="https://arxiv.org/abs/2606.09777" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a><a class="button" href="#demos">Watch the demos <span aria-hidden="true">▷</span></a><a class="text-link" href="#full-video">Full video <span aria-hidden="true">↓</span></a></div>
+    <figure class="teaser"><a href="assets/teaser.webp" target="_blank" rel="noopener" aria-label="Open the full-resolution AetheRock overview"><img src="assets/teaser.webp" width="2120" height="802" alt="AetheRock overview: arm-worn hardware, force-guided tactile learning, and real-world evaluation." fetchpriority="high"></a><figcaption>Collect force, vision, and touch together. Learn to use tactile feedback when sensor quality varies.</figcaption></figure>
+  </section>
 
-    <section id="demo" aria-labelledby="demo-heading">
-        <h2 id="demo-heading">Demo</h2>
-        <video class="demo-video" controls playsinline preload="metadata" poster="teaser.png" width="1920" height="1080" aria-label="AetheRock demonstration video">
-            <source src="demo.mp4" type="video/mp4">
-            Your browser does not support embedded video. <a href="demo.mp4">Download the demo</a>.
-        </video>
-        <p><a class="video-download" href="demo.mp4" download>Download video (MP4)</a></p>
-    </section>
-
-    <h2>Abstract</h2>
-    <div class="abstract">
-        Force and tactile sensing are indispensable in contact-rich manipulation. However, force-aware robot learning faces critical challenges due to the incompatible assembly of tactile and force sensors in handheld or wearable devices. To address these limitations, we first introduce AetheRock for gripper-force, vision, and tactile data collection, which is an arm-worn device featuring a modular and easily manufactured visuo-tactile sensor, GelSlim-MiniFab, at the fingertip, a resistive pressure sensor at the human finger contact region, a customized PCB module, and a wearable kit for comfortable and robust collection. Building on this, we propose ForceVT, a representation learning framework that uses force and vision to guide fidelity-agnostic tactile learning, enabling robust inference in any tactile situation. Real-world experiments show that AetheRock achieves qualified data efficiency and that ForceVT effectively alleviates inefficiencies when visuo-tactile sensors exhibit manufacturing and utilization inconsistencies. Overall, our work mitigates the limitations of gripper-force vision-tactile robot learning through innovative hardware design and algorithms.
+  <section id="overview" class="section wrap">
+    <div class="section-heading"><p class="eyebrow">01 / OVERVIEW</p><h2>Teaching robots to make contact.</h2><p class="lede">A wearable collection system and a learning framework designed together for contact-rich manipulation.</p></div>
+    <div class="contribution-grid">
+      <article><span class="index">01</span><h3>Collect multimodal demonstrations</h3><p>AetheRock records gripper force, wrist-camera images, tactile observations, and motion through an arm-worn interface.</p></article>
+      <article><span class="index">02</span><h3>Make touch easier to build</h3><p>GelSlim-Mini combines planar acrylic, a PDMS elastomer, a silver-powder coating, and detachable components.</p></article>
+      <article><span class="index">03</span><h3>Learn beyond ideal tactile inputs</h3><p>ForceVT uses force and vision as guidance for tactile representation learning, with masking and cross-modal alignment.</p></article>
     </div>
-</div>
-</body>
-</html>
+    <div class="abstract"><h3>Abstract</h3><p>Force and tactile sensing are essential for contact-rich manipulation, but their integration into handheld or wearable devices is constrained by cost, size, and mechanical compatibility. Tactile signals also vary with manufacturing and wear. We introduce <strong>AetheRock</strong>, an arm-worn device that collects gripper-force, visual, and tactile data. It incorporates <strong>GelSlim-Mini</strong>, a modification of GelSlim 4.0 designed for low cost and easy manufacturing, and a resistive pressure sensor at the human finger contact area. We further propose <strong>ForceVT</strong>, which aligns multimodal representations and uses force and vision to guide tactile learning. Across four real-world tasks, ForceVT achieves 52.6% mean task progress, compared with 39.6% for VisTacLinear. On bottle closing, it maintains 57.0% and 53.0% task progress at 75% and 50% tactile fidelity, respectively, compared with 58.0% at full fidelity.</p></div>
+    <div class="stats"><div><strong>+13.0<span> pp</span></strong><p>Mean task progress over VisTacLinear<br>across four contact-rich tasks</p></div><div><strong>3.0<span> pp</span></strong><p>Mean drop at degraded tactile fidelities<br>on bottle closing</p></div><div><strong>~$10</strong><p>Reported GelSlim-Mini sensor cost<br>with detachable components</p></div></div>
+  </section>
+
+  <section id="hardware" class="section tinted"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
+    <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
+    <div class="split-copy"><div><p class="eyebrow">GELSLIM-MINI</p><h3>Designed to build,<br>detach, and repair.</h3></div><div><p>Inspired by GelSlim 4.0's optics and PCB design, GelSlim-Mini uses 2D-cut planar acrylic and a PDMS-based sensing surface with silver powder. Detachable components simplify replacement and repair.</p><p>The same sensor design can be mounted on the UMI collection gripper and the real-robot gripper.</p></div></div>
+    <figure class="paper-figure"><a href="assets/gelslim-mini.webp" target="_blank" rel="noopener"><img src="assets/gelslim-mini.webp" loading="lazy" alt="GelSlim-Mini fabrication with planar acrylic, PDMS and silver powder; tactile contact images; mounting on UMI and robot grippers."></a><figcaption>Fabrication, tactile contact visualization, and gripper integration.</figcaption></figure>
+  </div></section>
+
+  <section id="method" class="section wrap">
+    <div class="section-heading"><p class="eyebrow">03 / METHOD</p><h2>Force and vision guide tactile learning.</h2><p class="lede">ForceVT learns from tactile observations at different fidelities, using complementary modalities to guide the representation.</p></div>
+    <figure class="paper-figure"><a href="assets/methods.webp" target="_blank" rel="noopener"><img src="assets/methods.webp" loading="lazy" alt="ForceVT architecture: multi-fidelity tactile inputs, random masking, modality encoders, force-vision guidance, cross-modality alignment and an action expert."></a><figcaption>ForceVT combines tactile random masking, force-guided vision-tactile learning, and cross-modality alignment.</figcaption></figure>
+    <div class="method-steps"><article><span>01 / AUGMENT</span><h3>Tactile random masking</h3><p>Spatial masking perturbs tactile observations from sensors with different fidelities, increasing the variation seen during training.</p></article><article><span>02 / GUIDE</span><h3>Force–vision guidance</h3><p>Fused force and vision features provide a training signal for the tactile encoder through soft alignment.</p></article><article><span>03 / ALIGN</span><h3>Cross-modal consistency</h3><p>Alignment preserves relationships across modalities. Conditioned vision-tactile features then guide continuous action prediction.</p></article></div>
+  </section>
+
+  <section id="results" class="section tinted"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">04 / RESULTS</p><h2>Measured in real-world task progress.</h2><p class="lede">Evaluation on a Flexiv Rizon-4 with a GN-01 gripper: 20 trials per model, at five object positions. Models are trained for 50,000 steps.</p></div>
+    <div class="result-intro"><h3>Vision-tactile policy performance</h3><p>ForceVT reaches <strong>52.6%</strong> mean task progress across four tasks, a <strong>13.0 percentage-point</strong> gain over VisTacLinear.</p></div>
+    <div class="chart-panel"><div class="chart-top"><span class="chart-label">Task progress (%) · higher is better</span><div class="task-buttons" role="group" aria-label="Choose a task for the performance chart"><button type="button" data-task="average" aria-pressed="true">Average</button><button type="button" data-task="erase" aria-pressed="false">Erase board</button><button type="button" data-task="screw" aria-pressed="false">Screwdriving</button><button type="button" data-task="bottle" aria-pressed="false">Close bottle</button><button type="button" data-task="stowing" aria-pressed="false">Stowing</button></div></div><div id="performance-chart" class="bar-chart" aria-live="polite"></div></div>
+    <div class="table-scroll" tabindex="0" aria-label="Policy performance table"><table><caption>Mean task progress (%) across contact-rich tasks</caption><thead><tr><th scope="col">Method</th><th scope="col">Erase board</th><th scope="col">Screwdriving</th><th scope="col">Close bottle</th><th scope="col">Stowing</th><th scope="col">Average</th></tr></thead><tbody><tr><th scope="row">Vision-only</th><td>18.0</td><td>38.0</td><td>47.0</td><td>34.0</td><td>34.3</td></tr><tr><th scope="row">VisTacLinear</th><td>31.5</td><td>31.0</td><td>50.5</td><td>45.5</td><td>39.6</td></tr><tr><th scope="row">TacFiLM</th><td>5.5</td><td>36.5</td><td>39.0</td><td>43.5</td><td>31.1</td></tr><tr><th scope="row">TactileConcat</th><td>20.0</td><td>9.0</td><td>22.5</td><td>30.0</td><td>20.4</td></tr><tr class="ours"><th scope="row">ForceVT (ours)</th><td>49.0</td><td>48.5</td><td>58.0</td><td>55.0</td><td>52.6</td></tr></tbody></table></div>
+    <div class="result-intro spaced"><h3>Robustness as tactile fidelity decreases</h3><p>On <strong>bottle closing</strong>, ForceVT's mean drop is <strong>3.0 pp</strong>, compared with <strong>22.0 pp</strong> for VisTacLinear. This measures the average drop at 75% and 50% fidelity relative to the 100% reference.</p></div>
+    <div class="table-scroll" tabindex="0" aria-label="Tactile robustness table"><table><caption>Bottle-closing task progress (%) at different tactile fidelities</caption><thead><tr><th scope="col">Method</th><th scope="col">100% fidelity</th><th scope="col">75% fidelity</th><th scope="col">50% fidelity</th><th scope="col">Average</th><th scope="col">Mean drop (pp) ↓</th></tr></thead><tbody><tr><th scope="row">VisTacLinear</th><td>50.5</td><td>30.5</td><td>26.5</td><td>35.8</td><td>22.0</td></tr><tr><th scope="row">TacFiLM</th><td>39.0</td><td>18.5</td><td>14.5</td><td>24.0</td><td>22.5</td></tr><tr><th scope="row">TactileConcat</th><td>22.5</td><td>15.5</td><td>18.0</td><td>18.7</td><td>5.8</td></tr><tr class="ours"><th scope="row">ForceVT (ours)</th><td>58.0</td><td>57.0</td><td>53.0</td><td>56.0</td><td>3.0</td></tr></tbody></table></div>
+    <p class="small-note">Average includes all three fidelities. Mean drop includes only the two degraded fidelities. These robustness results are specific to the evaluated bottle-closing setting.</p>
+    <div class="result-intro spaced"><h3>More demonstrations, better contact-rich behavior.</h3><p>We evaluate 210, 350, and 490 demonstrations per task. Additional data improves task progress and is associated with more appropriate approach heights, better alignment, and fewer collisions in the observed rollouts.</p></div>
+    <figure class="paper-figure"><a href="assets/single_task_scaling_law.webp" target="_blank" rel="noopener"><img src="assets/single_task_scaling_law.webp" loading="lazy" alt="Post-training scaling results across erase board, screwdriving, close bottle and stowing, with illustrative rollout frames."></a><figcaption>Post-training scaling across four tasks. Rollout examples illustrate changes as demonstration count increases.</figcaption></figure>
+    <details class="data-details"><summary>Data collection efficiency across six tasks <span aria-hidden="true">+</span></summary><p>Policies use wrist-camera images only. The collection study uses approximately 200 demonstrations per task.</p><div class="table-scroll" tabindex="0"><table><caption>Demonstration collection and vision-only task progress</caption><thead><tr><th scope="col">Task</th><th scope="col">Demonstrations</th><th scope="col">Collection time (min)</th><th scope="col">Task progress (%)</th></tr></thead><tbody><tr><th scope="row">Clamp seal</th><td>229</td><td>28.86</td><td>60.0</td></tr><tr><th scope="row">Towel hanging</th><td>206</td><td>27.60</td><td>47.5</td></tr><tr><th scope="row">Pick bread</th><td>199</td><td>17.16</td><td>64.5</td></tr><tr><th scope="row">Erase board</th><td>215</td><td>26.16</td><td>26.0</td></tr><tr><th scope="row">Pick block</th><td>214</td><td>14.41</td><td>85.0</td></tr><tr><th scope="row">Insert flower</th><td>212</td><td>24.72</td><td>22.0</td></tr></tbody></table></div><figure class="paper-figure"><img src="assets/single_generalization.webp" loading="lazy" alt="Real-world rollouts of six data collection efficiency tasks."></figure></details>
+  </div></section>
+
+  <section id="demos" class="section wrap">
+    <div class="demo-heading"><div class="section-heading"><p class="eyebrow">05 / IN MOTION</p><h2>Watch contact-rich manipulation.</h2><p class="lede">Short, looping excerpts from the original experiment video.</p></div><button type="button" class="button small" id="toggle-clips" aria-pressed="false">Pause all clips</button></div>
+    <div class="demo-grid">
+      <article class="demo-card"><div class="clip-frame"><video class="loop-video" controls muted loop playsinline preload="none" data-src="clips/data-collection.mp4" poster="clips/data-collection.webp" aria-label="Looping examples of bread moving, clamp seal and towel hanging"><a href="clips/data-collection.mp4">Watch the clip</a></video></div><h3>Data collection tasks</h3><p>Bread moving, clamp seal, and towel hanging. Original success and failure examples shown side by side.</p></article>
+      <article class="demo-card"><div class="clip-frame"><video class="loop-video" controls muted loop playsinline preload="none" data-src="clips/bottle-closing.mp4" poster="clips/bottle-closing.webp" aria-label="Looping bottle-closing rollout comparison"><a href="clips/bottle-closing.mp4">Watch the clip</a></video></div><h3>Close bottle</h3><p>Contact and alignment during bottle closing, with tactile observations alongside the robot views.</p></article>
+      <article class="demo-card"><div class="clip-frame"><video class="loop-video" controls muted loop playsinline preload="none" data-src="clips/stowing.mp4" poster="clips/stowing.webp" aria-label="Looping stowing rollout comparison"><a href="clips/stowing.mp4">Watch the clip</a></video></div><h3>Stowing</h3><p>Grasping and placement examples illustrate how contact signals complement visual observations.</p></article>
+    </div>
+    <p class="small-note">Clips retain the original 3× playback speed. These qualitative excerpts illustrate behavior; the tables above report aggregate evaluation.</p>
+    <div class="result-intro spaced"><h3>Contact feedback and its limits</h3><p>Tactile sensing helps distinguish physical contact from visually similar, contactless actions. It also introduces a generalization challenge: a grasp on a crossbar during data collection can produce different tactile signals from a grasp on a ribbed shaft during inference.</p></div>
+    <figure class="paper-figure"><a href="assets/tactile_visualize.webp" target="_blank" rel="noopener"><img src="assets/tactile_visualize.webp" loading="lazy" alt="Tactile observations shift with grasp position between collection and robot inference; comparison of physical and contactless behavior."></a><figcaption>Qualitative observations motivate learning with tactile variation and show a remaining grasp-distribution gap.</figcaption></figure>
+    <details id="full-video" class="full-video"><summary>Watch the full narrated demo <span class="video-meta">3:20 · 9.38 MB</span><span aria-hidden="true">↗</span></summary><video controls playsinline preload="none" data-src="demo.mp4" poster="assets/teaser.webp" aria-label="Full narrated AetheRock demonstration"></video><p><a href="demo.mp4" download>Download the complete MP4</a></p></details>
+  </section>
+  <section class="closing wrap"><p class="eyebrow">EXPLORE THE WORK</p><h2>From human demonstration<br>to contact-rich robot learning.</h2><a class="button primary" href="https://arxiv.org/abs/2606.09777" target="_blank" rel="noopener">Read AetheRock <span aria-hidden="true">↗</span></a></section>
+</main>
+<footer class="wrap footer"><a class="wordmark" href="#top">AetheRock<span class="brand-dot">.</span></a><p>Research project · 2026</p><a href="../">Hong Li / All projects <span aria-hidden="true">↗</span></a></footer>
+<noscript><style>.chart-panel,#toggle-clips{display:none}</style><p class="wrap">JavaScript is disabled. Results remain available in the tables. <a href="demo.mp4">Watch or download the full demonstration video.</a></p></noscript>
+</body></html>

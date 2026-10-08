@@ -7,7 +7,7 @@ import re
 
 papers = {
     "tac_dino": {"arxiv_id": "2606.12069", "title": "Tac-DINO: Learning Vision-Tactile Features with Patch Alignment", "authors": "Hong Li, Y. Dong, Y. Xu, Y. Tang, M. Li, J. Qiu, Q. Yao, X. Zhu, Y. Shen, N. Xue, ...", "venue": "ArXiv 2026"},
-    "aetherock": {"arxiv_id": "2606.09777", "title": "AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning", "authors": "Hong Li, Y. Xu, Y. Tang, Y. Dong, C. Liu, C. Yu, X. Li, S. Huang, Y. Shen, N. Xue, ...", "venue": "ArXiv 2026"},
+    "aetherock": {"arxiv_id": "2606.09777", "title": "AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning", "authors": "Hong Li, Y. Xu, Y. Tang, Y. Dong, C. Liu, C. Yu, X. Li, S. Huang, Y. Shen, N. Xue, ...", "venue": "ArXiv 2026", "manual_page": True},
     "egoguide": {"arxiv_id": "2606.14665", "title": "EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning", "authors": "Y. Xu, M. Nie, T. Li, Hong Li, Y. Luo, S. Huang, Y.-L. Li", "venue": "ArXiv 2026"},
     "beyond_static": {"arxiv_id": "2604.03302", "title": "Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models", "authors": "N. Li, X. Wang, Y. Chen, H. Zhang, Hong Li, Y.-L. Li", "venue": "ArXiv 2026"},
     "atlas": {"arxiv_id": "2410.10923", "title": "ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy", "authors": "Hong Li, Zhiquan Tan, Xingyu Li, Weiran Huang", "venue": "ArXiv 2024", "local_teaser": "../images/atlas/fig-methods-revision.png"},
@@ -119,6 +119,10 @@ def get_largest_image(pdf_path, output_path):
     return False
 
 for key, paper in papers.items():
+    # Preserve the curated demo player and canonical project route.
+    if paper.get("manual_page") and os.path.exists(f"{key}/index.html"):
+        print(f"Skipping manually maintained page: {key}")
+        continue
     print(f"Processing {key}...")
     os.makedirs(key, exist_ok=True)
     
