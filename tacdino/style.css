@@ -37,7 +37,7 @@ figure { margin: 0; }
 p { margin: 0 0 20px; }
 strong { font-weight: 600; }
 h1, h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; }
-h1 { font-size: 3.5rem; letter-spacing: -.02em; line-height: 1.08; margin: 0 0 24px; }
+h1 { letter-spacing: -.02em; }
 h2 {
   font-size: 2rem;
   letter-spacing: 0;
@@ -60,7 +60,7 @@ h3 { font-size: 1.1rem; line-height: 1.4; font-weight: 600; margin: 0 0 12px; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .wordmark { font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem; font-weight: 500; white-space: nowrap; text-decoration: none; }
 .nav-links { display: flex; gap: 20px; }
-.nav-links a, .text-link, .actions a, footer > a:last-child {
+.nav-links a, .text-link, footer > a:last-child {
   font-size: .9rem;
   font-weight: 500;
   text-decoration: none;
@@ -68,24 +68,9 @@ h3 { font-size: 1.1rem; line-height: 1.4; font-weight: 600; margin: 0 0 12px; }
   padding-bottom: 2px;
   transition: border-color .2s ease;
 }
-.nav-links a:hover, .text-link:hover, .actions a:hover, footer > a:last-child:hover { border-color: var(--text-color); }
-.hero { text-align: left; padding-top: 2.5rem; padding-bottom: 2rem; }
-.hero h1 span { color: var(--text-color); }
-.authors { font-size: 1rem; color: var(--secondary-text); margin-bottom: 20px; line-height: 1.7; }
-.authors a { font-weight: 600; color: var(--text-color); text-decoration: none; }
-.authors .wide-only { display: none; }
-.actions { display: flex; gap: 22px; flex-wrap: wrap; margin-bottom: 3rem; }
+.nav-links a:hover, .text-link:hover, footer > a:last-child:hover { border-color: var(--text-color); }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-bottom: 1px solid var(--border-color); padding: 2px 0; background: none; color: var(--text-color); font-size: .9rem; text-decoration: none; }
 .button:hover { border-color: var(--text-color); }
-.hero-figure {
-  background: var(--panel-color);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  margin-inline: -1.5rem;
-}
-.hero-figure img { border-radius: 4px; }
-.hero-figure figcaption { font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; color: var(--secondary-text); text-align: center; margin: 22px 0 0; }
 .intro > p { max-width: 720px; }
 .highlights { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 36px; }
 .highlights strong { display: block; font-family: 'Newsreader', Georgia, serif; font-size: 2.2rem; font-weight: 500; line-height: 1; margin-bottom: 12px; }
@@ -156,8 +141,6 @@ footer > a:last-child { font-size: .8rem; }
   .highlights { gap: 24px; }
   .three-columns { gap: 20px; }
   .three-columns h3 { font-size: 1rem; }
-  .hero h1 { font-size: 3rem; }
-  .hero h1 .wide-only { display: none; }
 }
 @media (max-width: 600px) {
   .wrap { width: calc(100% - 48px); }
@@ -166,13 +149,6 @@ footer > a:last-child { font-size: .8rem; }
   .nav > .wordmark { flex-basis: 100%; }
   .nav-links { gap: 22px; }
   .nav-links a { font-size: .8rem; }
-  .hero { padding-top: 2rem; }
-  .hero h1 { font-size: 2.5rem; line-height: 1.12; }
-  .authors { font-size: .9rem; }
-  .actions { gap: 18px; margin-bottom: 2rem; }
-  .actions a { font-size: .8rem; }
-  .hero-figure { padding: 1rem; margin-inline: -1rem; border-radius: 12px; }
-  .hero-figure figcaption { font-size: 1.1rem; }
   .section { padding-block: 2rem; }
   h2 { margin-bottom: 1.5rem; }
   .highlights { grid-template-columns: 1fr; gap: 24px; }

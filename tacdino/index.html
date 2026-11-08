@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../project-hero.css">
   <script src="site.js" defer></script>
 </head>
 <body>
@@ -25,11 +26,40 @@
     </nav>
   </header>
   <main id="main">
-    <section class="hero wrap">
-      <h1><span>Tac-DINO</span><br>Learning Tactile Features<br class="wide-only"> with Patch Alignment</h1>
-      <p class="authors"><a href="../">Hong Li</a>, Yankang Dong, Yue Xu, Yihan Tang, Mingzhu Li, Jiamin Qiu,<br class="wide-only"> Qihang Yao, Xing Zhu, Yujun Shen, Nan Xue, Yong-Lu Li</p>
-      <div class="actions"><a class="button primary" href="https://arxiv.org/abs/2606.12069" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a><a class="button" href="#demo">▶ Full video</a><a class="button" href="#results">Explore results ↓</a></div>
-      <figure class="hero-figure"><a href="media/teaser.webp" target="_blank" rel="noopener" aria-label="Open full-size Tac-DINO overview"><img width="2000" height="1108" src="media/teaser.webp" alt="Tac-DINO overview: contact-level alignment, 3D vision-tactile collection hardware, and CoMT-Bench retrieval and property tasks" fetchpriority="high"></a><figcaption>Touch is local. Learning should know <em>where</em> the contact happened.</figcaption></figure>
+    <section class="project-hero wrap" aria-labelledby="project-title">
+      <h1 id="project-title">Tac-DINO: Learning Tactile Features with Patch Alignment</h1>
+      <p class="project-authors">
+        <span><a href="../">Hong Li</a><sup>1</sup>,</span>
+        <span>Yankang Dong<sup>1</sup>,</span>
+        <span>Yue Xu<sup>1</sup>,</span>
+        <span>Yihan Tang<sup>1</sup>,</span>
+        <span>Mingzhu Li<sup>1</sup>,</span>
+        <span>Jiamin Qiu<sup>1</sup>,</span>
+        <span>Qihang Yao<sup>1</sup>,</span>
+        <span>Xing Zhu<sup>2</sup>,</span>
+        <span>Yujun Shen<sup>2</sup>,</span>
+        <span>Nan Xue<sup>2</sup>,</span>
+        <span>Yong-Lu Li<sup>1,3</sup></span>
+      </p>
+      <p class="project-affiliations">
+        <span><sup>1</sup> Shanghai Jiao Tong University</span>
+        <span><sup>2</sup> Ant Group</span>
+        <span><sup>3</sup> Shanghai Innovation Institute</span>
+      </p>
+      <figure class="project-preview">
+        <a href="media/teaser.webp" target="_blank" rel="noopener" aria-label="Open full-size Tac-DINO overview"><img width="2000" height="1108" src="media/teaser.webp" alt="Tac-DINO overview: contact-level alignment, 3D vision-tactile collection hardware, and CoMT-Bench retrieval and property tasks" fetchpriority="high"></a>
+        <figcaption>Touch is local. Learning should know <em>where</em> the contact happened.</figcaption>
+      </figure>
+      <ul class="project-resources" aria-label="Project resources">
+        <li><a class="resource-chip" href="https://arxiv.org/abs/2606.12069" target="_blank" rel="noopener">arXiv <span aria-hidden="true">↗</span></a></li>
+        <li><span class="resource-chip pending">Code <small>Coming soon…</small></span></li>
+        <li><span class="resource-chip pending">Hardware <small>Coming soon…</small></span></li>
+        <li><a class="resource-chip" href="https://huggingface.co/datasets/lihong-cs/Tac-DINO" target="_blank" rel="noopener">Data <span aria-hidden="true">↗</span></a></li>
+      </ul>
+      <div class="project-jump-links">
+        <a href="#demo">Full video <span aria-hidden="true">▷</span></a>
+        <a href="#results">Explore results <span aria-hidden="true">↓</span></a>
+      </div>
     </section>
     <section class="section wrap intro" aria-labelledby="abstract-title">
       <p class="eyebrow">The idea</p><h2 id="abstract-title">From whole objects to local contact.</h2>
