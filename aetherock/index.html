@@ -16,7 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="../project-hero.css">
+  <link rel="stylesheet" href="../hardware-viewer/viewer.css">
   <script src="script.js" defer></script>
+  <script type="module" src="../hardware-viewer/start.mjs"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -53,7 +55,7 @@
     <ul class="project-resources" aria-label="Project resources">
       <li><a class="resource-chip" href="https://arxiv.org/abs/2606.09777" target="_blank" rel="noopener">arXiv <span aria-hidden="true">↗</span></a></li>
       <li><a class="resource-chip" href="https://github.com/lihongcs/AetheRock" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a></li>
-      <li><span class="resource-chip pending">Hardware <small>Coming soon…</small></span></li>
+      <li><a class="resource-chip" href="#hardware">Hardware <span aria-hidden="true">↓</span></a></li>
       <li><a class="resource-chip" href="https://huggingface.co/datasets/lihong-cs/aetherock" target="_blank" rel="noopener">Data <span aria-hidden="true">↗</span></a></li>
     </ul>
     <div class="project-jump-links">
@@ -76,8 +78,51 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="split-copy"><div><p class="eyebrow">GELSLIM-MINI</p><h3>Designed to build,<br>detach, and repair.</h3></div><div><p>Inspired by GelSlim 4.0's optics and PCB design, GelSlim-Mini uses 2D-cut planar acrylic and a PDMS-based sensing surface with silver powder. Detachable components simplify replacement and repair.</p><p>The same sensor design can be mounted on the UMI collection gripper and the real-robot gripper.</p></div></div>
-    <figure class="paper-figure"><a href="assets/gelslim-mini.webp" target="_blank" rel="noopener"><img src="assets/gelslim-mini.webp" loading="lazy" alt="GelSlim-Mini fabrication with planar acrylic, PDMS and silver powder; tactile contact images; mounting on UMI and robot grippers."></a><figcaption>Fabrication, tactile contact visualization, and gripper integration.</figcaption></figure>
+    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb">
+      <div class="cad-heading">
+        <h3>Wearable UMI assembly</h3>
+        <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
+      </div>
+      <div class="cad-surface" data-cad-surface>
+        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp" alt="AetheRock assembly with hand and forearm reference." loading="lazy">
+        <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
+      </div>
+      <div class="cad-toolbar" data-cad-toolbar hidden>
+        <div class="cad-inputs">
+          <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+          <label class="cad-context" hidden><input type="checkbox" data-cad-context checked> Show hand and arm</label>
+        </div>
+        <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
+        <div class="cad-actions" aria-label="Assembly view controls">
+          <button type="button" data-cad-action="focus" disabled>Focus</button>
+          <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+          <button type="button" data-cad-action="top">Top view</button>
+          <button type="button" data-cad-action="side">Side view</button>
+          <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
+          <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
+          <button type="button" data-cad-action="reset">Reset</button>
+        </div>
+      </div>
+      <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
+      <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STEP downloads are available below.</p></noscript>
+    </div>
+    <div class="cad-downloads" id="downloads">
+      <h3>Download AetheRock CAD</h3>
+      <ul>
+        <li><a href="assets/hardware/aetherock-wearable-assembly.step" download>Wearable assembly (STEP)</a></li>
+        <li><a href="assets/hardware/aetherock-adaptive-gripper-assembly.step" download>Adaptive gripper assembly (STEP)</a></li>
+        <li><a href="assets/hardware/aetherock-handcap-step-parts.zip" download>Individual STEP parts (ZIP)</a></li>
+        <li><a href="assets/hardware/aetherock-handcap-solidworks.zip" download>Editable SolidWorks parts (ZIP)</a></li>
+        <li><a href="assets/hardware/aetherock-handcap-pcb-sources.zip" download>Original PCB designs for JLCEDA Pro (ZIP)</a></li>
+        <li><a href="assets/hardware/human-hand-and-forearm-pose-sources.zip" download>Hand and forearm reference source (ZIP)</a></li>
+      </ul>
+      <p>The viewer shows the wearable adaptive gripper, its electronics, and a hand and arm in the worn position. Use the checkbox to reveal the hardware from every angle. The downloadable CAD represents commercial hardware with simplified fit references.</p>
+      <details data-parts="assets/hardware/downloads.json" hidden>
+        <summary>Browse individual STEP downloads</summary>
+        <ul></ul>
+      </details>
+    </div>
+    <div class="split-copy"><div><p class="eyebrow">TACTILE SENSOR</p><h3>GelSlim Mini</h3></div><div><p>GelSlim Mini uses planar acrylic and a PDMS-based sensing surface with silver powder. Its detachable sensor stack mounts on either the UMI collection gripper or the robot gripper.</p><a class="text-link" href="../gelslim-mini/">Explore GelSlim Mini <span aria-hidden="true">↗</span></a></div></div>
   </div></section>
 
   <section id="method" class="section wrap">

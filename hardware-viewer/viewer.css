@@ -1,0 +1,94 @@
+.cad-viewer {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  margin: 1.5rem 0 2rem;
+  overflow: hidden;
+  background: var(--card-color);
+}
+.cad-viewer [hidden], .cad-downloads [hidden] { display: none !important; }
+.cad-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; }
+.cad-heading h3 { margin: 0; }
+.cad-viewer button, .cad-viewer select {
+  padding: .48rem .7rem;
+  border: 1px solid #cbbeb0;
+  border-radius: 6px;
+  color: var(--text-color);
+  background: #fffcf8;
+}
+.cad-viewer button { white-space: nowrap; }
+.cad-viewer button:hover:not(:disabled) { background: #eee2d1; }
+.cad-viewer button:disabled { opacity: .47; cursor: default; }
+.cad-viewer button[aria-pressed="true"], .cad-viewer .cad-launch {
+  background: #302823;
+  border-color: #302823;
+  color: white;
+}
+.cad-viewer .cad-launch:hover:not(:disabled) { background: #584433; }
+.cad-viewer :is(select,button,input,canvas):focus-visible {
+  outline: 2px solid #ae5c23;
+  outline-offset: 2px;
+}
+.cad-surface {
+  position: relative;
+  height: clamp(19rem, 56vw, 33rem);
+  background: #f2eee7;
+  border-block: 1px solid var(--border-color);
+}
+.cad-surface canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.cad-surface canvas:active { cursor: grabbing; }
+.cad-preview { width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
+.cad-status {
+  position: absolute;
+  inset: auto 1rem .75rem;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  margin: auto;
+  padding: .35rem .7rem;
+  font-size: .84rem;
+  border-radius: 6px;
+  color: #fff;
+  background: #302823;
+}
+.cad-help { color: var(--secondary-text); padding: .75rem 1.25rem; margin: 0; font-size: .82rem; }
+.cad-toolbar { padding: .8rem 1.25rem .1rem; font-size: .84rem; }
+.cad-inputs, .cad-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.cad-inputs label:first-child { display: flex; flex: 1 1 17rem; min-width: 0; align-items: center; gap: .7rem; }
+.cad-inputs select { width: 100%; min-width: 0; }
+.cad-inputs input { accent-color: #7d4e2f; }
+.cad-context { white-space: nowrap; margin-left: .25rem; }
+.cad-readout { min-height: 2rem; margin: .7rem 0 .5rem; overflow-wrap: anywhere; }
+.cad-readout span { margin-left: .5rem; color: var(--secondary-text); }
+.cad-downloads { margin: 0 0 1.5rem; }
+.cad-downloads h3 { margin-bottom: .55rem; }
+.cad-downloads ul { display: flex; flex-wrap: wrap; column-gap: 1.35rem; row-gap: .3rem; padding: 0; margin: 0 0 .8rem; list-style: none; }
+.cad-downloads p { font-size: .87rem; max-width: 66ch; color: var(--secondary-text); }
+.cad-downloads details summary { list-style: revert; cursor: pointer; font-size: .9rem; font-weight: 600; margin: .45rem 0; }
+.cad-downloads details ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); font-size: .86rem; }
+.cad-downloads a { text-underline-offset: .2em; }
+.cad-downloads a:hover { color: #765033; }
+.tactile-project .section { padding-top: 2.7rem; }
+.tactile-project .tactile-banner { padding-top: 3rem; }
+.tactile-project .tactile-banner h1 { font-size: clamp(2.8rem, 9vw, 4.7rem); line-height: 1.08; margin-bottom: .8rem; }
+.tactile-project .tactile-banner .lede { max-width: 37rem; margin-bottom: .8rem; }
+.tactile-project .tactile-info { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+.tactile-project .tactile-info article { padding-top: 1rem; border-top: 1px solid var(--border-color); }
+.tactile-project .tactile-info p { color: var(--secondary-text); font-size: .9rem; }
+.tactile-project .tactile-download-notes { line-height: 1.65; }
+@media (max-width: 650px) {
+  .tactile-project .tactile-info { grid-template-columns: 1fr; gap: .5rem; }
+  .cad-toolbar, .cad-help, .cad-heading { padding-inline: .75rem; }
+  .cad-actions button { min-height: 2.4rem; }
+  .cad-inputs label:first-child { flex-basis: 100%; }
+  .cad-heading h3 { font-size: .95rem; }
+}
+
+.tactile-project .skip-link {
+  position: absolute;
+  left: .75rem;
+  top: .75rem;
+  transform: translateY(-150%);
+  padding: .35rem .65rem;
+  z-index: 1;
+  background: var(--card-color);
+}
+.tactile-project .skip-link:focus { transform: none; }

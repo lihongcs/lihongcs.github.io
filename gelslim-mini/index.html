@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GelSlim Mini is a compact vision-based tactile sensor. Explore its 3D assembly and download the source CAD.">
+  <title>GelSlim Mini | Vision-based Tactile Sensor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../aetherock/style.css">
+  <link rel="stylesheet" href="../hardware-viewer/viewer.css">
+  <script type="module" src="../hardware-viewer/start.mjs"></script>
+</head>
+<body class="tactile-project">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Main navigation">
+    <a class="home-link" href="../">← Hong Li</a>
+    <div class="nav-links"><a href="../aetherock/#hardware">AetheRock hardware</a><a href="#downloads">CAD downloads</a></div>
+  </nav>
+</header>
+<main id="main">
+  <header class="tactile-banner wrap">
+    <p class="eyebrow">TACTILE SENSOR</p>
+    <h1>GelSlim Mini</h1>
+    <p class="lede">A compact vision-based tactile sensor with a detachable optical stack for wearable UMI and robot grippers.</p>
+    <a class="text-link" href="https://arxiv.org/abs/2606.09777">Read the AetheRock paper <span aria-hidden="true">↗</span></a>
+  </header>
+  <section class="section wrap" aria-label="GelSlim Mini CAD and downloads">
+    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/gelslim-mini.glb">
+      <div class="cad-heading">
+        <h3>GelSlim Mini assembly</h3>
+        <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
+      </div>
+      <div class="cad-surface" data-cad-surface>
+        <img class="cad-preview" data-cad-preview src="assets/hardware/gelslim-mini-preview.webp" alt="GelSlim Mini assembly with camera ribbon and adapter." loading="lazy">
+        <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
+      </div>
+      <div class="cad-toolbar" data-cad-toolbar hidden>
+        <div class="cad-inputs">
+          <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+
+        </div>
+        <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
+        <div class="cad-actions" aria-label="Assembly view controls">
+          <button type="button" data-cad-action="focus" disabled>Focus</button>
+          <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+          <button type="button" data-cad-action="top">Top view</button>
+          <button type="button" data-cad-action="side">Side view</button>
+          <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
+          <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
+          <button type="button" data-cad-action="reset">Reset</button>
+        </div>
+      </div>
+      <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
+      <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STEP downloads are available below.</p></noscript>
+    </div>
+    <div class="cad-downloads" id="downloads">
+      <h3>Download GelSlim Mini CAD</h3>
+      <ul>
+        <li><a href="assets/hardware/gelslim-mini-assembly.step" download>Sensor assembly (STEP)</a></li>
+        <li><a href="assets/hardware/gelslim-mini-mechanical-assembly.step" download>Mechanical assembly (STEP)</a></li>
+        <li><a href="assets/hardware/gelslim-mini-step-parts.zip" download>Individual STEP parts (ZIP)</a></li>
+        <li><a href="assets/hardware/gelslim-mini-solidworks.zip" download>Editable SolidWorks parts (ZIP)</a></li>
+      </ul>
+      <p>The STEP release includes the sensor, molds, and calibration tools. The commercial camera and upstream lighting appear as simplified clearance references. The archives link to the upstream hardware.</p>
+      <details data-parts="assets/hardware/downloads.json" hidden>
+        <summary>Browse individual STEP downloads</summary>
+        <ul></ul>
+      </details>
+    </div>
+  </section>
+  <section class="section wrap" aria-labelledby="sensor-design">
+    <h2 id="sensor-design">Sensor design</h2>
+    <div class="tactile-info">
+      <article><h3>Contact surface</h3><p>A PDMS elastomer with a silver-powder coating covers the planar acrylic window.</p></article>
+      <article><h3>Imaging</h3><p>An OV5647 fisheye camera observes the contact surface under internal illumination.</p></article>
+      <article><h3>Mounting</h3><p>The detachable stack can be used on AetheRock or on a robot gripper.</p></article>
+    </div>
+    <p class="tactile-download-notes">The optics and PCB design draw on <a href="https://github.com/MMintLab/gelslim_hardware">GelSlim 4.0</a>. The <a href="https://github.com/linchangyi1/9DTact">9DTact</a> reference documents the OV5647 camera module.</p>
+  </section>
+</main>
+<footer class="footer wrap"><a href="../aetherock/#hardware">AetheRock hardware</a> · <a href="../">All projects</a></footer>
+</body>
+</html>

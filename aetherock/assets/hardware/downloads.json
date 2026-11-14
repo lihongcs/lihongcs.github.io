@@ -1,0 +1,144 @@
+{
+  "parts": [
+    {
+      "label": "Acrylic Contact Window",
+      "href": "parts/acrylic-contact-window.step"
+    },
+    {
+      "label": "Adaptive Linkage Support",
+      "href": "parts/adaptive-linkage-support.step"
+    },
+    {
+      "label": "AS5600 Angle Encoder Custom PCB",
+      "href": "parts/as5600-angle-encoder-custom-pcb.step"
+    },
+    {
+      "label": "Braided Sleeve",
+      "href": "parts/braided-sleeve.step"
+    },
+    {
+      "label": "Center Encoder Rotor",
+      "href": "parts/center-encoder-rotor.step"
+    },
+    {
+      "label": "Controller Tray",
+      "href": "parts/controller-tray.step"
+    },
+    {
+      "label": "Force ADC Custom PCB",
+      "href": "parts/force-adc-custom-pcb.step"
+    },
+    {
+      "label": "Forearm Articulation",
+      "href": "parts/forearm-articulation.step"
+    },
+    {
+      "label": "Forearm Strap",
+      "href": "parts/forearm-strap.step"
+    },
+    {
+      "label": "Frame Side Rail",
+      "href": "parts/frame-side-rail.step"
+    },
+    {
+      "label": "Gel Retainer Ring",
+      "href": "parts/gel-retainer-ring.step"
+    },
+    {
+      "label": "Gripper Side Cover",
+      "href": "parts/gripper-side-cover.step"
+    },
+    {
+      "label": "Hikrobot Camera Mount",
+      "href": "parts/hikrobot-camera-mount.step"
+    },
+    {
+      "label": "Jaw Sliding Bar",
+      "href": "parts/jaw-sliding-bar.step"
+    },
+    {
+      "label": "Left Fingertip Support",
+      "href": "parts/left-fingertip-support.step"
+    },
+    {
+      "label": "Left Outer Link",
+      "href": "parts/left-outer-link.step"
+    },
+    {
+      "label": "Optical Shroud",
+      "href": "parts/optical-shroud.step"
+    },
+    {
+      "label": "Optical Window Support",
+      "href": "parts/optical-window-support.step"
+    },
+    {
+      "label": "Orange Pi 4 Pro Custom GPIO PCB",
+      "href": "parts/orange-pi-4-pro-custom-gpio-pcb.step"
+    },
+    {
+      "label": "Pivot M2p5 Hex Nut",
+      "href": "parts/pivot-m2p5-hex-nut.step"
+    },
+    {
+      "label": "Rear Pivot M2p5 Thrust Washer",
+      "href": "parts/rear-pivot-m2p5-thrust-washer.step"
+    },
+    {
+      "label": "Rear Pivot Shoulder Bolt D3 L37p55 M2p5",
+      "href": "parts/rear-pivot-shoulder-bolt-d3-l37p55-m2p5.step"
+    },
+    {
+      "label": "Right Fingertip Support",
+      "href": "parts/right-fingertip-support.step"
+    },
+    {
+      "label": "Right Outer Link",
+      "href": "parts/right-outer-link.step"
+    },
+    {
+      "label": "Rotating Link",
+      "href": "parts/rotating-link.step"
+    },
+    {
+      "label": "Short Pivot M2 Hex Nut",
+      "href": "parts/short-pivot-m2-hex-nut.step"
+    },
+    {
+      "label": "Short Pivot M2x22 Low Head Screw",
+      "href": "parts/short-pivot-m2x22-low-head-screw.step"
+    },
+    {
+      "label": "Sliding Bar Guide",
+      "href": "parts/sliding-bar-guide.step"
+    },
+    {
+      "label": "Tactile Contact Surface",
+      "href": "parts/tactile-contact-surface.step"
+    },
+    {
+      "label": "UMI Fingertip Back Cover",
+      "href": "parts/umi-fingertip-back-cover.step"
+    },
+    {
+      "label": "Upper Arm Articulation",
+      "href": "parts/upper-arm-articulation.step"
+    },
+    {
+      "label": "Upper Arm Strap",
+      "href": "parts/upper-arm-strap.step"
+    },
+    {
+      "label": "Upper Gripper Frame",
+      "href": "parts/upper-gripper-frame.step"
+    },
+    {
+      "label": "VIVE Tracker Mount",
+      "href": "parts/vive-tracker-mount.step"
+    },
+    {
+      "label": "Wrist Bridge",
+      "href": "parts/wrist-bridge.step"
+    }
+  ]
+}

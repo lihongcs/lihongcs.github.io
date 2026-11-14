@@ -1,0 +1,60 @@
+{
+  "parts": [
+    {
+      "label": "Adhesive Casting Mold",
+      "href": "parts/adhesive-casting-mold.step"
+    },
+    {
+      "label": "Contact Gel Mold March Revision",
+      "href": "parts/contact-gel-mold-march-revision.step"
+    },
+    {
+      "label": "Contact Gel Mold",
+      "href": "parts/contact-gel-mold.step"
+    },
+    {
+      "label": "Depth Calibration Rectangular Mold",
+      "href": "parts/depth-calibration-rectangular-mold.step"
+    },
+    {
+      "label": "Depth Calibration Reference Plate",
+      "href": "parts/depth-calibration-reference-plate.step"
+    },
+    {
+      "label": "Electronics Carrier",
+      "href": "parts/electronics-carrier.step"
+    },
+    {
+      "label": "Gel Retainer Ring",
+      "href": "parts/gel-retainer-ring.step"
+    },
+    {
+      "label": "Optical Shroud",
+      "href": "parts/optical-shroud.step"
+    },
+    {
+      "label": "Optical Window Support",
+      "href": "parts/optical-window-support.step"
+    },
+    {
+      "label": "OV5647 Camera Adapter Fit Envelope",
+      "href": "parts/ov5647-camera-adapter-fit-envelope.step"
+    },
+    {
+      "label": "Sensor Back Cover",
+      "href": "parts/sensor-back-cover.step"
+    },
+    {
+      "label": "Sensor Fastener Reference",
+      "href": "parts/sensor-fastener-reference.step"
+    },
+    {
+      "label": "Tactile Back OV5647 Through Slot",
+      "href": "parts/tactile-back-ov5647-through-slot.step"
+    },
+    {
+      "label": "Wide Adhesive Casting Mold",
+      "href": "parts/wide-adhesive-casting-mold.step"
+    }
+  ]
+}
