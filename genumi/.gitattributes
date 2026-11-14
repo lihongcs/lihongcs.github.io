@@ -2,4 +2,5 @@
 *.step binary
 *.glb binary
 *.zip binary
+*.sldprt binary
 vendor/three-cad.js -text -diff -whitespace
