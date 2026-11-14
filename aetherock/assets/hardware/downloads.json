@@ -93,6 +93,26 @@
       "href": "parts/left-outer-link.step"
     },
     {
+      "label": "Opposite Frame Mounted FSR Amplifier PCB",
+      "href": "parts/opposite-frame-mounted-fsr-amplifier-pcb.step"
+    },
+    {
+      "label": "Opposite FSR PCB Insulating Spacer",
+      "href": "parts/opposite-fsr-pcb-insulating-spacer.step"
+    },
+    {
+      "label": "Opposite FSR PCB Mount Screw M2.5 x 12",
+      "href": "parts/opposite-fsr-pcb-mount-screw-m2p5-x-12.step"
+    },
+    {
+      "label": "Opposite FSR PCB Retaining Nut M2.5",
+      "href": "parts/opposite-fsr-pcb-retaining-nut-m2p5.step"
+    },
+    {
+      "label": "Opposite FSR PCB Retaining Washer",
+      "href": "parts/opposite-fsr-pcb-retaining-washer.step"
+    },
+    {
       "label": "Optical Shroud",
       "href": "parts/optical-shroud.step"
     },
