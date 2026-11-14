@@ -17,7 +17,11 @@
 <body>
   <header class="site-header wrap">
     <a href="../#projects"><span aria-hidden="true">←</span> Hong Li</a>
-    <a href="#hardware">Hardware downloads</a>
+    <nav aria-label="GenUMI navigation">
+      <a href="viewer.html">3D viewer</a>
+      <a href="#hardware">Hardware downloads</a>
+      <a href="steps.html">STEP library</a>
+    </nav>
   </header>
   <main class="wrap">
     <section class="intro" aria-labelledby="title">
@@ -28,7 +32,7 @@
       </div>
       <figure class="preview">
         <div class="preview-frame"><img src="assets/flexiv-assembly.png" width="640" height="480" alt="CAD preview of the handheld GenUMI assembly with two articulated fingers, an Insta360 camera, and a VIVE tracker."></div>
-        <figcaption>Flexiv Grav GN-01 variant · SolidWorks assembly preview</figcaption>
+        <figcaption>Flexiv Grav GN-01 prototype · SolidWorks assembly preview</figcaption>
       </figure>
     </section>
 
@@ -37,16 +41,27 @@
       <div class="variants">
         <article class="variant">
           <h3>Flexiv Grav GN-01</h3>
-          <p>The CAD package includes the handheld frame, finger linkages, geared subassemblies, and fingertip parts.</p>
-          <a class="download" href="hardware/genumi-flexiv-gn01.zip" download>Download Flexiv CAD <span aria-hidden="true">↓</span></a>
+          <p>The STEP assembly includes the handheld frame, finger linkages, drive gears, fingertips, and the updated Insta360 quick-release spacer.</p>
+          <div class="variant-actions">
+            <a class="download" href="viewer.html?variant=flexiv">Explore Flexiv in 3D</a>
+            <a href="steps.html?variant=flexiv">Browse STEP files</a>
+            <a href="hardware/genumi-flexiv-step.zip" download>Download STEP package</a>
+            <a href="hardware/genumi-flexiv-gn01.zip" download>Download SolidWorks source</a>
+          </div>
         </article>
         <article class="variant">
           <h3>Robotiq 2F-85</h3>
-          <p>The CAD package includes the handheld frame, connector, and gear assembly. The finger geometry requires separate source files.</p>
-          <a class="download" href="hardware/genumi-robotiq-2f85.zip" download>Download Robotiq CAD <span aria-hidden="true">↓</span></a>
+          <p>Explore the Robotiq-matched handheld chassis and download its project CAD. The commercial finger geometry comes from Robotiq reference files.</p>
+          <div class="variant-actions">
+            <a class="download" href="viewer.html?variant=robotiq">Explore Robotiq in 3D</a>
+            <a href="steps.html?variant=robotiq">Browse STEP files</a>
+            <a href="hardware/genumi-robotiq-step.zip" download>Download STEP package</a>
+            <a href="hardware/genumi-robotiq-2f85.zip" download>Download SolidWorks source</a>
+          </div>
         </article>
       </div>
-      <p class="release-note">Each archive includes editable SolidWorks files and a README with assembly entry points and required references. The GenUMI designs are released under the BSD 3-Clause license. The archives contain parts and subassemblies, with some references available separately.</p>
+      <p class="release-note">The GenUMI designs use the BSD 3-Clause license. The SolidWorks archives preserve the source designs. The Flexiv STEP package includes the quick-release revision.</p>
+      <p class="release-note">The Flexiv retrofit uses an 18 mm × 8 mm spacer and a 6.6 mm clearance hole for a 1/4-20 fastener. The CAD clearance has been checked in the saved pose. Verify fastener length and latch access on the physical assembly. <a href="https://store.insta360.com/product/668">Insta360 Magnetic Quick Release Mount</a></p>
     </section>
 
     <footer class="references">

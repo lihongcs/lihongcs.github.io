@@ -1,0 +1,293 @@
+{
+  "variants": [
+    {
+      "id": "flexiv",
+      "name": "Flexiv Grav GN-01",
+      "model": "models/flexiv.glb",
+      "preview": "assets/flexiv-assembly.png",
+      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-quick-release-assembly.step",
+      "note": "The updated camera interface uses a GenUMI spacer and a purchased Insta360 Magnetic Quick Release Mount. The 3D model shows the GenUMI hardware.",
+      "modules": [
+        {
+          "id": "handheld-housing",
+          "name": "Handheld Housing",
+          "description": "Revised with a 6.6 mm through-hole for the quick-release fastener.",
+          "step": "hardware/steps/flexiv/handheld-housing-quick-release.step"
+        },
+        {
+          "id": "moving-handle",
+          "name": "Moving Handle",
+          "description": "The integrated body has the updated camera-fastener clearance.",
+          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release.step"
+        },
+        {
+          "id": "tracker-bracket",
+          "name": "Tracker Mounting Bracket",
+          "step": "hardware/steps/flexiv/d435-vive-tracker-bracket.step"
+        },
+        {
+          "id": "left-drive",
+          "name": "Left Drive Gear and Bearing",
+          "step": "hardware/steps/flexiv/left-drive-gear-and-bearing.step"
+        },
+        {
+          "id": "right-drive",
+          "name": "Right Drive Gear and Bearing",
+          "step": "hardware/steps/flexiv/right-drive-gear-and-bearing.step"
+        },
+        {
+          "id": "left-inner-link",
+          "name": "Left Finger Inner Link",
+          "step": "hardware/steps/flexiv/right-hand-left-finger-inner-link.step"
+        },
+        {
+          "id": "right-inner-link",
+          "name": "Right Finger Inner Link",
+          "step": "hardware/steps/flexiv/right-hand-right-finger-inner-link.step"
+        },
+        {
+          "id": "fingertip-carrier",
+          "name": "Fingertip Carrier",
+          "description": "Two instances of this SolidWorks part are used in the assembly.",
+          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step"
+        },
+        {
+          "id": "left-fingertip-pad",
+          "name": "Left TPU Fingertip",
+          "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
+        },
+        {
+          "id": "right-fingertip-pad",
+          "name": "Right TPU Fingertip",
+          "step": "hardware/steps/flexiv/right-tpu-fingertip.step"
+        },
+        {
+          "id": "camera-support",
+          "name": "Insta360 Quick-Release Spacer",
+          "description": "18 mm outside diameter, 8 mm thick, with a 6.6 mm through-hole for a 1/4-20 fastener.",
+          "step": "hardware/steps/flexiv/insta360-quick-release-spacer.step"
+        }
+      ],
+      "downloads": [
+        {
+          "name": "Flexiv Grav GN-01 Assembly",
+          "kind": "Assembly",
+          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-quick-release-assembly.step"
+        },
+        {
+          "name": "Handheld Body Section A",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/handheld-body-section-a.step"
+        },
+        {
+          "name": "Handheld Body",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/handheld-body.step"
+        },
+        {
+          "name": "Left Drive Gear and Bearing",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/left-drive-gear-and-bearing.step"
+        },
+        {
+          "name": "Left Fingertip",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/left-fingertip.step"
+        },
+        {
+          "name": "Right Drive Gear and Bearing",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/right-drive-gear-and-bearing.step"
+        },
+        {
+          "name": "Right Fingertip",
+          "kind": "Subassembly",
+          "step": "hardware/steps/flexiv/right-fingertip.step"
+        },
+        {
+          "name": "9DTact Sensor Base",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/9dtact-sensor-base.step"
+        },
+        {
+          "name": "Tracker Mounting Bracket",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/d435-vive-tracker-bracket.step"
+        },
+        {
+          "name": "Fingertip Linkage",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/fingertip-linkage.step"
+        },
+        {
+          "name": "Grav Finger Mount",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/grav-finger-mount.step"
+        },
+        {
+          "name": "Moving Handle",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release.step"
+        },
+        {
+          "name": "Handheld Body Section B Combined Part",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-body-section-b-combined-part.step"
+        },
+        {
+          "name": "Handheld Body Section B",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-body-section-b.step"
+        },
+        {
+          "name": "Handheld Housing",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-housing-quick-release.step"
+        },
+        {
+          "name": "Handheld Housing",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-housing.step"
+        },
+        {
+          "name": "Insta360 Quick-Release Spacer",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/insta360-quick-release-spacer.step"
+        },
+        {
+          "name": "Insta360 X5 Housing",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/insta360-x5-housing.step"
+        },
+        {
+          "name": "Left Drive Gear And Outer Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-drive-gear-and-outer-link.step"
+        },
+        {
+          "name": "Left Finger Outer Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-finger-outer-link.step"
+        },
+        {
+          "name": "Fingertip Carrier",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step"
+        },
+        {
+          "name": "Left Hand Left Finger Inner Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-hand-left-finger-inner-link.step"
+        },
+        {
+          "name": "Left Hand Right Finger Inner Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-hand-right-finger-inner-link.step"
+        },
+        {
+          "name": "Left TPU Fingertip",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
+        },
+        {
+          "name": "Right Drive Gear And Outer Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-drive-gear-and-outer-link.step"
+        },
+        {
+          "name": "Right Finger Outer Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-finger-outer-link.step"
+        },
+        {
+          "name": "Right Fingertip Combined Part",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-fingertip-combined-part.step"
+        },
+        {
+          "name": "Left Finger Inner Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-hand-left-finger-inner-link.step"
+        },
+        {
+          "name": "Right Finger Inner Link",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-hand-right-finger-inner-link.step"
+        },
+        {
+          "name": "Right TPU Fingertip",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/right-tpu-fingertip.step"
+        }
+      ]
+    },
+    {
+      "id": "robotiq",
+      "name": "Robotiq 2F-85",
+      "model": "models/robotiq.glb",
+      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware.step",
+      "assemblyDownloadName": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
+      "assemblyDownloadLabel": "Download GenUMI hardware STEP",
+      "note": "This view shows the GenUMI body and connectors in the reconstructed assembly. The commercial finger geometry and Toolbox gear are available from their respective suppliers.",
+      "modules": [
+        {
+          "id": "handheld-body",
+          "name": "Handheld Body",
+          "step": "hardware/steps/robotiq/handheld-body-section-b-combined-part.step"
+        },
+        {
+          "id": "left-connector",
+          "name": "Left Drive Link Connector",
+          "step": "hardware/steps/robotiq/handheld-connector.step"
+        },
+        {
+          "id": "right-connector",
+          "name": "Right Drive Link Connector",
+          "step": "hardware/steps/robotiq/handheld-connector.step"
+        }
+      ],
+      "downloads": [
+        {
+          "name": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
+          "kind": "Assembly",
+          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware.step"
+        },
+        {
+          "name": "Handheld Body Section A",
+          "kind": "Subassembly",
+          "step": "hardware/steps/robotiq/handheld-body-section-a.step"
+        },
+        {
+          "name": "Handheld Body",
+          "kind": "Subassembly",
+          "step": "hardware/steps/robotiq/handheld-body.step"
+        },
+        {
+          "name": "D435 VIVE Tracker Bracket",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/d435-vive-tracker-bracket.step"
+        },
+        {
+          "name": "Handheld Body",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-body-section-b-combined-part.step"
+        },
+        {
+          "name": "Handheld Body Section B",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-body-section-b.step"
+        },
+        {
+          "name": "Handheld Connector",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-connector.step"
+        },
+        {
+          "name": "Handheld Housing",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-housing.step"
+        }
+      ]
+    }
+  ]
+}

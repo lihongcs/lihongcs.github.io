@@ -41,6 +41,7 @@ a:focus-visible {
 
 .site-header a { text-decoration-color: var(--border); }
 .site-header a:hover { text-decoration-color: currentColor; }
+.site-header nav { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
 
 .intro {
   display: grid;
@@ -91,6 +92,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 
 .variant h3 { font-size: clamp(1.55rem, 3vw, 2rem); }
 .variant p { flex: 1; margin: .55rem 0 1.35rem; color: var(--muted); }
+.variant-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem .9rem; font-size: .85rem; }
 
 .download {
   display: inline-flex;

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GenUMI · 3D assembly viewer</title>
+  <meta name="description" content="Explore GenUMI hardware in 3D, inspect its modules, and download STEP files.">
+  <link rel="canonical" href="https://lihongcs.github.io/genumi/viewer.html">
+  <meta name="theme-color" content="#F4EFE6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="viewer.css">
+  <script type="module" src="viewer.js"></script>
+</head>
+<body>
+  <header class="site-header viewer-wrap">
+    <a href="./"><span aria-hidden="true">←</span> GenUMI project</a>
+    <nav aria-label="Viewer navigation">
+      <a href="#modules">Modules</a>
+      <a id="step-library-link" href="steps.html">STEP library</a>
+    </nav>
+  </header>
+  <main class="viewer-wrap">
+    <div class="viewer-heading">
+      <h1>GenUMI 3D assembly</h1>
+      <nav id="variant-switcher" class="variant-switcher" aria-label="Gripper variant"></nav>
+    </div>
+    <div class="viewer-layout">
+      <section class="model-panel" aria-label="Assembly preview">
+        <div class="model-toolbar">
+          <h2 id="variant-name">Assembly</h2>
+          <button id="reset-view" class="viewer-button" type="button" disabled>Reset view</button>
+        </div>
+        <nav id="view-switcher" class="variant-switcher view-switcher" aria-label="Assembly view" hidden></nav>
+        <div id="viewport" class="viewport">
+          <img id="fallback-preview" alt="SolidWorks assembly preview" hidden>
+          <p id="model-status" class="model-status" role="status">Loading assembly details…</p>
+          <p id="model-selection" class="model-selection" hidden></p>
+        </div>
+        <p id="model-instructions" class="model-instructions" hidden>
+          Drag to orbit. Scroll or pinch to zoom. Right-drag or use two fingers to pan. Click a part to select it.
+          <span class="sr-only">With the model focused, use the arrow keys to orbit and plus or minus to zoom.</span>
+        </p>
+      </section>
+      <section id="modules" class="module-panel" aria-labelledby="module-heading">
+        <h2 id="module-heading">Modules</h2>
+        <a id="assembly-download" class="download" download hidden>Download assembly STEP <span aria-hidden="true">↓</span></a>
+        <p id="variant-note" class="viewer-note" hidden></p>
+        <p id="module-empty" class="viewer-note" hidden>Module details are unavailable.</p>
+        <ul id="module-list" class="module-list"></ul>
+        <div id="module-detail" class="module-detail" hidden>
+          <div aria-live="polite">
+            <h3 id="module-name"></h3>
+            <p id="module-description" hidden></p>
+          </div>
+          <div class="module-actions">
+            <a id="part-download" class="viewer-button" download hidden>Download STEP <span aria-hidden="true">↓</span></a>
+            <button id="isolate-module" class="viewer-button" type="button" aria-pressed="false" hidden>Isolate module</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <noscript><p>The interactive viewer requires JavaScript. <a href="./#hardware">View hardware downloads.</a></p></noscript>
+  </main>
+</body>
+</html>

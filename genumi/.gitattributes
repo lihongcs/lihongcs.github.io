@@ -1,0 +1,5 @@
+# Preserve CAD exchange files and the upstream viewer bundle byte for byte.
+*.step binary
+*.glb binary
+*.zip binary
+vendor/three-cad.js -text -diff -whitespace
