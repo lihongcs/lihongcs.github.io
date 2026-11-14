@@ -1,6 +1,10 @@
 {
   "parts": [
     {
+      "label": "10 mm Diffused RGB LED Module",
+      "href": "parts/10mm-diffused-rgb-led-module.step"
+    },
+    {
       "label": "Acrylic Contact Window",
       "href": "parts/acrylic-contact-window.step"
     },
@@ -63,6 +67,10 @@
     {
       "label": "Jaw Sliding Bar",
       "href": "parts/jaw-sliding-bar.step"
+    },
+    {
+      "label": "Large Tactile Pushbutton Module",
+      "href": "parts/large-tactile-pushbutton-module.step"
     },
     {
       "label": "Left Fingertip Support",

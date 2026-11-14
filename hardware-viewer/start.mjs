@@ -9,7 +9,7 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=gripper-motion');
+    const { mountViewer } = await import('./viewer.mjs?v=controller-io');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     trigger.hidden = true;

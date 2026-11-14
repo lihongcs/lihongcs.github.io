@@ -61,7 +61,8 @@ function separation(part, center) {
     case 'Controller':
       if (label === 'Controller Tray') return out(0, 18, -58);
       if (label === 'Orange Pi 4 Pro Custom GPIO PCB') return out(0, 73, -58);
-      if (/Button|Status LED/.test(label)) return out(46, 38, -58);
+      if (label === 'Large Tactile Pushbutton Module') return out(45, 36, -38);
+      if (label === '10 mm Diffused RGB LED Module') return out(45, 36, -74);
       return out(0, 42, -58);
 
     case 'Wiring':

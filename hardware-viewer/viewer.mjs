@@ -456,7 +456,7 @@ export async function mountViewer(root) {
 
     if (assemblyControls) {
       const [{ createExplodedView }, { createGripperMotion }] = await Promise.all([
-        import('./aetherock-explode.mjs?v=gripper-motion'),
+        import('./aetherock-explode.mjs?v=controller-io'),
         import('./gripper-motion.mjs?v=gripper-motion'),
       ]);
       model.updateMatrixWorld(true);

@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../project-hero.css">
   <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=gripper-motion">
   <script src="script.js" defer></script>
-  <script type="module" src="../hardware-viewer/start.mjs?v=gripper-motion"></script>
+  <script type="module" src="../hardware-viewer/start.mjs?v=controller-io"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -78,7 +78,7 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb?v=remove-unused-wearable-mounts">
+    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb?v=controller-io-modules">
       <div class="cad-heading">
         <h3>Wearable UMI assembly</h3>
         <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="cad-surface" data-cad-surface>
-        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=remove-unused-wearable-mounts" alt="AetheRock wearable UMI assembly." loading="lazy">
+        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=controller-io-modules" alt="AetheRock wearable UMI assembly." loading="lazy">
         <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
       </div>
       <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -118,16 +118,17 @@
     <div class="cad-downloads" id="downloads">
       <h3>Download AetheRock CAD</h3>
       <ul>
-        <li><a href="assets/hardware/aetherock-wearable-assembly.step?v=remove-unused-wearable-mounts" download>Wearable assembly (STEP)</a></li>
+        <li><a href="assets/hardware/aetherock-wearable-assembly.step?v=controller-io-modules" download>Wearable assembly (STEP)</a></li>
         <li><a href="assets/hardware/aetherock-adaptive-gripper-assembly.step" download>Adaptive gripper assembly (STEP)</a></li>
-        <li><a href="assets/hardware/aetherock-handcap-step-parts.zip?v=remove-unused-wearable-mounts" download>Individual STEP parts (ZIP)</a></li>
+        <li><a href="assets/hardware/aetherock-handcap-step-parts.zip?v=controller-io-modules" download>Individual STEP parts (ZIP)</a></li>
         <li><a href="assets/hardware/aetherock-handcap-solidworks.zip?v=remove-unused-wearable-mounts" download>Editable SolidWorks parts (ZIP)</a></li>
         <li><a href="assets/hardware/aetherock-handcap-pcb-sources.zip" download>Original PCB designs for JLCEDA Pro (ZIP)</a></li>
       </ul>
       <p>The assembly STEP shows the 90° clockwise AS5600 connector orientation. The JLCEDA download contains the original PCB layout. The public STEP uses exterior references for the Hikrobot wrist camera, VIVE Ultimate Tracker, and OV5647 tactile cameras.</p>
       <p>The viewer uses HTC’s official VIVE Ultimate Tracker geometry. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC model source</a></p>
       <p>Each 22 × 22 mm fingertip film has a soldered lead pair routed to its voltage conversion module in the CAD. The wiring is a mechanical reference for a single force channel. The 4 × 4 array requires a matrix readout circuit for individual sensing points. <a href="https://item.taobao.com/item.htm?id=678907675185">Voltage conversion module listing</a></p>
-      <details data-parts="assets/hardware/downloads.json?v=remove-unused-wearable-mounts" hidden>
+      <p>The Orange Pi 4 Pro tray carries a separate FUN-001 tactile pushbutton and a 10 mm diffused common-cathode RGB LED module. The STEP parts use dimensions estimated from the prototype photos. <a href="https://item.taobao.com/item.htm?id=600330037429">Pushbutton listing</a> &middot; <a href="https://item.taobao.com/item.htm?id=659577810824">RGB LED listing</a></p>
+      <details data-parts="assets/hardware/downloads.json?v=controller-io-modules" hidden>
         <summary>Browse individual STEP downloads</summary>
         <ul></ul>
       </details>
