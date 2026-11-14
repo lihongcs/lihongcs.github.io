@@ -176,13 +176,14 @@ export async function mountViewer(root) {
     }
     select('');
 
-    // Center on the operator side of the supports, above the forward sensor faces.
+    // Include both trigger recesses and the palm on the operator side of the frame.
     const span = triggerBounds.getSize(new Vector3());
-    triggerBounds.max.y = triggerBounds.min.y + span.y * 0.62;
-    triggerBounds.min.y -= span.y * 0.11;
-    triggerBounds.max.z = triggerBounds.min.z + span.z * 0.56;
+    triggerBounds.expandByVector(new Vector3(span.x * 0.15, 0, 0));
+    triggerBounds.max.y -= span.y * 0.28;
+    triggerBounds.min.y -= span.y * 0.10;
+    triggerBounds.min.z -= span.z * 0.12;
     setViewUp(new Vector3(0, 0, -1));
-    fitBounds(triggerBounds, new Vector3(-0.14, -1, 0.10), 1.10);
+    fitBounds(triggerBounds, new Vector3(-0.06, -1, 0.25), 1.08);
   }
 
   function select(key) {
