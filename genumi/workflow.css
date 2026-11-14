@@ -241,3 +241,82 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
+.capture-sample {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: .85rem;
+}
+
+.capture-sample h4 {
+  margin: 0;
+  font: 500 clamp(1.65rem, 4vw, 2.35rem)/1.1 Newsreader, Georgia, serif;
+}
+
+.capture-sample figcaption p {
+  margin: .4rem 0 1.1rem;
+  color: var(--muted);
+}
+
+.capture-sample-views {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .25rem;
+  margin-bottom: .4rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.capture-sample video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 534;
+  background: #292321;
+  border-radius: .55rem;
+}
+
+.capture-sample-timeline { margin-top: 1.2rem; }
+.capture-sample-timeline-title { margin: 0 0 .55rem; font-weight: 600; }
+
+.capture-sample-axis,
+.capture-sample-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1rem;
+  color: var(--muted);
+}
+
+.capture-sample-axis { justify-content: space-between; }
+
+.capture-sample-track {
+  position: relative;
+  height: 1.65rem;
+  margin-block: .4rem .65rem;
+  overflow: hidden;
+  border-radius: .3rem;
+  background: #eae1d5;
+}
+
+.capture-sample-track span {
+  position: absolute;
+  left: var(--offset);
+  width: var(--span);
+}
+
+.sample-episode { inset-block: 0; background: #285e60; }
+.sample-excerpt { inset-block: .28rem; border: 2px solid #fffaf3; background: #bd6138; }
+
+.capture-sample-key span { display: flex; gap: .45rem; align-items: center; }
+.capture-sample-key span::before {
+  content: "";
+  width: .8rem;
+  height: .8rem;
+  border-radius: .15rem;
+  background: #285e60;
+}
+.capture-sample-key span + span::before { background: #bd6138; }
