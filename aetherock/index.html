@@ -16,9 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="../project-hero.css">
-  <link rel="stylesheet" href="../hardware-viewer/viewer.css">
+  <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=gripper-demo">
   <script src="script.js" defer></script>
-  <script type="module" src="../hardware-viewer/start.mjs?v=black-frame-factory-tracker"></script>
+  <script type="module" src="../hardware-viewer/start.mjs?v=gripper-demo"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -82,6 +82,16 @@
       <div class="cad-heading">
         <h3>Wearable UMI assembly</h3>
         <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
+      </div>
+      <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
+        <div class="cad-actions" role="group" aria-label="Assembly demonstrations">
+          <button class="cad-demo-button" type="button" data-cad-action="explode" aria-pressed="false">Explode assembly</button>
+          <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
+        </div>
+        <div class="cad-motion" data-cad-motion hidden>
+          <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help" data-cad-opening></label>
+          <p id="cad-motion-help">Drag either jaw in the model or use the slider.</p>
+        </div>
       </div>
       <div class="cad-surface" data-cad-surface>
         <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=remove-unused-wearable-mounts" alt="AetheRock wearable UMI assembly." loading="lazy">

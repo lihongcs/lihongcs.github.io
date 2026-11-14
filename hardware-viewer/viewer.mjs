@@ -21,6 +21,11 @@ export async function mountViewer(root) {
   const selectedModule = root.querySelector('[data-cad-module]');
   const contextToggle = root.querySelector('[data-cad-context]');
   const toolbar = root.querySelector('[data-cad-toolbar]');
+  const assemblyControls = root.querySelector('[data-cad-assembly-controls]');
+  const explodeButton = root.querySelector('[data-cad-action="explode"]');
+  const motionButton = root.querySelector('[data-cad-action="gripper"]');
+  const motionControls = root.querySelector('[data-cad-motion]');
+  const openingInput = root.querySelector('[data-cad-opening]');
   const scene = new Scene();
   scene.background = new Color(0xf2eee7);
 
@@ -69,6 +74,15 @@ export async function mountViewer(root) {
   let radius = 1;
   let selected = [];
   let solo = false;
+  let explodedView;
+  let gripper;
+  let opening = 0;
+  let posedOpening;
+  let explosion = 0;
+  let exploded = false;
+  let movingGripper = false;
+  let animation = 0;
+  let jawDrag;
   const groups = new Map();
   const meshes = [];
   const meshKeys = new Map();
@@ -118,24 +132,28 @@ export async function mountViewer(root) {
     fitBounds(box, direction, fit);
   }
 
-  function fitBounds(box, direction, fit = 1.18) {
+  function fitBounds(box, direction, fit = 1.18, targets = [box]) {
     if (box.isEmpty()) return;
     const center = box.getCenter(new Vector3());
     radius = Math.max(box.getSize(new Vector3()).length() / 2, 0.001);
     direction.normalize();
-    const right = new Vector3().crossVectors(camera.up, direction).normalize();
+    const right = new Vector3().crossVectors(camera.up, direction);
+    if (right.lengthSq() < 1e-8) right.setFromMatrixColumn(camera.matrixWorld, 0);
+    right.normalize();
     const up = new Vector3().crossVectors(direction, right).normalize();
     const vertical = Math.tan((camera.fov * Math.PI) / 360);
     const horizontal = vertical * camera.aspect;
     const offset = new Vector3();
     let distance = radius * 0.8;
-    for (const x of [box.min.x, box.max.x]) {
-      for (const y of [box.min.y, box.max.y]) {
-        for (const z of [box.min.z, box.max.z]) {
-          offset.set(x, y, z).sub(center);
-          distance = Math.max(distance, offset.dot(direction) + fit *
-            Math.max(Math.abs(offset.dot(right)) / horizontal, Math.abs(offset.dot(up)) / vertical));
-        }
+    for (const target of targets) {
+      for (let corner = 0; corner < 8; corner += 1) {
+        offset.set(
+          corner & 1 ? target.max.x : target.min.x,
+          corner & 2 ? target.max.y : target.min.y,
+          corner & 4 ? target.max.z : target.min.z,
+        ).sub(center);
+        distance = Math.max(distance, offset.dot(direction) + fit *
+          Math.max(Math.abs(offset.dot(right)) / horizontal, Math.abs(offset.dot(up)) / vertical));
       }
     }
     camera.near = radius / 150;
@@ -201,8 +219,174 @@ export async function mountViewer(root) {
     if (solo) focus(selected.filter((mesh) => mesh.visible), camera.position.clone().sub(controls.target));
   }
 
+  function applyPose() {
+    if (gripper && posedOpening !== opening) {
+      explodedView?.apply(0);
+      gripper.setOpening(opening);
+      posedOpening = opening;
+    }
+    explodedView?.apply(explosion);
+    model.updateMatrixWorld(true);
+    render();
+  }
+
+  function setOpening(value) {
+    opening = Math.max(0, Math.min(1, value));
+    openingInput.value = String(Math.round(opening * 100));
+    applyPose();
+  }
+
+  function toggleMotion(active) {
+    movingGripper = active;
+    motionButton.setAttribute('aria-pressed', String(active));
+    motionControls.hidden = !active;
+    renderer.domElement.removeAttribute('data-cad-drag-hint');
+    if (jawDrag) endJawDrag(jawDrag.id);
+  }
+
+  function fitMechanism() {
+    setViewUp(defaultUp);
+    const mechanismBounds = new Box3();
+    const boundsByPose = [];
+    for (const limit of [0, 1]) {
+      gripper.setOpening(limit);
+      model.updateMatrixWorld(true);
+      for (const part of gripper.movableObjects) {
+        const bounds = new Box3().setFromObject(part, true);
+        if (bounds.isEmpty()) continue;
+        boundsByPose.push(bounds);
+        mechanismBounds.union(bounds);
+      }
+    }
+    gripper.setOpening(opening);
+    model.updateMatrixWorld(true);
+    fitBounds(mechanismBounds, new Vector3(-0.30, 0.73, 1), 1.22, boundsByPose);
+  }
+
+  function setExplosion(active, animate = true) {
+    cancelAnimationFrame(animation);
+    exploded = active;
+    explodeButton.setAttribute('aria-pressed', String(active));
+    explodeButton.textContent = active ? 'Reassemble' : 'Explode assembly';
+    if (active) {
+      if (gripper) {
+        toggleMotion(false);
+        setOpening(gripper.initialOpening);
+      }
+      select('');
+    }
+    const target = active ? 1 : 0;
+    const origin = explosion;
+    if (active) {
+      const targets = explodedView.partBounds(1);
+      const expanded = new Box3();
+      for (const target of targets) expanded.union(target);
+      const direction = camera.position.clone().sub(controls.target);
+      fitBounds(expanded, direction, 1.15, targets);
+    }
+    // The check is made at interaction time so changes to the system preference take effect.
+    if (!animate || origin === target || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      explosion = target;
+      applyPose();
+      if (!active && animate) fitReassembly();
+      return;
+    }
+    const started = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - started) / 440);
+      const eased = t * t * (3 - 2 * t);
+      explosion = origin + (target - origin) * eased;
+      applyPose();
+      if (t < 1) animation = requestAnimationFrame(tick);
+      else if (!active) fitReassembly();
+    };
+    animation = requestAnimationFrame(tick);
+  }
+
+  function fitReassembly() {
+    focus(meshes.filter((mesh) => mesh.visible), camera.position.clone().sub(controls.target));
+  }
+
+  function startGripper() {
+    if (movingGripper) {
+      toggleMotion(false);
+      viewpoint();
+      return;
+    }
+    if (explodedView) setExplosion(false, false);
+    select('');
+    toggleMotion(true);
+    fitMechanism();
+  }
+
+  function hitAt(event) {
+    const bounds = renderer.domElement.getBoundingClientRect();
+    pointer.set((event.clientX - bounds.left) / bounds.width * 2 - 1,
+      -(event.clientY - bounds.top) / bounds.height * 2 + 1);
+    ray.setFromCamera(pointer, camera);
+    const hits = ray.intersectObjects(meshes.filter((mesh) => mesh.visible), false);
+    return hits.find(({ object }) => !isContext(object)) || hits[0];
+  }
+
+  function beginJawDrag(event) {
+    if (!movingGripper) return;
+    const hit = hitAt(event);
+    if (!hit) return;
+    const side = gripper.directionFor(hit.object);
+    if (!side) return;
+
+    const canvas = renderer.domElement;
+    const { width, height } = canvas.getBoundingClientRect();
+    const point = hit.point.clone().project(camera);
+    const shifted = hit.point.clone().add(new Vector3(side * gripper.getTravel(), 0, 0)).project(camera);
+    const axis = new Vector2((shifted.x - point.x) * width / 2, (point.y - shifted.y) * height / 2);
+    // At an almost end-on camera angle there is no useful projected slide axis.
+    if (axis.length() < 8) return;
+    const travel = Math.max(32, axis.length());
+    jawDrag = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      opening,
+      axis: axis.normalize(),
+      travel,
+    };
+    controls.enabled = false;
+    canvas.setPointerCapture(event.pointerId);
+    canvas.setAttribute('data-cad-drag-hint', '');
+  }
+
+  function moveJaw(event) {
+    if (jawDrag?.id !== event.pointerId) {
+      if (movingGripper && event.pointerType === 'mouse' && !event.buttons) {
+        const hit = hitAt(event);
+        renderer.domElement.toggleAttribute('data-cad-drag-hint', Boolean(hit && gripper.directionFor(hit.object)));
+      }
+      return;
+    }
+    const distance = (event.clientX - jawDrag.x) * jawDrag.axis.x + (event.clientY - jawDrag.y) * jawDrag.axis.y;
+    if (Math.abs(distance) < 4 && !jawDrag.moved) return;
+    jawDrag.moved = true;
+    setOpening(jawDrag.opening + distance / jawDrag.travel);
+  }
+
+  function endJawDrag(id) {
+    if (jawDrag?.id !== id) return false;
+    const { moved } = jawDrag;
+    jawDrag = undefined;
+    controls.enabled = true;
+    const canvas = renderer.domElement;
+    if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
+    canvas.removeAttribute('data-cad-drag-hint');
+    return moved;
+  }
+
   function act(action) {
-    if (action === 'isolate') {
+    if (action === 'explode') {
+      setExplosion(!exploded);
+    } else if (action === 'gripper') {
+      startGripper();
+    } else if (action === 'isolate') {
       solo = !solo;
       root.querySelector('[data-cad-action="isolate"]').setAttribute('aria-pressed', String(solo));
       applySelection();
@@ -213,6 +397,11 @@ export async function mountViewer(root) {
     } else if (action === 'focus') {
       focus(selected.filter((mesh) => mesh.visible), camera.position.clone().sub(controls.target));
     } else if (action === 'reset') {
+      if (explodedView) setExplosion(false, false);
+      if (gripper) {
+        toggleMotion(false);
+        setOpening(gripper.initialOpening);
+      }
       solo = false;
       select('');
       viewpoint();
@@ -265,6 +454,25 @@ export async function mountViewer(root) {
     });
     if (!meshes.length) throw new Error('The model has no visible parts.');
 
+    if (assemblyControls) {
+      const [{ createExplodedView }, { createGripperMotion }] = await Promise.all([
+        import('./aetherock-explode.mjs?v=gripper-demo'),
+        import('./gripper-motion.mjs?v=gripper-demo'),
+      ]);
+      model.updateMatrixWorld(true);
+      explodedView = createExplodedView(model);
+      gripper = createGripperMotion(model);
+      if (gripper) {
+        opening = gripper.initialOpening;
+        posedOpening = opening;
+        openingInput.value = String(Math.round(opening * 100));
+        openingInput.addEventListener('input', () => setOpening(openingInput.valueAsNumber / 100));
+      }
+      explodeButton.hidden = !explodedView;
+      motionButton.hidden = !gripper;
+      assemblyControls.hidden = !explodedView && !gripper;
+    }
+
     const clustered = new Map();
     const sorted = [...groups.entries()].sort(([, a], [, b]) =>
       a.module.localeCompare(b.module) || a.label.localeCompare(b.label));
@@ -303,7 +511,7 @@ export async function mountViewer(root) {
     new ResizeObserver(resize).observe(surface);
 
     selector.addEventListener('change', () => select(selector.value));
-    toolbar.addEventListener('click', (event) => {
+    root.addEventListener('click', (event) => {
       const action = event.target.closest('[data-cad-action]')?.dataset.cadAction;
       if (action) act(action);
     });
@@ -311,20 +519,24 @@ export async function mountViewer(root) {
     let start;
     const canvas = renderer.domElement;
     canvas.addEventListener('pointerdown', (event) => {
-      if (event.isPrimary && event.button === 0) start = [event.clientX, event.clientY];
+      if (!event.isPrimary || event.button !== 0) return;
+      start = [event.clientX, event.clientY];
+      beginJawDrag(event);
+    }, { capture: true });
+    canvas.addEventListener('pointermove', moveJaw);
+    canvas.addEventListener('pointerleave', () => canvas.removeAttribute('data-cad-drag-hint'));
+    canvas.addEventListener('pointercancel', (event) => {
+      start = undefined;
+      endJawDrag(event.pointerId);
     });
-    canvas.addEventListener('pointercancel', () => { start = undefined; });
+    canvas.addEventListener('lostpointercapture', (event) => endJawDrag(event.pointerId));
     canvas.addEventListener('pointerup', (event) => {
+      const movedJaw = endJawDrag(event.pointerId);
       if (!start || !event.isPrimary || event.button !== 0) return;
       const moved = Math.hypot(event.clientX - start[0], event.clientY - start[1]);
       start = undefined;
-      if (moved > 5) return;
-      const bounds = canvas.getBoundingClientRect();
-      pointer.set((event.clientX - bounds.left) / bounds.width * 2 - 1,
-        -(event.clientY - bounds.top) / bounds.height * 2 + 1);
-      ray.setFromCamera(pointer, camera);
-      const hits = ray.intersectObjects(meshes.filter((mesh) => mesh.visible), false);
-      const hit = hits.find((item) => !isContext(item.object)) || hits[0];
+      if (movedJaw || moved > 5) return;
+      const hit = hitAt(event);
       if (hit) select(meshKeys.get(hit.object));
     });
     canvas.addEventListener('keydown', (event) => {

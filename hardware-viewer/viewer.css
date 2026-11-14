@@ -52,6 +52,20 @@
 .cad-help { color: var(--secondary-text); padding: .75rem 1.25rem; margin: 0; font-size: .82rem; }
 .cad-toolbar { padding: .8rem 1.25rem .1rem; font-size: .84rem; }
 .cad-inputs, .cad-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.cad-assembly-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+  row-gap: .6rem;
+  padding: 0 1.25rem .85rem;
+  font-size: .84rem;
+}
+.cad-viewer .cad-demo-button { font-weight: 600; }
+.cad-motion label { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; }
+.cad-motion input { width: clamp(9rem, 32vw, 17rem); accent-color: #7d4e2f; }
+.cad-motion p { margin: .35rem 0 0; color: var(--secondary-text); }
+.cad-surface canvas[data-cad-drag-hint] { cursor: ew-resize; }
 .cad-inputs label:first-child { display: flex; flex: 1 1 17rem; min-width: 0; align-items: center; gap: .7rem; }
 .cad-inputs select { width: 100%; min-width: 0; }
 .cad-inputs input { accent-color: #7d4e2f; }
@@ -76,7 +90,7 @@
 .tactile-project .tactile-download-notes { line-height: 1.65; }
 @media (max-width: 650px) {
   .tactile-project .tactile-info { grid-template-columns: 1fr; gap: .5rem; }
-  .cad-toolbar, .cad-help, .cad-heading { padding-inline: .75rem; }
+  .cad-toolbar, .cad-help, .cad-heading, .cad-assembly-controls { padding-inline: .75rem; }
   .cad-actions button { min-height: 2.4rem; }
   .cad-inputs label:first-child { flex-basis: 100%; }
   .cad-heading h3 { font-size: .95rem; }
