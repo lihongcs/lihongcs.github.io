@@ -223,10 +223,6 @@
   margin: 1rem 0 0;
 }
 
-.system-screenshots figure + figure {
-  margin-top: 1.75rem;
-}
-
 .system-screenshots figure a {
   display: block;
   border-radius: .75rem;

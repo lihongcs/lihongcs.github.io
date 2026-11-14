@@ -36,20 +36,13 @@
     </section>
 
     <section class="system-screenshots" id="screenshots" aria-labelledby="system-screenshots-title">
-      <h2 id="system-screenshots-title">Capture interfaces</h2>
+      <h2 id="system-screenshots-title">Capture interface</h2>
       <figure>
         <a href="assets/instadatacap.webp" aria-label="Open the full-size InstaDataCap screenshot">
           <img src="assets/instadatacap.webp" width="1440" height="960"
             alt="InstaDataCap during a simulated dual-arm session, with capture controls and tracker status">
         </a>
-        <figcaption>Ubuntu workflow · InstaDataCap dry run</figcaption>
-      </figure>
-      <figure>
-        <a href="assets/instaumi-ios.webp" aria-label="Open the full-size InstaUMI iPad screenshot">
-          <img src="assets/instaumi-ios.webp" width="2064" height="1120"
-            alt="InstaUMI iPad app showing the camera connection screen and the capture, transfer, and sync sidebar">
-        </a>
-        <figcaption>iOS · InstaUMI on iPad Simulator</figcaption>
+        <figcaption>InstaDataCap · Simulated session</figcaption>
       </figure>
     </section>
 
@@ -75,11 +68,6 @@ bash datacap/tools/install_hardware_access.sh
 cp datacap/config.example.json datacap/config.json</code></pre>
             <p>Set the capture directory, camera roles and tracker roles in <code>datacap/config.json</code>. For real tracker capture, follow the <a href="https://github.com/lihongcs/InstaUMI/tree/main/datacap">DataCap README</a> to install a compatible tracker backend and set up device roles. Use <code>Bluetooth Control</code> for X5. Set <code>insta.name_prefixes</code> to <code>["X5 "]</code> or enter your own camera BLE addresses. For X3, follow the <a href="#x3">wired setup</a>.</p>
             <pre tabindex="0"><code>python3 -m datacap.webapp --config datacap/config.json --host 127.0.0.1</code></pre>
-          </details>
-          <details>
-            <summary>Build and use the iOS app</summary>
-            <p>In the iOS app source folder, open <code>instaumi/instaumi.xcodeproj</code> in Xcode. Follow the source repository’s iOS instructions to install the SDK frameworks under <code>instaumi/Frameworks/</code>, select your development team, then run on an iPhone or iPad.</p>
-            <p>Tap <strong>Scan BLE</strong> and select one X5 or tap <strong>Connect X5s</strong>. For multiple cameras, use <strong>Sync Multi</strong> before recording. After recording, connect to the camera for transfer, tap <strong>Download Latest</strong>, then <strong>Parse Sidecars</strong>. The Ubuntu workflow below uses DataCap session events and tracker logs for camera-to-tracker synchronization.</p>
           </details>
         </div>
     </article>
