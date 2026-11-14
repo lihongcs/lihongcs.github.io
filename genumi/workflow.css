@@ -209,3 +209,39 @@
     padding-inline: .6rem;
   }
 }
+
+.system-screenshots {
+  padding-bottom: clamp(1.25rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--border);
+}
+
+.system-screenshots h2 {
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+}
+
+.system-screenshots figure {
+  margin: 1rem 0 0;
+}
+
+.system-screenshots figure + figure {
+  margin-top: 1.75rem;
+}
+
+.system-screenshots figure a {
+  display: block;
+  border-radius: .75rem;
+}
+
+.system-screenshots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: inherit;
+}
+
+.system-screenshots figcaption {
+  margin-top: .55rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
