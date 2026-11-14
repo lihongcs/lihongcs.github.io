@@ -72,6 +72,6 @@ async function loadDownloads() {
 }
 
 loadDownloads().catch((error) => {
-  console.warn("GenUMI STEP downloads:", error);
+  console.warn("InstaUMI STEP downloads:", error);
   status.textContent = "STEP downloads could not load. Please refresh the page.";
 });

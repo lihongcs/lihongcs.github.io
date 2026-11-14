@@ -677,7 +677,7 @@
           "step": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step"
         },
         {
-          "name": "Robotiq 2F-85 · GenUMI Hardware Assembly",
+          "name": "Robotiq 2F-85 · InstaUMI Hardware Assembly",
           "kind": "Assembly",
           "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-countersunk-pivots.step"
         },

@@ -1,5 +1,5 @@
 const profiles = {
-  genumi: { name: 'GenUMI', up: [0, .65, -1], direction: [1.2, 1, -.36] },
+  genumi: { name: 'InstaUMI', up: [0, .65, -1], direction: [1.2, 1, -.36] },
   gelslim: { name: 'GelSlim Mini', up: [0, -1, 0], direction: [1, -1.18, -.86] },
 };
 

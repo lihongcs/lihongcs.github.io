@@ -266,7 +266,7 @@ async function start() {
     initJointMotion(modelData.motion);
     showSelection();
   } catch (error) {
-    console.warn("GenUMI 3D model:", error);
+    console.warn("InstaUMI 3D model:", error);
     showPreview(modelData, "The 3D display could not load. You can still browse and download the modules.", modelName);
   }
 }
@@ -315,7 +315,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 start().catch((error) => {
-  console.warn("GenUMI assembly details:", error);
+  console.warn("InstaUMI assembly details:", error);
   elements["module-empty"].hidden = false;
   showPreview(null, "Assembly details could not load. Please refresh the page.");
 });
