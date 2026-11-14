@@ -77,6 +77,10 @@
       "href": "parts/left-outer-link.step"
     },
     {
+      "label": "Left Soldered FSR Lead Reference",
+      "href": "parts/left-soldered-fsr-lead-reference.step"
+    },
+    {
       "label": "Lower FSR PCB Mount Screw M2.5 x 14",
       "href": "parts/lower-fsr-pcb-mount-screw-m2p5-x-14.step"
     },
@@ -143,6 +147,10 @@
     {
       "label": "Right Outer Link",
       "href": "parts/right-outer-link.step"
+    },
+    {
+      "label": "Right Soldered FSR Lead Reference",
+      "href": "parts/right-soldered-fsr-lead-reference.step"
     },
     {
       "label": "Rotating Link",

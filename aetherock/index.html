@@ -78,13 +78,13 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb?v=fingertip-force-arrays">
+    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb?v=soldered-fsr-leads">
       <div class="cad-heading">
         <h3>Wearable UMI assembly</h3>
         <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
       </div>
       <div class="cad-surface" data-cad-surface>
-        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=fingertip-force-arrays" alt="AetheRock wearable UMI assembly." loading="lazy">
+        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=soldered-fsr-leads" alt="AetheRock wearable UMI assembly." loading="lazy">
         <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
       </div>
       <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -116,7 +116,7 @@
       </ul>
       <p>The assembly STEP shows the 90° clockwise AS5600 connector orientation. The JLCEDA download contains the original PCB layout. The public STEP uses exterior references for the Hikrobot wrist camera, VIVE Ultimate Tracker, and OV5647 tactile cameras.</p>
       <p>The viewer uses HTC’s official VIVE Ultimate Tracker geometry. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC model source</a></p>
-      <p>Each fingertip carries a 22 × 22 mm thin-film force sensor with a 4 × 4 reference array. Individual sensing points require a matrix readout circuit. The archived force-sensor ADC board has one input channel.</p>
+      <p>Each 22 × 22 mm fingertip film has a soldered lead pair routed to its voltage conversion module in the CAD. The wiring is a mechanical reference for a single force channel. The 4 × 4 array requires a matrix readout circuit for individual sensing points. <a href="https://item.taobao.com/item.htm?id=678907675185">Voltage conversion module listing</a></p>
       <details data-parts="assets/hardware/downloads.json" hidden>
         <summary>Browse individual STEP downloads</summary>
         <ul></ul>
