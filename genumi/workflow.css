@@ -1,0 +1,211 @@
+.workflow-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  flex-wrap: wrap;
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.workflow-intro .subtitle {
+  margin: .35rem 0 0;
+}
+
+.workflow-intro .intro-actions {
+  margin: 0 0 .25rem;
+}
+
+.workflow-intro .download {
+  font-size: 1rem;
+}
+
+.camera-workflow {
+  display: grid;
+  gap: .85rem;
+  margin-bottom: clamp(2.25rem, 6vw, 4rem);
+  scroll-margin-top: 1rem;
+}
+
+.camera-workflow h2 {
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+}
+
+.camera-options,
+.workflow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+}
+
+.camera-options[hidden],
+.workflow-steps[hidden] {
+  display: none;
+}
+
+.camera-options button,
+.workflow-steps button {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.camera-options button {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .05rem .65rem;
+  min-height: 3rem;
+  padding: .45rem .75rem;
+  border-radius: .55rem;
+}
+
+.camera-options button span {
+  color: var(--muted);
+}
+
+.camera-options button[aria-pressed=true] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fffaf3;
+}
+
+.camera-options button[aria-pressed=true] span {
+  color: #f2dfc9;
+}
+
+.workflow-steps button {
+  min-height: 2.75rem;
+  padding: .35rem .75rem;
+  border-radius: .45rem;
+  font-weight: 600;
+}
+
+.workflow-steps button[aria-current=step] {
+  border-color: #977550;
+  background: #ecdfcf;
+  color: #352d24;
+}
+
+.camera-options button:hover:not([aria-pressed=true]),
+.workflow-steps button:hover:not([aria-current=step]) {
+  background: #f2e6d7;
+  border-color: #a89581;
+}
+
+.camera-options button:focus-visible,
+.workflow-steps button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.workflow-anchor {
+  position: absolute;
+  pointer-events: none;
+}
+
+.workflow-stage {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: .85rem;
+  background: var(--surface);
+}
+
+.workflow-stage :is(img, video) {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  background: #eae1d5;
+  color: var(--text);
+}
+
+.workflow-stage :is(img, video)[hidden] {
+  display: none;
+}
+
+.workflow-stage figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem 1.15rem;
+  padding: .85rem clamp(.85rem, 3vw, 1.3rem);
+  border-top: 1px solid var(--border);
+}
+
+.workflow-stage h3 {
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+}
+
+.workflow-stage p {
+  margin: .2rem 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.workflow-stage figcaption a {
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.guide-intro h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+}
+
+.guide-intro .lede {
+  margin-top: .65rem;
+}
+
+.guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.25rem;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.guide .guide-content :is(details, ol) {
+  font-size: 1rem;
+}
+
+.guide .guide-content pre {
+  font-size: .9rem;
+}
+
+@media (max-width: 40rem) {
+  .workflow-intro {
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .camera-options button {
+    flex: 1 1 8rem;
+    align-content: center;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media (max-width: 26rem) {
+  .camera-options button {
+    padding-inline: .6rem;
+  }
+
+  .workflow-steps {
+    gap: .35rem;
+  }
+
+  .workflow-steps button {
+    padding-inline: .6rem;
+  }
+}
