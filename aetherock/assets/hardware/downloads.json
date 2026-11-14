@@ -25,20 +25,8 @@
       "href": "parts/controller-tray.step"
     },
     {
-      "label": "Force Adapter Insulating Spacer",
-      "href": "parts/force-adapter-insulating-spacer.step"
-    },
-    {
-      "label": "Force Adapter Mount Screw M2.5 x 12",
-      "href": "parts/force-adapter-mount-screw-m2p5-x-12.step"
-    },
-    {
-      "label": "Force Adapter Retaining Nut M2.5",
-      "href": "parts/force-adapter-retaining-nut-m2p5.step"
-    },
-    {
-      "label": "Force Adapter Retaining Washer",
-      "href": "parts/force-adapter-retaining-washer.step"
+      "label": "Force ADC Board-to-Board Header",
+      "href": "parts/force-adc-board-to-board-header.step"
     },
     {
       "label": "Force Sensor ADC Adapter",
