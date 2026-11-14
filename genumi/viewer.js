@@ -1,5 +1,5 @@
 const elements = Object.fromEntries([
-  "variant-switcher", "view-switcher", "variant-name", "reset-view", "viewport", "fallback-preview",
+  "variant-switcher", "view-switcher", "variant-name", "reset-view", "explode-view", "viewport", "fallback-preview",
   "model-status", "model-selection",
   "model-instructions", "assembly-download", "variant-note", "module-empty", "module-list",
   "module-detail", "module-name", "module-description", "part-download", "isolate-module",
@@ -132,6 +132,22 @@ function setDragMode(enabled) {
     : "Drag to orbit.";
 }
 
+function showExplodedState(exploded, transitioning) {
+  const toggle = elements["explode-view"];
+  const suspended = exploded || transitioning;
+  toggle.textContent = exploded ? "Reassemble" : "Explode";
+  toggle.setAttribute("aria-pressed", String(exploded));
+  toggle.disabled = transitioning;
+  for (const id of ["joint-angle", "joint-drag", "joint-play", "joint-reset"]) {
+    elements[id].disabled = suspended;
+  }
+  if (suspended) {
+    elements["orbit-instructions"].textContent = "Drag to orbit. Reassemble to move the joints.";
+  } else if (joint) {
+    setDragMode(elements["joint-drag"].getAttribute("aria-pressed") === "true");
+  }
+}
+
 function initJointMotion(motion) {
   if (!Number.isFinite(motion?.min) || !Number.isFinite(motion?.max) || motion.min >= motion.max ||
       typeof assemblyViewer.setJointAngle !== "function") return;
@@ -156,7 +172,7 @@ function initJointMotion(motion) {
 }
 
 async function start() {
-  const response = await fetch("models/manifest.json");
+  const response = await fetch("models/manifest.json", { cache: "no-cache" });
   if (!response.ok) throw new Error("The assembly manifest is unavailable.");
   const { variants } = await response.json();
   const parameters = new URLSearchParams(location.search);
@@ -221,7 +237,9 @@ async function start() {
       cameraPose: modelData.camera,
       name: modelName,
       modules,
+      variant: active.id,
       onSelect: selectModule,
+      onExplodedChange: showExplodedState,
       onMotionChange(angle) {
         if (!applyingJointAngle) pauseJointMotion();
         showJointAngle(angle);
@@ -233,6 +251,7 @@ async function start() {
         joint = null;
         isolated = false;
         elements["reset-view"].disabled = true;
+        elements["explode-view"].hidden = true;
         elements["model-instructions"].hidden = true;
         elements["joint-motion"].hidden = true;
         elements["joint-motion-link"].hidden = true;
@@ -243,6 +262,7 @@ async function start() {
     setText("model-status", "");
     elements["model-instructions"].hidden = false;
     elements["reset-view"].disabled = false;
+    elements["explode-view"].hidden = typeof assemblyViewer.setExploded !== "function";
     initJointMotion(modelData.motion);
     showSelection();
   } catch (error) {
@@ -255,6 +275,15 @@ elements["reset-view"].addEventListener("click", () => {
   isolated = false;
   showSelection();
   assemblyViewer?.reset();
+});
+
+elements["explode-view"].addEventListener("click", ({ currentTarget }) => {
+  pauseJointMotion();
+  if (isolated) {
+    isolated = false;
+    showSelection();
+  }
+  assemblyViewer?.setExploded(currentTarget.getAttribute("aria-pressed") !== "true");
 });
 
 elements["isolate-module"].addEventListener("click", () => {

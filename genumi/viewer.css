@@ -152,6 +152,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 }
 
 .joint-motion input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.joint-motion input[type="range"]:disabled { opacity: .55; cursor: default; }
 .joint-range { color: var(--muted); font-size: .79rem; }
 .joint-motion .viewer-note { margin-top: .5rem; }
 
@@ -222,4 +223,5 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 32rem) {
   .viewer-wrap { width: calc(100% - 1.5rem); }
   .viewer-heading { padding-block: 1.6rem 1.1rem; }
+  .model-toolbar { align-items: flex-start; flex-direction: column; gap: .55rem; }
 }

@@ -3,6 +3,7 @@ import {
   Raycaster, Scene, Vector2, Vector3, WebGLRenderer, GLTFLoader, OrbitControls,
 } from "./vendor/three-cad.js";
 import { bindJointMotion } from "./joint-motion.js";
+import { createExplodedView } from "./exploded-view.js";
 
 function collectMeshes(model, modules) {
   const byNodeName = new Map(modules.flatMap((module) => {
@@ -41,8 +42,10 @@ function getViewBounds(meshes, center, direction, cameraUp) {
   return bounds;
 }
 
-export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl, motion, cameraPose, name, modules,
-  onSelect, onContextLost, onMotionChange }) {
+export async function createAssemblyViewer({
+  container, modelUrl, accessoriesUrl, motion, cameraPose, name, modules, variant,
+  onSelect, onContextLost, onMotionChange, onExplodedChange,
+}) {
   const renderer = new WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const canvas = renderer.domElement;
@@ -65,6 +68,9 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
   let model;
   let meshes;
   let jointMotion;
+  let explodedView;
+  let exploded = false;
+  let explosionFrame = null;
   let angle = motion?.defaultAngle ?? 0;
   let jointDriveEnabled = true;
   const bounds = new Box3();
@@ -73,6 +79,7 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
   const draw = () => renderer.render(scene, camera);
 
   function release() {
+    if (explosionFrame !== null) cancelAnimationFrame(explosionFrame);
     resizeObserver?.disconnect();
     controls.removeEventListener("change", draw);
     controls.dispose();
@@ -102,8 +109,10 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
   try {
     const loader = new GLTFLoader();
     ({ scene: model } = await loader.loadAsync(modelUrl));
+    const parts = [...model.children];
     if (accessoriesUrl) {
       const accessories = await loader.loadAsync(accessoriesUrl);
+      parts.push(...accessories.scene.children);
       model.add(accessories.scene);
     }
     scene.add(model);
@@ -111,6 +120,7 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
     meshes = collectMeshes(model, modules);
     jointMotion = bindJointMotion(model, motion);
     jointMotion?.setAngle(angle);
+    if (motion?.axis) explodedView = createExplodedView(model, parts, variant, motion.axis);
     for (const { object, visible } of meshes) {
       if (visible) bounds.union(new Box3().setFromObject(object));
     }
@@ -123,9 +133,9 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
   const center = bounds.getCenter(new Vector3());
   const radius = Math.max(bounds.getSize(new Vector3()).length() / 2, 0.000001);
   const viewDirection = new Vector3(...(cameraPose?.direction ?? [1, .68, 1.25])).normalize();
+  const explodedDirection = new Vector3(.38, -.28, -1.5).normalize();
   const viewBounds = getViewBounds(meshes, center, viewDirection, camera.up);
-  const halfWidth = Math.max(Math.abs(viewBounds.min.x), Math.abs(viewBounds.max.x));
-  const halfHeight = Math.max(Math.abs(viewBounds.min.y), Math.abs(viewBounds.max.y));
+  const assembledCamera = { position: new Vector3(), target: new Vector3() };
   key.position.copy(center).addScaledVector(new Vector3(2, 4, 3), radius);
   key.target.position.copy(center);
   fill.position.copy(center).addScaledVector(new Vector3(-4, 1, -2), radius);
@@ -136,15 +146,31 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
   controls.minDistance = radius * .12;
   controls.maxDistance = radius * 30;
 
-  function reset() {
+  function fitView(direction, target, projectedBounds) {
+    const width = Math.max(Math.abs(projectedBounds.min.x), Math.abs(projectedBounds.max.x));
+    const height = Math.max(Math.abs(projectedBounds.min.y), Math.abs(projectedBounds.max.y));
     const verticalSlope = Math.tan(camera.fov * Math.PI / 360);
     const horizontalSlope = verticalSlope * camera.aspect;
-    const fit = Math.max(halfWidth / horizontalSlope, halfHeight / verticalSlope);
-    const distance = 1.14 * fit + viewBounds.max.z;
-    camera.position.copy(center).addScaledVector(viewDirection, distance);
-    controls.target.copy(center);
+    const fit = Math.max(width / horizontalSlope, height / verticalSlope);
+    const distance = 1.14 * fit + projectedBounds.max.z;
+    camera.position.copy(target).addScaledVector(direction, distance);
+    controls.target.copy(target);
     controls.update();
     draw();
+  }
+
+  function fitCurrentPose(direction) {
+    const poseBounds = new Box3();
+    for (const { object, visible } of meshes) {
+      if (visible) poseBounds.union(new Box3().setFromObject(object));
+    }
+    const target = poseBounds.getCenter(new Vector3());
+    fitView(direction, target, getViewBounds(meshes, target, direction, camera.up));
+  }
+
+  function reset() {
+    if (exploded || explosionFrame !== null) fitCurrentPose(explodedDirection);
+    else fitView(viewDirection, center, viewBounds);
   }
 
   function resize() {
@@ -153,7 +179,11 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
     renderer.setSize(clientWidth, clientHeight, false);
     camera.aspect = clientWidth / clientHeight;
     camera.updateProjectionMatrix();
-    draw();
+    if (exploded && explosionFrame === null) {
+      fitCurrentPose(camera.position.clone().sub(controls.target).normalize());
+    } else {
+      draw();
+    }
   }
 
   function select(moduleId, isolated) {
@@ -174,6 +204,7 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
 
   function setJointAngle(degrees) {
     if (!jointMotion) return;
+    if (exploded || explosionFrame !== null) return angle;
     const value = Math.max(motion.min, Math.min(motion.max, degrees));
     if (jointMotion.setAngle(value)) {
       angle = value;
@@ -195,13 +226,62 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
     canvas.classList.remove("driving-joint");
   }
 
+  function setExploded(enabled) {
+    if (!explodedView || exploded === enabled || explosionFrame !== null) return;
+    endJointDrag();
+    press = null;
+    exploded = enabled;
+    if (enabled) {
+      assembledCamera.position.copy(camera.position);
+      assembledCamera.target.copy(controls.target);
+      explodedView.capturePose();
+      explodedView.setAmount(1);
+      fitCurrentPose(explodedDirection);
+    }
+
+    function finish() {
+      if (!enabled) {
+        camera.position.copy(assembledCamera.position);
+        controls.target.copy(assembledCamera.target);
+        controls.update();
+      }
+      draw();
+      onExplodedChange?.(enabled, false);
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (!enabled) explodedView.setAmount(0);
+      finish();
+      return;
+    }
+
+    const start = enabled ? 0 : 1;
+    explodedView.setAmount(start);
+    draw();
+    const startedAt = performance.now();
+    const animate = (now) => {
+      const progress = Math.min(1, (now - startedAt) / 340);
+      const eased = progress * progress * (3 - 2 * progress);
+      explodedView.setAmount(enabled ? eased : 1 - eased);
+      if (progress < 1) {
+        draw();
+        explosionFrame = requestAnimationFrame(animate);
+        return;
+      }
+      explosionFrame = null;
+      finish();
+    };
+    explosionFrame = requestAnimationFrame(animate);
+    onExplodedChange?.(enabled, true);
+  }
+
   canvas.addEventListener("pointerdown", (event) => {
     if (event.isPrimary && event.button === 0) {
       press = { id: event.pointerId, x: event.clientX, y: event.clientY };
     } else {
       press = null;
     }
-    if (!jointDriveEnabled || !jointMotion || !event.isPrimary || event.button !== 0) return;
+    if (!jointDriveEnabled || !jointMotion || exploded || explosionFrame !== null ||
+        !event.isPrimary || event.button !== 0) return;
     const hit = hitAt(event.clientX, event.clientY);
     const target = jointMotion.dragTarget(hit?.object);
     if (!target) return;
@@ -276,6 +356,7 @@ export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl
     select,
     reset,
     hasModule: (id) => meshes.some((mesh) => mesh.module?.id === id),
+    setExploded: explodedView ? setExploded : null,
     setJointAngle: jointMotion ? setJointAngle : null,
     setJointDriveEnabled: jointMotion ? (enabled) => {
       jointDriveEnabled = enabled;
