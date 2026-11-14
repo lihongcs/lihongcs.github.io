@@ -20,91 +20,117 @@
 }
 
 .camera-workflow {
-  display: grid;
-  gap: .85rem;
+  --workflow-accent: #255b52;
+  --workflow-active: #e5ede8;
+  position: relative;
   margin-bottom: clamp(2.25rem, 6vw, 4rem);
   scroll-margin-top: 1rem;
 }
 
-.camera-workflow h2 {
-  font-size: clamp(1.65rem, 4vw, 2.5rem);
-}
-
-.camera-options,
-.workflow-steps {
+.workflow-heading {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: .5rem;
+  justify-content: space-between;
+  align-items: end;
+  gap: .85rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.workflow-heading h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.85rem);
+  line-height: 1.05;
+}
+
+.camera-options {
+  display: flex;
+  padding: .22rem;
+  gap: .22rem;
+  border: 1px solid var(--border);
+  border-radius: .7rem;
+  background: #eae3d8;
 }
 
 .camera-options[hidden],
-.workflow-steps[hidden] {
+.workflow-steps[hidden],
+.workflow-media [hidden] {
   display: none;
 }
 
 .camera-options button,
 .workflow-steps button {
   appearance: none;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
+  border: 0;
+  color: var(--muted);
+  background: transparent;
   font: inherit;
-  text-align: left;
   cursor: pointer;
 }
 
 .camera-options button {
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
-  gap: .05rem .65rem;
-  min-height: 3rem;
-  padding: .45rem .75rem;
-  border-radius: .55rem;
-}
-
-.camera-options button span {
-  color: var(--muted);
+  gap: .35rem;
+  min-height: 2.75rem;
+  border-radius: .46rem;
+  padding: .5rem .85rem;
+  white-space: nowrap;
 }
 
 .camera-options button[aria-pressed=true] {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fffaf3;
+  background: var(--surface);
+  color: #224e47;
+  box-shadow: 0 1px 3px #352d2426;
 }
 
-.camera-options button[aria-pressed=true] span {
-  color: #f2dfc9;
+.camera-options button:hover:not([aria-pressed=true]) {
+  color: var(--text);
+  background: #fbf8f380;
+}
+
+.workflow-panel {
+  padding: .4rem clamp(.55rem, 1.75vw, 1rem) 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.workflow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .25rem;
+  padding-bottom: .45rem;
 }
 
 .workflow-steps button {
-  min-height: 2.75rem;
-  padding: .35rem .75rem;
-  border-radius: .45rem;
+  position: relative;
+  min-height: 2.85rem;
+  min-width: 0;
+  padding: .45rem .25rem;
+  border-radius: .5rem;
   font-weight: 600;
+  line-height: 1.15;
 }
 
 .workflow-steps button[aria-current=step] {
-  border-color: #977550;
-  background: #ecdfcf;
-  color: #352d24;
+  background: var(--workflow-active);
+  color: var(--workflow-accent);
 }
 
-.camera-options button:hover:not([aria-pressed=true]),
 .workflow-steps button:hover:not([aria-current=step]) {
-  background: #f2e6d7;
-  border-color: #a89581;
+  background: var(--background);
+  color: var(--text);
 }
 
 .camera-options button:focus-visible,
 .workflow-steps button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--workflow-accent);
+  outline-offset: 2px;
+  z-index: 1;
 }
 
 .workflow-anchor {
   position: absolute;
+  top: 0;
   pointer-events: none;
 }
 
@@ -112,24 +138,29 @@
   display: grid;
   min-width: 0;
   margin: 0;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: .85rem;
-  background: var(--surface);
 }
 
-.workflow-stage :is(img, video) {
+.workflow-media {
+  overflow: hidden;
+  border-radius: .62rem;
+  background: #f1ebdf;
+}
+
+.workflow-media :is(img, video) {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2;
   object-fit: contain;
-  background: #eae1d5;
-  color: var(--text);
 }
 
-.workflow-stage :is(img, video)[hidden] {
-  display: none;
+.workflow-media video {
+  aspect-ratio: 1200 / 534;
+  background: #232421;
+}
+
+.workflow-media img {
+  aspect-ratio: 3 / 2;
+  max-height: 29rem;
 }
 
 .workflow-stage figcaption {
@@ -137,25 +168,45 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: .75rem 1.15rem;
-  padding: .85rem clamp(.85rem, 3vw, 1.3rem);
-  border-top: 1px solid var(--border);
+  gap: .75rem 1.2rem;
+  padding: clamp(.85rem, 2vw, 1.25rem) clamp(.3rem, 1.5vw, .75rem);
+}
+
+.workflow-stage figcaption > div {
+  flex: 1 1 28rem;
 }
 
 .workflow-stage h3 {
-  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-size: clamp(1.5rem, 3.8vw, 2rem);
+  line-height: 1.15;
 }
 
 .workflow-stage p {
-  margin: .2rem 0 0;
+  margin: .25rem 0 0;
   color: var(--muted);
   font-size: 1rem;
 }
 
-.workflow-stage figcaption a {
-  font-size: 1rem;
+.workflow-stage .workflow-context {
+  color: var(--workflow-accent);
   font-weight: 600;
-  white-space: nowrap;
+}
+
+.workflow-stage figcaption a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.75rem;
+  padding: .35rem .8rem;
+  border: 1px solid #acbeb3;
+  border-radius: .5rem;
+  color: var(--workflow-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.workflow-stage figcaption a:hover {
+  background: var(--workflow-active);
 }
 
 .guide-intro h1 {
@@ -186,27 +237,6 @@
   .workflow-intro {
     align-items: start;
     gap: 1rem;
-  }
-
-  .camera-options button {
-    flex: 1 1 8rem;
-    align-content: center;
-    flex-direction: column;
-    align-items: start;
-  }
-}
-
-@media (max-width: 26rem) {
-  .camera-options button {
-    padding-inline: .6rem;
-  }
-
-  .workflow-steps {
-    gap: .35rem;
-  }
-
-  .workflow-steps button {
-    padding-inline: .6rem;
   }
 }
 

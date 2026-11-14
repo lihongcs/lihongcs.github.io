@@ -40,33 +40,40 @@
     </section>
 
     <section class="camera-workflow" id="software" aria-labelledby="workflow-title">
-      <h2 id="workflow-title">From capture to dataset</h2>
-      <div class="camera-options" role="group" aria-label="Camera workflow" data-camera-options hidden>
-        <button type="button" data-camera="x5" aria-pressed="true" aria-controls="workflow-stage">
-          <strong>Insta360 X5</strong><span>Wireless · INSV</span>
-        </button>
-        <button type="button" data-camera="x3" aria-pressed="false" aria-controls="workflow-stage">
-          <strong>Insta360 X3</strong><span>Wired USB · UVC</span>
-        </button>
-      </div>
-      <div class="workflow-steps" role="group" aria-label="Workflow stages" data-steps hidden></div>
-
       <span class="workflow-anchor" id="capture"></span>
       <span class="workflow-anchor" id="processing"></span>
-      <figure class="workflow-stage" id="workflow-stage">
-        <img data-art src="assets/workflow/x5-capture.webp" alt="X5 Bluetooth capture illustrated beside a wrist image from the pepper-sorting session" width="1200" height="800" fetchpriority="high">
-        <video data-clip hidden controls muted playsinline preload="none" width="1200" height="800"
-          aria-label="Silent clip from the X5 pepper-sorting session">
-          <a href="assets/workflow/x5-raw.webm">Download the silent clip</a>
-        </video>
-        <figcaption>
-          <div aria-live="polite" aria-atomic="true">
-            <h3 data-stage-title>Record a demonstration</h3>
-            <p data-stage-text>Control each X5 over Bluetooth and mark episodes in InstaDataCap.</p>
+      <div class="workflow-heading">
+        <h2 id="workflow-title">From capture to dataset</h2>
+        <div class="camera-options" role="group" aria-label="Insta360 camera" data-camera-options hidden>
+          <button type="button" data-camera="x5" aria-pressed="true" aria-controls="workflow-stage workflow-steps">
+            <strong>X5</strong><span>Wireless</span>
+          </button>
+          <button type="button" data-camera="x3" aria-pressed="false" aria-controls="workflow-stage workflow-steps">
+            <strong>X3</strong><span>USB</span>
+          </button>
+        </div>
+      </div>
+      <div class="workflow-panel">
+        <div class="workflow-steps" id="workflow-steps" role="group" aria-label="Workflow stages" data-steps hidden></div>
+        <figure class="workflow-stage" id="workflow-stage">
+          <div class="workflow-media">
+            <img data-art hidden width="1200" height="800" alt="">
+            <video data-clip controls muted playsinline preload="none" width="1200" height="534"
+              src="assets/workflow/x5-full-episode.mp4" poster="assets/workflow/x5-full-episode.webp"
+              aria-label="Full pepper-sorting demonstration from the left and right X5 wrist cameras">
+              <a href="assets/workflow/x5-full-episode.mp4">Download the demonstration video</a>
+            </video>
           </div>
-          <a data-stage-guide href="guide.html#capture">Stage guide <span aria-hidden="true">→</span></a>
-        </figcaption>
-      </figure>
+          <figcaption>
+            <div aria-live="polite" aria-atomic="true">
+              <h3 data-stage-title>Record a demonstration</h3>
+              <p data-stage-text>Start both cameras and mark episodes in InstaDataCap.</p>
+              <p class="workflow-context" data-stage-context>Pepper sorting · 15.2 s</p>
+            </div>
+            <a data-stage-guide href="guide.html#capture"><span data-stage-link>Capture guide</span> <span aria-hidden="true">↗</span></a>
+          </figcaption>
+        </figure>
+      </div>
       <noscript><p><a href="guide.html#x3">X3 instructions</a> · <a href="guide.html#capture">X5 instructions</a></p></noscript>
     </section>
 
