@@ -38,6 +38,11 @@ export async function mountViewer(root) {
   controls.enablePan = true;
   controls.addEventListener('change', render);
   scene.add(new HemisphereLight(0xffffff, 0x80796c, 2.35));
+  if (root.dataset.cadView === 'contact') {
+    const contactLight = new DirectionalLight(0xe6f1ff, 1.45);
+    contactLight.position.set(0.8, -1.4, -0.5);
+    scene.add(contactLight);
+  }
   for (const [position, intensity] of [
     [[1, 1.5, 1], 2.45], [[-1, 0.35, 0.7], 1.25], [[0.1, 1.0, -1], 1.65],
   ]) {
@@ -127,9 +132,12 @@ export async function mountViewer(root) {
 
   function viewpoint(key = 'iso') {
     const direction = {
-      iso: new Vector3(-1, 0.76, 1.35),
+      iso: root.dataset.cadView === 'contact'
+        ? new Vector3(1, -1.18, -0.86)
+        : new Vector3(-1.4, 0.8, 1.18),
       top: new Vector3(0, 1, 0.0001),
       side: new Vector3(-1, 0.08, 0),
+      electronics: new Vector3(-1.0, 1.18, 1.02),
     }[key];
     const visible = meshes.filter((mesh) => mesh.visible);
     focus(visible, direction);

@@ -1,6 +1,10 @@
 {
   "parts": [
     {
+      "label": "Acrylic Contact Window",
+      "href": "parts/acrylic-contact-window.step"
+    },
+    {
       "label": "Adhesive Casting Mold",
       "href": "parts/adhesive-casting-mold.step"
     },
@@ -29,6 +33,14 @@
       "href": "parts/gel-retainer-ring.step"
     },
     {
+      "label": "GelSlim Mini LED Driver PCB",
+      "href": "parts/gelslim-mini-led-driver-pcb.step"
+    },
+    {
+      "label": "GelSlim Mini LED Flex PCB Assembly",
+      "href": "parts/gelslim-mini-led-flex-pcb-assembly.step"
+    },
+    {
       "label": "Optical Shroud",
       "href": "parts/optical-shroud.step"
     },
@@ -37,8 +49,16 @@
       "href": "parts/optical-window-support.step"
     },
     {
-      "label": "OV5647 Camera Adapter Fit Envelope",
-      "href": "parts/ov5647-camera-adapter-fit-envelope.step"
+      "label": "OV5647 Fisheye Camera Exterior",
+      "href": "parts/ov5647-fisheye-camera-exterior.step"
+    },
+    {
+      "label": "OV5647 USB Adapter PCB Fit Reference",
+      "href": "parts/ov5647-usb-adapter-pcb-fit-reference.step"
+    },
+    {
+      "label": "PDMS Silicone Contact Pad",
+      "href": "parts/pdms-silicone-contact-pad.step"
     },
     {
       "label": "Sensor Back Cover",

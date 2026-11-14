@@ -53,6 +53,10 @@
       "href": "parts/hikrobot-camera-mount.step"
     },
     {
+      "label": "Hikrobot MV-CB060 Camera",
+      "href": "parts/hikrobot-mv-cb060-camera.step"
+    },
+    {
       "label": "Jaw Sliding Bar",
       "href": "parts/jaw-sliding-bar.step"
     },
@@ -75,6 +79,10 @@
     {
       "label": "Orange Pi 4 Pro Custom GPIO PCB",
       "href": "parts/orange-pi-4-pro-custom-gpio-pcb.step"
+    },
+    {
+      "label": "OV5647 Fisheye Camera Exterior",
+      "href": "parts/ov5647-fisheye-camera-exterior.step"
     },
     {
       "label": "Pivot M2p5 Hex Nut",
@@ -135,6 +143,10 @@
     {
       "label": "VIVE Tracker Mount",
       "href": "parts/vive-tracker-mount.step"
+    },
+    {
+      "label": "VIVE Ultimate Tracker Exterior",
+      "href": "parts/vive-ultimate-tracker-exterior.step"
     },
     {
       "label": "Wrist Bridge",
