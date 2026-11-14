@@ -128,57 +128,104 @@ cp datacap/config.example.json datacap/config.json</code></pre>
         </div>
     </article>
 
-    <article class="guide" id="processing" aria-labelledby="processing-title">
-        <div class="guide-heading">
-          <h3 id="processing-title">Post-process and validate</h3>
-          <p>The commands below are for a bimanual Insta360 X5 + HTC session. They use the X5 gyroscope and tracker angular velocity to align the capture, then estimate gripper opening and export LeRobot v2.1 episodes.</p>
+    <article class="guide processing-guide" id="processing" aria-labelledby="processing-title">
+      <header>
+        <h3 id="processing-title">Post-process and validate</h3>
+        <p class="processing-caption">Bimanual X5 + VIVE · Cloth-folding benchmark</p>
+      </header>
+
+      <div class="processing-benchmark" aria-label="Benchmark workload, timing and resource use">
+        <dl class="processing-benchmark-formats">
+          <div>
+            <dt>Source video</dt>
+            <dd>11.88 GB</dd>
+            <dd class="processing-format-detail">Left 9 min 22.09 s · Right 9 min 22.04 s</dd>
+            <dd class="processing-format-detail">Two 1920 × 1920 H.264 fisheye streams per INSV at 59.94 fps.</dd>
+            <dd class="processing-format-detail">Marked recording · 5 min 32 s</dd>
+          </div>
+          <div>
+            <dt>LeRobot output</dt>
+            <dd>4.93 GB</dd>
+            <dd class="processing-format-detail">25 episodes · 9,944 frames at 30 Hz</dd>
+            <dd class="processing-format-detail">v2.1 Parquet · six 224 × 224 PNG-encoded RGB views per frame</dd>
+            <dd class="processing-format-detail">20-D state and action vectors</dd>
+          </div>
+        </dl>
+        <dl class="processing-benchmark-resources">
+          <div><dt>Wall time</dt><dd>25 min 28.76 s</dd></div>
+          <div><dt>CPU time</dt><dd>101.4 core·min</dd></div>
+          <div><dt>Peak RAM</dt><dd>3.65 GiB</dd></div>
+          <div><dt>Peak VRAM</dt><dd>2.98 GiB</dd></div>
+        </dl>
+        <div class="processing-duration-bar" role="img" aria-label="Processing time by stage. Stage 01 2.8%, stage 03 38.9%, stage 05 58.2%."
+          style="--stage-01: 43.29fr; --stage-03: 595.27fr; --stage-05: 890.20fr">
+          <span>01</span><span>03</span><span>05</span>
         </div>
-        <div class="guide-content">
-          <details open>
-            <summary>Prepare the session and dependencies</summary>
-            <p>On Ubuntu, install FFmpeg with <code>v360</code>, the Python dependencies listed in the source repository, and an Insta360 Linux MediaSDK from the vendor. For the direct-image path, verify <code>v360</code> is also available in PyAV, and use a compatible NVIDIA GPU and driver for SDK decoding.</p>
-            <pre tabindex="0"><code>python3 -m venv .venv-processing
+        <p>Intel i7-14700K · RTX 4080 SUPER · HDD. Stages 01–05 timed on a fresh run.</p>
+        <p>CPU time sums all cores. Process RAM and VRAM peaks were sampled about every 2 s. Peak GPU utilization was 90%.</p>
+      </div>
+
+      <section class="processing-stage" id="x5-sync-guide" aria-labelledby="x5-sync-title">
+        <h4 id="x5-sync-title">01 · Extract and align</h4>
+        <img src="assets/workflow/x5-bench-sync.webp" width="1200" height="800" loading="lazy"
+          alt="Measured camera clock offsets across the sample. Fit residual p95 is 0.25 ms on the left and 0.29 ms on the right.">
+        <div class="processing-stage-content">
+          <p>Align the wrist cameras and VIVE trackers by matching angular motion.</p>
+          <dl>
+            <div><dt>Input</dt><dd>Two INSV files, VIVE pose CSVs and <code>timestamp_log.jsonl</code>.</dd></div>
+            <div><dt>Output</dt><dd>Two calibrated timestamp CSVs and <code>calibration.json</code>.</dd></div>
+            <div><dt>Time</dt><dd>43.29 s</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="processing-stage" id="x5-gripper-guide" aria-labelledby="x5-gripper-title">
+        <h4 id="x5-gripper-title">03 · Measure gripper opening</h4>
+        <img src="assets/workflow/x5-bench-gripper.webp" width="1200" height="800" loading="lazy"
+          alt="The detected marker pair on the left gripper and its pixel separation during one folding episode.">
+        <div class="processing-stage-content">
+          <p>Convert the distance between ArUco tags to gripper opening in metres.</p>
+          <dl>
+            <div><dt>Input</dt><dd>INSV wrist frames, aligned timestamps, episode markers and a gripper calibration curve.</dd></div>
+            <div><dt>Output</dt><dd>One <code>gripper_width.csv</code> per wrist.</dd></div>
+            <div><dt>Time</dt><dd>9 min 55.27 s</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="processing-stage" id="x5-export-guide" aria-labelledby="x5-export-title">
+        <h4 id="x5-export-title">05 · Export LeRobot</h4>
+        <img src="assets/workflow/x5-bench-export.webp" width="1200" height="800" loading="lazy"
+          alt="One exported frame showing three RGB views from each wrist.">
+        <div class="processing-stage-content">
+          <p>Stitch and project camera views, align pose and opening, and export marked episodes.</p>
+          <dl>
+            <div><dt>Input</dt><dd>INSV, VIVE pose and gripper-width CSVs, aligned timestamps and episode markers.</dd></div>
+            <div><dt>Output</dt><dd>One LeRobot Parquet file per episode, dataset metadata and <code>sync_report.json</code>.</dd></div>
+            <div><dt>Time</dt><dd>14 min 50.20 s</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="processing-check" aria-labelledby="processing-check-title">
+        <h4 id="processing-check-title">Validate export</h4>
+        <p>Accepted all 9,944 frames in 2.48 s. Some VIVE sampling gaps exceeded the soft threshold.</p>
+      </section>
+
+      <details class="processing-commands">
+        <summary>Install and run</summary>
+        <p>Run from the repository root on Ubuntu. Use FFmpeg and PyAV with <code>v360</code>, and Insta360 MediaSDK with a compatible NVIDIA driver. <a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-lerobot-v21">Gripper calibration instructions</a></p>
+        <pre tabindex="0"><code>python3 -m venv .venv-processing
 source .venv-processing/bin/activate
 python -m pip install -r dataprocess/requirements.txt
 export PYTHON="$(command -v python)"
-cd dataprocess
-export INPUT_DIR=/absolute/path/to/capture
 MEDIASDK_ROOT=/path/to/MediaSDK \
-  bash _01_raw_extrect/insta360_pano_export/scripts/build_ubuntu.sh
-"$PYTHON" inspect_capture_session.py "$INPUT_DIR" --require-media</code></pre>
-          </details>
-          <details>
-            <summary>Run the full bimanual pipeline</summary>
-            <p>From the repository root, run this after installing the dependencies and building the SDK helper. The launcher runs extraction, gripper estimation, LeRobot export and the sync audit.</p>
-            <pre tabindex="0"><code>bash dataprocess/run_bimanual_htc.sh \
-  /absolute/path/to/capture 'Pick up the block.'</code></pre>
-            <p>The next three sections show the equivalent individual stages.</p>
-          </details>
-          <details id="x5-sync-guide">
-            <summary>Extract and align camera and tracker streams</summary>
-            <pre tabindex="0"><code>DIRECT_IMAGE_MODE=1 MATERIALIZE_FRONT_VIDEO=0 \
-CALIBRATE_CLOCK=auto CLOCK_CALIBRATION_REQUIRED=1 \
-  bash _01_raw_extrect/run_01_raw_extract_biarm.sh</code></pre>
-            <p>Review the clock calibration report for both sides before continuing. Fix missing media, swapped roles, or insufficient sync motion before exporting.</p>
-          </details>
-          <details id="x5-gripper-guide">
-            <summary>Estimate gripper opening</summary>
-            <p>Use the gripper calibration for your physical setup. Set <code>LEFT_GRIPPER_CALIBRATION_JSON</code> and <code>RIGHT_GRIPPER_CALIBRATION_JSON</code> when using your own calibration files.</p>
-            <pre tabindex="0"><code>RAW_INSV_INPUT=1 ACTIVE_SEGMENTS=1 ADAPTIVE_CPU_LIMIT=0 \
-  bash _03_gripper_estimation/run_03_gripper_estimation_biarm.sh</code></pre>
-          </details>
-          <details id="x5-export-guide">
-            <summary>Export and audit the LeRobot dataset</summary>
-            <pre tabindex="0"><code>DIRECT_OPENPI_IMAGES=1 DIRECT_IMAGE_FRONT_CACHE=off \
-TASK_PROMPT='Pick up the block.' \
-  bash _05_convert_bimanual_lerobot/run_05_convert_bimanual_lerobot_htc.sh "$INPUT_DIR"
-"$PYTHON" audit_lerobot_sync.py "$INPUT_DIR/lerobot" \
-  --require-embedded-calibration</code></pre>
-            <p>The dataset is written to <code>&lt;capture&gt;/lerobot</code>. Inspect episode boundaries, left/right views, timestamps and gripper motion before using it for training.</p>
-          </details>
-
-        </div>
+  bash dataprocess/_01_raw_extrect/insta360_pano_export/scripts/build_ubuntu.sh
+bash dataprocess/run_bimanual_htc.sh \
+  /absolute/path/to/capture 'Task description'</code></pre>
+      </details>
     </article>
+
     <article class="guide" id="x3" aria-labelledby="x3-title">
         <div class="guide-heading">
           <h3 id="x3-title">X3 wired workflow</h3>
