@@ -3,10 +3,10 @@
     {
       "id": "flexiv",
       "name": "Flexiv Grav GN-01",
-      "model": "models/flexiv.glb",
+      "model": "models/flexiv-assembled.glb",
       "preview": "assets/flexiv-assembly-clean.webp",
-      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-pivot-fasteners.step",
-      "note": "The Insta360 X5 and VIVE Ultimate Tracker are shown at their mounting points. The STEP library contains the GenUMI hardware, including the camera and tracker mounts.",
+      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-mounted-accessories.step",
+      "note": "The supplied HTC tracker is seated on its original bracket. The X5 scan is scaled to its published dimensions. The eight pivot screws enter from the top, with flush 90° heads and locknuts underneath.",
       "modules": [
         {
           "id": "handheld-housing",
@@ -17,8 +17,8 @@
         {
           "id": "moving-handle",
           "name": "Moving Handle",
-          "description": "The integrated body has the updated camera-fastener clearance.",
-          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release.step"
+          "description": "Integrated body with four machined 90° chassis pivot seats and a 6.6 mm camera fastener clearance.",
+          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release-countersunk.step"
         },
         {
           "id": "tracker-bracket",
@@ -73,73 +73,78 @@
         },
         {
           "id": "pivot-p01",
-          "name": "P01 \u00b7 Left outer chassis pivot",
-          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+          "name": "P01 · Left outer chassis pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
         },
         {
           "id": "pivot-p02",
-          "name": "P02 \u00b7 Left inner chassis pivot",
-          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+          "name": "P02 · Left inner chassis pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
         },
         {
           "id": "pivot-p03",
-          "name": "P03 \u00b7 Right inner chassis pivot",
-          "description": "Custom \u00d86/5.45 mm stepped shoulder, 50 mm under-head shoulder length, M5 locknut, 8.3 mm spacer and reducer bushing.",
-          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+          "name": "P03 · Right inner chassis pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The bearing shoulder steps down from Ø6 mm to Ø5.45 mm.",
+          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l50-m5.step"
         },
         {
           "id": "pivot-p04",
-          "name": "P04 \u00b7 Right outer chassis pivot",
-          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+          "name": "P04 · Right outer chassis pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
         },
         {
           "id": "pivot-p05",
-          "name": "P05 \u00b7 Left outer fingertip pivot",
-          "description": "\u00d84 mm \u00d7 30 mm shoulder with M3 locknut and 4.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+          "name": "P05 · Left outer fingertip pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
         },
         {
           "id": "pivot-p06",
-          "name": "P06 \u00b7 Left inner fingertip pivot",
-          "description": "\u00d84 mm \u00d7 25 mm shoulder with M3 locknut and 1.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+          "name": "P06 · Left inner fingertip pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
         },
         {
           "id": "pivot-p07",
-          "name": "P07 \u00b7 Right inner fingertip pivot",
-          "description": "\u00d84 mm \u00d7 25 mm shoulder with M3 locknut and 1.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+          "name": "P07 · Right inner fingertip pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
         },
         {
           "id": "pivot-p08",
-          "name": "P08 \u00b7 Right outer fingertip pivot",
-          "description": "\u00d84 mm \u00d7 30 mm shoulder with M3 locknut and 4.3mm spacer. Nominal axial endplay is 0.20 mm.",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+          "name": "P08 · Right outer fingertip pivot",
+          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
         },
         {
           "id": "insta360-camera",
           "name": "Insta360 X5",
-          "description": "Simplified external model, positioned on the camera quick-release mount."
+          "description": "Source STEP scan calibrated to the published X5 dimensions."
         },
         {
           "id": "insta360-quick-release",
           "name": "Insta360 Magnetic Quick Release Mount",
-          "description": "Simplified purchased mount fitted between the X5 and the GenUMI spacer."
+          "description": "Dimensioned display model of the purchased mount."
         },
         {
           "id": "vive-ultimate-tracker",
           "name": "HTC VIVE Ultimate Tracker",
-          "description": "Simplified external model in the recorded SolidWorks mounting pose."
+          "description": "The supplied STEP is seated against the original tracker bracket."
         }
       ],
       "downloads": [
         {
+          "name": "Flexiv Grav GN-01 · Complete Mounted Assembly",
+          "kind": "Assembly",
+          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-with-mounted-accessories.step"
+        },
+        {
           "name": "Flexiv Grav GN-01 Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-with-pivot-fasteners.step"
+          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-countersunk-pivot-assembly.step"
         },
         {
           "name": "Handheld Body Section A",
@@ -257,21 +262,6 @@
           "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
         },
         {
-          "name": "M3 Locknut",
-          "kind": "Part",
-          "step": "hardware/steps/flexiv/m3-locknut.step"
-        },
-        {
-          "name": "M5 Locknut",
-          "kind": "Part",
-          "step": "hardware/steps/flexiv/m5-locknut.step"
-        },
-        {
-          "name": "Pivot Reducer Bushing D6p35 D5p52 1p8mm",
-          "kind": "Part",
-          "step": "hardware/steps/flexiv/pivot-reducer-bushing-d6p35-d5p52-1p8mm.step"
-        },
-        {
           "name": "Right Drive Gear And Outer Link",
           "kind": "Part",
           "step": "hardware/steps/flexiv/right-drive-gear-and-outer-link.step"
@@ -317,32 +307,82 @@
           "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
         },
         {
-          "name": "Shoulder Spacer D4 1.3mm",
+          "name": "P03 · Right inner chassis pivot",
           "kind": "Part",
+          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+        },
+        {
+          "name": "Countersunk Seat D8 1.75mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-seat-d8-1.75mm.step"
+        },
+        {
+          "name": "Countersunk Seat D8 2.75mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-seat-d8-2.75mm.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D4 L25 M3",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D4 L30 M3",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D6 L50 M5",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
+        },
+        {
+          "name": "Countersunk Stepped Shoulder Screw D6 D5p45 L50 M5",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+        },
+        {
+          "name": "Handheld Body Integrated Part Quick Release Countersunk",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release-countersunk.step"
+        },
+        {
+          "name": "M3 Locknut",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/m3-locknut.step"
+        },
+        {
+          "name": "M5 Locknut",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/m5-locknut.step"
+        },
+        {
+          "name": "Pivot Reducer Bushing D6p35 D5p52 1p8mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/pivot-reducer-bushing-d6p35-d5p52-1p8mm.step"
+        },
+        {
+          "name": "Shoulder Spacer D4 1.3mm",
+          "kind": "Fastener",
           "step": "hardware/steps/flexiv/shoulder-spacer-d4-1.3mm.step"
         },
         {
           "name": "Shoulder Spacer D4 4.3mm",
-          "kind": "Part",
+          "kind": "Fastener",
           "step": "hardware/steps/flexiv/shoulder-spacer-d4-4.3mm.step"
         },
         {
           "name": "Shoulder Spacer D5p45 8.3mm",
-          "kind": "Part",
+          "kind": "Fastener",
           "step": "hardware/steps/flexiv/shoulder-spacer-d5p45-8.3mm.step"
         },
         {
           "name": "Shoulder Spacer D6 8.3mm",
-          "kind": "Part",
+          "kind": "Fastener",
           "step": "hardware/steps/flexiv/shoulder-spacer-d6-8.3mm.step"
-        },
-        {
-          "name": "P03 \u00b7 Right inner chassis pivot",
-          "kind": "Part",
-          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
         }
       ],
-      "accessories": "models/flexiv-accessories.glb",
+      "accessories": "models/flexiv-mounted-accessories.glb",
       "camera": {
         "direction": [
           1.2,
@@ -366,7 +406,7 @@
           0.2588190451,
           -0.9659258263
         ],
-        "note": "The four-bar linkages follow their measured pivot axes. Gear tooth contact and physical travel limits are outside this preview.",
+        "note": "Four-bar motion follows the measured pivot axes. The source CAD contains contacts and overlaps across the animated range. The slider is a kinematic illustration.",
         "linkages": [
           {
             "pivots": [
@@ -443,112 +483,184 @@
             ]
           }
         ]
-      }
+      },
+      "assemblyDownloadLabel": "Download assembled STEP",
+      "assemblyDownloadName": "Flexiv Grav GN-01 · Complete Mounted Assembly"
     },
     {
       "id": "robotiq",
       "name": "Robotiq 2F-85",
-      "model": "models/robotiq.glb",
-      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-with-pivots.step",
-      "assemblyDownloadName": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
-      "assemblyDownloadLabel": "Download GenUMI hardware STEP",
-      "note": "Both jaws appear as simplified models aligned to the reconstructed GenUMI assembly. The public STEP contains the GenUMI chassis, connectors and four chassis pivot sets.",
+      "model": "models/robotiq-assembled.glb",
+      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step",
+      "assemblyDownloadName": "Robotiq 2F-85 · Complete Mounted Assembly",
+      "assemblyDownloadLabel": "Download assembled STEP",
+      "note": "The viewer shows the original jaw components in the reconstructed Robotiq assembly, with the supplied X5 and VIVE Ultimate Tracker geometry. The complete STEP includes the camera, tracker and reconstructed jaw linkage. 6 pivot screws have flush top-entry heads. Both frame-to-bar and both outer distal pivots retain their previous hardware.",
       "modules": [
         {
           "id": "handheld-body",
           "name": "Handheld Body",
-          "step": "hardware/steps/robotiq/handheld-body-section-b-combined-part.step"
+          "step": "hardware/steps/robotiq/handheld-body-countersunk.step"
         },
         {
-          "id": "left-connector",
-          "name": "Left Drive Link Connector",
-          "step": "hardware/steps/robotiq/handheld-connector.step"
-        },
-        {
-          "id": "right-connector",
-          "name": "Right Drive Link Connector",
-          "step": "hardware/steps/robotiq/handheld-connector.step"
-        },
-        {
-          "id": "left-inner-chassis-pivot",
-          "name": "Left Inner Chassis Pivot Fasteners",
-          "description": "Socket shoulder screw and shim with a retaining nut.",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
-        },
-        {
-          "id": "left-outer-chassis-pivot",
-          "name": "Left Outer Chassis Pivot Fasteners",
-          "description": "Socket shoulder screw and shim with a retaining nut.",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
-        },
-        {
-          "id": "right-inner-chassis-pivot",
-          "name": "Right Inner Chassis Pivot Fasteners",
-          "description": "Socket shoulder screw and shim with a retaining nut.",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
-        },
-        {
-          "id": "right-outer-chassis-pivot",
-          "name": "Right Outer Chassis Pivot Fasteners",
-          "description": "Socket shoulder screw and shim with a retaining nut.",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
+          "id": "left-drive",
+          "name": "Left Drive Gear and Connector",
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/left-merged-drive-gear-and-connector.step"
         },
         {
           "id": "left-proximal",
           "name": "Left Proximal Finger Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/left-proximal-finger-link-with-flush-link-pivots.step"
         },
         {
           "id": "left-frame",
           "name": "Left Finger Frame Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/finger-frame-link.step"
         },
         {
           "id": "left-bar",
           "name": "Left Finger Link Bar",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/finger-link-bar.step"
         },
         {
           "id": "left-distal",
           "name": "Left Distal Finger Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/distal-finger-link.step"
         },
         {
           "id": "left-pad",
           "name": "Left Fingertip Pad",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/fingertip-pad.step"
+        },
+        {
+          "id": "right-drive",
+          "name": "Right Drive Gear and Connector",
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/right-merged-drive-gear-and-connector.step"
         },
         {
           "id": "right-proximal",
           "name": "Right Proximal Finger Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/right-proximal-finger-link-with-flush-link-pivots.step"
         },
         {
           "id": "right-frame",
           "name": "Right Finger Frame Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/finger-frame-link.step"
         },
         {
           "id": "right-bar",
           "name": "Right Finger Link Bar",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/finger-link-bar.step"
         },
         {
           "id": "right-distal",
           "name": "Right Distal Finger Link",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/distal-finger-link.step"
         },
         {
           "id": "right-pad",
           "name": "Right Fingertip Pad",
-          "description": "Simplified preview fitted to the reconstructed pivot locations."
+          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
+          "step": "hardware/steps/robotiq/fingertip-pad.step"
+        },
+        {
+          "id": "left-inner-chassis-pivot",
+          "name": "Left Inner Chassis Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
+        },
+        {
+          "id": "left-outer-chassis-pivot",
+          "name": "Left Outer Chassis Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
+        },
+        {
+          "id": "left-frame-and-bar-pivot",
+          "name": "Left Frame and Bar Pivot Fasteners",
+          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+        },
+        {
+          "id": "left-distal-inner-pivot",
+          "name": "Left Distal Inner Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
+        },
+        {
+          "id": "left-distal-outer-pivot",
+          "name": "Left Distal Outer Pivot Fasteners",
+          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+        },
+        {
+          "id": "right-inner-chassis-pivot",
+          "name": "Right Inner Chassis Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
+        },
+        {
+          "id": "right-outer-chassis-pivot",
+          "name": "Right Outer Chassis Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
+        },
+        {
+          "id": "right-frame-and-bar-pivot",
+          "name": "Right Frame and Bar Pivot Fasteners",
+          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+        },
+        {
+          "id": "right-distal-inner-pivot",
+          "name": "Right Distal Inner Pivot Fasteners",
+          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
+        },
+        {
+          "id": "right-distal-outer-pivot",
+          "name": "Right Distal Outer Pivot Fasteners",
+          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+        },
+        {
+          "id": "insta360-camera",
+          "name": "Insta360 X5",
+          "description": "Source STEP scan calibrated to the published X5 dimensions."
+        },
+        {
+          "id": "insta360-quick-release",
+          "name": "Insta360 Magnetic Quick Release Mount",
+          "description": "Dimensioned display model of the purchased mount."
+        },
+        {
+          "id": "vive-ultimate-tracker",
+          "name": "HTC VIVE Ultimate Tracker",
+          "description": "The supplied STEP is seated against the original tracker bracket."
+        },
+        {
+          "id": "camera-support",
+          "name": "Insta360 Quick-Release Spacer",
+          "description": "The spacer seats against the original chassis bore and supports the purchased camera mount.",
+          "step": "hardware/steps/robotiq/insta360-quick-release-spacer.step"
         }
       ],
       "downloads": [
         {
-          "name": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
+          "name": "Robotiq 2F-85 · Complete Mounted Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-with-pivots.step"
+          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step"
+        },
+        {
+          "name": "Robotiq 2F-85 · GenUMI Hardware Assembly",
+          "kind": "Assembly",
+          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-countersunk-pivots.step"
         },
         {
           "name": "Handheld Body Section A",
@@ -601,6 +713,76 @@
           "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
         },
         {
+          "name": "Left Merged Drive Gear And Connector",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/left-merged-drive-gear-and-connector.step"
+        },
+        {
+          "name": "Left Assembled Proximal Finger Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/left-assembled-proximal-finger-link.step"
+        },
+        {
+          "name": "Finger Frame Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/finger-frame-link.step"
+        },
+        {
+          "name": "Finger Link Bar",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/finger-link-bar.step"
+        },
+        {
+          "name": "Distal Finger Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/distal-finger-link.step"
+        },
+        {
+          "name": "Fingertip Pad",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/fingertip-pad.step"
+        },
+        {
+          "name": "Right Merged Drive Gear And Connector",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/right-merged-drive-gear-and-connector.step"
+        },
+        {
+          "name": "Right Assembled Proximal Finger Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/right-assembled-proximal-finger-link.step"
+        },
+        {
+          "name": "Handheld Body with Countersunk Pivots",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-body-countersunk.step"
+        },
+        {
+          "name": "Insta360 Quick-Release Spacer",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/insta360-quick-release-spacer.step"
+        },
+        {
+          "name": "Handheld Housing with Camera Mount Clearance",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/handheld-housing-quick-release.step"
+        },
+        {
+          "name": "M3 Countersunk Collar Shoulder Screw 4x25.3 Head 7mm Collar 2.8mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
+        },
+        {
+          "name": "M5 Countersunk Collar Shoulder Screw 6x35 Head 10.5mm Collar 4.5mm Neck Relief",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
+        },
+        {
+          "name": "M5 Countersunk Shoulder Screw 6x25 Head 10mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
+        },
+        {
           "name": "M5 Thin Hex Nut",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/m5-thin-hex-nut.step"
@@ -609,9 +791,19 @@
           "name": "Shoulder Spacer 6p2x10x3p2",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x3p2.step"
+        },
+        {
+          "name": "Left Proximal Finger Link With Flush Link Pivots",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/left-proximal-finger-link-with-flush-link-pivots.step"
+        },
+        {
+          "name": "Right Proximal Finger Link With Flush Link Pivots",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/right-proximal-finger-link-with-flush-link-pivots.step"
         }
       ],
-      "accessories": "models/robotiq-jaws.glb",
+      "accessories": "models/robotiq-mounted-accessories.glb",
       "motion": {
         "label": "Closing angle",
         "min": 0,
@@ -623,7 +815,7 @@
           0.2588190451,
           -0.9659258263
         ],
-        "note": "This preview uses a four-bar approximation of the saved linkage pose. It omits internal spring motion, gear contact, and physical travel limits.",
+        "note": "The four-bar preview follows the reconstructed pivot axes. Spring travel, gear contact and physical travel are outside the simulation.",
         "linkages": [
           {
             "pivots": [
@@ -651,15 +843,18 @@
             "ratio": 1,
             "driven": [
               "left-proximal",
-              "left-connector"
+              "left-drive"
             ],
             "follower": [
               "left-frame",
-              "left-bar"
+              "left-bar",
+              "left-frame-and-bar-pivot"
             ],
             "carrier": [
               "left-distal",
-              "left-pad"
+              "left-pad",
+              "left-distal-inner-pivot",
+              "left-distal-outer-pivot"
             ]
           },
           {
@@ -688,17 +883,33 @@
             "ratio": -1,
             "driven": [
               "right-proximal",
-              "right-connector"
+              "right-drive"
             ],
             "follower": [
               "right-frame",
-              "right-bar"
+              "right-bar",
+              "right-frame-and-bar-pivot"
             ],
             "carrier": [
               "right-distal",
-              "right-pad"
+              "right-pad",
+              "right-distal-inner-pivot",
+              "right-distal-outer-pivot"
             ]
           }
+        ]
+      },
+      "preview": "assets/robotiq-assembly-clean.webp",
+      "camera": {
+        "direction": [
+          0.7,
+          0.28,
+          -1.12
+        ],
+        "up": [
+          0,
+          0.68,
+          -1
         ]
       }
     }
