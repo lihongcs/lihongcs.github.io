@@ -47,6 +47,10 @@ const rockerNames = new Set([
   'GB Pan Head Screw M2 x 8',
 ]);
 
+const outerNames = new Set([
+  'Left Outer Link', 'Right Outer Link', 'GB Small Pan Head Screw M3 x 25', 'GB Hex Nut M3',
+]);
+
 function rotate(x, z, angle) {
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
@@ -175,24 +179,25 @@ export function createGripperMotion(model) {
   const leads = [];
   for (const object of named) {
     const label = object.userData.label;
-    const box = new Box3().setFromObject(object, true);
-    const middle = box.getCenter(new Vector3());
+    let kind;
+    if (jawNames.has(label)) kind = 'jaw';
+    else if (cassetteNames.has(label)) kind = 'cassette';
+    else if (rockerNames.has(label) || label === 'GB Hex Nut M2') kind = 'rocker';
+    else if (label === 'Rotating Link') kind = 'rod';
+    else if (outerNames.has(label)) kind = 'outer';
+    else if (label === 'Left Soldered FSR Lead Reference' ||
+             label === 'Right Soldered FSR Lead Reference') kind = 'lead';
+    else continue;
+
+    const middle = new Box3().setFromObject(object, true).getCenter(new Vector3());
     const side = middle.x < center[0] ? 0 : 1;
-    if (jawNames.has(label)) {
-      const part = capture(object);
-      draggable.set(object, joints[side].side);
-      parts.push({ part, kind: 'jaw', side });
-    } else if (cassetteNames.has(label)) {
-      parts.push({ part: capture(object), kind: 'cassette', side });
-    } else if (rockerNames.has(label) || (label === 'GB Hex Nut M2' && Math.abs(middle.x) < 10)) {
-      parts.push({ part: capture(object), kind: 'rocker', side });
-    } else if (label === 'Rotating Link') {
-      parts.push({ part: capture(object), kind: 'rod', side });
-    } else if (label === 'Left Outer Link' || label === 'Right Outer Link' ||
-               label === 'GB Small Pan Head Screw M3 x 25' || label === 'GB Hex Nut M3') {
-      parts.push({ part: capture(object), kind: 'outer', side });
-    } else if (label === 'Left Soldered FSR Lead Reference' || label === 'Right Soldered FSR Lead Reference') {
+    if (label === 'GB Hex Nut M2' && Math.abs(middle.x) >= 10) continue;
+
+    if (kind === 'lead') {
       leads.push({ deform: flexibleLead(object), side });
+    } else {
+      if (kind === 'jaw') draggable.set(object, joints[side].side);
+      parts.push({ part: capture(object), kind, side });
     }
   }
 
