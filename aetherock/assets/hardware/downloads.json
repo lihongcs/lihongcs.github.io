@@ -25,6 +25,22 @@
       "href": "parts/controller-tray.step"
     },
     {
+      "label": "Force Adapter Insulating Spacer",
+      "href": "parts/force-adapter-insulating-spacer.step"
+    },
+    {
+      "label": "Force Adapter Mount Screw M2.5 x 12",
+      "href": "parts/force-adapter-mount-screw-m2p5-x-12.step"
+    },
+    {
+      "label": "Force Adapter Retaining Nut M2.5",
+      "href": "parts/force-adapter-retaining-nut-m2p5.step"
+    },
+    {
+      "label": "Force Adapter Retaining Washer",
+      "href": "parts/force-adapter-retaining-washer.step"
+    },
+    {
       "label": "Force Sensor ADC Adapter",
       "href": "parts/force-adc-custom-pcb.step"
     },
@@ -51,6 +67,14 @@
     {
       "label": "FSR PCB Outer Retaining Nut M2",
       "href": "parts/fsr-pcb-outer-retaining-nut-m2.step"
+    },
+    {
+      "label": "FSR Silver Contact Film Left",
+      "href": "parts/fsr-silver-contact-film-left.step"
+    },
+    {
+      "label": "FSR Silver Contact Film Right",
+      "href": "parts/fsr-silver-contact-film-right.step"
     },
     {
       "label": "Gel Retainer Ring",

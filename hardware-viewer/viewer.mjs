@@ -228,6 +228,71 @@ export async function mountViewer(root) {
     }
   }
 
+  function trackMesh(object, key) {
+    meshKeys.set(object, key);
+    meshes.push(object);
+    const materials = Array.isArray(object.material) ? object.material : [object.material];
+    const duplicates = materials.map((material) => {
+      const copy = material.clone();
+      copy.userData.originalEmission = copy.emissiveIntensity;
+      return copy;
+    });
+    object.material = Array.isArray(object.material) ? duplicates : duplicates[0];
+    object.userData.highlightMaterials = duplicates.map((material) => [material, material.emissive?.clone()]);
+  }
+
+  function enableTrackerImport() {
+    const input = root.querySelector('[data-cad-tracker-file]');
+    if (!input) return;
+    const message = root.querySelector('[data-cad-tracker-status]');
+    const tracker = [...groups.entries()].find(([, group]) => group.label === 'VIVE Ultimate Tracker Exterior');
+    if (!tracker) return;
+    const [key, group] = tracker;
+    let mountedModel = group.meshes[0];
+    while (mountedModel && mountedModel.userData.label !== group.label) mountedModel = mountedModel.parent;
+    if (!mountedModel) return;
+
+    input.addEventListener('change', async () => {
+      const file = input.files[0];
+      if (!file) return;
+      input.disabled = true;
+      message.hidden = false;
+      message.textContent = 'Loading the HTC tracker model…';
+
+      try {
+        const { loadViveFactoryMesh } = await import('./vive-factory-overlay.mjs');
+        const replacement = await loadViveFactoryMesh(file);
+        const wasSelected = selector.value === key;
+        const oldParent = mountedModel.parent;
+        replacement.matrix.copy(mountedModel.matrix);
+        replacement.matrixAutoUpdate = false;
+        oldParent.remove(mountedModel);
+        oldParent.add(replacement);
+        for (const part of group.meshes) {
+          meshes.splice(meshes.indexOf(part), 1);
+          meshKeys.delete(part);
+          part.geometry.dispose();
+          const materials = Array.isArray(part.material) ? part.material : [part.material];
+          for (const material of materials) material.dispose();
+        }
+        group.meshes = replacement.children;
+        for (const part of group.meshes) trackMesh(part, key);
+        mountedModel = replacement;
+        group.label = replacement.userData.label;
+        const option = Array.from(selector.options).find((item) => item.value === key);
+        option.textContent = group.label;
+        if (wasSelected) select(key);
+        else applySelection();
+        message.textContent = 'Official HTC tracker model loaded.';
+      } catch (error) {
+        message.textContent = error.message || 'The HTC tracker model could not be opened.';
+      } finally {
+        input.value = '';
+        input.disabled = false;
+      }
+    });
+  }
+
   try {
     const loaded = await new GLTFLoader().loadAsync(root.dataset.model, (event) => {
       if (event.lengthComputable) {
@@ -248,17 +313,7 @@ export async function mountViewer(root) {
       const key = JSON.stringify([module, label, context]);
       if (!groups.has(key)) groups.set(key, { label, module, context, meshes: [] });
       groups.get(key).meshes.push(object);
-      meshKeys.set(object, key);
-      meshes.push(object);
-
-      const materials = Array.isArray(object.material) ? object.material : [object.material];
-      const duplicates = materials.map((material) => {
-        const copy = material.clone();
-        copy.userData.originalEmission = copy.emissiveIntensity;
-        return copy;
-      });
-      object.material = Array.isArray(object.material) ? duplicates : duplicates[0];
-      object.userData.highlightMaterials = duplicates.map((material) => [material, material.emissive?.clone()]);
+      trackMesh(object, key);
     });
     if (!meshes.length) throw new Error('The model has no visible parts.');
 
@@ -292,6 +347,7 @@ export async function mountViewer(root) {
       }
     }
     applySelection();
+    enableTrackerImport();
     status.hidden = true;
     toolbar.hidden = false;
     root.dataset.cadReady = 'true';
