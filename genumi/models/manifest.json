@@ -505,11 +505,11 @@
     {
       "id": "robotiq",
       "name": "Robotiq 2F-85",
-      "model": "models/robotiq-assembled-trimmed-links.glb",
+      "model": "models/robotiq-assembled-ring-free.glb",
       "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step",
       "assemblyDownloadName": "Robotiq 2F-85 · Complete Mounted Assembly",
       "assemblyDownloadLabel": "Download assembled STEP",
-      "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw layout and ring-free finger link bars. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
+      "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw layout with ring-free outer and proximal finger links. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
       "modules": [
         {
           "id": "handheld-body",
@@ -525,8 +525,8 @@
         {
           "id": "left-proximal",
           "name": "Left Proximal Finger Link",
-          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/left-proximal-finger-link-with-flush-link-pivots.step"
+          "description": "Ring-free proximal link with the original trigger extension and countersunk pivot seats.",
+          "step": "hardware/steps/robotiq/left-proximal-finger-link-ring-free.step"
         },
         {
           "id": "left-frame",
@@ -561,8 +561,8 @@
         {
           "id": "right-proximal",
           "name": "Right Proximal Finger Link",
-          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/right-proximal-finger-link-with-flush-link-pivots.step"
+          "description": "Ring-free proximal link with the original trigger extension and countersunk pivot seats.",
+          "step": "hardware/steps/robotiq/right-proximal-finger-link-ring-free.step"
         },
         {
           "id": "right-frame",
@@ -792,16 +792,6 @@
           "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x3p2.step"
         },
         {
-          "name": "Left Proximal Finger Link With Flush Link Pivots",
-          "kind": "Part",
-          "step": "hardware/steps/robotiq/left-proximal-finger-link-with-flush-link-pivots.step"
-        },
-        {
-          "name": "Right Proximal Finger Link With Flush Link Pivots",
-          "kind": "Part",
-          "step": "hardware/steps/robotiq/right-proximal-finger-link-with-flush-link-pivots.step"
-        },
-        {
           "name": "M3 Shoulder Screw 4x25 Tip Flush 29p500mm",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
@@ -845,6 +835,16 @@
           "name": "M3 Head Shim 4P2X5P4X0P2",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/m3-head-shim-4p2x5p4x0p2.step"
+        },
+        {
+          "name": "Left Proximal Finger Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/left-proximal-finger-link-ring-free.step"
+        },
+        {
+          "name": "Right Proximal Finger Link",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/right-proximal-finger-link-ring-free.step"
         }
       ],
       "accessories": "models/robotiq-mounted-accessories.glb",
