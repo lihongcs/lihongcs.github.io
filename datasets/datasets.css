@@ -1,0 +1,163 @@
+.dataset-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dataset-figure {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    padding: 1rem 1.25rem 0.25rem;
+    border-bottom: 1px solid var(--border-color);
+    background: radial-gradient(ellipse at 50% 38%, #fcf9f4 15%, #eee6da 100%);
+}
+
+.dataset-stage {
+    position: relative;
+    width: min(100%, 308px);
+    aspect-ratio: 1;
+}
+
+.dataset-poster,
+.dataset-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.dataset-canvas {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.dataset-canvas:active {
+    cursor: grabbing;
+}
+
+.dataset-card [hidden] {
+    display: none;
+}
+
+.dataset-figure figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 44px;
+    color: var(--secondary-text);
+    font-size: 0.78rem;
+}
+
+.dataset-figure a,
+.dataset-credit a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+    text-decoration-color: #9b8d7c;
+}
+
+.dataset-figure a:hover,
+.dataset-credit a:hover {
+    color: var(--text-color);
+}
+
+.dataset-toggle {
+    min-width: 64px;
+    min-height: 44px;
+    margin-right: -0.55rem;
+    padding: 0 0.55rem;
+    border: 0;
+    border-radius: 5px;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+.dataset-toggle:hover {
+    color: var(--text-color);
+    background: rgba(108, 90, 70, 0.08);
+}
+
+.dataset-card :focus-visible {
+    outline: 2px solid #645241;
+    outline-offset: 2px;
+}
+
+.dataset-copy {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dataset-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    margin: auto 0 0.65rem;
+    padding-top: 1.15rem;
+}
+
+.dataset-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.55rem 0 0.65rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dataset-stats dt,
+.dataset-credit {
+    color: var(--secondary-text);
+    font-size: 0.77rem;
+    line-height: 1.4;
+}
+
+.dataset-stats dd {
+    order: -1;
+    margin: 0;
+    font: 500 clamp(1.15rem, 3vw, 1.55rem)/1.05 'Newsreader', Georgia, serif;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.dataset-sources {
+    margin: auto 0 0;
+    padding-top: 1.15rem;
+}
+
+.dataset-sources div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.2rem 0.75rem;
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.dataset-sources div:last-child {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dataset-sources a {
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration-color: #9b8d7c;
+    text-underline-offset: 0.2em;
+}
+
+.dataset-sources dd {
+    margin: 0;
+    color: var(--secondary-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.dataset-credit {
+    margin: 0.85rem 0 0;
+}

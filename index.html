@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./datasets/datasets.css">
+    <script src="./datasets/globe.js" defer></script>
     <style>
         :root {
             --bg-color: #F4EFE6;
@@ -301,6 +303,70 @@
                 </div>
             </article>
         </div>
+    </section>
+
+    <section id="datasets" aria-labelledby="datasets-heading">
+        <h2 id="datasets-heading">Datasets</h2>
+        <div class="project-grid">
+            <article class="project-entry dataset-card" aria-labelledby="dataset-tac-dino">
+                <figure class="dataset-figure" data-atlas="./datasets/tac-dino.webp" data-columns="12" data-rows="8">
+                    <div class="dataset-stage">
+                        <img class="dataset-poster" src="./datasets/tac-dino-poster.webp" width="640" height="640" loading="lazy" alt="A sphere tiled with object views and corresponding tactile images">
+                        <canvas class="dataset-canvas" tabindex="0" aria-label="Tac-DINO sample globe. Drag horizontally or use the left and right arrow keys to rotate." hidden></canvas>
+                    </div>
+                    <figcaption>
+                        <a href="https://huggingface.co/datasets/lihong-cs/Tac-DINO/viewer/contact_preview/samples">RGB &amp; tactile samples</a>
+                        <button class="dataset-toggle" type="button" aria-label="Pause Tac-DINO globe rotation" hidden>
+                            <span aria-hidden="true">Pause</span>
+                        </button>
+                    </figcaption>
+                </figure>
+                <div class="project-copy dataset-copy">
+                    <h3 class="project-title" id="dataset-tac-dino">Tac-DINO</h3>
+                    <p class="project-description">Touch3D pairs GelSight Mini contact images with RGB, depth, and 3D geometry of everyday objects.</p>
+                    <dl class="dataset-stats">
+                        <div><dt>Objects</dt><dd>505</dd></div>
+                        <div><dt>Tactile contacts</dt><dd>20,025</dd></div>
+                        <div><dt>Material labels</dt><dd>18</dd></div>
+                    </dl>
+                    <div class="paper-links">
+                        <a href="https://huggingface.co/datasets/lihong-cs/Tac-DINO" aria-label="Tac-DINO on Hugging Face">Hugging Face <span aria-hidden="true">↗</span></a>
+                        <a href="./tacdino/" aria-label="Tac-DINO project">Project</a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-entry dataset-card" aria-labelledby="dataset-robot-data">
+                <figure class="dataset-figure" data-atlas="./datasets/robot-data.webp" data-columns="16" data-rows="12" data-interleaved>
+                    <div class="dataset-stage">
+                        <img class="dataset-poster" src="./datasets/robot-data-poster.webp" width="640" height="640" loading="lazy" alt="A sphere tiled with RoboPose manipulation frames and AetheRock wrist-camera and tactile images">
+                        <canvas class="dataset-canvas" tabindex="0" aria-label="Robot Data sample globe. Drag horizontally or use the left and right arrow keys to rotate." hidden></canvas>
+                    </div>
+                    <figcaption>
+                        <span>RoboPose &amp; AetheRock samples</span>
+                        <button class="dataset-toggle" type="button" aria-label="Pause Robot Data globe rotation" hidden>
+                            <span aria-hidden="true">Pause</span>
+                        </button>
+                    </figcaption>
+                </figure>
+                <div class="project-copy dataset-copy">
+                    <h3 class="project-title" id="dataset-robot-data">Robot Data</h3>
+                    <p class="project-description">Manipulation demonstrations from handheld grippers, robot teleoperation, and an arm-worn vision–tactile system.</p>
+                    <dl class="dataset-sources">
+                        <div>
+                            <dt><a href="https://huggingface.co/datasets/lihong-cs/robopose" aria-label="RoboPose on Hugging Face">RoboPose <span aria-hidden="true">↗</span></a></dt>
+                            <dd>1,569 episodes</dd>
+                        </div>
+                        <div>
+                            <dt><a href="https://huggingface.co/datasets/lihong-cs/aetherock" aria-label="AetheRock on Hugging Face">AetheRock <span aria-hidden="true">↗</span></a></dt>
+                            <dd>3,760 episodes</dd>
+                        </div>
+                    </dl>
+                </div>
+            </article>
+        </div>
+        <!-- Atlas sources: Tac-DINO preview/contacts.parquet, RoboPose preview/frames.parquet,
+             and the AetheRock original Zarr archives published on ModelScope. -->
+        <p class="dataset-credit">Sample imagery by Hong Li et al., cropped and resized under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
     </section>
 
     <h2>Publications</h2>
