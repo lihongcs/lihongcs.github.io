@@ -37,10 +37,6 @@
       "href": "parts/force-adc-custom-pcb.step"
     },
     {
-      "label": "Forearm Articulation",
-      "href": "parts/forearm-articulation.step"
-    },
-    {
       "label": "Frame Mounted FSR Amplifier PCB",
       "href": "parts/frame-mounted-fsr-amplifier-pcb.step"
     },
@@ -195,10 +191,6 @@
     {
       "label": "VIVE Ultimate Tracker Exterior",
       "href": "parts/vive-ultimate-tracker-exterior.step"
-    },
-    {
-      "label": "Wrist Bridge",
-      "href": "parts/wrist-bridge.step"
     }
   ]
 }
