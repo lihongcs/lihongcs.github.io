@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hong Li</title>
+    <script type="module" src="./hardware-viewer/project-previews.mjs"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -134,11 +135,6 @@
             background: #FBF8F3;
         }
         .project-link {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-sizing: border-box;
-            border-radius: inherit;
             color: inherit;
             text-decoration: none;
         }
@@ -147,6 +143,7 @@
             outline-offset: 3px;
         }
         .project-media {
+            position: relative;
             aspect-ratio: 16 / 10;
             overflow: hidden;
             border-bottom: 1px solid var(--border-color);
@@ -163,14 +160,54 @@
         .project-image--genumi {
             mix-blend-mode: multiply;
         }
+        .project-media canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        .project-media canvas:active { cursor: grabbing; }
+        .project-media canvas:focus-visible {
+            outline: 2px solid var(--text-color);
+            outline-offset: -4px;
+        }
+        .project-preview-tools {
+            position: absolute;
+            z-index: 1;
+            right: .65rem;
+            bottom: .65rem;
+            left: .65rem;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: .35rem;
+            pointer-events: none;
+        }
+        [data-preview-state="ready"] .project-image { visibility: hidden; }
+        [data-preview-state="ready"] .project-preview-tools { display: flex; }
+        .project-preview-tools span,
+        .project-preview-tools button {
+            padding: .3rem .5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: #FBF8F3;
+            color: var(--secondary-text);
+            font: 500 .72rem/1.3 'Inter', sans-serif;
+        }
+        .project-preview-tools button {
+            cursor: pointer;
+            pointer-events: auto;
+        }
         .project-copy {
             padding: 1.1rem 1.25rem 1.25rem;
         }
         .project-description {
             margin-top: .45rem;
         }
-        .project-link:hover .project-title,
-        .project-link:focus-visible .project-title {
+        .project-link:hover,
+        .project-link:focus-visible {
             text-decoration: underline;
             text-underline-offset: .25em;
         }
@@ -236,26 +273,32 @@
         <h2 id="projects-heading">Projects</h2>
         <div class="project-grid">
             <article class="project-entry">
-                <a class="project-link" href="./genumi/" aria-labelledby="project-genumi-title">
-                    <div class="project-media">
-                        <img class="project-image project-image--genumi" src="./genumi/assets/flexiv-assembly-clean.webp" alt="GenUMI handheld gripper with an Insta360 camera and a VIVE tracker" width="1280" height="960" loading="lazy">
+                <div class="project-media" data-project-preview="genumi"
+                     data-model="./genumi/models/flexiv.glb" data-accessories="./genumi/models/flexiv-accessories.glb">
+                    <img class="project-image project-image--genumi" src="./genumi/assets/flexiv-assembly-clean.webp" alt="GenUMI handheld gripper with an Insta360 camera and a VIVE tracker" width="1280" height="960" loading="lazy">
+                    <div class="project-preview-tools">
+                        <span id="project-genumi-controls">Drag to rotate</span>
+                        <button type="button" data-preview-reset aria-label="Reset GenUMI preview">Reset</button>
                     </div>
-                    <div class="project-copy">
-                        <h3 class="project-title" id="project-genumi-title">GenUMI</h3>
-                        <p class="project-description">Insta360-based handheld Universal Manipulation Interface (UMI) hardware with versions matched to the Flexiv Grav (GN-01) and Robotiq 2F-85 grippers.</p>
-                    </div>
-                </a>
+                </div>
+                <div class="project-copy">
+                    <h3 class="project-title" id="project-genumi-title"><a class="project-link" href="./genumi/">GenUMI</a></h3>
+                    <p class="project-description">Insta360-based handheld Universal Manipulation Interface (UMI) hardware with versions matched to the Flexiv Grav (GN-01) and Robotiq 2F-85 grippers.</p>
+                </div>
             </article>
             <article class="project-entry">
-                <a class="project-link" href="./gelslim-mini/" aria-labelledby="project-gelslim-title">
-                    <div class="project-media">
-                        <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="GelSlim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
+                <div class="project-media" data-project-preview="gelslim"
+                     data-model="./gelslim-mini/assets/hardware/gelslim-mini.glb?v=post-mount">
+                    <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="GelSlim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
+                    <div class="project-preview-tools">
+                        <span id="project-gelslim-controls">Drag to rotate</span>
+                        <button type="button" data-preview-reset aria-label="Reset GelSlim Mini preview">Reset</button>
                     </div>
-                    <div class="project-copy">
-                        <h3 class="project-title" id="project-gelslim-title">Tactile Sensor: GelSlim Mini</h3>
-                        <p class="project-description">A compact vision-based tactile sensor with a detachable optical stack, interactive 3D assembly, and downloadable CAD.</p>
-                    </div>
-                </a>
+                </div>
+                <div class="project-copy">
+                    <h3 class="project-title" id="project-gelslim-title"><a class="project-link" href="./gelslim-mini/">Tactile Sensor: GelSlim Mini</a></h3>
+                    <p class="project-description">A compact vision-based tactile sensor with a detachable optical stack, interactive 3D assembly, and downloadable CAD.</p>
+                </div>
             </article>
         </div>
     </section>

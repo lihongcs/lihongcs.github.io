@@ -25,41 +25,59 @@
   </header>
   <main class="wrap">
     <section class="intro" aria-labelledby="title">
-      <div>
-        <h1 id="title">GenUMI</h1>
-        <p class="subtitle">Handheld UMI for two robot grippers</p>
-        <p class="lede">GenUMI uses an Insta360 camera to capture manipulation demonstrations with a handheld gripper. Its two mechanical designs aim to reproduce the geometry and motion of the Flexiv Grav GN-01 and the Robotiq 2F-85, respectively.</p>
-      </div>
-      <figure class="preview">
-        <div class="preview-frame"><img src="assets/flexiv-assembly-clean.webp" width="1280" height="960" alt="CAD render of the Flexiv GenUMI assembly with two fingers, an Insta360 X5 and an HTC VIVE Ultimate Tracker."></div>
-        <figcaption>Flexiv Grav GN-01 assembly · CAD render</figcaption>
-      </figure>
+      <h1 id="title">GenUMI</h1>
+      <p class="subtitle">Handheld UMI for two robot grippers</p>
+      <p class="lede">GenUMI uses an Insta360 camera to capture manipulation demonstrations with a handheld gripper. Its two mechanical designs aim to reproduce the geometry and motion of the Flexiv Grav GN-01 and the Robotiq 2F-85, respectively.</p>
     </section>
 
     <section class="hardware" id="hardware" aria-labelledby="hardware-title">
       <h2 id="hardware-title">Open hardware</h2>
       <div class="variants">
-        <article class="variant">
-          <h3>Flexiv Grav GN-01</h3>
-          <p>The STEP assembly includes the frame, linkages, Insta360 quick-release spacer, and eight shoulder-screw pivot sets. The right inner pivot uses a custom stepped shoulder screw.</p>
-          <div class="variant-actions">
-            <a class="download" href="viewer.html?variant=flexiv">Explore Flexiv in 3D</a>
+        <article class="variant" aria-labelledby="flexiv-title">
+          <figure class="variant-figure">
+            <img class="variant-image variant-image--flexiv" src="assets/flexiv-assembly-clean.webp" width="1280" height="960"
+              alt="Flexiv GenUMI assembly with two fingers, an Insta360 X5, and a VIVE tracker"
+              loading="lazy">
+          </figure>
+          <div class="variant-overview">
+            <h3 id="flexiv-title">Flexiv Grav GN-01</h3>
+            <p>Frame, linkages, Insta360 quick-release spacer, and eight shoulder-screw pivots. The right inner pivot uses a custom stepped shoulder screw.</p>
+          </div>
+          <nav class="variant-actions" aria-label="Explore Flexiv Grav GN-01">
+            <a class="download" href="viewer.html?variant=flexiv">Explore in 3D</a>
             <a href="steps.html?variant=flexiv">Browse STEP files</a>
-            <a href="hardware/genumi-flexiv-step.zip" download>Download STEP package</a>
-            <a href="hardware/genumi-flexiv-gn01.zip" download>Download SolidWorks source</a>
-            <a href="hardware/insta360-quick-release-spacer.sldprt" download>Download spacer SolidWorks file</a>
-            <a href="hardware/flexiv-pivot-fastener-bom.csv" download>Download pivot fastener BOM</a>
+          </nav>
+          <div class="variant-files">
+            <h4>Downloads</h4>
+            <ul>
+              <li><a href="hardware/genumi-flexiv-step.zip" download>STEP package</a></li>
+              <li><a href="hardware/genumi-flexiv-gn01.zip" download>SolidWorks source</a></li>
+              <li><a href="hardware/flexiv-pivot-fastener-bom.csv" download>Pivot fastener BOM</a></li>
+              <li><a href="hardware/insta360-quick-release-spacer.sldprt" download>Quick-release spacer</a></li>
+            </ul>
           </div>
         </article>
-        <article class="variant">
-          <h3>Robotiq 2F-85</h3>
-          <p>Explore both articulated jaws and the chassis. The downloadable STEP includes the GenUMI chassis, connectors, and four shoulder-screw pivot sets.</p>
-          <div class="variant-actions">
-            <a class="download" href="viewer.html?variant=robotiq">Explore Robotiq in 3D</a>
+        <article class="variant" aria-labelledby="robotiq-title">
+          <figure class="variant-figure">
+            <img class="variant-image" src="assets/robotiq-assembly.webp" width="1280" height="960"
+              alt="Robotiq GenUMI assembly with two articulated jaws and a handheld chassis"
+              loading="lazy">
+          </figure>
+          <div class="variant-overview">
+            <h3 id="robotiq-title">Robotiq 2F-85</h3>
+            <p>The 3D model shows both articulated jaws and the chassis. The STEP package includes the chassis, connectors, and four shoulder-screw pivot sets.</p>
+          </div>
+          <nav class="variant-actions" aria-label="Explore Robotiq 2F-85">
+            <a class="download" href="viewer.html?variant=robotiq">Explore in 3D</a>
             <a href="steps.html?variant=robotiq">Browse STEP files</a>
-            <a href="hardware/genumi-robotiq-step.zip" download>Download STEP package</a>
-            <a href="hardware/genumi-robotiq-2f85.zip" download>Download SolidWorks source</a>
-            <a href="hardware/robotiq-pivot-fastener-bom.csv" download>Download chassis fastener BOM</a>
+          </nav>
+          <div class="variant-files">
+            <h4>Downloads</h4>
+            <ul>
+              <li><a href="hardware/genumi-robotiq-step.zip" download>STEP package</a></li>
+              <li><a href="hardware/genumi-robotiq-2f85.zip" download>SolidWorks source</a></li>
+              <li><a href="hardware/robotiq-pivot-fastener-bom.csv" download>Chassis fastener BOM</a></li>
+            </ul>
           </div>
         </article>
       </div>
