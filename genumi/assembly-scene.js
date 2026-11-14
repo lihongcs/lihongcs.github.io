@@ -1,5 +1,5 @@
 import {
-  Box3, DirectionalLight, HemisphereLight, MeshStandardMaterial, PerspectiveCamera,
+  Box3, DirectionalLight, HemisphereLight, MeshStandardMaterial, OrthographicCamera, PerspectiveCamera,
   Raycaster, Scene, Vector2, Vector3, WebGLRenderer, GLTFLoader, OrbitControls,
 } from "./vendor/three-cad.js";
 import { bindJointMotion } from "./joint-motion.js";
@@ -54,9 +54,13 @@ export async function createAssemblyViewer({
   canvas.setAttribute("aria-describedby", "model-instructions");
 
   const scene = new Scene();
-  const camera = new PerspectiveCamera(36);
-  if (cameraPose?.up) camera.up.set(...cameraPose.up).normalize();
-  const controls = new OrbitControls(camera, canvas);
+  const assembledCamera = new PerspectiveCamera(36);
+  if (cameraPose?.up) assembledCamera.up.set(...cameraPose.up).normalize();
+  const explodedCamera = new OrthographicCamera();
+  explodedCamera.up.copy(assembledCamera.up);
+  const explodedDirection = new Vector3(.38, -.28, -1.5).normalize();
+  let camera = assembledCamera;
+  const controls = new OrbitControls(assembledCamera, canvas);
   controls.enableDamping = false;
   controls.screenSpacePanning = true;
 
@@ -120,7 +124,7 @@ export async function createAssemblyViewer({
     meshes = collectMeshes(model, modules);
     jointMotion = bindJointMotion(model, motion);
     jointMotion?.setAngle(angle);
-    if (motion?.axis) explodedView = createExplodedView(model, parts, variant, motion.axis);
+    explodedView = createExplodedView(model, parts, variant, explodedDirection, explodedCamera.up);
     for (const { object, visible } of meshes) {
       if (visible) bounds.union(new Box3().setFromObject(object));
     }
@@ -133,9 +137,8 @@ export async function createAssemblyViewer({
   const center = bounds.getCenter(new Vector3());
   const radius = Math.max(bounds.getSize(new Vector3()).length() / 2, 0.000001);
   const viewDirection = new Vector3(...(cameraPose?.direction ?? [1, .68, 1.25])).normalize();
-  const explodedDirection = new Vector3(.38, -.28, -1.5).normalize();
   const viewBounds = getViewBounds(meshes, center, viewDirection, camera.up);
-  const assembledCamera = { position: new Vector3(), target: new Vector3() };
+  const assembledTarget = new Vector3();
   key.position.copy(center).addScaledVector(new Vector3(2, 4, 3), radius);
   key.target.position.copy(center);
   fill.position.copy(center).addScaledVector(new Vector3(-4, 1, -2), radius);
@@ -143,6 +146,10 @@ export async function createAssemblyViewer({
   scene.add(key.target, fill.target);
   camera.near = radius * .005;
   camera.far = radius * 60;
+  explodedCamera.near = camera.near;
+  explodedCamera.far = camera.far;
+  controls.minZoom = .2;
+  controls.maxZoom = 12;
   controls.minDistance = radius * .12;
   controls.maxDistance = radius * 30;
 
@@ -159,17 +166,30 @@ export async function createAssemblyViewer({
     draw();
   }
 
-  function fitCurrentPose(direction) {
-    const poseBounds = new Box3();
-    for (const { object, visible } of meshes) {
-      if (visible) poseBounds.union(new Box3().setFromObject(object));
-    }
-    const target = poseBounds.getCenter(new Vector3());
-    fitView(direction, target, getViewBounds(meshes, target, direction, camera.up));
+  function fitExplodedView(direction) {
+    const right = explodedCamera.up.clone().cross(direction).normalize();
+    const up = direction.clone().cross(right);
+    const projected = getViewBounds(meshes, center, direction, explodedCamera.up);
+    const size = projected.getSize(new Vector3());
+    const midpoint = projected.getCenter(new Vector3());
+    const target = center.clone().addScaledVector(right, midpoint.x)
+      .addScaledVector(up, midpoint.y).addScaledVector(direction, midpoint.z);
+    const aspect = assembledCamera.aspect;
+    const halfHeight = .55 * Math.max(size.x / aspect, size.y);
+    explodedCamera.left = -halfHeight * aspect;
+    explodedCamera.right = halfHeight * aspect;
+    explodedCamera.bottom = -halfHeight;
+    explodedCamera.top = halfHeight;
+    explodedCamera.zoom = 1;
+    explodedCamera.updateProjectionMatrix();
+    explodedCamera.position.copy(target).addScaledVector(direction, radius * 5 + size.z);
+    controls.target.copy(target);
+    controls.update();
+    draw();
   }
 
   function reset() {
-    if (exploded || explosionFrame !== null) fitCurrentPose(explodedDirection);
+    if (camera === explodedCamera) fitExplodedView(explodedDirection);
     else fitView(viewDirection, center, viewBounds);
   }
 
@@ -177,10 +197,10 @@ export async function createAssemblyViewer({
     const { clientWidth, clientHeight } = container;
     if (!clientWidth || !clientHeight) return;
     renderer.setSize(clientWidth, clientHeight, false);
-    camera.aspect = clientWidth / clientHeight;
-    camera.updateProjectionMatrix();
-    if (exploded && explosionFrame === null) {
-      fitCurrentPose(camera.position.clone().sub(controls.target).normalize());
+    assembledCamera.aspect = clientWidth / clientHeight;
+    assembledCamera.updateProjectionMatrix();
+    if (camera === explodedCamera) {
+      fitExplodedView(camera.position.clone().sub(controls.target).normalize());
     } else {
       draw();
     }
@@ -231,19 +251,22 @@ export async function createAssemblyViewer({
     endJointDrag();
     press = null;
     exploded = enabled;
+    const initialAspect = assembledCamera.aspect;
     if (enabled) {
-      assembledCamera.position.copy(camera.position);
-      assembledCamera.target.copy(controls.target);
+      assembledTarget.copy(controls.target);
+      camera = controls.object = explodedCamera;
       explodedView.capturePose();
       explodedView.setAmount(1);
-      fitCurrentPose(explodedDirection);
+      fitExplodedView(explodedDirection);
     }
 
     function finish() {
       if (!enabled) {
-        camera.position.copy(assembledCamera.position);
-        controls.target.copy(assembledCamera.target);
+        camera = controls.object = assembledCamera;
+        controls.target.copy(assembledTarget);
         controls.update();
+      } else if (assembledCamera.aspect !== initialAspect) {
+        fitExplodedView(camera.position.clone().sub(controls.target).normalize());
       }
       draw();
       onExplodedChange?.(enabled, false);
@@ -335,8 +358,18 @@ export async function createAssemblyViewer({
         break;
       }
       case "+":
-      case "=": offset.multiplyScalar(.85); break;
-      case "-": offset.divideScalar(.85); break;
+      case "=":
+      case "-": {
+        const factor = event.key === "-" ? .85 : 1 / .85;
+        if (camera === explodedCamera) {
+          camera.zoom = Math.max(controls.minZoom, Math.min(controls.maxZoom, camera.zoom * factor));
+          camera.updateProjectionMatrix();
+          draw();
+        } else {
+          offset.divideScalar(factor);
+        }
+        break;
+      }
       default: return;
     }
     event.preventDefault();

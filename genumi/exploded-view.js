@@ -1,74 +1,100 @@
-import { Vector3 } from "./vendor/three-cad.js";
+import { Box3, Vector3 } from "./vendor/three-cad.js";
 
-// Offsets are in millimeters along the outward, fingertip and pivot axes.
 const flexiv = {
-  drive: [27, 1, 12],
-  "inner-link": [26, 9, -27],
-  carrier: [34, 29, 8],
-  "fingertip-pad": [36, 55, 4],
+  upperJaw: ["right-drive", "right-inner-link", "right-carrier", "left-fingertip-pad"],
+  lowerJaw: ["left-drive", "left-inner-link", "left-carrier", "right-fingertip-pad"],
+  upperPivots: ["pivot-p04", "pivot-p03", "pivot-p08", "pivot-p07"],
+  lowerPivots: ["pivot-p01", "pivot-p02", "pivot-p05", "pivot-p06"],
+  body: ["handheld-housing", "moving-handle"],
+  tracker: ["vive-ultimate-tracker", "tracker-bracket"],
 };
 
+const robotiqJaw = ["drive", "proximal", "frame", "bar", "distal", "pad"];
+const robotiqPivots = ["inner-chassis-pivot", "outer-chassis-pivot", "frame-and-bar-pivot",
+  "distal-inner-pivot", "distal-outer-pivot"];
 const robotiq = {
-  drive: [24, 0, 11],
-  proximal: [32, 8, -23],
-  frame: [36, 2, 32],
-  bar: [67, 11, 2],
-  distal: [40, 34, 4],
-  pad: [41, 61, 4],
-  "inner-chassis-pivot": [8, -8, 41],
-  "outer-chassis-pivot": [28, -4, 46],
-  "frame-and-bar-pivot": [68, -3, 36],
-  "distal-inner-pivot": [28, 28, 43],
-  "distal-outer-pivot": [62, 40, 42],
+  upperJaw: robotiqJaw.map((part) => "right-" + part),
+  lowerJaw: robotiqJaw.map((part) => "left-" + part),
+  upperPivots: robotiqPivots.map((part) => "right-" + part),
+  lowerPivots: robotiqPivots.map((part) => "left-" + part),
+  body: ["handheld-body"],
+  tracker: ["vive-ultimate-tracker"],
 };
 
-const flexivPivots = [
-  [-35, -8, 48], [-8, -4, 37], [8, -4, 37], [35, -8, 48],
-  [-49, 27, 39], [-22, 39, 52], [22, 39, 52], [49, 27, 39],
-];
+const cameraParts = ["insta360-camera", "insta360-quick-release", "camera-support"];
 
-const accessoryOffsets = {
-  "camera-support": [0, 8, -14],
-  "insta360-quick-release": [0, 24, -34],
-  "insta360-camera": [0, 62, -76],
-  "tracker-bracket": [20, 0, 0],
-  "vive-ultimate-tracker": [61, 0, 0],
-  "handheld-housing": [0, 29, -17],
-};
+function measurePart(part, right, up) {
+  const bounds = new Box3();
+  const point = new Vector3();
+  const projected = new Vector3();
+  part.traverse((object) => {
+    if (!object.isMesh) return;
+    const positions = object.geometry.getAttribute("position");
+    for (let index = 0; index < positions.count; index += 1) {
+      point.fromBufferAttribute(positions, index).applyMatrix4(object.matrixWorld);
+      projected.set(point.dot(right), point.dot(up), 0);
+      bounds.expandByPoint(projected);
+    }
+  });
+  if (bounds.isEmpty()) return null;
+  const { x: width, y: height } = bounds.getSize(new Vector3());
+  return { part, width, height, center: bounds.getCenter(new Vector3()), home: part.position.clone() };
+}
 
-export function createExplodedView(model, parts, variant, pivotAxis) {
+// Place complete part instances in horizontal rows. The margins are measured in
+// model space so orthographic projection preserves separation on every screen.
+function placeRows(rows, right, up) {
+  const gap = .014;
+  const offsets = [];
+  const heights = rows.map((row) => Math.max(...row.map((item) => item.height)));
+  let top = (heights.reduce((total, height) => total + height, 0) + gap * (rows.length - 1)) / 2;
+
+  rows.forEach((row, index) => {
+    const width = row.reduce((total, item) => total + item.width, 0) + gap * (row.length - 1);
+    const y = top - heights[index] / 2;
+    let left = -width / 2;
+    for (const item of row) {
+      const x = left + item.width / 2;
+      const offset = right.clone().multiplyScalar(x - item.center.x)
+        .addScaledVector(up, y - item.center.y);
+      offsets.push({ part: item.part, offset, home: item.home });
+      left += item.width + gap;
+    }
+    top -= heights[index] + gap;
+  });
+
+  return offsets;
+}
+
+export function createExplodedView(model, parts, variant, direction, cameraUp) {
+  const layout = variant === "flexiv" ? flexiv : robotiq;
   if (variant !== "flexiv" && variant !== "robotiq") return null;
 
-  const axial = new Vector3(...pivotAxis).normalize();
-  const across = new Vector3(1, 0, 0);
-  const forward = new Vector3().crossVectors(axial, across).normalize();
-  const isFlexiv = variant === "flexiv";
-  const layout = isFlexiv ? flexiv : robotiq;
-  const offsets = [];
-
-  for (const part of parts) {
-    const name = part.name;
-    const [side, ...words] = name.split("-");
-    const piece = words.join("-");
-    let offset;
-    if (Object.hasOwn(accessoryOffsets, name)) {
-      offset = new Vector3(...accessoryOffsets[name]);
-    } else {
-      const match = /^pivot-p0([1-8])$/.exec(name);
-      const shift = isFlexiv && match ? flexivPivots[Number(match[1]) - 1] : layout[piece];
-      if (!shift) continue;
-      const [outward, along, lift] = shift;
-      const sign = match ? 1 : ((side === "left") !== isFlexiv ? 1 : -1);
-      const direction = isFlexiv && piece === "fingertip-pad" ? -sign : sign;
-      offset = across.clone().multiplyScalar(outward * direction)
-        .addScaledVector(forward, along).addScaledVector(axial, lift);
-    }
-    offsets.push({ part, offset: offset.multiplyScalar(.001), home: new Vector3() });
-  }
+  const right = cameraUp.clone().cross(direction).normalize();
+  const up = direction.clone().cross(right);
+  let offsets = [];
 
   return {
     capturePose() {
-      for (const { part, home } of offsets) home.copy(part.position);
+      const measured = new Map();
+      for (const part of parts) {
+        const item = measurePart(part, right, up);
+        if (item) measured.set(part.name, item);
+      }
+
+      const rows = [
+        cameraParts,
+        [...layout.tracker, ...layout.body],
+        layout.upperJaw,
+        [...layout.upperPivots, ...layout.lowerPivots],
+        layout.lowerJaw,
+      ].map((names) => names.flatMap((name) => {
+        const item = measured.get(name);
+        measured.delete(name);
+        return item ? [item] : [];
+      }));
+      rows.push([...measured.values()]);
+      offsets = placeRows(rows.filter((row) => row.length), right, up);
     },
     setAmount(amount) {
       for (const { part, home, offset } of offsets) {

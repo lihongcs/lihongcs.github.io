@@ -142,7 +142,7 @@ function showExplodedState(exploded, transitioning) {
     elements[id].disabled = suspended;
   }
   if (suspended) {
-    elements["orbit-instructions"].textContent = "Drag to orbit. Reassemble to move the joints.";
+    elements["orbit-instructions"].textContent = "Drag to orbit. Reset view restores the exploded layout. Reassemble to move the joints.";
   } else if (joint) {
     setDragMode(elements["joint-drag"].getAttribute("aria-pressed") === "true");
   }
