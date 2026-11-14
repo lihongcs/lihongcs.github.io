@@ -87,14 +87,16 @@
             flex-direction: column;
             gap: 0.4rem;
         }
-        .paper-title {
+        .paper-title,
+        .project-title {
             font-size: 1.1rem;
             font-weight: 600;
             margin: 0;
             line-height: 1.4;
             color: var(--text-color);
         }
-        .paper-authors {
+        .paper-authors,
+        .project-description {
             font-size: 1rem;
             color: var(--secondary-text);
             margin: 0;
@@ -119,6 +121,20 @@
         }
         .paper-links a:hover {
             border-color: var(--text-color);
+        }
+        .project-entry {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .project-title a {
+            color: inherit;
+            text-decoration-color: var(--border-color);
+            text-underline-offset: 0.25em;
+        }
+        .project-title a:hover,
+        .project-title a:focus-visible {
+            text-decoration-color: currentColor;
         }
         .paper.first-author {
             background-color: #FBF8F3;
@@ -172,6 +188,14 @@
         A third-year Ph.D. student at Shanghai Jiao Tong University, focusing on multi-modal learning (previously) and robotics.<br>
         Email: <a href="mailto:hong_li@sjtu.edu.cn">hong_li@sjtu.edu.cn</a>
     </p>
+
+    <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <article class="project-entry">
+            <h3 class="project-title"><a href="./genumi/">GenUMI</a></h3>
+            <p class="project-description">Insta360-based handheld Universal Manipulation Interface (UMI) hardware with versions matched to the Flexiv Grav (GN-01) and Robotiq 2F-85 grippers.</p>
+        </article>
+    </section>
 
     <h2>Publications</h2>
     <div class="paper-list">

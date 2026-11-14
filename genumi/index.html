@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GenUMI · Hong Li</title>
+  <meta name="description" content="GenUMI is an Insta360-based handheld UMI hardware project with gripper designs for the Flexiv Grav GN-01 and Robotiq 2F-85.">
+  <link rel="canonical" href="https://lihongcs.github.io/genumi/">
+  <meta property="og:title" content="GenUMI · Handheld UMI hardware">
+  <meta property="og:image" content="https://lihongcs.github.io/genumi/assets/flexiv-assembly.png">
+  <meta name="theme-color" content="#F4EFE6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header wrap">
+    <a href="../#projects"><span aria-hidden="true">←</span> Hong Li</a>
+    <a href="#hardware">Hardware downloads</a>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <h1 id="title">GenUMI</h1>
+        <p class="subtitle">Handheld UMI for two robot grippers</p>
+        <p class="lede">GenUMI uses an Insta360 camera to capture manipulation demonstrations with a handheld gripper. Its two mechanical designs aim to reproduce the geometry and motion of the Flexiv Grav GN-01 and the Robotiq 2F-85, respectively.</p>
+      </div>
+      <figure class="preview">
+        <div class="preview-frame"><img src="assets/flexiv-assembly.png" width="640" height="480" alt="CAD preview of the handheld GenUMI assembly with two articulated fingers, an Insta360 camera, and a VIVE tracker."></div>
+        <figcaption>Flexiv Grav GN-01 variant · SolidWorks assembly preview</figcaption>
+      </figure>
+    </section>
+
+    <section class="hardware" id="hardware" aria-labelledby="hardware-title">
+      <h2 id="hardware-title">Open hardware</h2>
+      <div class="variants">
+        <article class="variant">
+          <h3>Flexiv Grav GN-01</h3>
+          <p>The CAD package includes the handheld frame, finger linkages, geared subassemblies, and fingertip parts.</p>
+          <a class="download" href="hardware/genumi-flexiv-gn01.zip" download>Download Flexiv CAD <span aria-hidden="true">↓</span></a>
+        </article>
+        <article class="variant">
+          <h3>Robotiq 2F-85</h3>
+          <p>The CAD package includes the handheld frame, connector, and gear assembly. The finger geometry requires separate source files.</p>
+          <a class="download" href="hardware/genumi-robotiq-2f85.zip" download>Download Robotiq CAD <span aria-hidden="true">↓</span></a>
+        </article>
+      </div>
+      <p class="release-note">Each archive includes editable SolidWorks files and a README with assembly entry points and required references. The GenUMI designs are released under the BSD 3-Clause license. The archives contain parts and subassemblies, with some references available separately.</p>
+    </section>
+
+    <footer class="references">
+      <p>Based on the <a href="https://umi-gripper.github.io/">Universal Manipulation Interface</a>.</p>
+      <ul aria-label="Reference grippers">
+        <li><a href="https://www.flexiv.com/product/grav">Flexiv Grav</a></li>
+        <li><a href="https://robotiq.com/products/adaptive-grippers">Robotiq 2F-85</a></li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>
