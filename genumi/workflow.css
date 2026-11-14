@@ -242,11 +242,18 @@
   font-weight: 600;
 }
 
+#capture {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+
+@media (max-width: 46rem) {
+  #capture { grid-template-columns: minmax(0, 1fr); }
+}
+
 .capture-sample {
-  grid-column: 1 / -1;
   min-width: 0;
-  margin: 0;
-  padding: clamp(1rem, 3vw, 1.5rem);
+  margin: .85rem 0 0;
+  padding: clamp(.8rem, 2vw, 1.15rem);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: .85rem;
@@ -254,7 +261,7 @@
 
 .capture-sample h4 {
   margin: 0;
-  font: 500 clamp(1.65rem, 4vw, 2.35rem)/1.1 Newsreader, Georgia, serif;
+  font: 500 clamp(1.45rem, 3.3vw, 2rem)/1.1 Newsreader, Georgia, serif;
 }
 
 .capture-sample figcaption p {
@@ -308,8 +315,8 @@
   width: var(--span);
 }
 
-.sample-episode { inset-block: 0; background: #285e60; }
-.sample-excerpt { inset-block: .28rem; border: 2px solid #fffaf3; background: #bd6138; }
+.sample-episode { inset-block: 0; background: #946d55; }
+.sample-episode-playing { background: #285e60; }
 
 .capture-sample-key span { display: flex; gap: .45rem; align-items: center; }
 .capture-sample-key span::before {
@@ -319,4 +326,4 @@
   border-radius: .15rem;
   background: #285e60;
 }
-.capture-sample-key span + span::before { background: #bd6138; }
+.capture-sample-key span + span::before { background: #946d55; }

@@ -76,7 +76,35 @@ cp datacap/config.example.json datacap/config.json</code></pre>
     <article class="guide" id="capture" aria-labelledby="capture-title">
         <div class="guide-heading">
           <h3 id="capture-title">Collect a session</h3>
-          <p>Use one continuous capture for the session. Mark the beginning and end of each demonstration as an episode.</p>
+          <figure class="capture-sample" id="raw-sample" aria-labelledby="raw-sample-title">
+            <figcaption>
+              <h4 id="raw-sample-title">Pepper sorting · Episode 1</h4>
+              <p>Full demonstration · 15.2 s</p>
+            </figcaption>
+            <div class="capture-sample-views" aria-hidden="true">
+              <span>Left wrist</span>
+              <span>Right wrist</span>
+            </div>
+            <video controls muted playsinline preload="none" width="1200" height="534"
+              poster="assets/workflow/x5-full-episode.webp" aria-label="Full 15.2-second pepper-sorting demonstration, with left and right views from the original Insta360 recordings">
+              <source src="assets/workflow/x5-full-episode.mp4" type="video/mp4">
+              <a href="assets/workflow/x5-full-episode.mp4">Download the full demonstration video</a>
+            </video>
+            <div class="capture-sample-timeline" role="group" aria-label="First 90 seconds of the capture log. Episode 1 runs from 44.8 to 60.0 seconds, episode 2 from 70.0 to 84.5 seconds. The video covers all of episode 1.">
+              <p class="capture-sample-timeline-title">Episode markers · first 90 seconds</p>
+              <div class="capture-sample-axis" aria-hidden="true">
+                <span>0 s</span><span>30 s</span><span>60 s</span><span>90 s</span>
+              </div>
+              <div class="capture-sample-track" aria-hidden="true">
+                <span class="sample-episode sample-episode-playing" style="--offset: 49.73%; --span: 16.89%"></span>
+                <span class="sample-episode" style="--offset: 77.80%; --span: 16.03%"></span>
+              </div>
+              <div class="capture-sample-key" aria-hidden="true">
+                <span>Episode 1 · video</span>
+                <span>Episode 2</span>
+              </div>
+            </div>
+          </figure>
         </div>
         <div class="guide-content">
           <ol class="capture-list">
@@ -98,36 +126,6 @@ cp datacap/config.example.json datacap/config.json</code></pre>
     └── insta_right/</code></pre>
           </details>
         </div>
-        <figure class="capture-sample" id="raw-sample" aria-labelledby="raw-sample-title">
-          <figcaption>
-            <h4 id="raw-sample-title">Raw capture · Pepper sorting</h4>
-            <p>One X5 + VIVE session. Both wrist views are cropped from the original INSV files.</p>
-          </figcaption>
-          <div class="capture-sample-views" aria-hidden="true">
-            <span>Left wrist</span>
-            <span>Right wrist</span>
-          </div>
-          <video controls muted playsinline preload="none" width="1200" height="534"
-            poster="assets/workflow/x5-raw-session.webp" aria-label="Seven-second dual-wrist recording from a pepper-sorting session">
-            <source src="assets/workflow/x5-raw-session.mp4" type="video/mp4">
-            <a href="assets/workflow/x5-raw-session.mp4">Download the sample clip</a>
-          </video>
-          <div class="capture-sample-timeline" role="group" aria-label="First 90 seconds of the capture log. Episode 1 runs from 44.8 to 60.0 seconds, episode 2 from 70.0 to 84.5 seconds. The video shows 47.9 to 54.9 seconds of episode 1.">
-            <p class="capture-sample-timeline-title">Episode markers · first 90 seconds</p>
-            <div class="capture-sample-axis" aria-hidden="true">
-              <span>0 s</span><span>30 s</span><span>60 s</span><span>90 s</span>
-            </div>
-            <div class="capture-sample-track" aria-hidden="true">
-              <span class="sample-episode" style="--offset: 49.73%; --span: 16.89%"></span>
-              <span class="sample-episode" style="--offset: 77.80%; --span: 16.03%"></span>
-              <span class="sample-excerpt" style="--offset: 53.22%; --span: 7.78%"></span>
-            </div>
-            <div class="capture-sample-key" aria-hidden="true">
-              <span>Marked episodes</span>
-              <span>Video excerpt</span>
-            </div>
-          </div>
-        </figure>
     </article>
 
     <article class="guide" id="processing" aria-labelledby="processing-title">
