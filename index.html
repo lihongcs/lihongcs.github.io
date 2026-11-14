@@ -130,6 +130,13 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1.25rem;
         }
+        .project-grid--featured {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .project-grid--featured .paper-links {
+            flex-wrap: wrap;
+            gap: .35rem .75rem;
+        }
         .project-entry {
             min-width: 0;
             border: 1px solid var(--border-color);
@@ -213,6 +220,11 @@
             text-decoration: underline;
             text-underline-offset: .25em;
         }
+        @media (max-width: 720px) {
+            .project-grid--featured {
+                grid-template-columns: 1fr;
+            }
+        }
         @media (max-width: 600px) {
             .project-grid {
                 grid-template-columns: 1fr;
@@ -273,7 +285,7 @@
 
     <section id="projects" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
-        <div class="project-grid">
+        <div class="project-grid project-grid--featured">
             <article class="project-entry">
                 <div class="project-media" data-project-preview="genumi"
                      data-model="./genumi/models/flexiv-assembled-low-profile.glb" data-accessories="./genumi/models/flexiv-mounted-accessories.glb">
@@ -294,16 +306,33 @@
                 </div>
             </article>
             <article class="project-entry">
-                <div class="project-media" data-project-preview="gelslim"
-                     data-model="./gelslim-mini/assets/hardware/gelslim-mini.glb?v=post-mount">
-                    <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="GelSlim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
+                <div class="project-media" data-project-preview="aetherock"
+                     data-model="./aetherock/assets/hardware/aetherock.glb?v=short-pivot-seats">
+                    <img class="project-image" src="./aetherock/assets/hardware/aetherock-preview.webp?v=short-pivot-seats" alt="AetheRock arm-worn robot teaching device" width="798" height="527" loading="lazy">
                     <div class="project-preview-tools">
-                        <span id="project-gelslim-controls">Drag to rotate</span>
-                        <button type="button" data-preview-reset aria-label="Reset GelSlim Mini preview">Reset</button>
+                        <span id="project-aetherock-controls">Drag to rotate</span>
+                        <button type="button" data-preview-reset aria-label="Reset AetheRock preview">Reset</button>
                     </div>
                 </div>
                 <div class="project-copy">
-                    <h3 class="project-title" id="project-gelslim-title"><a class="project-link" href="./gelslim-mini/">Tactile Sensor: GelSlim Mini</a></h3>
+                    <h3 class="project-title" id="project-aetherock-title"><a class="project-link" href="./aetherock/">AetheRock</a></h3>
+                    <p class="project-description">An arm-worn robot teaching system that records wrist video, gripper force, and tactile data.</p>
+                    <div class="paper-links">
+                        <a href="https://github.com/lihongcs/AetheRock">GitHub</a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-entry">
+                <div class="project-media" data-project-preview="gelslim"
+                     data-model="./gelslim-mini/assets/hardware/gelslim-mini.glb?v=post-mount">
+                    <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="Gelslim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
+                    <div class="project-preview-tools">
+                        <span id="project-gelslim-controls">Drag to rotate</span>
+                        <button type="button" data-preview-reset aria-label="Reset Gelslim Mini preview">Reset</button>
+                    </div>
+                </div>
+                <div class="project-copy">
+                    <h3 class="project-title" id="project-gelslim-title"><a class="project-link" href="./gelslim-mini/">Gelslim Mini</a></h3>
                     <p class="project-description">A compact vision-based tactile sensor with a detachable optical stack, interactive 3D assembly, and downloadable CAD.</p>
                 </div>
             </article>
