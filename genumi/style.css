@@ -68,7 +68,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   border-radius: 1rem;
   background: #fff;
 }
-.preview img { display: block; width: 100%; height: auto; transform: scale(1.35); transform-origin: center 38%; }
+.preview img { display: block; width: 100%; height: auto; }
 .preview figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
 
 .hardware { scroll-margin-top: 1rem; }

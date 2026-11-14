@@ -1,7 +1,8 @@
 import {
   Box3, DirectionalLight, HemisphereLight, MeshStandardMaterial, PerspectiveCamera,
-  Raycaster, Scene, Spherical, Vector2, Vector3, WebGLRenderer, GLTFLoader, OrbitControls,
+  Raycaster, Scene, Vector2, Vector3, WebGLRenderer, GLTFLoader, OrbitControls,
 } from "./vendor/three-cad.js";
+import { bindJointMotion } from "./joint-motion.js";
 
 function collectMeshes(model, modules) {
   const byNodeName = new Map(modules.flatMap((module) => {
@@ -22,8 +23,8 @@ function collectMeshes(model, modules) {
   return meshes;
 }
 
-function getViewBounds(meshes, center, direction) {
-  const right = new Vector3(0, 1, 0).cross(direction).normalize();
+function getViewBounds(meshes, center, direction, cameraUp) {
+  const right = cameraUp.clone().cross(direction).normalize();
   const up = direction.clone().cross(right);
   const point = new Vector3();
   const projection = new Vector3();
@@ -40,7 +41,8 @@ function getViewBounds(meshes, center, direction) {
   return bounds;
 }
 
-export async function createAssemblyViewer({ container, modelUrl, name, modules, onSelect, onContextLost }) {
+export async function createAssemblyViewer({ container, modelUrl, accessoriesUrl, motion, cameraPose, name, modules,
+  onSelect, onContextLost, onMotionChange }) {
   const renderer = new WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   const canvas = renderer.domElement;
@@ -50,6 +52,7 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(36);
+  if (cameraPose?.up) camera.up.set(...cameraPose.up).normalize();
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = false;
   controls.screenSpacePanning = true;
@@ -61,6 +64,9 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
 
   let model;
   let meshes;
+  let jointMotion;
+  let angle = motion?.defaultAngle ?? 0;
+  let jointDriveEnabled = true;
   const bounds = new Box3();
   let resizeObserver;
   const selectionMaterial = new MeshStandardMaterial({ color: 0xdd973c, roughness: .68 });
@@ -96,9 +102,15 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
   try {
     const loader = new GLTFLoader();
     ({ scene: model } = await loader.loadAsync(modelUrl));
+    if (accessoriesUrl) {
+      const accessories = await loader.loadAsync(accessoriesUrl);
+      model.add(accessories.scene);
+    }
     scene.add(model);
     model.updateMatrixWorld(true);
     meshes = collectMeshes(model, modules);
+    jointMotion = bindJointMotion(model, motion);
+    jointMotion?.setAngle(angle);
     for (const { object, visible } of meshes) {
       if (visible) bounds.union(new Box3().setFromObject(object));
     }
@@ -110,8 +122,8 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
 
   const center = bounds.getCenter(new Vector3());
   const radius = Math.max(bounds.getSize(new Vector3()).length() / 2, 0.000001);
-  const viewDirection = new Vector3(1, .68, 1.25).normalize();
-  const viewBounds = getViewBounds(meshes, center, viewDirection);
+  const viewDirection = new Vector3(...(cameraPose?.direction ?? [1, .68, 1.25])).normalize();
+  const viewBounds = getViewBounds(meshes, center, viewDirection, camera.up);
   const halfWidth = Math.max(Math.abs(viewBounds.min.x), Math.abs(viewBounds.max.x));
   const halfHeight = Math.max(Math.abs(viewBounds.min.y), Math.abs(viewBounds.max.y));
   key.position.copy(center).addScaledVector(new Vector3(2, 4, 3), radius);
@@ -158,6 +170,30 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
   const meshModules = new Map(meshes.map(({ object, module }) => [object, module]));
   const meshObjects = meshes.map(({ object }) => object);
   let press = null;
+  let jointDrag = null;
+
+  function setJointAngle(degrees) {
+    if (!jointMotion) return;
+    const value = Math.max(motion.min, Math.min(motion.max, degrees));
+    if (jointMotion.setAngle(value)) {
+      angle = value;
+      draw();
+    }
+    return angle;
+  }
+
+  function hitAt(x, y) {
+    const { left, top, width, height } = canvas.getBoundingClientRect();
+    pointer.set((x - left) / width * 2 - 1, 1 - (y - top) / height * 2);
+    ray.setFromCamera(pointer, camera);
+    return ray.intersectObjects(meshObjects.filter((mesh) => mesh.visible), false)[0];
+  }
+
+  function endJointDrag() {
+    jointDrag = null;
+    controls.enabled = true;
+    canvas.classList.remove("driving-joint");
+  }
 
   canvas.addEventListener("pointerdown", (event) => {
     if (event.isPrimary && event.button === 0) {
@@ -165,38 +201,65 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
     } else {
       press = null;
     }
-  });
+    if (!jointDriveEnabled || !jointMotion || !event.isPrimary || event.button !== 0) return;
+    const hit = hitAt(event.clientX, event.clientY);
+    const target = jointMotion.dragTarget(hit?.object);
+    if (!target) return;
+    const offset = hit.point.clone().sub(target.pivot);
+    const rotated = hit.point.clone().addScaledVector(
+      new Vector3().crossVectors(jointMotion.axis, offset), target.ratio * Math.PI / 180,
+    );
+    const projected = hit.point.clone().project(camera);
+    rotated.project(camera).sub(projected);
+    const { width, height } = canvas.getBoundingClientRect();
+    const delta = new Vector2(rotated.x * width / 2, -rotated.y * height / 2);
+    if (delta.lengthSq() < 0.015) delta.set(target.ratio > 0 ? 1 : -1, 0);
+    jointDrag = { ...press, angle, delta, hit };
+    controls.enabled = false;
+    canvas.setPointerCapture(event.pointerId);
+    canvas.classList.add("driving-joint");
+  }, true);
   canvas.addEventListener("pointermove", (event) => {
+    if (jointDrag?.id === event.pointerId) {
+      const movement = new Vector2(event.clientX - jointDrag.x, event.clientY - jointDrag.y);
+      if (movement.lengthSq() < 16 && press) return;
+      press = null;
+      const degrees = movement.dot(jointDrag.delta) / jointDrag.delta.lengthSq();
+      onMotionChange?.(setJointAngle(jointDrag.angle + degrees));
+      return;
+    }
     if (press && Math.hypot(event.clientX - press.x, event.clientY - press.y) > 5) press = null;
   });
-  canvas.addEventListener("pointercancel", () => { press = null; });
+  canvas.addEventListener("pointercancel", () => { press = null; endJointDrag(); });
+  canvas.addEventListener("lostpointercapture", endJointDrag);
   canvas.addEventListener("pointerup", (event) => {
+    const hit = jointDrag?.hit;
+    if (jointDrag?.id === event.pointerId) endJointDrag();
     if (press?.id !== event.pointerId) return;
     press = null;
-    const { left, top, width, height } = canvas.getBoundingClientRect();
-    pointer.set((event.clientX - left) / width * 2 - 1, 1 - (event.clientY - top) / height * 2);
-    ray.setFromCamera(pointer, camera);
-    const hit = ray.intersectObjects(meshObjects.filter((mesh) => mesh.visible), false)[0];
-    const module = meshModules.get(hit?.object);
+    const module = meshModules.get((hit ?? hitAt(event.clientX, event.clientY))?.object);
     if (module) onSelect(module);
   });
 
   canvas.addEventListener("keydown", (event) => {
     const offset = camera.position.clone().sub(controls.target);
-    const spherical = new Spherical().setFromVector3(offset);
     const step = Math.PI / 24;
+    const tilt = new Vector3().crossVectors(camera.up, offset).normalize();
     switch (event.key) {
-      case "ArrowLeft": spherical.theta += step; break;
-      case "ArrowRight": spherical.theta -= step; break;
-      case "ArrowUp": spherical.phi += step; break;
-      case "ArrowDown": spherical.phi -= step; break;
+      case "ArrowLeft": offset.applyAxisAngle(camera.up, step); break;
+      case "ArrowRight": offset.applyAxisAngle(camera.up, -step); break;
+      case "ArrowUp":
+      case "ArrowDown": {
+        const next = offset.clone().applyAxisAngle(tilt, event.key === "ArrowUp" ? step : -step);
+        if (Math.abs(next.clone().normalize().dot(camera.up)) < .995) offset.copy(next);
+        break;
+      }
       case "+":
-      case "=": spherical.radius *= .85; break;
-      case "-": spherical.radius /= .85; break;
+      case "=": offset.multiplyScalar(.85); break;
+      case "-": offset.divideScalar(.85); break;
       default: return;
     }
     event.preventDefault();
-    offset.setFromSpherical(spherical.makeSafe());
     camera.position.copy(controls.target).add(offset);
     controls.update();
   });
@@ -213,6 +276,11 @@ export async function createAssemblyViewer({ container, modelUrl, name, modules,
     select,
     reset,
     hasModule: (id) => meshes.some((mesh) => mesh.module?.id === id),
+    setJointAngle: jointMotion ? setJointAngle : null,
+    setJointDriveEnabled: jointMotion ? (enabled) => {
+      jointDriveEnabled = enabled;
+      if (!enabled) endJointDrag();
+    } : null,
     dispose: release,
   };
 }

@@ -4,9 +4,9 @@
       "id": "flexiv",
       "name": "Flexiv Grav GN-01",
       "model": "models/flexiv.glb",
-      "preview": "assets/flexiv-assembly.png",
+      "preview": "assets/flexiv-assembly-clean.webp",
       "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-pivot-fasteners.step",
-      "note": "The assembly includes the quick-release spacer and 8 shoulder-screw pivot sets. Clearance was checked in the saved pose. The right inner pivot uses a custom stepped shoulder screw and reducer bushing.",
+      "note": "The Insta360 X5 and VIVE Ultimate Tracker are shown at their mounting points. The STEP library contains the GenUMI hardware, including the camera and tracker mounts.",
       "modules": [
         {
           "id": "handheld-housing",
@@ -49,7 +49,11 @@
           "id": "fingertip-carrier",
           "name": "Fingertip Carrier",
           "description": "Two instances of this SolidWorks part are used in the assembly.",
-          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step"
+          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step",
+          "nodes": [
+            "left-carrier",
+            "right-carrier"
+          ]
         },
         {
           "id": "left-fingertip-pad",
@@ -114,6 +118,21 @@
           "name": "P08 \u00b7 Right outer fingertip pivot",
           "description": "\u00d84 mm \u00d7 30 mm shoulder with M3 locknut and 4.3mm spacer. Nominal axial endplay is 0.20 mm.",
           "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+        },
+        {
+          "id": "insta360-camera",
+          "name": "Insta360 X5",
+          "description": "Simplified external model, positioned on the camera quick-release mount."
+        },
+        {
+          "id": "insta360-quick-release",
+          "name": "Insta360 Magnetic Quick Release Mount",
+          "description": "Simplified purchased mount fitted between the X5 and the GenUMI spacer."
+        },
+        {
+          "id": "vive-ultimate-tracker",
+          "name": "HTC VIVE Ultimate Tracker",
+          "description": "Simplified external model in the recorded SolidWorks mounting pose."
         }
       ],
       "downloads": [
@@ -322,7 +341,109 @@
           "kind": "Part",
           "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
         }
-      ]
+      ],
+      "accessories": "models/flexiv-accessories.glb",
+      "camera": {
+        "direction": [
+          1.2,
+          1,
+          -0.36
+        ],
+        "up": [
+          0,
+          0.65,
+          -1
+        ]
+      },
+      "motion": {
+        "label": "Closing angle",
+        "min": 0,
+        "max": 12,
+        "step": 0.1,
+        "defaultAngle": 0,
+        "axis": [
+          0,
+          0.2588190451,
+          -0.9659258263
+        ],
+        "note": "The four-bar linkages follow their measured pivot axes. Gear tooth contact and physical travel limits are outside this preview.",
+        "linkages": [
+          {
+            "pivots": [
+              [
+                -0.01345824031,
+                -0.01198667286,
+                -0.00321181931
+              ],
+              [
+                0.00239175969,
+                -0.02851366375,
+                -0.00764021318
+              ],
+              [
+                -0.04702357118,
+                -0.05767576662,
+                -0.01545417509
+              ],
+              [
+                -0.03115806299,
+                -0.07421338367,
+                -0.01988541622
+              ]
+            ],
+            "ratio": -1,
+            "driven": [
+              "left-drive"
+            ],
+            "follower": [
+              "left-inner-link"
+            ],
+            "carrier": [
+              "left-carrier",
+              "right-fingertip-pad",
+              "pivot-p05",
+              "pivot-p06"
+            ]
+          },
+          {
+            "pivots": [
+              [
+                0.05104175969,
+                -0.01198667286,
+                -0.00321181931
+              ],
+              [
+                0.03519175969,
+                -0.02851366375,
+                -0.00764021318
+              ],
+              [
+                0.0892574067,
+                -0.05412987745,
+                -0.01450405695
+              ],
+              [
+                0.07339332913,
+                -0.07066877493,
+                -0.01893564117
+              ]
+            ],
+            "ratio": 1.03125,
+            "driven": [
+              "right-drive"
+            ],
+            "follower": [
+              "right-inner-link"
+            ],
+            "carrier": [
+              "right-carrier",
+              "left-fingertip-pad",
+              "pivot-p08",
+              "pivot-p07"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "robotiq",
@@ -331,7 +452,7 @@
       "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-with-pivots.step",
       "assemblyDownloadName": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
       "assemblyDownloadLabel": "Download GenUMI hardware STEP",
-      "note": "The GenUMI body, connectors and four chassis pivot fastener sets are shown. The finger geometry and Toolbox gear are supplied separately. Fit was checked in the saved pose.",
+      "note": "Both jaws appear as simplified models aligned to the reconstructed GenUMI assembly. The public STEP contains the GenUMI chassis, connectors and four chassis pivot sets.",
       "modules": [
         {
           "id": "handheld-body",
@@ -371,6 +492,56 @@
           "name": "Right Outer Chassis Pivot Fasteners",
           "description": "Socket shoulder screw and shim with a retaining nut.",
           "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
+        },
+        {
+          "id": "left-proximal",
+          "name": "Left Proximal Finger Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "left-frame",
+          "name": "Left Finger Frame Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "left-bar",
+          "name": "Left Finger Link Bar",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "left-distal",
+          "name": "Left Distal Finger Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "left-pad",
+          "name": "Left Fingertip Pad",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "right-proximal",
+          "name": "Right Proximal Finger Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "right-frame",
+          "name": "Right Finger Frame Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "right-bar",
+          "name": "Right Finger Link Bar",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "right-distal",
+          "name": "Right Distal Finger Link",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
+        },
+        {
+          "id": "right-pad",
+          "name": "Right Fingertip Pad",
+          "description": "Simplified preview fitted to the reconstructed pivot locations."
         }
       ],
       "downloads": [
@@ -439,7 +610,97 @@
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x3p2.step"
         }
-      ]
+      ],
+      "accessories": "models/robotiq-jaws.glb",
+      "motion": {
+        "label": "Closing angle",
+        "min": 0,
+        "max": 18,
+        "step": 0.1,
+        "defaultAngle": 0,
+        "axis": [
+          0,
+          0.2588190451,
+          -0.9659258263
+        ],
+        "note": "This preview uses a four-bar approximation of the saved linkage pose. It omits internal spring motion, gear contact, and physical travel limits.",
+        "linkages": [
+          {
+            "pivots": [
+              [
+                -0.05404939622,
+                -0.00818012428,
+                -0.0021918577
+              ],
+              [
+                -0.03614905568,
+                -0.0018822879,
+                -0.00050435752
+              ],
+              [
+                -0.01674505568,
+                -0.05000084886,
+                -0.01339768707
+              ],
+              [
+                0.00115594432,
+                -0.0437078421,
+                -0.01171148099
+              ]
+            ],
+            "ratio": 1,
+            "driven": [
+              "left-proximal",
+              "left-connector"
+            ],
+            "follower": [
+              "left-frame",
+              "left-bar"
+            ],
+            "carrier": [
+              "left-distal",
+              "left-pad"
+            ]
+          },
+          {
+            "pivots": [
+              [
+                -0.07944939622,
+                -0.00818012428,
+                -0.0021918577
+              ],
+              [
+                -0.09734905568,
+                -0.0018822879,
+                -0.00050435752
+              ],
+              [
+                -0.11675405568,
+                -0.05000084886,
+                -0.01339768707
+              ],
+              [
+                -0.13465505568,
+                -0.0437078421,
+                -0.01171148099
+              ]
+            ],
+            "ratio": -1,
+            "driven": [
+              "right-proximal",
+              "right-connector"
+            ],
+            "follower": [
+              "right-frame",
+              "right-bar"
+            ],
+            "carrier": [
+              "right-distal",
+              "right-pad"
+            ]
+          }
+        ]
+      }
     }
   ]
 }
