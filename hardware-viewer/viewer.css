@@ -58,10 +58,6 @@
 .cad-context { white-space: nowrap; margin-left: .25rem; }
 .cad-readout { min-height: 2rem; margin: .7rem 0 .5rem; overflow-wrap: anywhere; }
 .cad-readout span { margin-left: .5rem; color: var(--secondary-text); }
-.cad-tracker { margin-top: .75rem; }
-.cad-tracker summary { font-weight: 600; cursor: pointer; }
-.cad-tracker p { margin: .45rem 0; }
-.cad-tracker input { max-width: 100%; }
 .cad-downloads { margin: 0 0 1.5rem; }
 .cad-downloads h3 { margin-bottom: .55rem; }
 .cad-downloads ul { display: flex; flex-wrap: wrap; column-gap: 1.35rem; row-gap: .3rem; padding: 0; margin: 0 0 .8rem; list-style: none; }

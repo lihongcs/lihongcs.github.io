@@ -9,7 +9,7 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=mounted-sensors');
+    const { mountViewer } = await import('./viewer.mjs?v=black-frame-factory-tracker');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     trigger.hidden = true;
