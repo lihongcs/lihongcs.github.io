@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GenUMI · Hong Li</title>
-  <meta name="description" content="GenUMI is an Insta360-based handheld UMI hardware project with gripper designs for the Flexiv Grav GN-01 and Robotiq 2F-85.">
+  <meta name="description" content="GenUMI pairs handheld grippers with Insta360 and VIVE to collect manipulation demonstrations and export LeRobot datasets.">
   <link rel="canonical" href="https://lihongcs.github.io/genumi/">
-  <meta property="og:title" content="GenUMI · Handheld UMI hardware">
+  <meta property="og:title" content="GenUMI · Handheld manipulation capture">
   <meta property="og:image" content="https://lihongcs.github.io/genumi/assets/flexiv-assembly-clean.webp">
   <meta name="theme-color" content="#F4EFE6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,9 @@
     <a href="../#projects"><span aria-hidden="true">←</span> Hong Li</a>
     <nav aria-label="GenUMI navigation">
       <a href="viewer.html">3D viewer</a>
-      <a href="#hardware">Hardware downloads</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#software">Software</a>
+      <a href="#capture">Capture guide</a>
       <a href="steps.html">STEP library</a>
     </nav>
   </header>
@@ -27,7 +29,11 @@
     <section class="intro" aria-labelledby="title">
       <h1 id="title">GenUMI</h1>
       <p class="subtitle">Handheld UMI for two robot grippers</p>
-      <p class="lede">GenUMI uses an Insta360 camera to capture manipulation demonstrations with a handheld gripper. Its two mechanical designs aim to reproduce the geometry and motion of the Flexiv Grav GN-01 and the Robotiq 2F-85, respectively.</p>
+      <p class="lede">GenUMI uses an Insta360 camera to capture manipulation demonstrations with a handheld gripper. Choose a Flexiv Grav GN-01 or Robotiq 2F-85 design, then use the capture and processing tools to turn your recordings into training episodes.</p>
+      <div class="intro-actions">
+        <a class="download" href="#software">Get the software</a>
+        <a class="download secondary" href="#hardware">Explore the hardware</a>
+      </div>
     </section>
 
     <section class="hardware" id="hardware" aria-labelledby="hardware-title">
@@ -83,6 +89,150 @@
       </div>
       <p class="release-note">The GenUMI designs use the BSD 3-Clause license. The SolidWorks archives preserve the native designs. The STEP packages include the revised assemblies and separate hardware parts. Third-party reference geometry follows its upstream terms.</p>
       <p class="release-note">The camera display uses the supplied X5 scan calibrated to the published dimensions. The magnetic quick release is shown as a dimensional envelope. <a href="https://onlinemanual.insta360.com/x5/en-us/specs/hardware">Insta360 X5 specifications</a></p>
+    </section>
+
+    <section class="software" id="software" aria-labelledby="software-title">
+      <div class="section-heading">
+        <h2 id="software-title">Software and workflow</h2>
+        <p>Record demonstrations on Ubuntu, align the camera and tracker streams, and export episodes for training.</p>
+      </div>
+
+      <div class="software-grid">
+        <article class="software-card">
+          <p class="platform">Ubuntu</p>
+          <h3>Capture and post-processing</h3>
+          <p>InstaDataCap, the VIVE tracker adapter, and the staged bimanual LeRobot pipeline.</p>
+          <a class="download" href="downloads/genumi-ubuntu-source.zip" download>Download Ubuntu source</a>
+        </article>
+        <article class="software-card">
+          <p class="platform">iOS · Xcode</p>
+          <h3>Insta360 companion app</h3>
+          <p>Control X5 cameras, download footage, and export timestamp and gyro sidecars. Building requires the camera SDK frameworks and Xcode signing.</p>
+          <a class="download secondary" href="downloads/genumi-ios-source.zip" download>Download iOS source</a>
+        </article>
+      </div>
+
+      <nav class="workflow" aria-label="Software workflow">
+        <a href="#setup"><span>Set up</span><small>Install and configure</small></a>
+        <a href="#capture"><span>Collect data</span><small>Record and mark episodes</small></a>
+        <a href="#processing"><span>Post-process</span><small>Align, export, and validate</small></a>
+      </nav>
+
+      <article class="guide" id="setup" aria-labelledby="setup-title">
+        <div class="guide-heading">
+          <h3 id="setup-title">Set up InstaDataCap</h3>
+          <p>Start with Ubuntu 24.04. For the X5 workflow, mount each camera and VIVE Ultimate Tracker rigidly on its gripper and pair each tracker with its dongle.</p>
+        </div>
+        <div class="guide-content">
+          <details open>
+            <summary>Open the capture interface</summary>
+            <p>Extract the Ubuntu archive and run this from its root. The dry run writes a simulated session so you can practice recording and marking episodes.</p>
+            <pre tabindex="0"><code>python3 -m datacap.webapp --dry-run --host 127.0.0.1 --port 8788</code></pre>
+            <p>Open <a href="http://127.0.0.1:8788/">http://127.0.0.1:8788/</a> on the capture computer.</p>
+          </details>
+          <details>
+            <summary>Connect real cameras and trackers</summary>
+            <pre tabindex="0"><code>sudo apt install bluez python3-dbus python3-gi python3-venv \
+  libhidapi-hidraw0 libhidapi-libusb0 ffmpeg
+python3 -m venv datacap/.venv
+source datacap/.venv/bin/activate
+pip install -e ./pyvut
+bash datacap/tools/install_hardware_access.sh
+cp datacap/config.example.json datacap/config.json</code></pre>
+            <p>Set the capture directory, camera roles and tracker roles in <code>datacap/config.json</code>. Follow the archive guide for tracker pairing, mapping and local Wi-Fi settings. Use <code>Bluetooth Control</code> for X5. Set <code>insta.name_prefixes</code> to <code>["X5 "]</code> or enter your own camera BLE addresses. For the X3 USB Webcam route, start from <code>datacap/config.usb_webcam.example.json</code>.</p>
+            <pre tabindex="0"><code>python3 -m datacap.webapp --config datacap/config.json --host 127.0.0.1</code></pre>
+          </details>
+          <details>
+            <summary>Build and use the iOS app</summary>
+            <p>Open <code>instaumi/instaumi.xcodeproj</code> in Xcode. Follow the archive README to install the SDK frameworks under <code>instaumi/Frameworks/</code>, select your development team, then run on an iPhone or iPad.</p>
+            <p>Tap <strong>Scan BLE</strong> and select one X5 or tap <strong>Connect X5s</strong>. For multiple cameras, use <strong>Sync Multi</strong> before recording. After recording, connect to the camera for transfer, tap <strong>Download Latest</strong>, then <strong>Parse Sidecars</strong>. The Ubuntu workflow below uses DataCap session events and tracker logs for camera-to-tracker synchronization.</p>
+          </details>
+        </div>
+      </article>
+
+      <article class="guide" id="capture" aria-labelledby="capture-title">
+        <div class="guide-heading">
+          <h3 id="capture-title">Collect a session</h3>
+          <p>Use one continuous capture for the session. Mark the beginning and end of each demonstration as an episode.</p>
+        </div>
+        <div class="guide-content">
+          <ol class="capture-list">
+            <li><strong>Check device roles.</strong> Choose <em>Dual arm · 2 Trackers</em> or <em>Single arm · Right side</em>, set the task and destination, connect the cameras, and verify live tracker poses on the correct sides.</li>
+            <li><strong>Start capture and record a sync motion.</strong> For X5 with HTC, rotate each rigid camera–tracker assembly on several axes for 5–10 seconds with irregular motion. Repeat every 10–15 minutes and before ending capture.</li>
+            <li><strong>Mark episodes.</strong> Use <em>Start episode</em> and <em>End episode</em> for each demonstration. Finish with <em>End capture</em> to close out the session.</li>
+            <li><strong>Bring the original X5 media into the session.</strong> Keep all INSV chapters and sidecars with the correct camera role. Keep the transfer manifest, tracker CSVs and timestamp log with the session.</li>
+          </ol>
+          <details>
+            <summary>Bimanual X5 session layout</summary>
+            <pre tabindex="0"><code>capture/
+├── manifest.json
+├── timestamp_log.jsonl
+├── htc_left.csv
+├── htc_right.csv
+└── insta/
+    ├── transfer_manifest.json
+    ├── insta_left/       # original .insv chapters and sidecars
+    └── insta_right/      # original .insv chapters and sidecars</code></pre>
+          </details>
+        </div>
+      </article>
+
+      <article class="guide" id="processing" aria-labelledby="processing-title">
+        <div class="guide-heading">
+          <h3 id="processing-title">Post-process and validate</h3>
+          <p>The commands below are for a bimanual Insta360 X5 + HTC session. They use the X5 gyroscope and tracker angular velocity to align the capture, then estimate gripper opening and export LeRobot v2.1 episodes.</p>
+        </div>
+        <div class="guide-content">
+          <details open>
+            <summary>Prepare the session and dependencies</summary>
+            <p>On Ubuntu, install FFmpeg with <code>v360</code>, the Python dependencies listed in the archive, and an Insta360 Linux MediaSDK from the vendor. For the direct-image path, verify <code>v360</code> is also available in PyAV, and use a compatible NVIDIA GPU and driver for SDK decoding.</p>
+            <pre tabindex="0"><code>python3 -m venv .venv-processing
+source .venv-processing/bin/activate
+python -m pip install -r dataprocess/requirements.txt
+export PYTHON="$(command -v python)"
+cd dataprocess
+export INPUT_DIR=/absolute/path/to/capture
+MEDIASDK_ROOT=/path/to/MediaSDK \
+  bash _01_raw_extrect/insta360_pano_export/scripts/build_ubuntu.sh
+"$PYTHON" inspect_capture_session.py "$INPUT_DIR" --require-media</code></pre>
+          </details>
+          <details>
+            <summary>Run the full bimanual pipeline</summary>
+            <p>From the Ubuntu archive root, run this after installing the dependencies and building the SDK helper. The launcher runs extraction, gripper estimation, LeRobot export and the sync audit.</p>
+            <pre tabindex="0"><code>bash dataprocess/run_bimanual_htc.sh \
+  /absolute/path/to/capture 'Pick up the block.'</code></pre>
+            <p>The next three sections show the equivalent individual stages.</p>
+          </details>
+          <details>
+            <summary>Extract and align camera and tracker streams</summary>
+            <pre tabindex="0"><code>DIRECT_IMAGE_MODE=1 MATERIALIZE_FRONT_VIDEO=0 \
+CALIBRATE_CLOCK=auto CLOCK_CALIBRATION_REQUIRED=1 \
+  bash _01_raw_extrect/run_01_raw_extract_biarm.sh</code></pre>
+            <p>Review the clock calibration report for both sides before continuing. Fix missing media, swapped roles, or insufficient sync motion before exporting.</p>
+          </details>
+          <details>
+            <summary>Estimate gripper opening</summary>
+            <p>Use the gripper calibration for your physical setup. Set <code>LEFT_GRIPPER_CALIBRATION_JSON</code> and <code>RIGHT_GRIPPER_CALIBRATION_JSON</code> when using your own calibration files.</p>
+            <pre tabindex="0"><code>RAW_INSV_INPUT=1 ACTIVE_SEGMENTS=1 ADAPTIVE_CPU_LIMIT=0 \
+  bash _03_gripper_estimation/run_03_gripper_estimation_biarm.sh</code></pre>
+          </details>
+          <details>
+            <summary>Export and audit the LeRobot dataset</summary>
+            <pre tabindex="0"><code>DIRECT_OPENPI_IMAGES=1 DIRECT_IMAGE_FRONT_CACHE=off \
+TASK_PROMPT='Pick up the block.' \
+  bash _05_convert_bimanual_lerobot/run_05_convert_bimanual_lerobot_htc.sh "$INPUT_DIR"
+"$PYTHON" audit_lerobot_sync.py "$INPUT_DIR/lerobot" \
+  --require-embedded-calibration</code></pre>
+            <p>The dataset is written to <code>&lt;capture&gt;/lerobot</code>. Inspect episode boundaries, left/right views, timestamps and gripper motion before using it for training.</p>
+          </details>
+          <details>
+            <summary>Process an X3 USB Webcam capture</summary>
+            <p>Stage 01 detects the USB completion manifest and uses host timestamps for 30 Hz alignment. The INSV gyro alignment and the bimanual export instructions above are specific to the X5 workflow.</p>
+            <pre tabindex="0"><code>INPUT_DIR=/absolute/path/to/usb-capture \
+  bash _01_raw_extrect/run_01_raw_extract_biarm.sh</code></pre>
+          </details>
+        </div>
+      </article>
     </section>
 
     <footer class="references">
