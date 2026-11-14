@@ -505,11 +505,11 @@
     {
       "id": "robotiq",
       "name": "Robotiq 2F-85",
-      "model": "models/robotiq-assembled-low-profile.glb",
+      "model": "models/robotiq-assembled-trimmed-links.glb",
       "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step",
       "assemblyDownloadName": "Robotiq 2F-85 · Complete Mounted Assembly",
       "assemblyDownloadLabel": "Download assembled STEP",
-      "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw components. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
+      "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw layout and ring-free finger link bars. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
       "modules": [
         {
           "id": "handheld-body",
@@ -537,8 +537,8 @@
         {
           "id": "left-bar",
           "name": "Left Finger Link Bar",
-          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/finger-link-bar.step"
+          "description": "Ring-free link bar matching the supplied STL outline, with the existing pivot centers and 4.2 mm shoulder screw bores.",
+          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
         },
         {
           "id": "left-distal",
@@ -573,8 +573,8 @@
         {
           "id": "right-bar",
           "name": "Right Finger Link Bar",
-          "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/finger-link-bar.step"
+          "description": "Ring-free link bar matching the supplied STL outline, with the existing pivot centers and 4.2 mm shoulder screw bores.",
+          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
         },
         {
           "id": "right-distal",
@@ -747,11 +747,6 @@
           "step": "hardware/steps/robotiq/finger-frame-link.step"
         },
         {
-          "name": "Finger Link Bar",
-          "kind": "Part",
-          "step": "hardware/steps/robotiq/finger-link-bar.step"
-        },
-        {
           "name": "Distal Finger Link",
           "kind": "Part",
           "step": "hardware/steps/robotiq/distal-finger-link.step"
@@ -835,6 +830,21 @@
           "name": "Shoulder Spacer 6p2x10x0p5",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x0p5.step"
+        },
+        {
+          "name": "Ring-Free Finger Link Bar",
+          "kind": "Part",
+          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
+        },
+        {
+          "name": "M3 Washer 3P2X6X0P2",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-washer-3p2x6x0p2.step"
+        },
+        {
+          "name": "M3 Head Shim 4P2X5P4X0P2",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-head-shim-4p2x5p4x0p2.step"
         }
       ],
       "accessories": "models/robotiq-mounted-accessories.glb",
