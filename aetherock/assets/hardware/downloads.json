@@ -45,18 +45,6 @@
       "href": "parts/frame-side-rail.step"
     },
     {
-      "label": "FSR PCB Insulating Spacer",
-      "href": "parts/fsr-pcb-insulating-spacer.step"
-    },
-    {
-      "label": "FSR PCB Mount Screw M2 x 12",
-      "href": "parts/fsr-pcb-mount-screw-m2-x-12.step"
-    },
-    {
-      "label": "FSR PCB Outer Retaining Nut M2",
-      "href": "parts/fsr-pcb-outer-retaining-nut-m2.step"
-    },
-    {
       "label": "FSR Silver Contact Film Left",
       "href": "parts/fsr-silver-contact-film-left.step"
     },
@@ -91,6 +79,10 @@
     {
       "label": "Left Outer Link",
       "href": "parts/left-outer-link.step"
+    },
+    {
+      "label": "Lower FSR PCB Mount Screw M2.5 x 14",
+      "href": "parts/lower-fsr-pcb-mount-screw-m2p5-x-14.step"
     },
     {
       "label": "Opposite Frame Mounted FSR Amplifier PCB",
