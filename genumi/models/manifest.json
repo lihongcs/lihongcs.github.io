@@ -3,10 +3,10 @@
     {
       "id": "flexiv",
       "name": "Flexiv Grav GN-01",
-      "model": "models/flexiv-assembled.glb",
+      "model": "models/flexiv-assembled-low-profile.glb",
       "preview": "assets/flexiv-assembly-clean.webp",
       "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-mounted-accessories.step",
-      "note": "The supplied HTC tracker is seated on its original bracket. The X5 scan is scaled to its published dimensions. The eight pivot screws enter from the top, with flush 90° heads and locknuts underneath.",
+      "note": "The supplied HTC tracker is seated on its original bracket. The X5 scan is scaled to its published dimensions. All eight countersunk screws are flush at the top and finish at the underside of the locknuts.",
       "modules": [
         {
           "id": "handheld-housing",
@@ -74,50 +74,50 @@
         {
           "id": "pivot-p01",
           "name": "P01 · Left outer chassis pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
         },
         {
           "id": "pivot-p02",
           "name": "P02 · Left inner chassis pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
         },
         {
           "id": "pivot-p03",
           "name": "P03 · Right inner chassis pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The bearing shoulder steps down from Ø6 mm to Ø5.45 mm.",
-          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.step"
         },
         {
           "id": "pivot-p04",
           "name": "P04 · Right outer chassis pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
         },
         {
           "id": "pivot-p05",
           "name": "P05 · Left outer fingertip pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
         },
         {
           "id": "pivot-p06",
           "name": "P06 · Left inner fingertip pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
         },
         {
           "id": "pivot-p07",
           "name": "P07 · Right inner fingertip pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
         },
         {
           "id": "pivot-p08",
           "name": "P08 · Right outer fingertip pivot",
-          "description": "Flush top-entry 90° shoulder screw, bottom locknut, and 0.20 mm nominal axial endplay. The conical seat fits the original cylindrical counterbore.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
+          "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
         },
         {
           "id": "insta360-camera",
@@ -322,26 +322,6 @@
           "step": "hardware/steps/flexiv/countersunk-seat-d8-2.75mm.step"
         },
         {
-          "name": "Countersunk Shoulder Screw D4 L25 M3",
-          "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l25-m3.step"
-        },
-        {
-          "name": "Countersunk Shoulder Screw D4 L30 M3",
-          "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l30-m3.step"
-        },
-        {
-          "name": "Countersunk Shoulder Screw D6 L50 M5",
-          "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l50-m5.step"
-        },
-        {
-          "name": "Countersunk Stepped Shoulder Screw D6 D5p45 L50 M5",
-          "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l50-m5.step"
-        },
-        {
           "name": "Handheld Body Integrated Part Quick Release Countersunk",
           "kind": "Part",
           "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release-countersunk.step"
@@ -380,6 +360,41 @@
           "name": "Shoulder Spacer D6 8.3mm",
           "kind": "Fastener",
           "step": "hardware/steps/flexiv/shoulder-spacer-d6-8.3mm.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D6 L42p2 M5",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
+        },
+        {
+          "name": "Shoulder Spacer D6 0.5mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d6-0.5mm.step"
+        },
+        {
+          "name": "Countersunk Stepped Shoulder Screw D6 D5p45 L42p2 M5",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.step"
+        },
+        {
+          "name": "Shoulder Spacer D5p45 0.5mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d5p45-0.5mm.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D4 L26p2 M3",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
+        },
+        {
+          "name": "Shoulder Spacer D4 0.5mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d4-0.5mm.step"
+        },
+        {
+          "name": "Countersunk Shoulder Screw D4 L24p2 M3",
+          "kind": "Fastener",
+          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
         }
       ],
       "accessories": "models/flexiv-mounted-accessories.glb",
@@ -398,15 +413,15 @@
       "motion": {
         "label": "Closing angle",
         "min": 0,
-        "max": 12,
-        "step": 0.1,
+        "max": 43.94,
+        "step": 0.01,
         "defaultAngle": 0,
         "axis": [
           0,
           0.2588190451,
           -0.9659258263
         ],
-        "note": "Four-bar motion follows the measured pivot axes. The source CAD contains contacts and overlaps across the animated range. The slider is a kinematic illustration.",
+        "note": "The slider runs from the saved open pose to fingertip contact. Four-bar motion illustrates the linkage. Physical travel and clearance require separate checks.",
         "linkages": [
           {
             "pivots": [
@@ -490,11 +505,11 @@
     {
       "id": "robotiq",
       "name": "Robotiq 2F-85",
-      "model": "models/robotiq-assembled.glb",
+      "model": "models/robotiq-assembled-low-profile.glb",
       "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step",
       "assemblyDownloadName": "Robotiq 2F-85 · Complete Mounted Assembly",
       "assemblyDownloadLabel": "Download assembled STEP",
-      "note": "The viewer shows the original jaw components in the reconstructed Robotiq assembly, with the supplied X5 and VIVE Ultimate Tracker geometry. The complete STEP includes the camera, tracker and reconstructed jaw linkage. 6 pivot screws have flush top-entry heads. Both frame-to-bar and both outer distal pivots retain their previous hardware.",
+      "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw components. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
       "modules": [
         {
           "id": "handheld-body",
@@ -576,58 +591,62 @@
         {
           "id": "left-inner-chassis-pivot",
           "name": "Left Inner Chassis Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
         },
         {
           "id": "left-outer-chassis-pivot",
           "name": "Left Outer Chassis Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
         },
         {
           "id": "left-frame-and-bar-pivot",
           "name": "Left Frame and Bar Pivot Fasteners",
-          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+          "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
         },
         {
           "id": "left-distal-inner-pivot",
           "name": "Left Distal Inner Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
         },
         {
           "id": "left-distal-outer-pivot",
           "name": "Left Distal Outer Pivot Fasteners",
-          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+          "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
         },
         {
           "id": "right-inner-chassis-pivot",
           "name": "Right Inner Chassis Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
         },
         {
           "id": "right-outer-chassis-pivot",
           "name": "Right Outer Chassis Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
         },
         {
           "id": "right-frame-and-bar-pivot",
           "name": "Right Frame and Bar Pivot Fasteners",
-          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+          "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
         },
         {
           "id": "right-distal-inner-pivot",
           "name": "Right Distal Inner Pivot Fasteners",
-          "description": "Flat-head shoulder screw installed from the top, with the retaining nut underneath.",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
+          "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
         },
         {
           "id": "right-distal-outer-pivot",
           "name": "Right Distal Outer Pivot Fasteners",
-          "description": "Pivot shoulder screw and retaining hardware at the measured hinge axis."
+          "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
         },
         {
           "id": "insta360-camera",
@@ -768,21 +787,6 @@
           "step": "hardware/steps/robotiq/handheld-housing-quick-release.step"
         },
         {
-          "name": "M3 Countersunk Collar Shoulder Screw 4x25.3 Head 7mm Collar 2.8mm",
-          "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm.step"
-        },
-        {
-          "name": "M5 Countersunk Collar Shoulder Screw 6x35 Head 10.5mm Collar 4.5mm Neck Relief",
-          "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief.step"
-        },
-        {
-          "name": "M5 Countersunk Shoulder Screw 6x25 Head 10mm",
-          "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm.step"
-        },
-        {
           "name": "M5 Thin Hex Nut",
           "kind": "Fastener",
           "step": "hardware/steps/robotiq/m5-thin-hex-nut.step"
@@ -801,21 +805,51 @@
           "name": "Right Proximal Finger Link With Flush Link Pivots",
           "kind": "Part",
           "step": "hardware/steps/robotiq/right-proximal-finger-link-with-flush-link-pivots.step"
+        },
+        {
+          "name": "M3 Shoulder Screw 4x25 Tip Flush 29p500mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
+        },
+        {
+          "name": "M3 Shoulder Screw 4x25 Tip Flush 29p400mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
+        },
+        {
+          "name": "M5 Countersunk Shoulder Screw 6x25 Head 10mm Tip Flush 25p200mm Compact Shoulder 22p3mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
+        },
+        {
+          "name": "M5 Countersunk Collar Shoulder Screw 6x35 Head 10.5mm Collar 4.5mm Neck Relief Tip Flush 38p200mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
+        },
+        {
+          "name": "M3 Countersunk Collar Shoulder Screw 4x25.3 Head 7mm Collar 2.8mm Tip Flush 29p200mm",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
+        },
+        {
+          "name": "Shoulder Spacer 6p2x10x0p5",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x0p5.step"
         }
       ],
       "accessories": "models/robotiq-mounted-accessories.glb",
       "motion": {
         "label": "Closing angle",
         "min": 0,
-        "max": 18,
-        "step": 0.1,
+        "max": 46.1,
+        "step": 0.01,
         "defaultAngle": 0,
         "axis": [
           0,
           0.2588190451,
           -0.9659258263
         ],
-        "note": "The four-bar preview follows the reconstructed pivot axes. Spring travel, gear contact and physical travel are outside the simulation.",
+        "note": "The slider runs from the saved open pose to fingertip contact. Four-bar motion illustrates the linkage. Physical travel and clearance require separate checks.",
         "linkages": [
           {
             "pivots": [
@@ -902,13 +936,13 @@
       "preview": "assets/robotiq-assembly-clean.webp",
       "camera": {
         "direction": [
-          0.7,
-          0.28,
-          -1.12
+          1.2,
+          1,
+          -0.36
         ],
         "up": [
           0,
-          0.68,
+          0.65,
           -1
         ]
       }
