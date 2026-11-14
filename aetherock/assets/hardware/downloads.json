@@ -25,6 +25,10 @@
       "href": "parts/controller-tray.step"
     },
     {
+      "label": "Flexible Matrix FSR 22 mm",
+      "href": "parts/flexible-matrix-fsr-22-mm.step"
+    },
+    {
       "label": "Force ADC Board-to-Board Header",
       "href": "parts/force-adc-board-to-board-header.step"
     },
@@ -43,14 +47,6 @@
     {
       "label": "Frame Side Rail",
       "href": "parts/frame-side-rail.step"
-    },
-    {
-      "label": "FSR Silver Contact Film Left",
-      "href": "parts/fsr-silver-contact-film-left.step"
-    },
-    {
-      "label": "FSR Silver Contact Film Right",
-      "href": "parts/fsr-silver-contact-film-right.step"
     },
     {
       "label": "Gel Retainer Ring",
