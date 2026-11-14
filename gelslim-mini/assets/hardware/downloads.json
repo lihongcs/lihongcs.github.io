@@ -53,8 +53,8 @@
       "href": "parts/ov5647-fisheye-camera-exterior.step"
     },
     {
-      "label": "OV5647 USB Adapter PCB Fit Reference",
-      "href": "parts/ov5647-usb-adapter-pcb-fit-reference.step"
+      "label": "OV5647 USB Adapter PCB",
+      "href": "parts/ov5647-usb-adapter-pcb.step"
     },
     {
       "label": "PDMS Silicone Contact Pad",

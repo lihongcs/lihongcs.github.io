@@ -122,19 +122,62 @@
         .paper-links a:hover {
             border-color: var(--text-color);
         }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
         .project-entry {
+            min-width: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: #FBF8F3;
+        }
+        .project-link {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
-        }
-        .project-title a {
+            height: 100%;
+            box-sizing: border-box;
+            border-radius: inherit;
             color: inherit;
-            text-decoration-color: var(--border-color);
-            text-underline-offset: 0.25em;
+            text-decoration: none;
         }
-        .project-title a:hover,
-        .project-title a:focus-visible {
-            text-decoration-color: currentColor;
+        .project-link:focus-visible {
+            outline: 2px solid var(--text-color);
+            outline-offset: 3px;
+        }
+        .project-media {
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 11px 11px 0 0;
+            background: #F2EEE7;
+            isolation: isolate;
+        }
+        .project-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .project-image--genumi {
+            mix-blend-mode: multiply;
+        }
+        .project-copy {
+            padding: 1.1rem 1.25rem 1.25rem;
+        }
+        .project-description {
+            margin-top: .45rem;
+        }
+        .project-link:hover .project-title,
+        .project-link:focus-visible .project-title {
+            text-decoration: underline;
+            text-underline-offset: .25em;
+        }
+        @media (max-width: 600px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
         }
         .paper.first-author {
             background-color: #FBF8F3;
@@ -191,15 +234,30 @@
 
     <section id="projects" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
-        <article class="project-entry">
-            <h3 class="project-title"><a href="./genumi/">GenUMI</a></h3>
-            <p class="project-description">Insta360-based handheld Universal Manipulation Interface (UMI) hardware with versions matched to the Flexiv Grav (GN-01) and Robotiq 2F-85 grippers.</p>
-        </article>
-        <article class="project-entry">
-            <h3 class="project-title"><a href="./gelslim-mini/">Tactile Sensor: GelSlim Mini</a></h3>
-            <p class="project-description">A compact vision-based tactile sensor with a detachable optical stack, interactive 3D assembly, and downloadable CAD.</p>
-            <a href="./gelslim-mini/" aria-label="Open the GelSlim Mini assembly"><img src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=contact-stack" alt="GelSlim Mini sensor assembly" width="320" height="211" loading="lazy" style="display:block;width:min(100%,320px);height:auto;border-radius:8px"></a>
-        </article>
+        <div class="project-grid">
+            <article class="project-entry">
+                <a class="project-link" href="./genumi/" aria-labelledby="project-genumi-title">
+                    <div class="project-media">
+                        <img class="project-image project-image--genumi" src="./genumi/assets/flexiv-assembly-clean.webp" alt="GenUMI handheld gripper with an Insta360 camera and a VIVE tracker" width="1280" height="960" loading="lazy">
+                    </div>
+                    <div class="project-copy">
+                        <h3 class="project-title" id="project-genumi-title">GenUMI</h3>
+                        <p class="project-description">Insta360-based handheld Universal Manipulation Interface (UMI) hardware with versions matched to the Flexiv Grav (GN-01) and Robotiq 2F-85 grippers.</p>
+                    </div>
+                </a>
+            </article>
+            <article class="project-entry">
+                <a class="project-link" href="./gelslim-mini/" aria-labelledby="project-gelslim-title">
+                    <div class="project-media">
+                        <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="GelSlim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
+                    </div>
+                    <div class="project-copy">
+                        <h3 class="project-title" id="project-gelslim-title">Tactile Sensor: GelSlim Mini</h3>
+                        <p class="project-description">A compact vision-based tactile sensor with a detachable optical stack, interactive 3D assembly, and downloadable CAD.</p>
+                    </div>
+                </a>
+            </article>
+        </div>
     </section>
 
     <h2>Publications</h2>

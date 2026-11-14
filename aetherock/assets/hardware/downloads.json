@@ -33,12 +33,24 @@
       "href": "parts/forearm-articulation.step"
     },
     {
-      "label": "Forearm Strap",
-      "href": "parts/forearm-strap.step"
+      "label": "Frame Mounted FSR Amplifier PCB",
+      "href": "parts/frame-mounted-fsr-amplifier-pcb.step"
     },
     {
       "label": "Frame Side Rail",
       "href": "parts/frame-side-rail.step"
+    },
+    {
+      "label": "FSR PCB Insulating Spacer",
+      "href": "parts/fsr-pcb-insulating-spacer.step"
+    },
+    {
+      "label": "FSR PCB Mount Screw M2 x 12",
+      "href": "parts/fsr-pcb-mount-screw-m2-x-12.step"
+    },
+    {
+      "label": "FSR PCB Outer Retaining Nut M2",
+      "href": "parts/fsr-pcb-outer-retaining-nut-m2.step"
     },
     {
       "label": "Gel Retainer Ring",
@@ -81,8 +93,16 @@
       "href": "parts/orange-pi-4-pro-custom-gpio-pcb.step"
     },
     {
+      "label": "OV5647 Camera FPC",
+      "href": "parts/ov5647-camera-fpc.step"
+    },
+    {
       "label": "OV5647 Fisheye Camera Exterior",
       "href": "parts/ov5647-fisheye-camera-exterior.step"
+    },
+    {
+      "label": "OV5647 USB Adapter PCB",
+      "href": "parts/ov5647-usb-adapter-pcb.step"
     },
     {
       "label": "Pivot M2p5 Hex Nut",

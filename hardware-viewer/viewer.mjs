@@ -25,6 +25,7 @@ export async function mountViewer(root) {
   scene.background = new Color(0xf2eee7);
 
   const camera = new PerspectiveCamera(38, 1, 0.01, 2000);
+  if (root.dataset.cadView === 'contact') camera.up.set(0, -1, 0);
   const renderer = new WebGLRenderer({ antialias: true });
   renderer.domElement.setAttribute('aria-label', 'Interactive 3D assembly. Use the controls or select a part from the list.');
   renderer.domElement.tabIndex = 0;
@@ -33,10 +34,23 @@ export async function mountViewer(root) {
   renderer.toneMappingExposure = 1.18;
   surface.append(renderer.domElement);
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = false;
-  controls.enablePan = true;
-  controls.addEventListener('change', render);
+  const defaultUp = camera.up.clone();
+  let controls = createOrbitControls();
+
+  function createOrbitControls() {
+    const controller = new OrbitControls(camera, renderer.domElement);
+    controller.enableDamping = false;
+    controller.enablePan = true;
+    controller.addEventListener('change', render);
+    return controller;
+  }
+
+  function setViewUp(up) {
+    if (camera.up.equals(up)) return;
+    controls.dispose();
+    camera.up.copy(up);
+    controls = createOrbitControls();
+  }
   scene.add(new HemisphereLight(0xffffff, 0x80796c, 2.35));
   if (root.dataset.cadView === 'contact') {
     const contactLight = new DirectionalLight(0xe6f1ff, 1.45);
@@ -101,6 +115,10 @@ export async function mountViewer(root) {
   function focus(objects, direction, fit = 1.18) {
     box.makeEmpty();
     for (const object of objects) box.expandByObject(object, true);
+    fitBounds(box, direction, fit);
+  }
+
+  function fitBounds(box, direction, fit = 1.18) {
     if (box.isEmpty()) return;
     const center = box.getCenter(new Vector3());
     radius = Math.max(box.getSize(new Vector3()).length() / 2, 0.001);
@@ -131,6 +149,7 @@ export async function mountViewer(root) {
   }
 
   function viewpoint(key = 'iso') {
+    setViewUp(defaultUp);
     const direction = {
       iso: root.dataset.cadView === 'contact'
         ? new Vector3(1, -1.18, -0.86)
@@ -141,6 +160,29 @@ export async function mountViewer(root) {
     }[key];
     const visible = meshes.filter((mesh) => mesh.visible);
     focus(visible, direction);
+  }
+
+  function gripView() {
+    const triggerBounds = new Box3();
+    for (const group of groups.values()) {
+      if (!/^(Left|Right) Fingertip Support$/.test(group.label)) continue;
+      for (const mesh of group.meshes) triggerBounds.expandByObject(mesh, true);
+    }
+    if (triggerBounds.isEmpty()) return;
+
+    if (contextToggle && !contextToggle.checked) {
+      contextToggle.checked = true;
+      contextToggle.dispatchEvent(new Event('change'));
+    }
+    select('');
+
+    // Center on the operator side of the supports, above the forward sensor faces.
+    const span = triggerBounds.getSize(new Vector3());
+    triggerBounds.max.y = triggerBounds.min.y + span.y * 0.62;
+    triggerBounds.min.y -= span.y * 0.11;
+    triggerBounds.max.z = triggerBounds.min.z + span.z * 0.56;
+    setViewUp(new Vector3(0, 0, -1));
+    fitBounds(triggerBounds, new Vector3(-0.14, -1, 0.10), 1.10);
   }
 
   function select(key) {
@@ -165,6 +207,8 @@ export async function mountViewer(root) {
       applySelection();
       if (solo) focus(selected.filter((mesh) => mesh.visible), camera.position.clone().sub(controls.target));
       else viewpoint();
+    } else if (action === 'grip') {
+      gripView();
     } else if (action === 'focus') {
       focus(selected.filter((mesh) => mesh.visible), camera.position.clone().sub(controls.target));
     } else if (action === 'reset') {
