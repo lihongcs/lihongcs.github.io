@@ -16,9 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="../project-hero.css">
-  <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=gripper-motion">
+  <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=inline-3d">
   <script src="script.js" defer></script>
-  <script type="module" src="../hardware-viewer/start.mjs?v=controller-io"></script>
+  <script type="module" src="../hardware-viewer/start.mjs?v=inline-3d"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -78,10 +78,10 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="cad-viewer" data-cad-viewer data-model="assets/hardware/aetherock.glb?v=yellow-optical-shrouds">
+    <div class="cad-viewer" data-cad-viewer data-cad-autoload data-model="assets/hardware/aetherock.glb?v=yellow-optical-shrouds">
       <div class="cad-heading">
         <h3>Wearable UMI assembly</h3>
-        <button class="cad-launch" type="button" data-cad-start>Open 3D viewer</button>
+        <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
       </div>
       <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
         <div class="cad-actions" role="group" aria-label="Assembly demonstrations">

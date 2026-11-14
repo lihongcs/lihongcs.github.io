@@ -37,6 +37,8 @@
 .cad-surface canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 .cad-surface canvas:active { cursor: grabbing; }
 .cad-preview { width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
+[data-cad-autoload] .cad-preview { position: absolute; inset: 0; }
+[data-cad-autoload]:not([data-cad-ready="true"]) canvas { visibility: hidden; }
 .cad-status {
   position: absolute;
   inset: auto 1rem .75rem;

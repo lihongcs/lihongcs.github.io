@@ -1,10 +1,10 @@
 export async function startViewer(root) {
-  if (root.dataset.cadLoading === 'true') return;
+  if (root.dataset.cadLoading === 'true' || root.dataset.cadReady === 'true') return;
   const trigger = root.querySelector('[data-cad-start]');
   const status = root.querySelector('[data-cad-status]');
   const preview = root.querySelector('[data-cad-preview]');
   root.dataset.cadLoading = 'true';
-  trigger.disabled = true;
+  if (trigger) trigger.disabled = true;
   status.hidden = false;
   status.textContent = 'Loading 3D model…';
 
@@ -12,17 +12,33 @@ export async function startViewer(root) {
     const { mountViewer } = await import('./viewer.mjs?v=controller-io');
     await mountViewer(root);
     if (preview) preview.hidden = true;
-    trigger.hidden = true;
+    if (trigger) trigger.hidden = true;
   } catch (error) {
     status.textContent = 'The 3D model could not be opened. Check WebGL or use the STEP downloads below.';
     console.error(error);
-    trigger.disabled = false;
+    if (trigger) {
+      trigger.disabled = false;
+      trigger.hidden = false;
+    }
+  } finally {
     root.dataset.cadLoading = 'false';
   }
 }
 
 for (const root of document.querySelectorAll('[data-cad-viewer]')) {
-  root.querySelector('[data-cad-start]').addEventListener('click', () => startViewer(root));
+  root.querySelector('[data-cad-start]')?.addEventListener('click', () => startViewer(root));
+  if (!root.hasAttribute('data-cad-autoload')) continue;
+
+  if (typeof IntersectionObserver !== 'function') {
+    startViewer(root);
+    continue;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    observer.disconnect();
+    startViewer(root);
+  }, { rootMargin: '600px 0px' });
+  observer.observe(root.querySelector('[data-cad-surface]'));
 }
 
 async function renderParts(root) {
