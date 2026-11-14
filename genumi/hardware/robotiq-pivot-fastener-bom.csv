@@ -1,0 +1,6 @@
+Item,Quantity,Dimensions,Joint,Source
+M5 shoulder screw 6x35,2,6 mm shoulder by 35 mm; M5 x 0.8 with 9.5 mm thread; head 10 mm diameter by 4.5 mm,Inner chassis,https://www.elesa.com/siteassets/PDF/PDF_US/ISO%207379.pdf
+M5 shoulder screw 6x25,2,6 mm shoulder by 25 mm; M5 x 0.8 with 9.5 mm thread; head 10 mm diameter by 4.5 mm,Outer chassis,https://www.elesa.com/siteassets/PDF/PDF_US/ISO%207379.pdf
+M5 thin hex nut,4,M5 x 0.8; 8 mm flats; 2.7 mm thickness,Chassis,https://www.mcmaster.com/products/hex-nuts/specifications-met~iso-4035/
+M5 narrow shim,2,5.3 mm ID; 8 mm OD; 0.5 mm thick,Inner chassis,Turn or cut to dimensions shown in supplied STEP
+Shoulder spacer,2,6.2 mm ID; 10 mm OD; 3.2 mm thick,Outer chassis,Turn to dimensions shown in supplied STEP

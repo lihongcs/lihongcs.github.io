@@ -1,0 +1,9 @@
+position,joint,stack_mm,screw,spacer,locknut,nominal_endplay_mm,direction,bushing
+P01,Left outer chassis pivot,41.5,shoulder-screw-d6-l50-m5,shoulder-spacer-d6-8.3mm,m5-locknut,0.2,-1,
+P02,Left inner chassis pivot,41.5,shoulder-screw-d6-l50-m5,shoulder-spacer-d6-8.3mm,m5-locknut,0.2,-1,
+P03,Right inner chassis pivot,41.5,stepped-shoulder-screw-d6-d5p45-l50-m5,shoulder-spacer-d5p45-8.3mm,m5-locknut,0.2,-1,pivot-reducer-bushing-d6p35-d5p52-1p8mm
+P04,Right outer chassis pivot,41.5,shoulder-screw-d6-l50-m5,shoulder-spacer-d6-8.3mm,m5-locknut,0.2,-1,
+P05,Left outer fingertip pivot,25.5,shoulder-screw-d4-l30-m3,shoulder-spacer-d4-4.3mm,m3-locknut,0.2,1,
+P06,Left inner fingertip pivot,23.5,shoulder-screw-d4-l25-m3,shoulder-spacer-d4-1.3mm,m3-locknut,0.2,1,
+P07,Right inner fingertip pivot,23.5,shoulder-screw-d4-l25-m3,shoulder-spacer-d4-1.3mm,m3-locknut,0.2,1,
+P08,Right outer fingertip pivot,25.5,shoulder-screw-d4-l30-m3,shoulder-spacer-d4-4.3mm,m3-locknut,0.2,1,

@@ -5,8 +5,8 @@
       "name": "Flexiv Grav GN-01",
       "model": "models/flexiv.glb",
       "preview": "assets/flexiv-assembly.png",
-      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-quick-release-assembly.step",
-      "note": "The updated camera interface uses a GenUMI spacer and a purchased Insta360 Magnetic Quick Release Mount. The 3D model shows the GenUMI hardware.",
+      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-pivot-fasteners.step",
+      "note": "The assembly includes the quick-release spacer and 8 shoulder-screw pivot sets. Clearance was checked in the saved pose. The right inner pivot uses a custom stepped shoulder screw and reducer bushing.",
       "modules": [
         {
           "id": "handheld-housing",
@@ -66,13 +66,61 @@
           "name": "Insta360 Quick-Release Spacer",
           "description": "18 mm outside diameter, 8 mm thick, with a 6.6 mm through-hole for a 1/4-20 fastener.",
           "step": "hardware/steps/flexiv/insta360-quick-release-spacer.step"
+        },
+        {
+          "id": "pivot-p01",
+          "name": "P01 \u00b7 Left outer chassis pivot",
+          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+        },
+        {
+          "id": "pivot-p02",
+          "name": "P02 \u00b7 Left inner chassis pivot",
+          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+        },
+        {
+          "id": "pivot-p03",
+          "name": "P03 \u00b7 Right inner chassis pivot",
+          "description": "Custom \u00d86/5.45 mm stepped shoulder, 50 mm under-head shoulder length, M5 locknut, 8.3 mm spacer and reducer bushing.",
+          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+        },
+        {
+          "id": "pivot-p04",
+          "name": "P04 \u00b7 Right outer chassis pivot",
+          "description": "\u00d86 mm \u00d7 50 mm shoulder with M5 locknut and 8.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+        },
+        {
+          "id": "pivot-p05",
+          "name": "P05 \u00b7 Left outer fingertip pivot",
+          "description": "\u00d84 mm \u00d7 30 mm shoulder with M3 locknut and 4.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+        },
+        {
+          "id": "pivot-p06",
+          "name": "P06 \u00b7 Left inner fingertip pivot",
+          "description": "\u00d84 mm \u00d7 25 mm shoulder with M3 locknut and 1.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+        },
+        {
+          "id": "pivot-p07",
+          "name": "P07 \u00b7 Right inner fingertip pivot",
+          "description": "\u00d84 mm \u00d7 25 mm shoulder with M3 locknut and 1.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+        },
+        {
+          "id": "pivot-p08",
+          "name": "P08 \u00b7 Right outer fingertip pivot",
+          "description": "\u00d84 mm \u00d7 30 mm shoulder with M3 locknut and 4.3mm spacer. Nominal axial endplay is 0.20 mm.",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
         }
       ],
       "downloads": [
         {
           "name": "Flexiv Grav GN-01 Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-quick-release-assembly.step"
+          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-with-pivot-fasteners.step"
         },
         {
           "name": "Handheld Body Section A",
@@ -190,6 +238,21 @@
           "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
         },
         {
+          "name": "M3 Locknut",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/m3-locknut.step"
+        },
+        {
+          "name": "M5 Locknut",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/m5-locknut.step"
+        },
+        {
+          "name": "Pivot Reducer Bushing D6p35 D5p52 1p8mm",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/pivot-reducer-bushing-d6p35-d5p52-1p8mm.step"
+        },
+        {
           "name": "Right Drive Gear And Outer Link",
           "kind": "Part",
           "step": "hardware/steps/flexiv/right-drive-gear-and-outer-link.step"
@@ -218,6 +281,46 @@
           "name": "Right TPU Fingertip",
           "kind": "Part",
           "step": "hardware/steps/flexiv/right-tpu-fingertip.step"
+        },
+        {
+          "name": "Shoulder Screw D4 L25 M3",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+        },
+        {
+          "name": "Shoulder Screw D4 L30 M3",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+        },
+        {
+          "name": "Shoulder Screw D6 L50 M5",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+        },
+        {
+          "name": "Shoulder Spacer D4 1.3mm",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d4-1.3mm.step"
+        },
+        {
+          "name": "Shoulder Spacer D4 4.3mm",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d4-4.3mm.step"
+        },
+        {
+          "name": "Shoulder Spacer D5p45 8.3mm",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d5p45-8.3mm.step"
+        },
+        {
+          "name": "Shoulder Spacer D6 8.3mm",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/shoulder-spacer-d6-8.3mm.step"
+        },
+        {
+          "name": "P03 \u00b7 Right inner chassis pivot",
+          "kind": "Part",
+          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
         }
       ]
     },
@@ -225,10 +328,10 @@
       "id": "robotiq",
       "name": "Robotiq 2F-85",
       "model": "models/robotiq.glb",
-      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware.step",
+      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-with-pivots.step",
       "assemblyDownloadName": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
       "assemblyDownloadLabel": "Download GenUMI hardware STEP",
-      "note": "This view shows the GenUMI body and connectors in the reconstructed assembly. The commercial finger geometry and Toolbox gear are available from their respective suppliers.",
+      "note": "The GenUMI body, connectors and four chassis pivot fastener sets are shown. The finger geometry and Toolbox gear are supplied separately. Fit was checked in the saved pose.",
       "modules": [
         {
           "id": "handheld-body",
@@ -244,13 +347,37 @@
           "id": "right-connector",
           "name": "Right Drive Link Connector",
           "step": "hardware/steps/robotiq/handheld-connector.step"
+        },
+        {
+          "id": "left-inner-chassis-pivot",
+          "name": "Left Inner Chassis Pivot Fasteners",
+          "description": "Socket shoulder screw and shim with a retaining nut.",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
+        },
+        {
+          "id": "left-outer-chassis-pivot",
+          "name": "Left Outer Chassis Pivot Fasteners",
+          "description": "Socket shoulder screw and shim with a retaining nut.",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
+        },
+        {
+          "id": "right-inner-chassis-pivot",
+          "name": "Right Inner Chassis Pivot Fasteners",
+          "description": "Socket shoulder screw and shim with a retaining nut.",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
+        },
+        {
+          "id": "right-outer-chassis-pivot",
+          "name": "Right Outer Chassis Pivot Fasteners",
+          "description": "Socket shoulder screw and shim with a retaining nut.",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
         }
       ],
       "downloads": [
         {
           "name": "Robotiq 2F-85 \u8def GenUMI Hardware Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware.step"
+          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-with-pivots.step"
         },
         {
           "name": "Handheld Body Section A",
@@ -286,6 +413,31 @@
           "name": "Handheld Housing",
           "kind": "Part",
           "step": "hardware/steps/robotiq/handheld-housing.step"
+        },
+        {
+          "name": "M5 Shim 5p3x8x0p5",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-shim-5p3x8x0p5.step"
+        },
+        {
+          "name": "M5 Shoulder Screw 6x25",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
+        },
+        {
+          "name": "M5 Shoulder Screw 6x35",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
+        },
+        {
+          "name": "M5 Thin Hex Nut",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/m5-thin-hex-nut.step"
+        },
+        {
+          "name": "Shoulder Spacer 6p2x10x3p2",
+          "kind": "Fastener",
+          "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x3p2.step"
         }
       ]
     }
