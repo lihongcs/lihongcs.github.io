@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=slam-world-video">
+  <link rel="stylesheet" href="workflow.css?v=slam-bimanual">
 </head>
 <body>
   <header class="site-header wrap">
@@ -276,51 +276,55 @@ bash dataprocess/run_bimanual_htc.sh \
     <article class="guide processing-guide" id="panoramic-slam" aria-labelledby="panoramic-slam-title">
       <header>
         <h3 id="panoramic-slam-title">Panoramic SLAM</h3>
-        <p class="processing-caption">Stella VSLAM tracks ORB features directly in the 360° equirectangular video from one X5 wrist camera. <a href="https://stella-cv.readthedocs.io/en/stable/overview.html">Algorithm documentation</a></p>
+        <p class="processing-caption">Stella VSLAM tracks ORB features in each X5 wrist camera’s 360° equirectangular video. <a href="https://stella-cv.readthedocs.io/en/stable/overview.html">Algorithm documentation</a></p>
       </header>
 
       <div class="processing-benchmark slam-benchmark">
         <dl>
           <div>
-            <dt>Input video</dt>
+            <dt>Input per wrist</dt>
             <dd><time datetime="PT60.06S">60.06 s</time></dd>
             <dd class="processing-format-detail">HEVC MP4 · 2048 × 1024 · 59.94 fps · 3,600 frames</dd>
           </div>
           <div>
             <dt>SLAM wall time</dt>
-            <dd><time datetime="PT1M12.22S">1 min 12.22 s</time></dd>
-            <dd class="processing-format-detail">Intel Core i7-14700K · 4.85 core·min · 0.54 GiB peak RSS</dd>
+            <dd class="slam-times">
+              <span><span class="slam-time-label">Left</span><time datetime="PT72.22S">72.22 s</time></span>
+              <span><span class="slam-time-label">Right</span><time datetime="PT75.42S">75.42 s</time></span>
+            </dd>
+            <dd class="processing-format-detail">Intel Core i7-14700K · separate runs</dd>
           </div>
         </dl>
       </div>
 
       <figure class="slam-video">
-        <video controls playsinline preload="none" width="1536" height="512"
-          src="assets/workflow/slam-world-replay.mp4" poster="assets/workflow/slam-world-replay.webp"
-          aria-label="Synchronized X5 panorama and 3D world-coordinate trajectories of the camera and Stage 05 end effector">
-          <a href="assets/workflow/slam-world-replay.mp4">Watch the world-coordinate replay</a>
+        <video controls playsinline preload="none" width="1600" height="736"
+          src="assets/workflow/slam-world-replay.mp4?v=bimanual" poster="assets/workflow/slam-world-replay.webp?v=bimanual"
+          aria-label="Synchronized left and right wrist panoramas with 3D world-coordinate trajectories and Stage 05 end-effector orientations">
+          <a href="assets/workflow/slam-world-replay.mp4?v=bimanual">Watch the bimanual replay</a>
         </video>
         <figcaption>
-          <h4>World-coordinate replay</h4>
-          <p>13.10 s · Complete recorded episode · 360° input on the left, camera and Stage 05 left end-effector paths on the right</p>
+          <h4>Bimanual world-coordinate replay</h4>
+          <p>13.10 s · Both wrist panoramas and Stage 05 end-effector poses. Moving RGB axes show each gripper’s orientation.</p>
         </figcaption>
       </figure>
 
       <dl class="slam-files">
-        <div><dt>TUM trajectory <code>.txt</code></dt><dd>Timestamp, 3D position and quaternion · 3,543 source-frame poses · 22 keyframes</dd></div>
-        <div><dt>MessagePack map <code>.msgpack</code></dt><dd>1,911 sparse 3D landmarks and their keyframes</dd></div>
+        <div><dt>TUM trajectories <code>.txt</code></dt><dd>Position and quaternion · left 3,543 poses, 22 keyframes · right 3,540 poses, 17 keyframes</dd></div>
+        <div><dt>MessagePack maps <code>.msgpack</code></dt><dd>Sparse 3D landmarks · left 1,911 · right 1,673</dd></div>
       </dl>
       <p class="processing-caption">Timing covers MP4 decoding, tracking, mapping and file output. Stitching and metric scale calibration are separate steps.</p>
 
       <details class="processing-commands">
         <summary>World coordinates and end-effector conversion</summary>
-        <p>Frame timestamps link Stella poses to VIVE. A similarity transform and a rigid camera mount fitted on other segments register the camera to the VIVE world. The registered camera pose gives the left tracker pose, which Stage 05 converts to the Flexiv end-effector frame. Both paths use world X, Y and Z in metres.</p>
-        <p>Against 390 valid Stage 05 export poses in this held-out episode, end-effector position RMSE was 3.8 mm.</p>
+        <p>Stage 05’s source-frame map synchronizes the two views. Each camera is registered to the same metric VIVE world with a similarity transform and a rigid mount fitted on other segments. Stage 05’s VIVE-to-Flexiv transform gives each end effector’s position and orientation.</p>
+        <p>Solid paths show end-effector positions and dashed paths show camera positions. Local +X, +Y and +Z are red, green and blue.</p>
+        <p>Compared with Stage 05 export poses held out from registration, position RMSE was 3.8 mm per wrist. Orientation RMSE was 0.22° left and 0.35° right across 390 and 392 valid poses respectively.</p>
       </details>
 
       <details class="processing-commands">
         <summary>Run Stella VSLAM on a panorama</summary>
-        <p>Use a Stella runner with FFmpeg pipe support. Set the camera model to <code>equirectangular</code> and match the video's dimensions and frame rate. On 15 Nov 2026 this run used all 3,600 frames and an 8,000-keypoint limit. The final trajectory starts at 0.95 s after initialization retries. The pose count excludes one record emitted after the last video frame. <a href="https://stella-cv.readthedocs.io/en/stable/simple_tutorial.html">Stella VSLAM setup</a></p>
+        <p>Use a Stella runner with FFmpeg pipe support and match the <code>equirectangular</code> camera config to each video’s size and frame rate. The runs used all 3,600 frames per wrist and an 8,000-keypoint limit. CPU time and peak RSS were 4.85 core·min and 0.54 GiB on the left, and 5.00 core·min and 0.48 GiB on the right. The pose counts exclude the record emitted after each video’s last frame. <a href="https://stella-cv.readthedocs.io/en/stable/simple_tutorial.html">Stella VSLAM setup</a></p>
         <pre tabindex="0"><code>mkdir -p stella_eval
 STELLA_FFMPEG_PIPE=1 /usr/bin/time -v run_video_slam \
   -v orb_vocab.fbow -c camera.yaml -m panorama.mp4 \
