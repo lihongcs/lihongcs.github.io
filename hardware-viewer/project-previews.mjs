@@ -21,12 +21,16 @@ async function showPreview(surface) {
   const scene = new Scene();
   const camera = new PerspectiveCamera(36);
   camera.up.set(...up).normalize();
-  const view = new Vector3(...direction).normalize();
+  const initialView = new Vector3(...direction).normalize();
+  const view = initialView.clone();
   const resetButton = surface.querySelector('[data-preview-reset]');
   let observer;
+  let renderFrame = 0;
+  let distance;
 
   function restorePoster(event) {
     event?.preventDefault();
+    cancelAnimationFrame(renderFrame);
     observer?.disconnect();
     resetButton.removeEventListener('click', reset);
     canvas.remove();
@@ -34,7 +38,7 @@ async function showPreview(surface) {
     surface.dataset.previewState = 'fallback';
   }
 
-  let center, modelCorners;
+  let center, radius;
   try {
     const loader = new GLTFLoader();
     const paths = [surface.dataset.model, surface.dataset.accessories].filter(Boolean);
@@ -64,7 +68,8 @@ async function showPreview(surface) {
     });
     if (bounds.isEmpty()) throw new Error('Empty project preview');
     center = bounds.getCenter(new Vector3());
-    modelCorners = corners.map((corner) => corner.sub(center));
+    radius = corners.reduce((largest, corner) => Math.max(largest, corner.distanceTo(center)), 0);
+    if (!Number.isFinite(radius) || radius <= 0) throw new Error('Invalid preview bounds');
   } catch (error) {
     restorePoster();
     throw error;
@@ -80,32 +85,20 @@ async function showPreview(surface) {
   }
 
   function draw() {
+    renderFrame = 0;
+    camera.position.copy(center).addScaledVector(view, distance);
     camera.lookAt(center);
     renderer.render(scene, camera);
+    surface.dataset.previewState = 'ready';
   }
 
-  function fit() {
-    const right = new Vector3().crossVectors(camera.up, view).normalize();
-    const vertical = new Vector3().crossVectors(view, right);
-    const vSlope = Math.tan(camera.fov * Math.PI / 360);
-    const hSlope = vSlope * camera.aspect;
-    let distance = 0;
-    for (const point of modelCorners) {
-      distance = Math.max(distance, point.dot(view) + 1.14 * Math.max(
-        Math.abs(point.dot(right)) / hSlope,
-        Math.abs(point.dot(vertical)) / vSlope,
-      ));
-    }
-    camera.position.copy(center).addScaledVector(view, distance);
-    camera.near = distance / 150;
-    camera.far = distance * 40;
-    camera.updateProjectionMatrix();
-    draw();
+  function requestDraw() {
+    if (!renderFrame && distance) renderFrame = requestAnimationFrame(draw);
   }
 
   function reset() {
-    view.set(...direction).normalize();
-    fit();
+    view.copy(initialView);
+    requestDraw();
   }
 
   function rotate(dx, dy) {
@@ -114,28 +107,32 @@ async function showPreview(surface) {
     const inclination = view.angleTo(camera.up);
     const next = Math.max(.04, Math.min(Math.PI - .04, inclination + dy));
     view.applyAxisAngle(right, next - inclination);
-    fit();
+    requestDraw();
   }
 
   let pointer;
   canvas.addEventListener('pointerdown', (event) => {
-    if (!event.isPrimary || event.button !== 0) return;
-    pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, rotating: event.pointerType !== 'touch' };
+    if (pointer || !event.isPrimary || event.button !== 0) return;
+    pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
     canvas.setPointerCapture(event.pointerId);
+    canvas.classList.add('is-rotating');
   });
   canvas.addEventListener('pointermove', (event) => {
     if (pointer?.id !== event.pointerId) return;
     const dx = event.clientX - pointer.x;
     const dy = event.clientY - pointer.y;
-    if (!pointer.rotating && (Math.abs(dx) < 6 || Math.abs(dx) <= Math.abs(dy))) return;
-    pointer.rotating = true;
-    const scale = 3.4 / canvas.clientHeight;
-    rotate(dx * scale, dy * scale);
     pointer.x = event.clientX;
     pointer.y = event.clientY;
+    if (!dx && !dy) return;
+    const scale = Math.PI / Math.max(canvas.clientHeight, 1);
+    rotate(dx * scale, dy * scale);
   });
   for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-    canvas.addEventListener(event, () => { pointer = null; });
+    canvas.addEventListener(event, ({ pointerId }) => {
+      if (pointer?.id !== pointerId) return;
+      pointer = null;
+      canvas.classList.remove('is-rotating');
+    });
   }
   canvas.addEventListener('keydown', (event) => {
     const movement = {
@@ -150,11 +147,18 @@ async function showPreview(surface) {
   resetButton.addEventListener('click', reset);
   surface.append(canvas);
   observer = new ResizeObserver(() => {
-    if (!surface.clientWidth || !surface.clientHeight) return;
-    camera.aspect = surface.clientWidth / surface.clientHeight;
-    renderer.setSize(surface.clientWidth, surface.clientHeight, false);
-    fit();
-    surface.dataset.previewState = 'ready';
+    const { clientWidth: width, clientHeight: height } = surface;
+    if (!width || !height) return;
+    camera.aspect = width / height;
+    const verticalHalfFov = camera.fov * Math.PI / 360;
+    const horizontalHalfFov = Math.atan(Math.tan(verticalHalfFov) * camera.aspect);
+    // Keep the bounding sphere in view at every angle without zooming during a drag.
+    distance = 1.035 * radius / Math.sin(Math.min(verticalHalfFov, horizontalHalfFov));
+    camera.near = distance - radius * 1.05;
+    camera.far = distance + radius * 1.05;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height, false);
+    requestDraw();
   });
   observer.observe(surface);
 }

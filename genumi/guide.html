@@ -13,7 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=gripper-video">
+  <link rel="stylesheet" href="workflow.css?v=slam-orbit">
+  <script type="module" src="slam-replay.mjs"></script>
 </head>
 <body>
   <header class="site-header wrap">
@@ -303,15 +304,37 @@ bash dataprocess/run_bimanual_htc.sh \
         </dl>
       </div>
 
-      <figure class="slam-video">
-        <video controls playsinline preload="none" width="1600" height="736"
-          src="assets/workflow/slam-world-replay.mp4?v=operator-htc" poster="assets/workflow/slam-world-replay.webp?v=operator-htc"
+      <figure class="slam-video" data-slam-replay>
+        <video data-slam-fallback controls playsinline preload="none" width="1600" height="736"
+          src="assets/workflow/slam-world-replay.mp4?v=depth" poster="assets/workflow/slam-world-replay.webp?v=depth"
           aria-label="Both wrist panoramas and an operator-facing comparison of SLAM and HTC end-effector trajectories in VIVE world coordinates">
-          <a href="assets/workflow/slam-world-replay.mp4?v=operator-htc">Watch the SLAM and HTC comparison</a>
+          <a href="assets/workflow/slam-world-replay.mp4?v=depth">Watch the SLAM and HTC comparison</a>
         </video>
+        <div class="slam-interactive" data-slam-interactive hidden>
+          <video data-slam-wrists controls playsinline preload="none" width="640" height="736"
+            src="assets/workflow/slam-world-wrists.mp4" poster="assets/workflow/slam-world-wrists.webp"
+            aria-label="Synchronized left and right wrist panoramas. Playback also advances the 3D trajectories."></video>
+          <div class="slam-orbit">
+            <div class="slam-scene" data-slam-scene>
+              <span class="slam-direction" data-slam-forward aria-hidden="true">Forward</span>
+              <span class="slam-direction" data-slam-up aria-hidden="true">Up</span>
+              <div class="slam-orbit-controls">
+                <span>Drag to rotate</span>
+                <button type="button" data-slam-reset>Reset view</button>
+              </div>
+            </div>
+            <div class="slam-orbit-key">
+              <span class="slam-left">Left <strong data-slam-left>—</strong></span>
+              <span class="slam-right">Right <strong data-slam-right>—</strong></span>
+              <span class="slam-key-solid">SLAM</span>
+              <span class="slam-key-dashed">HTC</span>
+            </div>
+          </div>
+        </div>
         <figcaption>
           <h4>SLAM vs HTC end-effector replay</h4>
-          <p>13.10 s · Both wrist panoramas. View from the operator’s side, with forward toward the top of the plot.</p>
+          <p>13.10 s · Both wrist panoramas. The default view looks forward from the operator’s side.</p>
+          <a data-slam-mp4 href="assets/workflow/slam-world-replay.mp4?v=depth" hidden>Open replay MP4</a>
         </figcaption>
       </figure>
 
@@ -324,7 +347,7 @@ bash dataprocess/run_bimanual_htc.sh \
       <details class="processing-commands">
         <summary>World coordinates and end-effector conversion</summary>
         <p>SLAM estimates the X5 camera’s optical centre from video. HTC VIVE records the tracker pose. A calibrated wrist mount and the Stage 05 VIVE-to-Flexiv conversion let both paths describe the same end-effector point.</p>
-        <p>Solid paths show SLAM estimates and dashed paths show HTC references. The readout gives the 3D distance between the paired positions. The fixed operator view projects the VIVE world coordinates. Red, green and blue show the local +X, +Y and +Z axes of the SLAM-derived pose.</p>
+        <p>Solid paths show SLAM estimates and dashed paths show HTC references. The readout gives their 3D position difference in millimetres. Height lines extend to the ground grid, which uses 10 cm cells in the VIVE world. Red, green and blue show the local +X, +Y and +Z axes of the SLAM-derived pose.</p>
         <p>Against HTC poses from this held-out episode, position RMSE was 3.8 mm per wrist. Orientation RMSE was 0.22° left and 0.35° right across 390 and 392 valid poses respectively.</p>
       </details>
 
