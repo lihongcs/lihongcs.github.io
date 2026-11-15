@@ -305,13 +305,13 @@ bash dataprocess/run_bimanual_htc.sh \
 
       <figure class="slam-video">
         <video controls playsinline preload="none" width="1600" height="736"
-          src="assets/workflow/slam-world-replay.mp4?v=bimanual" poster="assets/workflow/slam-world-replay.webp?v=bimanual"
-          aria-label="Synchronized left and right wrist panoramas with 3D world-coordinate trajectories and Stage 05 end-effector orientations">
-          <a href="assets/workflow/slam-world-replay.mp4?v=bimanual">Watch the bimanual replay</a>
+          src="assets/workflow/slam-world-replay.mp4?v=operator-htc" poster="assets/workflow/slam-world-replay.webp?v=operator-htc"
+          aria-label="Both wrist panoramas and an operator-facing comparison of SLAM and HTC end-effector trajectories in VIVE world coordinates">
+          <a href="assets/workflow/slam-world-replay.mp4?v=operator-htc">Watch the SLAM and HTC comparison</a>
         </video>
         <figcaption>
-          <h4>Bimanual world-coordinate replay</h4>
-          <p>13.10 s · Both wrist panoramas and Stage 05 end-effector poses. Moving RGB axes show each gripper’s orientation.</p>
+          <h4>SLAM vs HTC end-effector replay</h4>
+          <p>13.10 s · Both wrist panoramas. View from the operator’s side, with forward toward the top of the plot.</p>
         </figcaption>
       </figure>
 
@@ -323,9 +323,9 @@ bash dataprocess/run_bimanual_htc.sh \
 
       <details class="processing-commands">
         <summary>World coordinates and end-effector conversion</summary>
-        <p>Stage 05’s source-frame map synchronizes the two views. Each camera is registered to the same metric VIVE world with a similarity transform and a rigid mount fitted on other segments. Stage 05’s VIVE-to-Flexiv transform gives each end effector’s position and orientation.</p>
-        <p>Solid paths show end-effector positions and dashed paths show camera positions. Local +X, +Y and +Z are red, green and blue.</p>
-        <p>Compared with Stage 05 export poses held out from registration, position RMSE was 3.8 mm per wrist. Orientation RMSE was 0.22° left and 0.35° right across 390 and 392 valid poses respectively.</p>
+        <p>SLAM estimates the X5 camera’s optical centre from video. HTC VIVE records the tracker pose. A calibrated wrist mount and the Stage 05 VIVE-to-Flexiv conversion let both paths describe the same end-effector point.</p>
+        <p>Solid paths show SLAM estimates and dashed paths show HTC references. The readout gives the 3D distance between the paired positions. The fixed operator view projects the VIVE world coordinates. Red, green and blue show the local +X, +Y and +Z axes of the SLAM-derived pose.</p>
+        <p>Against HTC poses from this held-out episode, position RMSE was 3.8 mm per wrist. Orientation RMSE was 0.22° left and 0.35° right across 390 and 392 valid poses respectively.</p>
       </details>
 
       <details class="processing-commands">
