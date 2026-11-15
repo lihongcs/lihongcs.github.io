@@ -154,3 +154,17 @@
     color: var(--secondary-text);
     font-variant-numeric: tabular-nums;
 }
+
+@media (min-width: 601px) {
+    .dataset-figure {
+        min-width: 0;
+        align-content: center;
+        padding-inline: clamp(0.75rem, 2vw, 1.25rem);
+        border-right: 1px solid var(--border-color);
+        border-bottom: 0;
+    }
+
+    .dataset-stage {
+        width: min(100%, 240px);
+    }
+}

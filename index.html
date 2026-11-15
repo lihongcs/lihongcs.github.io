@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./datasets/datasets.css">
+    <link rel="stylesheet" href="./datasets/datasets.css?v=rows">
     <script src="./datasets/globe.js" defer></script>
     <style>
         :root {
@@ -127,13 +127,10 @@
         }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: minmax(0, 1fr);
             gap: 1.25rem;
         }
-        .project-grid--featured {
-            grid-template-columns: minmax(0, 1fr);
-        }
-        .project-grid--featured .paper-links {
+        .project-grid .paper-links {
             flex-wrap: wrap;
             gap: .35rem .75rem;
         }
@@ -221,27 +218,22 @@
             text-underline-offset: .25em;
         }
         @media (min-width: 601px) {
-            .project-grid--featured .project-entry {
+            .project-grid > .project-entry {
                 display: grid;
                 grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
             }
-            .project-grid--featured .project-media {
+            .project-grid .project-media {
                 min-width: 0;
                 border-right: 1px solid var(--border-color);
                 border-bottom: 0;
                 border-radius: 11px 0 0 11px;
             }
-            .project-grid--featured .project-copy {
+            .project-grid .project-copy {
                 align-self: center;
                 padding: 1.35rem clamp(1.25rem, 3.5vw, 2rem);
             }
-            .project-grid--featured .project-title {
+            .project-grid .project-title {
                 font-size: 1.25rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .project-grid {
-                grid-template-columns: 1fr;
             }
         }
         .paper.first-author {
@@ -299,7 +291,7 @@
 
     <section id="projects" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
-        <div class="project-grid project-grid--featured">
+        <div class="project-grid">
             <article class="project-entry">
                 <div class="project-media" data-project-preview="genumi"
                      data-model="./genumi/models/flexiv-assembled-low-profile.glb" data-accessories="./genumi/models/flexiv-mounted-accessories.glb">
