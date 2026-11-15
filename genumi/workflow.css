@@ -586,3 +586,123 @@
 @media (max-width: 42rem) {
   .export-views { grid-template-columns: minmax(0, 1fr); }
 }
+
+.inference-chart {
+  --median-fill: #28615e;
+  --tail-fill: #a5bfad;
+  margin: 1.15rem 0 0;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  background: var(--surface);
+}
+
+.inference-chart figcaption { color: var(--muted); }
+
+.inference-legend,
+.inference-bars {
+  list-style: none;
+  padding: 0;
+}
+
+.inference-legend {
+  display: flex;
+  gap: 1.2rem;
+  margin: .65rem 0 1.35rem;
+  color: var(--muted);
+}
+
+.inference-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.inference-legend li::before {
+  content: "";
+  width: .85rem;
+  height: .85rem;
+  border-radius: .2rem;
+  background: var(--median-fill);
+}
+
+.inference-legend li + li::before { background: var(--tail-fill); }
+
+.inference-bars {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+}
+
+.inference-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .25rem 1rem;
+  margin-bottom: .5rem;
+}
+
+.inference-row h4 { margin: 0; font-size: 1.15rem; }
+.inference-row h4 span { font-weight: 500; color: var(--muted); }
+
+.inference-row p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2rem 1rem;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.inference-row strong { font-size: 1.45rem; }
+
+.inference-track {
+  --median-end: calc(var(--median) * .4%);
+  --p95-end: calc(var(--p95) * .4%);
+  height: .85rem;
+  border-radius: .25rem;
+  background: linear-gradient(to right,
+    var(--median-fill) 0 var(--median-end),
+    var(--tail-fill) var(--median-end) var(--p95-end),
+    var(--border) var(--p95-end) 100%);
+}
+
+.inference-scale {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: .55rem 0 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.inference-scale span:nth-child(2) { justify-self: center; }
+.inference-scale span:last-child { justify-self: end; }
+
+.inference-phone {
+  margin: 1.15rem 0 0;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.inference-phone strong { color: var(--text); }
+
+.inference-details table {
+  width: 100%;
+  margin: 1rem 0 0;
+  border-collapse: collapse;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.inference-details caption {
+  padding-bottom: .45rem;
+  color: var(--muted);
+  text-align: left;
+}
+
+.inference-details th,
+.inference-details td {
+  padding: .45rem .65rem .45rem 0;
+  border-bottom: 1px solid var(--border);
+}

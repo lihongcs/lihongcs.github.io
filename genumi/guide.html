@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=x5-export-video">
+  <link rel="stylesheet" href="workflow.css?v=inference-latency">
 </head>
 <body>
   <header class="site-header wrap">
@@ -32,6 +32,7 @@
         <a href="#setup">Shared setup</a>
         <a href="#x5">X5 wireless</a>
         <a href="#x3">X3 wired</a>
+        <a href="#inference">Inference latency</a>
       </nav>
     </section>
 
@@ -299,6 +300,57 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             <p>The documented X3 path ends at Stage 01. The gripper estimation and LeRobot instructions above use X5 INSV files.</p>
           </details>
         </div>
+    </article>
+
+    <article class="guide processing-guide" id="inference" aria-labelledby="inference-title">
+      <header>
+        <h3 id="inference-title">Inference latency</h3>
+        <p class="processing-caption">From two decoded 224 × 224 wrist views to a validated action ready for dispatch.</p>
+      </header>
+
+      <figure class="inference-chart">
+        <figcaption>π0.5 · X5 bimanual tests · 18–19 Aug 2026</figcaption>
+        <ul class="inference-legend" aria-label="Chart legend">
+          <li>Median</li>
+          <li>P95</li>
+        </ul>
+        <ul class="inference-bars">
+          <li style="--median: 147.4; --p95: 180.0">
+            <div class="inference-row">
+              <h4>X5 USB Webcam</h4>
+              <p><span><strong>147.4</strong> ms median</span><span><strong>180.0</strong> ms P95</span></p>
+            </div>
+            <div class="inference-track" aria-hidden="true"></div>
+          </li>
+          <li style="--median: 211.9; --p95: 225.9">
+            <div class="inference-row">
+              <h4>X5 USB Android <span>· CameraSDK on Linux</span></h4>
+              <p><span><strong>211.9</strong> ms median</span><span><strong>225.9</strong> ms P95</span></p>
+            </div>
+            <div class="inference-track" aria-hidden="true"></div>
+          </li>
+        </ul>
+        <div class="inference-scale" aria-hidden="true">
+          <span>0</span><span>125</span><span>250 ms</span>
+        </div>
+        <p class="inference-phone"><strong>Android phone control</strong> · No historical latency measurement found.</p>
+      </figure>
+
+      <details class="processing-commands inference-details">
+        <summary>Measurement details</summary>
+        <p>Three runs per mode used the same checkpoint on separate days. Camera and policy runtimes varied. The client logged every fifth inference step.</p>
+        <table>
+          <caption>Additional timings, median / P95 (ms)</caption>
+          <thead>
+            <tr><th scope="col">Timing</th><th scope="col">USB Webcam</th><th scope="col">USB Android</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Inference request round trip</th><td>140.8 / 151.6</td><td>195.4 / 199.8</td></tr>
+            <tr><th scope="row">Model compute</th><td>127.9 / 132.9</td><td>184.6 / 185.7</td></tr>
+            <tr><th scope="row">Logged samples</th><td>13</td><td>103</td></tr>
+          </tbody>
+        </table>
+      </details>
     </article>
 
     <footer class="references">
