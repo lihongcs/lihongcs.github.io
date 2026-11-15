@@ -587,122 +587,120 @@
   .export-views { grid-template-columns: minmax(0, 1fr); }
 }
 
-.inference-chart {
-  --median-fill: #28615e;
-  --tail-fill: #a5bfad;
-  margin: 1.15rem 0 0;
-  padding: clamp(1rem, 3vw, 1.6rem);
+.inference-modes {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.15rem;
+}
+
+.inference-mode {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.15rem clamp(1rem, 3vw, 1.75rem);
+  padding: clamp(1rem, 3vw, 1.5rem);
   border: 1px solid var(--border);
   border-radius: .75rem;
   background: var(--surface);
 }
 
-.inference-chart figcaption { color: var(--muted); }
-
-.inference-legend,
-.inference-bars {
-  list-style: none;
-  padding: 0;
+.inference-mode > header {
+  grid-column: 1 / -1;
 }
 
-.inference-legend {
-  display: flex;
-  gap: 1.2rem;
-  margin: .65rem 0 1.35rem;
+.inference-mode h4,
+.inference-boundary h4 {
+  margin: 0 0 .25rem;
+  font-size: 1.2rem;
+}
+
+.inference-mode header p,
+.inference-preview figcaption,
+.inference-run,
+.inference-boundary p,
+.inference-phone {
+  margin: 0;
   color: var(--muted);
 }
 
-.inference-legend li {
-  display: inline-flex;
-  align-items: center;
+.inference-preview {
+  align-self: start;
+  margin: 0;
+}
+
+.inference-wrists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .45rem;
 }
 
-.inference-legend li::before {
-  content: "";
-  width: .85rem;
-  height: .85rem;
-  border-radius: .2rem;
-  background: var(--median-fill);
+.inference-wrists img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: .4rem;
+  background: var(--text);
 }
 
-.inference-legend li + li::before { background: var(--tail-fill); }
+.inference-preview figcaption { margin-top: .5rem; }
 
-.inference-bars {
-  display: grid;
-  gap: 1.25rem;
+.inference-timing h5 {
   margin: 0;
+  color: #285e60;
+  font-size: 1.02rem;
 }
 
-.inference-row {
+.inference-result {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  gap: .15rem 1.1rem;
+  margin: .25rem 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.inference-result strong { font-size: 1.7rem; }
+
+.inference-timing dl { margin: .55rem 0 .55rem; }
+
+.inference-timing dl div {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: .25rem 1rem;
-  margin-bottom: .5rem;
+  gap: .1rem .55rem;
+  padding: .4rem 0;
+  border-top: 1px solid var(--border);
 }
 
-.inference-row h4 { margin: 0; font-size: 1.15rem; }
-.inference-row h4 span { font-weight: 500; color: var(--muted); }
-
-.inference-row p {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .2rem 1rem;
+.inference-timing dd {
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
 
-.inference-row strong { font-size: 1.45rem; }
-
-.inference-track {
-  --median-end: calc(var(--median) * .4%);
-  --p95-end: calc(var(--p95) * .4%);
-  height: .85rem;
-  border-radius: .25rem;
-  background: linear-gradient(to right,
-    var(--median-fill) 0 var(--median-end),
-    var(--tail-fill) var(--median-end) var(--p95-end),
-    var(--border) var(--p95-end) 100%);
+.inference-boundary {
+  margin-top: 1.2rem;
+  padding: 1rem clamp(1rem, 3vw, 1.5rem);
+  border-left: 3px solid #285e60;
+  background: var(--surface);
 }
 
-.inference-scale {
+.inference-boundary ol {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: .55rem 0 0;
-  font-variant-numeric: tabular-nums;
-  color: var(--muted);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .55rem;
+  margin: .75rem 0;
+  padding: 0;
+  list-style: none;
 }
 
-.inference-scale span:nth-child(2) { justify-self: center; }
-.inference-scale span:last-child { justify-self: end; }
-
-.inference-phone {
-  margin: 1.15rem 0 0;
-  padding-top: .9rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+.inference-boundary li {
+  padding: .5rem .65rem;
+  border-top: 2px solid #285e60;
+  background: #e5ede8;
 }
 
+.inference-phone { margin-top: 1rem; }
 .inference-phone strong { color: var(--text); }
 
-.inference-details table {
-  width: 100%;
-  margin: 1rem 0 0;
-  border-collapse: collapse;
-  text-align: left;
-  font-variant-numeric: tabular-nums;
-}
-
-.inference-details caption {
-  padding-bottom: .45rem;
-  color: var(--muted);
-  text-align: left;
-}
-
-.inference-details th,
-.inference-details td {
-  padding: .45rem .65rem .45rem 0;
-  border-bottom: 1px solid var(--border);
+@media (max-width: 40rem) {
+  .inference-mode { grid-template-columns: minmax(0, 1fr); }
+  .inference-boundary ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
