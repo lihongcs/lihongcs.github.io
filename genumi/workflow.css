@@ -154,7 +154,6 @@
 }
 
 .workflow-media video {
-  aspect-ratio: 1200 / 534;
   background: #232421;
 }
 
@@ -476,13 +475,17 @@
   font: 500 clamp(1.45rem, 3.5vw, 1.9rem)/1.15 Newsreader, Georgia, serif;
 }
 
-.processing-stage img {
+.processing-stage img,
+.processing-stage-media video {
   display: block;
   width: 100%;
   height: auto;
   border: 1px solid var(--border);
   border-radius: .65rem;
 }
+
+.processing-stage-media { margin: 0; min-width: 0; }
+.processing-stage-media figcaption { margin-top: .5rem; color: var(--muted); }
 
 .processing-stage-content > p {
   margin: 0 0 .55rem;

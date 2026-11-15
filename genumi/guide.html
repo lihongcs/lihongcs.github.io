@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=slam-bimanual">
+  <link rel="stylesheet" href="workflow.css?v=gripper-video">
 </head>
 <body>
   <header class="site-header wrap">
@@ -182,14 +182,20 @@ cp datacap/config.example.json datacap/config.json</code></pre>
 
       <section class="processing-stage" id="x5-gripper-guide" aria-labelledby="x5-gripper-title">
         <h4 id="x5-gripper-title">03 · Measure gripper opening</h4>
-        <img src="assets/workflow/x5-bench-gripper.webp" width="1200" height="800" loading="lazy"
-          alt="The detected marker pair on the left gripper and its pixel separation during one folding episode.">
+        <figure class="processing-stage-media">
+          <video controls playsinline preload="none" width="1200" height="800"
+            src="assets/workflow/x5-bench-gripper.mp4" poster="assets/workflow/x5-bench-gripper.webp?v=bimanual"
+            aria-label="Left and right gripper close-ups with detected ArUco markers and synchronized gripper opening in millimetres">
+            <a href="assets/workflow/x5-bench-gripper.mp4">Watch the gripper opening video</a>
+          </video>
+          <figcaption>13.10 s · Calibrated opening for both wrists. Dashed segments hold the last estimate. Calibration tops out at 85 mm.</figcaption>
+        </figure>
         <div class="processing-stage-content">
           <p>Convert the distance between ArUco tags to gripper opening in metres.</p>
           <dl>
             <div><dt>Input</dt><dd>INSV wrist frames, aligned timestamps, episode markers and a gripper calibration curve.</dd></div>
             <div><dt>Output</dt><dd>One <code>gripper_width.csv</code> per wrist.</dd></div>
-            <div><dt>Time</dt><dd>9 min 55.27 s</dd></div>
+            <div><dt>Time</dt><dd>9 min 55.27 s for the full benchmark.</dd></div>
           </dl>
         </div>
       </section>

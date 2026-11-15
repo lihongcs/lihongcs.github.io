@@ -23,11 +23,13 @@ const stages = {
     },
     {
       name: 'Gripper',
-      file: 'x5-bench-gripper.webp',
+      file: 'x5-bench-gripper.webp?v=bimanual',
+      clip: 'x5-bench-gripper.mp4',
+      clipHeight: 800,
       title: 'Measure gripper opening',
-      alt: 'ArUco marker positions and separation during the first benchmark episode',
+      alt: 'Synchronized left and right gripper close-ups and their calibrated opening in millimetres',
       text: 'Convert ArUco marker separation to gripper opening.',
-      context: 'Cloth-folding benchmark · 9 min 55 s',
+      context: 'Cloth-folding replay · 13.10 s',
       guide: 'x5-gripper-guide',
       link: 'Gripper details',
     },
@@ -108,6 +110,9 @@ function showStage(index) {
   if (stage.clip) {
     const source = 'assets/workflow/' + stage.clip;
     clip.poster = artwork;
+    clip.height = stage.clipHeight ?? 534;
+    clip.setAttribute('aria-label', stage.alt);
+    clip.querySelector('a').href = source;
     if (clip.getAttribute('src') !== source) clip.src = source;
   } else {
     art.src = artwork;
