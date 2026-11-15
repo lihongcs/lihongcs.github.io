@@ -2,7 +2,7 @@ const stages = {
   x5: [
     {
       name: 'Capture',
-      file: 'x5-full-episode.webp',
+      file: 'x5-capture.webp?v=dual-wrist',
       clip: 'x5-full-episode.mp4',
       title: 'Record a demonstration',
       alt: 'Full pepper-sorting demonstration from the left and right X5 wrist cameras',
