@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=x5-views">
+  <link rel="stylesheet" href="workflow.css?v=x5-export-video">
 </head>
 <body>
   <header class="site-header wrap">
@@ -198,6 +198,7 @@ cp datacap/config.example.json datacap/config.json</code></pre>
           <p>Optical-flow stitching</p>
           <strong><time datetime="PT4M12.67S">4 min 12.67 s</time></strong>
           <p>Parallel CUDA stitching, H.265 encoding and verification for two 9 min 22 s videos.</p>
+          <p>Included in the <time datetime="PT14M50.20S">14 min 50.20 s</time> six-view export.</p>
         </div>
         <div class="processing-stage-content">
           <p>Export native fisheye videos or synchronized LeRobot episodes.</p>
@@ -207,47 +208,44 @@ cp datacap/config.example.json datacap/config.json</code></pre>
           </dl>
           <p class="export-formats-link"><a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-native-fisheye-views">Native fisheye export commands</a></p>
         </div>
-        <p class="export-example-note">Previews show episode 150 from the August 17, 2026 capture. Timings are from the 25-episode benchmark above.</p>
         <ul class="export-views" role="list" aria-label="Wrist image layouts for both cameras">
           <li>
             <figure>
-              <a href="assets/workflow/x5-export-front.webp" aria-label="Open the full-size front fisheye preview">
-                <img src="assets/workflow/x5-export-front.webp" width="1200" height="800" loading="lazy"
-                  alt="Raw front lens image from each wrist.">
-              </a>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-front.mp4" poster="assets/workflow/x5-export-front.webp?v=video"
+                aria-label="Front fisheye video from both wrists">
+                <a href="assets/workflow/x5-export-front.mp4">Watch the front fisheye video</a>
+              </video>
               <figcaption>
                 <h5>Front 180°</h5>
-                <p>2 views · one front MP4 per wrist and chapter</p>
-                <p>Native fisheye</p>
-                <p>Export time unmeasured</p>
+                <p>2 native MP4 views per chapter</p>
               </figcaption>
             </figure>
           </li>
           <li>
             <figure>
-              <a href="assets/workflow/x5-export-front-rear.webp" aria-label="Open the full-size front and rear preview">
-                <img src="assets/workflow/x5-export-front-rear.webp" width="1200" height="800" loading="lazy"
-                  alt="Front and rear lens images from both wrists, with faces obscured in the rear views.">
-              </a>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-front-rear.mp4" poster="assets/workflow/x5-export-front-rear.webp?v=video"
+                aria-label="Front and rear fisheye video from both wrists, with rear faces masked">
+                <a href="assets/workflow/x5-export-front-rear.mp4">Watch the front and rear video</a>
+              </video>
               <figcaption>
                 <h5>Front 180° + rear 180°</h5>
-                <p>4 views · front and rear MP4s per wrist and chapter</p>
-                <p>Requires reviewed opaque face masks before export.</p>
-                <p>Export time unmeasured</p>
+                <p>4 native MP4 views per chapter</p>
+                <p>Rear faces masked</p>
               </figcaption>
             </figure>
           </li>
           <li>
             <figure>
-              <a href="assets/workflow/x5-export-surround.webp" aria-label="Open the full-size front and side preview">
-                <img src="assets/workflow/x5-export-surround.webp" width="1200" height="800" loading="lazy"
-                  alt="Two wrists, each showing the front image and projected left and right images from a stitched panorama.">
-              </a>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-surround.mp4" poster="assets/workflow/x5-export-surround.webp?v=video"
+                aria-label="Front and stitched side-view video from both wrists">
+                <a href="assets/workflow/x5-export-surround.mp4">Watch the front and side-view video</a>
+              </video>
               <figcaption>
                 <h5>Front 180° + two 90° sides</h5>
-                <p>6 PNG views per frame · side views projected at ±90° yaw</p>
-                <p>One LeRobot v2.1 Parquet file per episode</p>
-                <p><strong><time datetime="PT14M50.20S">14 min 50.20 s</time></strong> · includes stitching</p>
+                <p>6 PNG views per frame · LeRobot v2.1 Parquet</p>
               </figcaption>
             </figure>
           </li>

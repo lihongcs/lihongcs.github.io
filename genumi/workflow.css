@@ -535,12 +535,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.export-example-note {
-  grid-column: 1 / -1;
-  margin: .5rem 0 0;
-  color: var(--muted);
-}
-
 .processing-stage-content .export-formats-link { margin: .45rem 0 0; }
 
 #x5-export-guide .processing-stage-content dl div {
@@ -566,12 +560,15 @@
 
 .export-views figure { margin: 0; }
 
-.export-views figure > a { display: block; }
-
-.export-views img {
-  border: 0;
+.export-views video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
   border-bottom: 1px solid var(--border);
   border-radius: .6rem .6rem 0 0;
+  background: var(--surface);
 }
 
 .export-views figcaption { padding: .85rem 1rem 1rem; }
@@ -585,8 +582,6 @@
   margin: .2rem 0 0;
   color: var(--muted);
 }
-
-.export-views figcaption strong { color: var(--text); }
 
 @media (max-width: 42rem) {
   .export-views { grid-template-columns: minmax(0, 1fr); }
