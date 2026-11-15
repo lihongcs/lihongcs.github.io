@@ -24,15 +24,28 @@ async function showPreview(surface) {
   const initialView = new Vector3(...direction).normalize();
   const view = initialView.clone();
   const resetButton = surface.querySelector('[data-preview-reset]');
-  let observer;
+  const spinButton = surface.querySelector('[data-preview-spin]');
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  const idleDelayMs = 2500;
+  const spinRadiansPerSecond = .32;
+  let autoRotate = !motionPreference.matches;
+  let spinReady = false;
+  let lastSpinTime = null;
+  let visible = !('IntersectionObserver' in window);
+  let resizeObserver, visibilityObserver, pointer, spinTimer;
   let renderFrame = 0;
   let distance;
 
   function restorePoster(event) {
     event?.preventDefault();
     cancelAnimationFrame(renderFrame);
-    observer?.disconnect();
+    clearTimeout(spinTimer);
+    resizeObserver?.disconnect();
+    visibilityObserver?.disconnect();
+    document.removeEventListener('visibilitychange', scheduleSpin);
+    motionPreference.removeEventListener('change', updateMotionPreference);
     resetButton.removeEventListener('click', reset);
+    spinButton.removeEventListener('click', toggleSpin);
     canvas.remove();
     renderer.dispose();
     surface.dataset.previewState = 'fallback';
@@ -84,12 +97,51 @@ async function showPreview(surface) {
     scene.add(light);
   }
 
-  function draw() {
+  function scheduleSpin() {
+    clearTimeout(spinTimer);
+    spinReady = false;
+    lastSpinTime = null;
+    if (!autoRotate || !visible || document.hidden || pointer) return;
+    spinTimer = setTimeout(() => {
+      spinReady = true;
+      requestDraw();
+    }, idleDelayMs);
+  }
+
+  function setAutoRotate(enabled) {
+    autoRotate = enabled;
+    spinButton.textContent = enabled ? 'Pause' : 'Play';
+    spinButton.setAttribute('aria-label', `${enabled ? 'Pause' : 'Play'} automatic rotation of ${name}`);
+    scheduleSpin();
+  }
+
+  function toggleSpin() {
+    setAutoRotate(!autoRotate);
+  }
+
+  function updateMotionPreference() {
+    setAutoRotate(!motionPreference.matches);
+  }
+
+  function draw(now) {
     renderFrame = 0;
+    if (spinReady) {
+      if (lastSpinTime !== null) {
+        const frameTime = now - lastSpinTime;
+        if (frameTime < 30) {
+          requestDraw();
+          return;
+        }
+        const elapsed = Math.min(frameTime, 100) / 1000;
+        view.applyAxisAngle(camera.up, spinRadiansPerSecond * elapsed);
+      }
+      lastSpinTime = now;
+    }
     camera.position.copy(center).addScaledVector(view, distance);
     camera.lookAt(center);
     renderer.render(scene, camera);
-    surface.dataset.previewState = 'ready';
+    if (surface.dataset.previewState !== 'ready') surface.dataset.previewState = 'ready';
+    if (spinReady) requestDraw();
   }
 
   function requestDraw() {
@@ -97,6 +149,7 @@ async function showPreview(surface) {
   }
 
   function reset() {
+    scheduleSpin();
     view.copy(initialView);
     requestDraw();
   }
@@ -110,10 +163,10 @@ async function showPreview(surface) {
     requestDraw();
   }
 
-  let pointer;
   canvas.addEventListener('pointerdown', (event) => {
     if (pointer || !event.isPrimary || event.button !== 0) return;
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    scheduleSpin();
     canvas.setPointerCapture(event.pointerId);
     canvas.classList.add('is-rotating');
   });
@@ -132,6 +185,7 @@ async function showPreview(surface) {
       if (pointer?.id !== pointerId) return;
       pointer = null;
       canvas.classList.remove('is-rotating');
+      scheduleSpin();
     });
   }
   canvas.addEventListener('keydown', (event) => {
@@ -140,13 +194,26 @@ async function showPreview(surface) {
     }[event.key];
     if (!movement && event.key !== 'Home') return;
     event.preventDefault();
-    if (movement) rotate(...movement);
-    else reset();
+    if (movement) {
+      scheduleSpin();
+      rotate(...movement);
+    } else reset();
   });
   canvas.addEventListener('webglcontextlost', restorePoster);
   resetButton.addEventListener('click', reset);
+  spinButton.addEventListener('click', toggleSpin);
+  document.addEventListener('visibilitychange', scheduleSpin);
+  motionPreference.addEventListener('change', updateMotionPreference);
+  updateMotionPreference();
+  if ('IntersectionObserver' in window) {
+    visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.intersectionRatio >= .05;
+      scheduleSpin();
+    }, { threshold: .05 });
+    visibilityObserver.observe(surface);
+  }
   surface.append(canvas);
-  observer = new ResizeObserver(() => {
+  resizeObserver = new ResizeObserver(() => {
     const { clientWidth: width, clientHeight: height } = surface;
     if (!width || !height) return;
     camera.aspect = width / height;
@@ -160,7 +227,7 @@ async function showPreview(surface) {
     renderer.setSize(width, height, false);
     requestDraw();
   });
-  observer.observe(surface);
+  resizeObserver.observe(surface);
 }
 
 const previews = document.querySelectorAll('[data-project-preview]');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hong Li</title>
-    <script type="module" src="./hardware-viewer/project-previews.mjs?v=orbit"></script>
+    <script type="module" src="./hardware-viewer/project-previews.mjs?v=idle-rotation"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -194,7 +194,7 @@
         }
         [data-preview-state="ready"] .project-image { visibility: hidden; }
         [data-preview-state="ready"] .project-preview-tools { display: flex; }
-        .project-preview-tools span,
+        .project-preview-tools > span,
         .project-preview-tools button {
             padding: .3rem .5rem;
             border: 1px solid var(--border-color);
@@ -206,6 +206,10 @@
         .project-preview-tools button {
             cursor: pointer;
             pointer-events: auto;
+        }
+        .project-preview-actions {
+            display: flex;
+            gap: .35rem;
         }
         .project-copy {
             padding: 1.1rem 1.25rem 1.25rem;
@@ -299,7 +303,10 @@
                     <img class="project-image project-image--genumi" src="./genumi/assets/flexiv-assembly-clean.webp" alt="InstaUMI handheld gripper with an Insta360 camera and a VIVE tracker" width="1280" height="960" loading="lazy">
                     <div class="project-preview-tools">
                         <span id="project-genumi-controls">Drag to rotate</span>
-                        <button type="button" data-preview-reset aria-label="Reset InstaUMI preview">Reset</button>
+                        <div class="project-preview-actions">
+                            <button type="button" data-preview-spin>Pause</button>
+                            <button type="button" data-preview-reset aria-label="Reset InstaUMI preview">Reset</button>
+                        </div>
                     </div>
                 </div>
                 <div class="project-copy">
@@ -318,7 +325,10 @@
                     <img class="project-image" src="./aetherock/assets/hardware/aetherock-preview.webp?v=short-pivot-seats" alt="AetheRock arm-worn robot teaching device" width="798" height="527" loading="lazy">
                     <div class="project-preview-tools">
                         <span id="project-aetherock-controls">Drag to rotate</span>
-                        <button type="button" data-preview-reset aria-label="Reset AetheRock preview">Reset</button>
+                        <div class="project-preview-actions">
+                            <button type="button" data-preview-spin>Pause</button>
+                            <button type="button" data-preview-reset aria-label="Reset AetheRock preview">Reset</button>
+                        </div>
                     </div>
                 </div>
                 <div class="project-copy">
@@ -335,7 +345,10 @@
                     <img class="project-image" src="./gelslim-mini/assets/hardware/gelslim-mini-preview.webp?v=post-mount" alt="Gelslim Mini optical tactile sensor assembly" width="798" height="527" loading="lazy">
                     <div class="project-preview-tools">
                         <span id="project-gelslim-controls">Drag to rotate</span>
-                        <button type="button" data-preview-reset aria-label="Reset Gelslim Mini preview">Reset</button>
+                        <div class="project-preview-actions">
+                            <button type="button" data-preview-spin>Pause</button>
+                            <button type="button" data-preview-reset aria-label="Reset Gelslim Mini preview">Reset</button>
+                        </div>
                     </div>
                 </div>
                 <div class="project-copy">
