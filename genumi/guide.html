@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=inference-columns">
+  <link rel="stylesheet" href="workflow.css?v=panoramic-slam">
 </head>
 <body>
   <header class="site-header wrap">
@@ -32,6 +32,7 @@
         <a href="#setup">Shared setup</a>
         <a href="#x5">X5 wireless</a>
         <a href="#x3">X3 wired</a>
+        <a href="#panoramic-slam">Panoramic SLAM</a>
         <a href="#inference">Inference latency</a>
       </nav>
     </section>
@@ -269,6 +270,56 @@ MEDIASDK_ROOT=/path/to/MediaSDK \
   bash dataprocess/_01_raw_extrect/insta360_pano_export/scripts/build_ubuntu.sh
 bash dataprocess/run_bimanual_htc.sh \
   /absolute/path/to/capture 'Task description'</code></pre>
+      </details>
+    </article>
+
+    <article class="guide processing-guide" id="panoramic-slam" aria-labelledby="panoramic-slam-title">
+      <header>
+        <h3 id="panoramic-slam-title">Panoramic SLAM</h3>
+        <p class="processing-caption">Stella VSLAM tracks ORB features directly in the 360° equirectangular video from one X5 wrist camera. <a href="https://stella-cv.readthedocs.io/en/stable/overview.html">Algorithm documentation</a></p>
+      </header>
+
+      <div class="processing-benchmark slam-benchmark">
+        <dl>
+          <div>
+            <dt>Input video</dt>
+            <dd><time datetime="PT60.06S">60.06 s</time></dd>
+            <dd class="processing-format-detail">HEVC MP4 · 2048 × 1024 · 59.94 fps · 3,600 frames</dd>
+          </div>
+          <div>
+            <dt>SLAM wall time</dt>
+            <dd><time datetime="PT1M12.22S">1 min 12.22 s</time></dd>
+            <dd class="processing-format-detail">Intel Core i7-14700K · 4.85 core·min · 0.54 GiB peak RSS</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="slam-views">
+        <figure>
+          <img src="assets/workflow/slam-panorama.webp" width="1024" height="512" loading="lazy" alt="Equirectangular panorama from the left X5 wrist while both grippers hold cloth over a red table">
+          <figcaption><h4>360° input</h4><p>Left wrist at 00:19 · privacy masks applied to the preview</p></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/workflow/slam-trajectory.webp" width="1024" height="512" loading="lazy" alt="Projected camera trajectory in teal over the sparse Stella VSLAM map in gray, from the same video">
+          <figcaption><h4>Trajectory and sparse map</h4><p>Z–Y detail · teal path · gray landmarks · relative scale</p></figcaption>
+        </figure>
+      </div>
+
+      <dl class="slam-files">
+        <div><dt>TUM trajectory <code>.txt</code></dt><dd>Timestamp, 3D position and quaternion · 3,544 frame poses · 22 keyframes</dd></div>
+        <div><dt>MessagePack map <code>.msgpack</code></dt><dd>1,911 sparse 3D landmarks and their keyframes</dd></div>
+      </dl>
+      <p class="processing-caption">Timing covers MP4 decoding, tracking, mapping and file output. Stitching and metric scale calibration are separate steps.</p>
+
+      <details class="processing-commands">
+        <summary>Run Stella VSLAM on a panorama</summary>
+        <p>Use a Stella runner with FFmpeg pipe support. Set the camera model to <code>equirectangular</code> and match the video's dimensions and frame rate. On 15 Nov 2026 this run used all 3,600 frames and an 8,000-keypoint limit. The final trajectory begins at 0.95 s after initialization retries. <a href="https://stella-cv.readthedocs.io/en/stable/simple_tutorial.html">Stella VSLAM setup</a></p>
+        <pre tabindex="0"><code>mkdir -p stella_eval
+STELLA_FFMPEG_PIPE=1 /usr/bin/time -v run_video_slam \
+  -v orb_vocab.fbow -c camera.yaml -m panorama.mp4 \
+  --viewer none --no-sleep --auto-term --wait-loop-ba \
+  --frame-skip 1 --start-timestamp 0 \
+  --eval-log-dir stella_eval --map-db-out stella-map.msgpack</code></pre>
       </details>
     </article>
 
