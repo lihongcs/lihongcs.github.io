@@ -240,15 +240,6 @@
   }
 }
 
-.system-screenshots {
-  padding-bottom: clamp(1.25rem, 4vw, 2.5rem);
-  border-bottom: 1px solid var(--border);
-}
-
-.system-screenshots h2 {
-  font-size: clamp(1.65rem, 4vw, 2.35rem);
-}
-
 .system-screenshots figure {
   margin: 1rem 0 0;
 }
@@ -312,7 +303,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1200 / 534;
+  aspect-ratio: 2 / 1;
   background: #292321;
   border-radius: .55rem;
 }
@@ -521,4 +512,82 @@
 
 @media (max-width: 56rem) {
   .processing-duration-bar span:first-child { font-size: 0; }
+}
+
+.export-stitch-time {
+  align-self: stretch;
+  display: grid;
+  align-content: center;
+  gap: .35rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-radius: .65rem;
+  background: #254e4e;
+  color: #fff;
+}
+
+.export-stitch-time p {
+  margin: 0;
+  color: inherit;
+}
+
+.export-stitch-time > strong {
+  font: 500 clamp(2.25rem, 5vw, 3.35rem)/1.1 Newsreader, Georgia, serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.export-example-note {
+  grid-column: 1 / -1;
+  margin: .5rem 0 0;
+  color: var(--muted);
+}
+
+.processing-stage-content .export-formats-link { margin: .45rem 0 0; }
+
+#x5-export-guide .processing-stage-content dl div {
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+}
+
+.export-views {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.export-views li {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: .65rem;
+  background: var(--surface);
+}
+
+.export-views figure { margin: 0; }
+
+.export-views figure > a { display: block; }
+
+.export-views img {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: .6rem .6rem 0 0;
+}
+
+.export-views figcaption { padding: .85rem 1rem 1rem; }
+
+.export-views h5 {
+  margin: 0 0 .35rem;
+  font: 500 1.35rem/1.15 Newsreader, Georgia, serif;
+}
+
+.export-views figcaption p {
+  margin: .2rem 0 0;
+  color: var(--muted);
+}
+
+.export-views figcaption strong { color: var(--text); }
+
+@media (max-width: 42rem) {
+  .export-views { grid-template-columns: minmax(0, 1fr); }
 }

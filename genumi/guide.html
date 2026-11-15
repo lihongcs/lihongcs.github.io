@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css">
+  <link rel="stylesheet" href="workflow.css?v=x5-views">
 </head>
 <body>
   <header class="site-header wrap">
@@ -33,17 +33,6 @@
         <a href="#x5">X5 wireless</a>
         <a href="#x3">X3 wired</a>
       </nav>
-    </section>
-
-    <section class="system-screenshots" id="screenshots" aria-labelledby="system-screenshots-title">
-      <h2 id="system-screenshots-title">Capture interface</h2>
-      <figure>
-        <a href="assets/instadatacap-dashboard.webp" aria-label="Open the full-size InstaDataCap screenshot">
-          <img src="assets/instadatacap-dashboard.webp" width="2160" height="1560"
-            alt="InstaDataCap during a simulated dual-arm session, with capture controls and tracker status">
-        </a>
-        <figcaption>InstaDataCap · Simulated session</figcaption>
-      </figure>
     </section>
 
     <article class="guide" id="setup" aria-labelledby="setup-title">
@@ -69,39 +58,49 @@ cp datacap/config.example.json datacap/config.json</code></pre>
             <p>Set the capture directory, camera roles and tracker roles in <code>datacap/config.json</code>. For real tracker capture, follow the <a href="https://github.com/lihongcs/InstaUMI/tree/main/datacap">DataCap README</a> to install a compatible tracker backend and set up device roles. Use <code>Bluetooth Control</code> for X5. Set <code>insta.name_prefixes</code> to <code>["X5 "]</code> or enter your own camera BLE addresses. For X3, follow the <a href="#x3">wired setup</a>.</p>
             <pre tabindex="0"><code>python3 -m datacap.webapp --config datacap/config.json --host 127.0.0.1</code></pre>
           </details>
+          <details class="system-screenshots" id="screenshots">
+            <summary>View the InstaDataCap interface</summary>
+            <figure>
+              <a href="assets/instadatacap-dashboard.webp" aria-label="Open the full-size InstaDataCap screenshot">
+                <img src="assets/instadatacap-dashboard.webp" width="2160" height="1560" loading="lazy"
+                  alt="InstaDataCap during a simulated dual-arm session, with capture controls and tracker status">
+              </a>
+              <figcaption>Interface reference · Simulated devices</figcaption>
+            </figure>
+          </details>
         </div>
     </article>
 
-      <div id="x5"></div>
+    <div id="x5"></div>
     <article class="guide" id="capture" aria-labelledby="capture-title">
         <div class="guide-heading">
           <h3 id="capture-title">Collect a session</h3>
           <figure class="capture-sample" id="raw-sample" aria-labelledby="raw-sample-title">
             <figcaption>
-              <h4 id="raw-sample-title">Pepper sorting · Episode 1</h4>
-              <p>Full demonstration · 15.2 s</p>
+              <h4 id="raw-sample-title">Cloth folding · Episode 150</h4>
+              <p>Latest complete capture · 17 Aug 2026<br>Final demonstration · 10.74 s</p>
             </figcaption>
             <div class="capture-sample-views" aria-hidden="true">
               <span>Left wrist</span>
               <span>Right wrist</span>
             </div>
-            <video controls muted playsinline preload="none" width="1200" height="534"
-              poster="assets/workflow/x5-full-episode.webp" aria-label="Full 15.2-second pepper-sorting demonstration, with left and right views from the original Insta360 recordings">
-              <source src="assets/workflow/x5-full-episode.mp4" type="video/mp4">
-              <a href="assets/workflow/x5-full-episode.mp4">Download the full demonstration video</a>
+            <video controls muted playsinline preload="none" width="1200" height="600"
+              poster="assets/workflow/x5-latest-episode.webp" aria-label="Complete final cloth-folding demonstration, with left and right views from the original Insta360 recordings">
+              <source src="assets/workflow/x5-latest-episode.mp4" type="video/mp4">
+              <a href="assets/workflow/x5-latest-episode.mp4">Download the full demonstration video</a>
             </video>
-            <div class="capture-sample-timeline" role="group" aria-label="First 90 seconds of the capture log. Episode 1 runs from 44.8 to 60.0 seconds, episode 2 from 70.0 to 84.5 seconds. The video covers all of episode 1.">
-              <p class="capture-sample-timeline-title">Episode markers · first 90 seconds</p>
+            <div class="capture-sample-timeline" role="group" aria-label="Final 90 seconds of the capture. Episode 149 runs from 44.22 to 57.24 seconds. Episode 150 runs from 65.39 to 76.13 seconds.">
+              <p class="capture-sample-timeline-title">Episode markers · final 90 seconds</p>
               <div class="capture-sample-axis" aria-hidden="true">
                 <span>0 s</span><span>30 s</span><span>60 s</span><span>90 s</span>
               </div>
               <div class="capture-sample-track" aria-hidden="true">
-                <span class="sample-episode sample-episode-playing" style="--offset: 49.73%; --span: 16.89%"></span>
-                <span class="sample-episode" style="--offset: 77.80%; --span: 16.03%"></span>
+                <span class="sample-episode" style="--offset: 49.13%; --span: 14.47%"></span>
+                <span class="sample-episode sample-episode-playing" style="--offset: 72.65%; --span: 11.94%"></span>
               </div>
               <div class="capture-sample-key" aria-hidden="true">
-                <span>Episode 1 · video</span>
-                <span>Episode 2</span>
+                <span>Episode 150 · video</span>
+                <span>Episode 149</span>
               </div>
             </div>
           </figure>
@@ -194,17 +193,65 @@ cp datacap/config.example.json datacap/config.json</code></pre>
       </section>
 
       <section class="processing-stage" id="x5-export-guide" aria-labelledby="x5-export-title">
-        <h4 id="x5-export-title">05 · Export LeRobot</h4>
-        <img src="assets/workflow/x5-bench-export.webp" width="1200" height="800" loading="lazy"
-          alt="One exported frame showing three RGB views from each wrist.">
-        <div class="processing-stage-content">
-          <p>Stitch and project camera views, align pose and opening, and export marked episodes.</p>
-          <dl>
-            <div><dt>Input</dt><dd>INSV, VIVE pose and gripper-width CSVs, aligned timestamps and episode markers.</dd></div>
-            <div><dt>Output</dt><dd>One LeRobot Parquet file per episode, dataset metadata and <code>sync_report.json</code>.</dd></div>
-            <div><dt>Time</dt><dd>14 min 50.20 s</dd></div>
-          </dl>
+        <h4 id="x5-export-title">05 · Export wrist views</h4>
+        <div class="export-stitch-time">
+          <p>Optical-flow stitching</p>
+          <strong><time datetime="PT4M12.67S">4 min 12.67 s</time></strong>
+          <p>Parallel CUDA stitching, H.265 encoding and verification for two 9 min 22 s videos.</p>
         </div>
+        <div class="processing-stage-content">
+          <p>Export native fisheye videos or synchronized LeRobot episodes.</p>
+          <dl>
+            <div><dt>Input</dt><dd>X5 INSV files for both wrists.</dd></div>
+            <div><dt>LeRobot</dt><dd>Also uses VIVE pose and gripper-width CSVs, aligned timestamps and episode markers.</dd></div>
+          </dl>
+          <p class="export-formats-link"><a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-native-fisheye-views">Native fisheye export commands</a></p>
+        </div>
+        <p class="export-example-note">Previews show episode 150 from the August 17, 2026 capture. Timings are from the 25-episode benchmark above.</p>
+        <ul class="export-views" role="list" aria-label="Wrist image layouts for both cameras">
+          <li>
+            <figure>
+              <a href="assets/workflow/x5-export-front.webp" aria-label="Open the full-size front fisheye preview">
+                <img src="assets/workflow/x5-export-front.webp" width="1200" height="800" loading="lazy"
+                  alt="Raw front lens image from each wrist.">
+              </a>
+              <figcaption>
+                <h5>Front 180°</h5>
+                <p>2 views · one front MP4 per wrist and chapter</p>
+                <p>Native fisheye</p>
+                <p>Export time unmeasured</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <a href="assets/workflow/x5-export-front-rear.webp" aria-label="Open the full-size front and rear preview">
+                <img src="assets/workflow/x5-export-front-rear.webp" width="1200" height="800" loading="lazy"
+                  alt="Front and rear lens images from both wrists, with faces obscured in the rear views.">
+              </a>
+              <figcaption>
+                <h5>Front 180° + rear 180°</h5>
+                <p>4 views · front and rear MP4s per wrist and chapter</p>
+                <p>Requires reviewed opaque face masks before export.</p>
+                <p>Export time unmeasured</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <a href="assets/workflow/x5-export-surround.webp" aria-label="Open the full-size front and side preview">
+                <img src="assets/workflow/x5-export-surround.webp" width="1200" height="800" loading="lazy"
+                  alt="Two wrists, each showing the front image and projected left and right images from a stitched panorama.">
+              </a>
+              <figcaption>
+                <h5>Front 180° + two 90° sides</h5>
+                <p>6 PNG views per frame · side views projected at ±90° yaw</p>
+                <p>One LeRobot v2.1 Parquet file per episode</p>
+                <p><strong><time datetime="PT14M50.20S">14 min 50.20 s</time></strong> · includes stitching</p>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
       </section>
 
       <section class="processing-check" aria-labelledby="processing-check-title">
@@ -213,7 +260,7 @@ cp datacap/config.example.json datacap/config.json</code></pre>
       </section>
 
       <details class="processing-commands">
-        <summary>Install and run</summary>
+        <summary>Install and run the LeRobot pipeline</summary>
         <p>Run from the repository root on Ubuntu. Use FFmpeg and PyAV with <code>v360</code>, and Insta360 MediaSDK with a compatible NVIDIA driver. <a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-lerobot-v21">Gripper calibration instructions</a></p>
         <pre tabindex="0"><code>python3 -m venv .venv-processing
 source .venv-processing/bin/activate
