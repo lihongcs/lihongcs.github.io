@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=inference-views">
+  <link rel="stylesheet" href="workflow.css?v=inference-columns">
 </head>
 <body>
   <header class="site-header wrap">
@@ -297,7 +297,7 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             <p>Run Stage 01 from the repository root. It checks the packet index, camera roles, and shared host timestamps, then writes 30 Hz MP4 and timing reports under <code>capture/tmp/</code>.</p>
             <pre tabindex="0"><code>INPUT_DIR=/absolute/path/to/usb-capture \
   bash dataprocess/_01_raw_extrect/run_01_raw_extract_biarm.sh</code></pre>
-            <p>The documented X3 path ends at Stage 01. The gripper estimation and LeRobot instructions above use X5 INSV files.</p>
+            <p>The documented X3 path ends at Stage 01. It writes <code>native_flat_master.mp4</code> with the original stacked lenses. <a href="#inference-x3">See the X3 output layout</a></p>
           </details>
         </div>
     </article>
@@ -305,25 +305,27 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
     <article class="guide processing-guide" id="inference" aria-labelledby="inference-title">
       <header>
         <h3 id="inference-title">Inference views and latency</h3>
-        <p class="processing-caption">The X5 runs used the same π0.5 checkpoint with different image pipelines and GPU settings. Previews come from separate camera checks, with faces masked.</p>
       </header>
 
       <div class="inference-modes">
+        <div class="inference-column-headings">
+          <span>Exported wrist views</span>
+          <span>Inference latency</span>
+        </div>
         <section class="inference-mode" aria-labelledby="inference-webcam-title">
-          <header>
+          <div class="inference-images">
             <h4 id="inference-webcam-title">X5 USB Webcam</h4>
-            <p>In-camera stitch and stabilization · MJPEG · 2880 × 1440</p>
-          </header>
-          <figure class="inference-preview">
-            <div class="inference-wrists">
-              <img src="assets/workflow/inference-webcam-left.webp" width="224" height="224" loading="lazy" alt="Left wrist view exported from an X5 USB Webcam stream">
-              <img src="assets/workflow/inference-webcam-right.webp" width="224" height="224" loading="lazy" alt="Right wrist view exported from an X5 USB Webcam stream">
-            </div>
-            <figcaption>Left / right 180° fisheye · 224 × 224 · 18 Aug check</figcaption>
-          </figure>
+            <figure class="inference-preview">
+              <div class="inference-wrists">
+                <img src="assets/workflow/inference-webcam-left.webp" width="224" height="224" alt="Left wrist view exported from an X5 USB Webcam stream">
+                <img src="assets/workflow/inference-webcam-right.webp" width="224" height="224" alt="Right wrist view exported from an X5 USB Webcam stream">
+              </div>
+              <figcaption>Left and right wrist · 18 Aug check</figcaption>
+            </figure>
+            <p>In-camera stitched panorama · 2880 × 1440 MJPEG</p>
+          </div>
           <div class="inference-timing">
-            <h5>Latest wrist pair → reply + freshness check</h5>
-            <p class="inference-result"><span><strong>147.4</strong> ms median</span><span><strong>180.0</strong> ms P95</span></p>
+            <p class="inference-result"><span><strong>147.4 ms</strong> Median</span><span><strong>180.0 ms</strong> P95</span></p>
             <dl>
               <div><dt>Policy request round trip</dt><dd>140.8 / 151.6 ms</dd></div>
               <div><dt>Model compute within request</dt><dd>127.9 / 132.9 ms</dd></div>
@@ -333,20 +335,19 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
         </section>
 
         <section class="inference-mode" aria-labelledby="inference-sdk-title">
-          <header>
-            <h4 id="inference-sdk-title">X5 USB Android · CameraSDK on Linux</h4>
-            <p>H.264 dual fisheye · host optical-flow stitch · 2048 × 1024 panorama</p>
-          </header>
-          <figure class="inference-preview">
-            <div class="inference-wrists">
-              <img src="assets/workflow/inference-sdk-left.webp" width="224" height="224" loading="lazy" alt="Left wrist view exported from an X5 CameraSDK stream">
-              <img src="assets/workflow/inference-sdk-right.webp" width="224" height="224" loading="lazy" alt="Right wrist view exported from an X5 CameraSDK stream">
-            </div>
-            <figcaption>Left / right 180° fisheye · 224 × 224 · 17 Aug check</figcaption>
-          </figure>
+          <div class="inference-images">
+            <h4 id="inference-sdk-title">X5 USB Android · CameraSDK</h4>
+            <figure class="inference-preview">
+              <div class="inference-wrists">
+                <img src="assets/workflow/inference-sdk-left.webp" width="224" height="224" alt="Left wrist view exported from an X5 CameraSDK stream">
+                <img src="assets/workflow/inference-sdk-right.webp" width="224" height="224" alt="Right wrist view exported from an X5 CameraSDK stream">
+              </div>
+              <figcaption>Left and right wrist · 17 Aug check</figcaption>
+            </figure>
+            <p>H.264 dual fisheye · Linux optical-flow stitch · 2048 × 1024 panorama</p>
+          </div>
           <div class="inference-timing">
-            <h5>Latest wrist pair → reply + freshness check</h5>
-            <p class="inference-result"><span><strong>211.9</strong> ms median</span><span><strong>225.9</strong> ms P95</span></p>
+            <p class="inference-result"><span><strong>211.9 ms</strong> Median</span><span><strong>225.9 ms</strong> P95</span></p>
             <dl>
               <div><dt>Policy request round trip</dt><dd>195.4 / 199.8 ms</dd></div>
               <div><dt>Model compute within request</dt><dd>184.6 / 185.7 ms</dd></div>
@@ -354,7 +355,22 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             <p class="inference-run">19 Aug 2026 · 103 logged steps</p>
           </div>
         </section>
+
+        <section class="inference-mode" id="inference-x3" aria-labelledby="inference-x3-title">
+          <div class="inference-images">
+            <h4 id="inference-x3-title">X3 USB Webcam · Flat View</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/x3-output.webp" width="1200" height="752" alt="Synthetic X3 output layout with two unstitched fisheye lenses stacked vertically in a 1920 by 1080 frame">
+              <figcaption>Layout example · 1920 × 1080 MJPEG at 30 fps</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-untimed">Inference timing unavailable</p>
+            <p class="inference-run">Stage 01 remux verified with a synthetic capture. A camera recording is still needed.</p>
+          </div>
+        </section>
       </div>
+      <p class="inference-notes">X5 model previews show 224 × 224 front fisheye frames from separate camera checks, with faces masked. Timing runs used the same π0.5 checkpoint with different GPU settings.</p>
 
       <section class="inference-boundary" aria-labelledby="inference-boundary-title">
         <h4 id="inference-boundary-title">What the timer covers</h4>
@@ -367,6 +383,23 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
         <p>Exposure, video transfer, decoding, stitching and projection happen before the timer starts. Action scheduling, dispatch and robot motion follow.</p>
       </section>
       <p class="inference-phone"><strong>Android phone control</strong> · No historical latency measurement found.</p>
+
+      <details class="processing-commands x5-webcam-notes">
+        <summary>Can X5 Webcam stabilization be turned off?</summary>
+        <p>Webcam overrides in-camera shooting settings. X5 stitches and stabilizes the 2880 × 1440 panorama in-camera. Both cameras accepted FlowState Off via CameraSDK. Persistence after switching back to Webcam is unverified. <a href="https://onlinemanual.insta360.com/x5/zh-cn/operating_tutorials/connect/webcam">X5 Webcam manual</a></p>
+        <p>X5 also exposes 1920 × 1080 with two stacked lenses, like X3. It preserved camera roll in the test. Per-lens stabilization remains unverified. X3 Webcam has no FlowState. <a href="https://onlinemanual.insta360.com/app/en-us/operation-tutorial/live/live-streaming#:~:text=X3%20and%20X2%20do%20not%20support%20FlowState%20Stabilization">Insta360 stabilization FAQ</a></p>
+      </details>
+
+      <section class="inference-matrix" aria-labelledby="x5-matrix-title">
+        <div>
+          <h4 id="x5-matrix-title">X5 dataset export matrix</h4>
+          <p>Two wrists × front and rear 180° views, exported from INSV. Rear faces are masked.</p>
+          <a href="#x5-export-guide">See all three X5 exports</a>
+        </div>
+        <figure class="inference-preview">
+          <a href="assets/workflow/x5-export-front-rear.webp?v=video" aria-label="Open the full-size X5 export matrix"><img src="assets/workflow/x5-export-front-rear.webp?v=video" width="1200" height="800" loading="lazy" alt="Real 2 by 2 X5 dataset frame with the left and right wrists in rows and front and rear fisheyes in columns"></a>
+        </figure>
+      </section>
     </article>
 
     <footer class="references">

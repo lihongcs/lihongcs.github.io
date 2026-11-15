@@ -588,23 +588,35 @@
 }
 
 .inference-modes {
-  display: grid;
-  gap: 1rem;
+  --inference-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  --inference-gap: clamp(.7rem, 3vw, 1.75rem);
+  --inference-inset: clamp(.7rem, 2.8vw, 1.5rem);
   margin-top: 1.15rem;
-}
-
-.inference-mode {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.15rem clamp(1rem, 3vw, 1.75rem);
-  padding: clamp(1rem, 3vw, 1.5rem);
   border: 1px solid var(--border);
   border-radius: .75rem;
   background: var(--surface);
 }
 
-.inference-mode > header {
-  grid-column: 1 / -1;
+.inference-column-headings,
+.inference-mode {
+  display: grid;
+  grid-template-columns: var(--inference-columns);
+  column-gap: var(--inference-gap);
+  padding-inline: var(--inference-inset);
+}
+
+.inference-column-headings {
+  padding-block: .75rem;
+  border-radius: .7rem .7rem 0 0;
+  background: #e5ede8;
+  color: #234e4e;
+  font-weight: 650;
+}
+
+.inference-mode {
+  align-items: start;
+  padding-block: var(--inference-inset);
+  border-top: 1px solid var(--border);
 }
 
 .inference-mode h4,
@@ -613,18 +625,21 @@
   font-size: 1.2rem;
 }
 
-.inference-mode header p,
+.inference-images p,
 .inference-preview figcaption,
 .inference-run,
+.inference-notes,
 .inference-boundary p,
 .inference-phone {
   margin: 0;
   color: var(--muted);
 }
 
+.inference-images p,
+.inference-notes { margin-top: .5rem; }
+
 .inference-preview {
-  align-self: start;
-  margin: 0;
+  margin: .55rem 0 0;
 }
 
 .inference-wrists {
@@ -633,7 +648,7 @@
   gap: .45rem;
 }
 
-.inference-wrists img {
+.inference-preview img {
   display: block;
   width: 100%;
   height: auto;
@@ -643,21 +658,24 @@
 
 .inference-preview figcaption { margin-top: .5rem; }
 
-.inference-timing h5 {
-  margin: 0;
-  color: #285e60;
-  font-size: 1.02rem;
+.inference-timing {
+  padding-left: clamp(.45rem, 1.4vw, 1rem);
+  border-left: 1px solid var(--border);
 }
 
 .inference-result {
   display: flex;
   flex-wrap: wrap;
   gap: .15rem 1.1rem;
-  margin: .25rem 0 0;
+  margin: 0;
   font-variant-numeric: tabular-nums;
 }
 
-.inference-result strong { font-size: 1.7rem; }
+.inference-result strong {
+  display: block;
+  font-size: clamp(1.15rem, 3.5vw, 1.75rem);
+  line-height: 1.15;
+}
 
 .inference-timing dl { margin: .55rem 0 .55rem; }
 
@@ -673,6 +691,11 @@
 .inference-timing dd {
   margin: 0;
   font-variant-numeric: tabular-nums;
+}
+
+.inference-untimed {
+  margin: 0 0 .55rem;
+  font-weight: 650;
 }
 
 .inference-boundary {
@@ -700,7 +723,29 @@
 .inference-phone { margin-top: 1rem; }
 .inference-phone strong { color: var(--text); }
 
+.inference-matrix {
+  display: grid;
+  grid-template-areas: "matrix-image matrix-description";
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 1.15rem;
+  padding: clamp(.9rem, 2.8vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  background: var(--surface);
+}
+
+.inference-matrix > div { grid-area: matrix-description; }
+.inference-matrix figure { grid-area: matrix-image; margin: 0; }
+.inference-matrix h4 { margin: 0; font-size: 1.2rem; }
+.inference-matrix p { margin: .45rem 0; color: var(--muted); }
+
 @media (max-width: 40rem) {
-  .inference-mode { grid-template-columns: minmax(0, 1fr); }
+  .inference-wrists { grid-template-columns: minmax(0, 1fr); }
   .inference-boundary ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inference-matrix {
+    grid-template-areas: "matrix-description" "matrix-image";
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
