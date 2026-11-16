@@ -416,12 +416,10 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             <p>In-camera stitched panorama · 2880 × 1440 MJPEG</p>
           </div>
           <div class="inference-timing">
-            <p class="inference-result"><span><strong>147.4 ms</strong> Median</span><span><strong>180.0 ms</strong> P95</span></p>
-            <dl>
-              <div><dt>Policy request round trip</dt><dd>140.8 / 151.6 ms</dd></div>
-              <div><dt>Model compute within request</dt><dd>127.9 / 132.9 ms</dd></div>
-            </dl>
-            <p class="inference-run">18 Aug 2026 · 13 logged steps</p>
+            <p class="inference-scope">Frame request → decoded image</p>
+            <p class="inference-result"><span><strong>22.8 ms</strong> Median</span><span><strong>44.5 ms</strong> P95</span></p>
+            <p class="inference-run">Includes waiting for the next frame and decoding MJPEG at full resolution.</p>
+            <p class="inference-run">16 Nov 2026 · 200 requests</p>
           </div>
         </section>
 
