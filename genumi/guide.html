@@ -401,7 +401,7 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
       <div class="inference-modes">
         <div class="inference-column-headings">
           <span>Camera and policy views</span>
-          <span>Inference latency</span>
+          <span>Latency</span>
         </div>
         <section class="inference-mode" aria-labelledby="inference-webcam-title">
           <div class="inference-images">
@@ -434,15 +434,10 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             </figure>
           </div>
           <div class="inference-timing">
-            <p class="inference-scope">Host frame dequeued → action reply</p>
-            <p class="inference-result"><span><strong>102.7 ms</strong> Median</span><span><strong>118.8 ms</strong> P95</span></p>
-            <dl>
-              <div><dt>MJPEG decode and 224 × 224 resize</dt><dd>5.5 / 6.0 ms</dd></div>
-              <div><dt>Local WebSocket round trip</dt><dd>80.0 / 81.0 ms</dd></div>
-              <div><dt>GPU compute within request</dt><dd>73.6 / 74.2 ms</dd></div>
-            </dl>
-            <p class="inference-run">One live camera · fixed robot state · π0.5 single-wrist checkpoint · RTX 4080 SUPER</p>
-            <p class="inference-run">16 Nov 2026 · 100 requests after warm-up</p>
+            <p class="inference-scope">Frame request → decoded image</p>
+            <p class="inference-result"><span><strong>19.5 ms</strong> Median</span><span><strong>34.7 ms</strong> P95</span></p>
+            <p class="inference-run">Includes waiting for the next frame and decoding MJPEG at full resolution.</p>
+            <p class="inference-run">16 Nov 2026 · 200 requests</p>
           </div>
         </section>
 
