@@ -33,6 +33,10 @@
       "href": "parts/flexible-matrix-fsr-22-mm.step"
     },
     {
+      "label": "Force Sensor ADC Adapter (5-pin XH)",
+      "href": "parts/force-adc-5-pin-xh-adapter.step"
+    },
+    {
       "label": "Force ADC Board-to-Board Header",
       "href": "parts/force-adc-board-to-board-header.step"
     },
@@ -75,6 +79,10 @@
     {
       "label": "Left Fingertip Support",
       "href": "parts/left-fingertip-support.step"
+    },
+    {
+      "label": "Left Force ADC XH2.54 Ribbon Cable",
+      "href": "parts/left-force-adc-xh2-54-ribbon-cable.step"
     },
     {
       "label": "Left Outer Link",
@@ -151,6 +159,10 @@
     {
       "label": "Right Fingertip Support",
       "href": "parts/right-fingertip-support.step"
+    },
+    {
+      "label": "Right Force ADC XH2.54 Ribbon Cable",
+      "href": "parts/right-force-adc-xh2-54-ribbon-cable.step"
     },
     {
       "label": "Right Outer Link",
