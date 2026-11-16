@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="workflow.css?v=slam-orbit">
+  <link rel="stylesheet" href="workflow.css?v=x5-flat-latency">
   <script type="module" src="slam-replay.mjs"></script>
 </head>
 <body>
@@ -400,12 +400,12 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
 
       <div class="inference-modes">
         <div class="inference-column-headings">
-          <span>Exported wrist views</span>
+          <span>Camera and policy views</span>
           <span>Inference latency</span>
         </div>
         <section class="inference-mode" aria-labelledby="inference-webcam-title">
           <div class="inference-images">
-            <h4 id="inference-webcam-title">X5 USB Webcam</h4>
+            <h4 id="inference-webcam-title">X5 USB Webcam · Panorama</h4>
             <figure class="inference-preview">
               <div class="inference-wrists">
                 <img src="assets/workflow/inference-webcam-left.webp" width="224" height="224" alt="Left wrist view exported from an X5 USB Webcam stream">
@@ -422,6 +422,27 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
               <div><dt>Model compute within request</dt><dd>127.9 / 132.9 ms</dd></div>
             </dl>
             <p class="inference-run">18 Aug 2026 · 13 logged steps</p>
+          </div>
+        </section>
+
+        <section class="inference-mode" id="inference-x5-flat" aria-labelledby="inference-x5-flat-title">
+          <div class="inference-images">
+            <h4 id="inference-x5-flat-title">X5 USB Webcam · Flat</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-x5-usb-flat.webp" width="960" height="540" loading="lazy" alt="Single 16:9 view of the test room from the X5 flat USB Webcam stream">
+              <figcaption>Live frame · 1920 × 1080 MJPEG at 30 fps</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Host frame dequeued → action reply</p>
+            <p class="inference-result"><span><strong>102.7 ms</strong> Median</span><span><strong>118.8 ms</strong> P95</span></p>
+            <dl>
+              <div><dt>MJPEG decode and 224 × 224 resize</dt><dd>5.5 / 6.0 ms</dd></div>
+              <div><dt>Local WebSocket round trip</dt><dd>80.0 / 81.0 ms</dd></div>
+              <div><dt>GPU compute within request</dt><dd>73.6 / 74.2 ms</dd></div>
+            </dl>
+            <p class="inference-run">One live camera · fixed robot state · π0.5 single-wrist checkpoint · RTX 4080 SUPER</p>
+            <p class="inference-run">16 Nov 2026 · 100 requests after warm-up</p>
           </div>
         </section>
 
@@ -461,10 +482,10 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
           </div>
         </section>
       </div>
-      <p class="inference-notes">X5 model previews show 224 × 224 front fisheye frames from separate camera checks, with faces masked. Timing runs used the same π0.5 checkpoint with different GPU settings.</p>
+      <p class="inference-notes">The August panorama and CameraSDK runs used the same bimanual π0.5 checkpoint with different GPU settings. Their previews show 224 × 224 front fisheye frames from separate camera checks, with faces masked.</p>
 
       <section class="inference-boundary" aria-labelledby="inference-boundary-title">
-        <h4 id="inference-boundary-title">What the timer covers</h4>
+        <h4 id="inference-boundary-title">August bimanual timing</h4>
         <ol>
           <li>Both latest 224 × 224 views available</li>
           <li>Assemble current and prior views with robot state</li>
@@ -478,7 +499,7 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
       <details class="processing-commands x5-webcam-notes">
         <summary>Can X5 Webcam stabilization be turned off?</summary>
         <p>Webcam overrides in-camera shooting settings. X5 stitches and stabilizes the 2880 × 1440 panorama in-camera. Both cameras accepted FlowState Off via CameraSDK. Persistence after switching back to Webcam is unverified. <a href="https://onlinemanual.insta360.com/x5/zh-cn/operating_tutorials/connect/webcam">X5 Webcam manual</a></p>
-        <p>X5 also exposes 1920 × 1080 with two stacked lenses, like X3. It preserved camera roll in the test. Per-lens stabilization remains unverified. X3 Webcam has no FlowState. <a href="https://onlinemanual.insta360.com/app/en-us/operation-tutorial/live/live-streaming#:~:text=X3%20and%20X2%20do%20not%20support%20FlowState%20Stabilization">Insta360 stabilization FAQ</a></p>
+        <p>The August X5 test captured two stacked lenses at 1920 × 1080 and preserved camera roll. Per-lens stabilization remains unverified. The November flat-mode test captured a single 16:9 view at the same resolution. X3 Webcam has no FlowState. <a href="https://onlinemanual.insta360.com/app/en-us/operation-tutorial/live/live-streaming#:~:text=X3%20and%20X2%20do%20not%20support%20FlowState%20Stabilization">Insta360 stabilization FAQ</a></p>
       </details>
 
       <section class="inference-matrix" aria-labelledby="x5-matrix-title">

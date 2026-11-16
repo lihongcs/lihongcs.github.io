@@ -794,6 +794,12 @@
   border-left: 1px solid var(--border);
 }
 
+.inference-scope {
+  margin: 0 0 .35rem;
+  color: #234e4e;
+  font-weight: 650;
+}
+
 .inference-result {
   display: flex;
   flex-wrap: wrap;
