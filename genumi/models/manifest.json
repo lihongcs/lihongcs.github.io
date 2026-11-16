@@ -5,119 +5,118 @@
       "name": "Flexiv Grav GN-01",
       "model": "models/flexiv-assembled-low-profile.glb",
       "preview": "assets/flexiv-assembly-clean.webp",
-      "assemblyStep": "hardware/steps/flexiv/genumi-flexiv-gn01-with-mounted-accessories.step",
       "note": "The supplied HTC tracker is seated on its original bracket. The X5 scan is scaled to its published dimensions. All eight countersunk screws are flush at the top and finish at the underside of the locknuts.",
       "modules": [
         {
           "id": "handheld-housing",
           "name": "Handheld Housing",
           "description": "Revised with a 6.6 mm through-hole for the quick-release fastener.",
-          "step": "hardware/steps/flexiv/handheld-housing-quick-release.step"
+          "stl": "hardware/stls/flexiv/handheld-housing-quick-release.stl"
         },
         {
           "id": "moving-handle",
           "name": "Moving Handle",
           "description": "Integrated body with four machined 90° chassis pivot seats and a 6.6 mm camera fastener clearance.",
-          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release-countersunk.step"
+          "stl": "hardware/stls/flexiv/handheld-body-integrated-part-quick-release-countersunk.stl"
         },
         {
           "id": "tracker-bracket",
           "name": "Tracker Mounting Bracket",
-          "step": "hardware/steps/flexiv/d435-vive-tracker-bracket.step"
+          "stl": "hardware/stls/flexiv/d435-vive-tracker-bracket.stl"
         },
         {
           "id": "left-drive",
           "name": "Left Drive Gear and Bearing",
-          "step": "hardware/steps/flexiv/left-drive-gear-and-bearing.step"
+          "stl": "hardware/stls/flexiv/left-drive-gear-and-bearing.stl"
         },
         {
           "id": "right-drive",
           "name": "Right Drive Gear and Bearing",
-          "step": "hardware/steps/flexiv/right-drive-gear-and-bearing.step"
+          "stl": "hardware/stls/flexiv/right-drive-gear-and-bearing.stl"
         },
         {
           "id": "left-inner-link",
           "name": "Left Finger Inner Link",
-          "step": "hardware/steps/flexiv/right-hand-left-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/right-hand-left-finger-inner-link.stl"
         },
         {
           "id": "right-inner-link",
           "name": "Right Finger Inner Link",
-          "step": "hardware/steps/flexiv/right-hand-right-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/right-hand-right-finger-inner-link.stl"
         },
         {
           "id": "fingertip-carrier",
           "name": "Fingertip Carrier",
           "description": "Two instances of this SolidWorks part are used in the assembly.",
-          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step",
           "nodes": [
             "left-carrier",
             "right-carrier"
-          ]
+          ],
+          "stl": "hardware/stls/flexiv/left-fingertip-combined-part.stl"
         },
         {
           "id": "left-fingertip-pad",
           "name": "Left TPU Fingertip",
-          "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
+          "stl": "hardware/stls/flexiv/left-tpu-fingertip.stl"
         },
         {
           "id": "right-fingertip-pad",
           "name": "Right TPU Fingertip",
-          "step": "hardware/steps/flexiv/right-tpu-fingertip.step"
+          "stl": "hardware/stls/flexiv/right-tpu-fingertip.stl"
         },
         {
           "id": "camera-support",
           "name": "Insta360 Quick-Release Spacer",
           "description": "18 mm outside diameter, 8 mm thick, with a 6.6 mm through-hole for a 1/4-20 fastener.",
-          "step": "hardware/steps/flexiv/insta360-quick-release-spacer.step"
+          "stl": "hardware/stls/flexiv/insta360-quick-release-spacer.stl"
         },
         {
           "id": "pivot-p01",
           "name": "P01 · Left outer chassis pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.stl"
         },
         {
           "id": "pivot-p02",
           "name": "P02 · Left inner chassis pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.stl"
         },
         {
           "id": "pivot-p03",
           "name": "P03 · Right inner chassis pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.stl"
         },
         {
           "id": "pivot-p04",
           "name": "P04 · Right outer chassis pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 5.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.stl"
         },
         {
           "id": "pivot-p05",
           "name": "P05 · Left outer fingertip pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.stl"
         },
         {
           "id": "pivot-p06",
           "name": "P06 · Left inner fingertip pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.stl"
         },
         {
           "id": "pivot-p07",
           "name": "P07 · Right inner fingertip pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.stl"
         },
         {
           "id": "pivot-p08",
           "name": "P08 · Right outer fingertip pivot",
           "description": "Top-entry 90° shoulder screw with a flush head and 0.20 mm nominal axial endplay. The threaded end is flush with the bottom locknut. Locknut extends 4.7 mm below the local mechanism face.",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.stl"
         },
         {
           "id": "insta360-camera",
@@ -139,262 +138,262 @@
         {
           "name": "Flexiv Grav GN-01 · Complete Mounted Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-with-mounted-accessories.step"
+          "stl": "hardware/stls/flexiv/genumi-flexiv-gn01-with-mounted-accessories.stl"
         },
         {
           "name": "Flexiv Grav GN-01 Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/flexiv/genumi-flexiv-gn01-countersunk-pivot-assembly.step"
+          "stl": "hardware/stls/flexiv/genumi-flexiv-gn01-countersunk-pivot-assembly.stl"
         },
         {
           "name": "Handheld Body Section A",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/handheld-body-section-a.step"
+          "stl": "hardware/stls/flexiv/handheld-body-section-a.stl"
         },
         {
           "name": "Handheld Body",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/handheld-body.step"
+          "stl": "hardware/stls/flexiv/handheld-body.stl"
         },
         {
           "name": "Left Drive Gear and Bearing",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/left-drive-gear-and-bearing.step"
+          "stl": "hardware/stls/flexiv/left-drive-gear-and-bearing.stl"
         },
         {
           "name": "Left Fingertip",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/left-fingertip.step"
+          "stl": "hardware/stls/flexiv/left-fingertip.stl"
         },
         {
           "name": "Right Drive Gear and Bearing",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/right-drive-gear-and-bearing.step"
+          "stl": "hardware/stls/flexiv/right-drive-gear-and-bearing.stl"
         },
         {
           "name": "Right Fingertip",
           "kind": "Subassembly",
-          "step": "hardware/steps/flexiv/right-fingertip.step"
+          "stl": "hardware/stls/flexiv/right-fingertip.stl"
         },
         {
           "name": "9DTact Sensor Base",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/9dtact-sensor-base.step"
+          "stl": "hardware/stls/flexiv/9dtact-sensor-base.stl"
         },
         {
           "name": "Tracker Mounting Bracket",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/d435-vive-tracker-bracket.step"
+          "stl": "hardware/stls/flexiv/d435-vive-tracker-bracket.stl"
         },
         {
           "name": "Fingertip Linkage",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/fingertip-linkage.step"
+          "stl": "hardware/stls/flexiv/fingertip-linkage.stl"
         },
         {
           "name": "Grav Finger Mount",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/grav-finger-mount.step"
+          "stl": "hardware/stls/flexiv/grav-finger-mount.stl"
         },
         {
           "name": "Moving Handle",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release.step"
+          "stl": "hardware/stls/flexiv/handheld-body-integrated-part-quick-release.stl"
         },
         {
           "name": "Handheld Body Section B Combined Part",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-body-section-b-combined-part.step"
+          "stl": "hardware/stls/flexiv/handheld-body-section-b-combined-part.stl"
         },
         {
           "name": "Handheld Body Section B",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-body-section-b.step"
+          "stl": "hardware/stls/flexiv/handheld-body-section-b.stl"
         },
         {
           "name": "Handheld Housing",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-housing-quick-release.step"
+          "stl": "hardware/stls/flexiv/handheld-housing-quick-release.stl"
         },
         {
           "name": "Handheld Housing",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-housing.step"
+          "stl": "hardware/stls/flexiv/handheld-housing.stl"
         },
         {
           "name": "Insta360 Quick-Release Spacer",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/insta360-quick-release-spacer.step"
+          "stl": "hardware/stls/flexiv/insta360-quick-release-spacer.stl"
         },
         {
           "name": "Insta360 X5 Housing",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/insta360-x5-housing.step"
+          "stl": "hardware/stls/flexiv/insta360-x5-housing.stl"
         },
         {
           "name": "Left Drive Gear And Outer Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-drive-gear-and-outer-link.step"
+          "stl": "hardware/stls/flexiv/left-drive-gear-and-outer-link.stl"
         },
         {
           "name": "Left Finger Outer Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-finger-outer-link.step"
+          "stl": "hardware/stls/flexiv/left-finger-outer-link.stl"
         },
         {
           "name": "Fingertip Carrier",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-fingertip-combined-part.step"
+          "stl": "hardware/stls/flexiv/left-fingertip-combined-part.stl"
         },
         {
           "name": "Left Hand Left Finger Inner Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-hand-left-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/left-hand-left-finger-inner-link.stl"
         },
         {
           "name": "Left Hand Right Finger Inner Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-hand-right-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/left-hand-right-finger-inner-link.stl"
         },
         {
           "name": "Left TPU Fingertip",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/left-tpu-fingertip.step"
+          "stl": "hardware/stls/flexiv/left-tpu-fingertip.stl"
         },
         {
           "name": "Right Drive Gear And Outer Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-drive-gear-and-outer-link.step"
+          "stl": "hardware/stls/flexiv/right-drive-gear-and-outer-link.stl"
         },
         {
           "name": "Right Finger Outer Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-finger-outer-link.step"
+          "stl": "hardware/stls/flexiv/right-finger-outer-link.stl"
         },
         {
           "name": "Right Fingertip Combined Part",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-fingertip-combined-part.step"
+          "stl": "hardware/stls/flexiv/right-fingertip-combined-part.stl"
         },
         {
           "name": "Left Finger Inner Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-hand-left-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/right-hand-left-finger-inner-link.stl"
         },
         {
           "name": "Right Finger Inner Link",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-hand-right-finger-inner-link.step"
+          "stl": "hardware/stls/flexiv/right-hand-right-finger-inner-link.stl"
         },
         {
           "name": "Right TPU Fingertip",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/right-tpu-fingertip.step"
+          "stl": "hardware/stls/flexiv/right-tpu-fingertip.stl"
         },
         {
           "name": "Shoulder Screw D4 L25 M3",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l25-m3.step"
+          "stl": "hardware/stls/flexiv/shoulder-screw-d4-l25-m3.stl"
         },
         {
           "name": "Shoulder Screw D4 L30 M3",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/shoulder-screw-d4-l30-m3.step"
+          "stl": "hardware/stls/flexiv/shoulder-screw-d4-l30-m3.stl"
         },
         {
           "name": "Shoulder Screw D6 L50 M5",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/shoulder-screw-d6-l50-m5.step"
+          "stl": "hardware/stls/flexiv/shoulder-screw-d6-l50-m5.stl"
         },
         {
           "name": "P03 · Right inner chassis pivot",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.step"
+          "stl": "hardware/stls/flexiv/stepped-shoulder-screw-d6-d5p45-l50-m5.stl"
         },
         {
           "name": "Countersunk Seat D8 1.75mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-seat-d8-1.75mm.step"
+          "stl": "hardware/stls/flexiv/countersunk-seat-d8-1.75mm.stl"
         },
         {
           "name": "Countersunk Seat D8 2.75mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-seat-d8-2.75mm.step"
+          "stl": "hardware/stls/flexiv/countersunk-seat-d8-2.75mm.stl"
         },
         {
           "name": "Handheld Body Integrated Part Quick Release Countersunk",
           "kind": "Part",
-          "step": "hardware/steps/flexiv/handheld-body-integrated-part-quick-release-countersunk.step"
+          "stl": "hardware/stls/flexiv/handheld-body-integrated-part-quick-release-countersunk.stl"
         },
         {
           "name": "M3 Locknut",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/m3-locknut.step"
+          "stl": "hardware/stls/flexiv/m3-locknut.stl"
         },
         {
           "name": "M5 Locknut",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/m5-locknut.step"
+          "stl": "hardware/stls/flexiv/m5-locknut.stl"
         },
         {
           "name": "Pivot Reducer Bushing D6p35 D5p52 1p8mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/pivot-reducer-bushing-d6p35-d5p52-1p8mm.step"
+          "stl": "hardware/stls/flexiv/pivot-reducer-bushing-d6p35-d5p52-1p8mm.stl"
         },
         {
           "name": "Shoulder Spacer D4 1.3mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d4-1.3mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d4-1.3mm.stl"
         },
         {
           "name": "Shoulder Spacer D4 4.3mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d4-4.3mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d4-4.3mm.stl"
         },
         {
           "name": "Shoulder Spacer D5p45 8.3mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d5p45-8.3mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d5p45-8.3mm.stl"
         },
         {
           "name": "Shoulder Spacer D6 8.3mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d6-8.3mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d6-8.3mm.stl"
         },
         {
           "name": "Countersunk Shoulder Screw D6 L42p2 M5",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d6-l42p2-m5.stl"
         },
         {
           "name": "Shoulder Spacer D6 0.5mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d6-0.5mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d6-0.5mm.stl"
         },
         {
           "name": "Countersunk Stepped Shoulder Screw D6 D5p45 L42p2 M5",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.step"
+          "stl": "hardware/stls/flexiv/countersunk-stepped-shoulder-screw-d6-d5p45-l42p2-m5.stl"
         },
         {
           "name": "Shoulder Spacer D5p45 0.5mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d5p45-0.5mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d5p45-0.5mm.stl"
         },
         {
           "name": "Countersunk Shoulder Screw D4 L26p2 M3",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l26p2-m3.stl"
         },
         {
           "name": "Shoulder Spacer D4 0.5mm",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/shoulder-spacer-d4-0.5mm.step"
+          "stl": "hardware/stls/flexiv/shoulder-spacer-d4-0.5mm.stl"
         },
         {
           "name": "Countersunk Shoulder Screw D4 L24p2 M3",
           "kind": "Fastener",
-          "step": "hardware/steps/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.step"
+          "stl": "hardware/stls/flexiv/countersunk-shoulder-screw-d4-l24p2-m3.stl"
         }
       ],
       "accessories": "models/flexiv-mounted-accessories.glb",
@@ -499,154 +498,154 @@
           }
         ]
       },
-      "assemblyDownloadLabel": "Download assembled STEP",
-      "assemblyDownloadName": "Flexiv Grav GN-01 · Complete Mounted Assembly"
+      "assemblyDownloadLabel": "Download assembled STL",
+      "assemblyDownloadName": "Flexiv Grav GN-01 · Complete Mounted Assembly",
+      "assemblyStl": "hardware/stls/flexiv/genumi-flexiv-gn01-with-mounted-accessories.stl"
     },
     {
       "id": "robotiq",
       "name": "Robotiq 2F-85",
       "model": "models/robotiq-assembled-ring-free.glb",
-      "assemblyStep": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step",
       "assemblyDownloadName": "Robotiq 2F-85 · Complete Mounted Assembly",
-      "assemblyDownloadLabel": "Download assembled STEP",
+      "assemblyDownloadLabel": "Download assembled STL",
       "note": "The complete assembly includes the supplied camera and tracker geometry and the original jaw layout with ring-free outer and proximal finger links. All ten screw ends are flush with the underside of their nuts. Six top heads are countersunk. The four frame-to-bar and outer distal pivots have socket heads.",
       "modules": [
         {
           "id": "handheld-body",
           "name": "Handheld Body",
-          "step": "hardware/steps/robotiq/handheld-body-countersunk.step"
+          "stl": "hardware/stls/robotiq/handheld-body-countersunk.stl"
         },
         {
           "id": "left-drive",
           "name": "Left Drive Gear and Connector",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/left-merged-drive-gear-and-connector.step"
+          "stl": "hardware/stls/robotiq/left-merged-drive-gear-and-connector.stl"
         },
         {
           "id": "left-proximal",
           "name": "Left Proximal Finger Link",
           "description": "Ring-free proximal link with the original trigger extension and countersunk pivot seats.",
-          "step": "hardware/steps/robotiq/left-proximal-finger-link-ring-free.step"
+          "stl": "hardware/stls/robotiq/left-proximal-finger-link-ring-free.stl"
         },
         {
           "id": "left-frame",
           "name": "Left Finger Frame Link",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/finger-frame-link.step"
+          "stl": "hardware/stls/robotiq/finger-frame-link.stl"
         },
         {
           "id": "left-bar",
           "name": "Left Finger Link Bar",
           "description": "Ring-free link bar matching the supplied STL outline, with the existing pivot centers and 4.2 mm shoulder screw bores.",
-          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
+          "stl": "hardware/stls/robotiq/finger-link-bar-trimmed.stl"
         },
         {
           "id": "left-distal",
           "name": "Left Distal Finger Link",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/distal-finger-link.step"
+          "stl": "hardware/stls/robotiq/distal-finger-link.stl"
         },
         {
           "id": "left-pad",
           "name": "Left Fingertip Pad",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/fingertip-pad.step"
+          "stl": "hardware/stls/robotiq/fingertip-pad.stl"
         },
         {
           "id": "right-drive",
           "name": "Right Drive Gear and Connector",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/right-merged-drive-gear-and-connector.step"
+          "stl": "hardware/stls/robotiq/right-merged-drive-gear-and-connector.stl"
         },
         {
           "id": "right-proximal",
           "name": "Right Proximal Finger Link",
           "description": "Ring-free proximal link with the original trigger extension and countersunk pivot seats.",
-          "step": "hardware/steps/robotiq/right-proximal-finger-link-ring-free.step"
+          "stl": "hardware/stls/robotiq/right-proximal-finger-link-ring-free.stl"
         },
         {
           "id": "right-frame",
           "name": "Right Finger Frame Link",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/finger-frame-link.step"
+          "stl": "hardware/stls/robotiq/finger-frame-link.stl"
         },
         {
           "id": "right-bar",
           "name": "Right Finger Link Bar",
           "description": "Ring-free link bar matching the supplied STL outline, with the existing pivot centers and 4.2 mm shoulder screw bores.",
-          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
+          "stl": "hardware/stls/robotiq/finger-link-bar-trimmed.stl"
         },
         {
           "id": "right-distal",
           "name": "Right Distal Finger Link",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/distal-finger-link.step"
+          "stl": "hardware/stls/robotiq/distal-finger-link.stl"
         },
         {
           "id": "right-pad",
           "name": "Right Fingertip Pad",
           "description": "Original CAD geometry positioned in the reconstructed jaw linkage.",
-          "step": "hardware/steps/robotiq/fingertip-pad.step"
+          "stl": "hardware/stls/robotiq/fingertip-pad.stl"
         },
         {
           "id": "left-inner-chassis-pivot",
           "name": "Left Inner Chassis Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.stl"
         },
         {
           "id": "left-outer-chassis-pivot",
           "name": "Left Outer Chassis Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.stl"
         },
         {
           "id": "left-frame-and-bar-pivot",
           "name": "Left Frame and Bar Pivot Fasteners",
           "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.stl"
         },
         {
           "id": "left-distal-inner-pivot",
           "name": "Left Distal Inner Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
+          "stl": "hardware/stls/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.stl"
         },
         {
           "id": "left-distal-outer-pivot",
           "name": "Left Distal Outer Pivot Fasteners",
           "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.stl"
         },
         {
           "id": "right-inner-chassis-pivot",
           "name": "Right Inner Chassis Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.stl"
         },
         {
           "id": "right-outer-chassis-pivot",
           "name": "Right Outer Chassis Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.stl"
         },
         {
           "id": "right-frame-and-bar-pivot",
           "name": "Right Frame and Bar Pivot Fasteners",
           "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.stl"
         },
         {
           "id": "right-distal-inner-pivot",
           "name": "Right Distal Inner Pivot Fasteners",
           "description": "Countersunk top-entry shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
+          "stl": "hardware/stls/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.stl"
         },
         {
           "id": "right-distal-outer-pivot",
           "name": "Right Distal Outer Pivot Fasteners",
           "description": "Socket-head shoulder screw. The threaded end is flush with the bottom retaining nut.",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.stl"
         },
         {
           "id": "insta360-camera",
@@ -667,184 +666,184 @@
           "id": "camera-support",
           "name": "Insta360 Quick-Release Spacer",
           "description": "The spacer seats against the original chassis bore and supports the purchased camera mount.",
-          "step": "hardware/steps/robotiq/insta360-quick-release-spacer.step"
+          "stl": "hardware/stls/robotiq/insta360-quick-release-spacer.stl"
         }
       ],
       "downloads": [
         {
           "name": "Robotiq 2F-85 · Complete Mounted Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-with-mounted-accessories.step"
+          "stl": "hardware/stls/robotiq/genumi-robotiq-2f85-with-mounted-accessories.stl"
         },
         {
           "name": "Robotiq 2F-85 · InstaUMI Hardware Assembly",
           "kind": "Assembly",
-          "step": "hardware/steps/robotiq/genumi-robotiq-2f85-open-hardware-countersunk-pivots.step"
+          "stl": "hardware/stls/robotiq/genumi-robotiq-2f85-open-hardware-countersunk-pivots.stl"
         },
         {
           "name": "Handheld Body Section A",
           "kind": "Subassembly",
-          "step": "hardware/steps/robotiq/handheld-body-section-a.step"
+          "stl": "hardware/stls/robotiq/handheld-body-section-a.stl"
         },
         {
           "name": "Handheld Body",
           "kind": "Subassembly",
-          "step": "hardware/steps/robotiq/handheld-body.step"
+          "stl": "hardware/stls/robotiq/handheld-body.stl"
         },
         {
           "name": "D435 VIVE Tracker Bracket",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/d435-vive-tracker-bracket.step"
+          "stl": "hardware/stls/robotiq/d435-vive-tracker-bracket.stl"
         },
         {
           "name": "Handheld Body",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-body-section-b-combined-part.step"
+          "stl": "hardware/stls/robotiq/handheld-body-section-b-combined-part.stl"
         },
         {
           "name": "Handheld Body Section B",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-body-section-b.step"
+          "stl": "hardware/stls/robotiq/handheld-body-section-b.stl"
         },
         {
           "name": "Handheld Connector",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-connector.step"
+          "stl": "hardware/stls/robotiq/handheld-connector.stl"
         },
         {
           "name": "Handheld Housing",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-housing.step"
+          "stl": "hardware/stls/robotiq/handheld-housing.stl"
         },
         {
           "name": "M5 Shim 5p3x8x0p5",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-shim-5p3x8x0p5.step"
+          "stl": "hardware/stls/robotiq/m5-shim-5p3x8x0p5.stl"
         },
         {
           "name": "M5 Shoulder Screw 6x25",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x25.step"
+          "stl": "hardware/stls/robotiq/m5-shoulder-screw-6x25.stl"
         },
         {
           "name": "M5 Shoulder Screw 6x35",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-shoulder-screw-6x35.step"
+          "stl": "hardware/stls/robotiq/m5-shoulder-screw-6x35.stl"
         },
         {
           "name": "Left Merged Drive Gear And Connector",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/left-merged-drive-gear-and-connector.step"
+          "stl": "hardware/stls/robotiq/left-merged-drive-gear-and-connector.stl"
         },
         {
           "name": "Left Assembled Proximal Finger Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/left-assembled-proximal-finger-link.step"
+          "stl": "hardware/stls/robotiq/left-assembled-proximal-finger-link.stl"
         },
         {
           "name": "Finger Frame Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/finger-frame-link.step"
+          "stl": "hardware/stls/robotiq/finger-frame-link.stl"
         },
         {
           "name": "Distal Finger Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/distal-finger-link.step"
+          "stl": "hardware/stls/robotiq/distal-finger-link.stl"
         },
         {
           "name": "Fingertip Pad",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/fingertip-pad.step"
+          "stl": "hardware/stls/robotiq/fingertip-pad.stl"
         },
         {
           "name": "Right Merged Drive Gear And Connector",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/right-merged-drive-gear-and-connector.step"
+          "stl": "hardware/stls/robotiq/right-merged-drive-gear-and-connector.stl"
         },
         {
           "name": "Right Assembled Proximal Finger Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/right-assembled-proximal-finger-link.step"
+          "stl": "hardware/stls/robotiq/right-assembled-proximal-finger-link.stl"
         },
         {
           "name": "Handheld Body with Countersunk Pivots",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-body-countersunk.step"
+          "stl": "hardware/stls/robotiq/handheld-body-countersunk.stl"
         },
         {
           "name": "Insta360 Quick-Release Spacer",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/insta360-quick-release-spacer.step"
+          "stl": "hardware/stls/robotiq/insta360-quick-release-spacer.stl"
         },
         {
           "name": "Handheld Housing with Camera Mount Clearance",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/handheld-housing-quick-release.step"
+          "stl": "hardware/stls/robotiq/handheld-housing-quick-release.stl"
         },
         {
           "name": "M5 Thin Hex Nut",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-thin-hex-nut.step"
+          "stl": "hardware/stls/robotiq/m5-thin-hex-nut.stl"
         },
         {
           "name": "Shoulder Spacer 6p2x10x3p2",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x3p2.step"
+          "stl": "hardware/stls/robotiq/shoulder-spacer-6p2x10x3p2.stl"
         },
         {
           "name": "M3 Shoulder Screw 4x25 Tip Flush 29p500mm",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p500mm.stl"
         },
         {
           "name": "M3 Shoulder Screw 4x25 Tip Flush 29p400mm",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.step"
+          "stl": "hardware/stls/robotiq/m3-shoulder-screw-4x25-tip-flush-29p400mm.stl"
         },
         {
           "name": "M5 Countersunk Shoulder Screw 6x25 Head 10mm Tip Flush 25p200mm Compact Shoulder 22p3mm",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-shoulder-screw-6x25-head-10mm-tip-flush-25p200mm-compact-shoulder-22p3mm.stl"
         },
         {
           "name": "M5 Countersunk Collar Shoulder Screw 6x35 Head 10.5mm Collar 4.5mm Neck Relief Tip Flush 38p200mm",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.step"
+          "stl": "hardware/stls/robotiq/m5-countersunk-collar-shoulder-screw-6x35-head-10.5mm-collar-4.5mm-neck-relief-tip-flush-38p200mm.stl"
         },
         {
           "name": "M3 Countersunk Collar Shoulder Screw 4x25.3 Head 7mm Collar 2.8mm Tip Flush 29p200mm",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.step"
+          "stl": "hardware/stls/robotiq/m3-countersunk-collar-shoulder-screw-4x25.3-head-7mm-collar-2.8mm-tip-flush-29p200mm.stl"
         },
         {
           "name": "Shoulder Spacer 6p2x10x0p5",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/shoulder-spacer-6p2x10x0p5.step"
+          "stl": "hardware/stls/robotiq/shoulder-spacer-6p2x10x0p5.stl"
         },
         {
           "name": "Ring-Free Finger Link Bar",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/finger-link-bar-trimmed.step"
+          "stl": "hardware/stls/robotiq/finger-link-bar-trimmed.stl"
         },
         {
           "name": "M3 Washer 3P2X6X0P2",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-washer-3p2x6x0p2.step"
+          "stl": "hardware/stls/robotiq/m3-washer-3p2x6x0p2.stl"
         },
         {
           "name": "M3 Head Shim 4P2X5P4X0P2",
           "kind": "Fastener",
-          "step": "hardware/steps/robotiq/m3-head-shim-4p2x5p4x0p2.step"
+          "stl": "hardware/stls/robotiq/m3-head-shim-4p2x5p4x0p2.stl"
         },
         {
           "name": "Left Proximal Finger Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/left-proximal-finger-link-ring-free.step"
+          "stl": "hardware/stls/robotiq/left-proximal-finger-link-ring-free.stl"
         },
         {
           "name": "Right Proximal Finger Link",
           "kind": "Part",
-          "step": "hardware/steps/robotiq/right-proximal-finger-link-ring-free.step"
+          "stl": "hardware/stls/robotiq/right-proximal-finger-link-ring-free.stl"
         }
       ],
       "accessories": "models/robotiq-mounted-accessories.glb",
@@ -955,7 +954,8 @@
           0.65,
           -1
         ]
-      }
+      },
+      "assemblyStl": "hardware/stls/robotiq/genumi-robotiq-2f85-with-mounted-accessories.stl"
     }
   ]
 }

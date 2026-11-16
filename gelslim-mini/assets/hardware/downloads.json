@@ -2,79 +2,99 @@
   "parts": [
     {
       "label": "Acrylic Contact Window",
-      "href": "parts/acrylic-contact-window.step"
+      "href": "parts/acrylic-contact-window.stl"
     },
     {
       "label": "Adhesive Casting Mold",
-      "href": "parts/adhesive-casting-mold.step"
+      "href": "parts/adhesive-casting-mold.stl"
     },
     {
-      "label": "Contact Gel Mold March Revision",
-      "href": "parts/contact-gel-mold-march-revision.step"
+      "label": "Blue LED Package",
+      "href": "parts/blue-led-package.stl"
     },
     {
       "label": "Contact Gel Mold",
-      "href": "parts/contact-gel-mold.step"
+      "href": "parts/contact-gel-mold.stl"
+    },
+    {
+      "label": "Contact Gel Mold March Revision",
+      "href": "parts/contact-gel-mold-march-revision.stl"
     },
     {
       "label": "Depth Calibration Rectangular Mold",
-      "href": "parts/depth-calibration-rectangular-mold.step"
+      "href": "parts/depth-calibration-rectangular-mold.stl"
     },
     {
       "label": "Depth Calibration Reference Plate",
-      "href": "parts/depth-calibration-reference-plate.step"
+      "href": "parts/depth-calibration-reference-plate.stl"
     },
     {
       "label": "Electronics Carrier",
-      "href": "parts/electronics-carrier.step"
+      "href": "parts/electronics-carrier.stl"
     },
     {
       "label": "Gel Retainer Ring",
-      "href": "parts/gel-retainer-ring.step"
+      "href": "parts/gel-retainer-ring.stl"
     },
     {
       "label": "GelSlim Mini LED Driver PCB",
-      "href": "parts/gelslim-mini-led-driver-pcb.step"
+      "href": "parts/gelslim-mini-led-driver-pcb.stl"
     },
     {
       "label": "GelSlim Mini LED Flex PCB Assembly",
-      "href": "parts/gelslim-mini-led-flex-pcb-assembly.step"
+      "href": "parts/gelslim-mini-led-flex-pcb-assembly.stl"
     },
     {
-      "label": "Optical Shroud",
-      "href": "parts/optical-shroud.step"
+      "label": "Green LED Package",
+      "href": "parts/green-led-package.stl"
     },
     {
-      "label": "Optical Window Support",
-      "href": "parts/optical-window-support.step"
+      "label": "OV5647 Camera Adapter Fit Envelope",
+      "href": "parts/ov5647-camera-adapter-fit-envelope.stl"
+    },
+    {
+      "label": "OV5647 Camera FPC",
+      "href": "parts/ov5647-camera-fpc.stl"
     },
     {
       "label": "OV5647 Fisheye Camera Exterior",
-      "href": "parts/ov5647-fisheye-camera-exterior.step"
+      "href": "parts/ov5647-fisheye-camera-exterior.stl"
     },
     {
       "label": "OV5647 USB Adapter PCB",
-      "href": "parts/ov5647-usb-adapter-pcb.step"
+      "href": "parts/ov5647-usb-adapter-pcb.stl"
+    },
+    {
+      "label": "Optical Shroud",
+      "href": "parts/optical-shroud.stl"
+    },
+    {
+      "label": "Optical Window Support",
+      "href": "parts/optical-window-support.stl"
     },
     {
       "label": "PDMS Silicone Contact Pad",
-      "href": "parts/pdms-silicone-contact-pad.step"
+      "href": "parts/pdms-silicone-contact-pad.stl"
+    },
+    {
+      "label": "Red LED Package",
+      "href": "parts/red-led-package.stl"
     },
     {
       "label": "Sensor Back Cover",
-      "href": "parts/sensor-back-cover.step"
+      "href": "parts/sensor-back-cover.stl"
     },
     {
       "label": "Sensor Fastener Reference",
-      "href": "parts/sensor-fastener-reference.step"
+      "href": "parts/sensor-fastener-reference.stl"
     },
     {
       "label": "Tactile Back OV5647 Through Slot",
-      "href": "parts/tactile-back-ov5647-through-slot.step"
+      "href": "parts/tactile-back-ov5647-through-slot.stl"
     },
     {
       "label": "Wide Adhesive Casting Mold",
-      "href": "parts/wide-adhesive-casting-mold.step"
+      "href": "parts/wide-adhesive-casting-mold.stl"
     }
   ]
 }

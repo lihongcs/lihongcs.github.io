@@ -1,4 +1,4 @@
-*.step binary
+*.stl binary
 *.glb binary
 *.zip binary
 *.webp binary

@@ -1,5 +1,5 @@
 # Preserve CAD exchange files and the upstream viewer bundle byte for byte.
-*.step binary
+*.stl binary
 *.glb binary
 *.zip binary
 *.sldprt binary

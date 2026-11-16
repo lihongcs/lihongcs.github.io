@@ -3,7 +3,7 @@ const elements = Object.fromEntries([
   "model-status", "model-selection",
   "model-instructions", "assembly-download", "variant-note", "module-empty", "module-list",
   "module-detail", "module-name", "module-description", "part-download", "isolate-module",
-  "step-library-link", "orbit-instructions", "joint-motion", "joint-motion-link", "joint-drag", "joint-play",
+  "stl-library-link", "orbit-instructions", "joint-motion", "joint-motion-link", "joint-drag", "joint-play",
   "joint-reset", "joint-angle", "joint-angle-label", "joint-angle-value", "joint-range-min",
   "joint-range-max", "joint-motion-note",
 ].map((id) => [id, document.getElementById(id)]));
@@ -37,7 +37,7 @@ function showSelection() {
   elements["module-detail"].hidden = !selectedModule;
   setText("module-name", selectedModule?.name);
   setText("module-description", selectedModule?.description);
-  setDownload("part-download", selectedModule?.step);
+  setDownload("part-download", selectedModule?.stl);
 
   const moduleIsVisible = assemblyViewer?.hasModule(selectedModule?.id);
   setText("model-selection", moduleIsVisible ? selectedModule.name : null);
@@ -180,7 +180,7 @@ async function start() {
   const requestedView = parameters.get("view");
   const active = variants.find((variant) => variant.id === requestedId) ?? variants[0];
   if (!active) throw new Error("The assembly manifest contains no variants.");
-  elements["step-library-link"].href = `steps.html?variant=${encodeURIComponent(active.id)}`;
+  elements["stl-library-link"].href = `stl.html?variant=${encodeURIComponent(active.id)}`;
 
   for (const variant of variants) {
     addViewLink(elements["variant-switcher"], variant.name, variant.id, null, variant === active);
@@ -201,7 +201,7 @@ async function start() {
 
   setText("variant-name", active.name);
   setText("variant-note", modelData.note ?? active.note);
-  setDownload("assembly-download", modelData.assemblyStep);
+  setDownload("assembly-download", modelData.assemblyStl);
   if (modelData.assemblyDownloadLabel) {
     elements["assembly-download"].firstChild.textContent = `${modelData.assemblyDownloadLabel} `;
   }

@@ -2,231 +2,231 @@
   "parts": [
     {
       "label": "10 mm Diffused RGB LED Module",
-      "href": "parts/10mm-diffused-rgb-led-module.step"
+      "href": "parts/10mm-diffused-rgb-led-module.stl"
     },
     {
       "label": "Acrylic Contact Window",
-      "href": "parts/acrylic-contact-window.step"
+      "href": "parts/acrylic-contact-window.stl"
     },
     {
       "label": "Adaptive Linkage Support",
-      "href": "parts/adaptive-linkage-support.step"
+      "href": "parts/adaptive-linkage-support.stl"
     },
     {
       "label": "AS5600 Angle Encoder Custom PCB",
-      "href": "parts/as5600-angle-encoder-custom-pcb.step"
+      "href": "parts/as5600-angle-encoder-custom-pcb.stl"
     },
     {
       "label": "AS5600 Encoder XH2.54 Ribbon Cable",
-      "href": "parts/as5600-encoder-xh2-54-ribbon-cable.step"
+      "href": "parts/as5600-encoder-xh2-54-ribbon-cable.stl"
     },
     {
       "label": "Braided Sleeve",
-      "href": "parts/braided-sleeve.step"
+      "href": "parts/braided-sleeve.stl"
     },
     {
       "label": "Center Encoder Rotor",
-      "href": "parts/center-encoder-rotor.step"
+      "href": "parts/center-encoder-rotor.stl"
     },
     {
       "label": "Controller Tray",
-      "href": "parts/controller-tray.step"
+      "href": "parts/controller-tray.stl"
     },
     {
       "label": "Flexible Matrix FSR 22 mm",
-      "href": "parts/flexible-matrix-fsr-22-mm.step"
+      "href": "parts/flexible-matrix-fsr-22-mm.stl"
     },
     {
       "label": "Force Sensor ADC Adapter (5-pin XH)",
-      "href": "parts/force-adc-5-pin-xh-adapter.step"
+      "href": "parts/force-adc-5-pin-xh-adapter.stl"
     },
     {
       "label": "Force ADC Board-to-Board Header",
-      "href": "parts/force-adc-board-to-board-header.step"
+      "href": "parts/force-adc-board-to-board-header.stl"
     },
     {
       "label": "Force Sensor ADC Adapter",
-      "href": "parts/force-adc-custom-pcb.step"
+      "href": "parts/force-adc-custom-pcb.stl"
     },
     {
       "label": "Frame Mounted FSR Amplifier PCB",
-      "href": "parts/frame-mounted-fsr-amplifier-pcb.step"
+      "href": "parts/frame-mounted-fsr-amplifier-pcb.stl"
     },
     {
       "label": "Frame Side Rail",
-      "href": "parts/frame-side-rail.step"
+      "href": "parts/frame-side-rail.stl"
     },
     {
       "label": "Gel Retainer Ring",
-      "href": "parts/gel-retainer-ring.step"
+      "href": "parts/gel-retainer-ring.stl"
     },
     {
       "label": "Gripper Side Cover",
-      "href": "parts/gripper-side-cover.step"
+      "href": "parts/gripper-side-cover.stl"
     },
     {
       "label": "Hikrobot Camera Mount",
-      "href": "parts/hikrobot-camera-mount.step"
+      "href": "parts/hikrobot-camera-mount.stl"
     },
     {
       "label": "Hikrobot MV-CB060 Camera",
-      "href": "parts/hikrobot-mv-cb060-camera.step"
+      "href": "parts/hikrobot-mv-cb060-camera.stl"
     },
     {
       "label": "Jaw Sliding Bar",
-      "href": "parts/jaw-sliding-bar.step"
+      "href": "parts/jaw-sliding-bar.stl"
     },
     {
       "label": "Large Tactile Pushbutton Module",
-      "href": "parts/large-tactile-pushbutton-module.step"
+      "href": "parts/large-tactile-pushbutton-module.stl"
     },
     {
       "label": "Left Fingertip Support",
-      "href": "parts/left-fingertip-support.step"
+      "href": "parts/left-fingertip-support.stl"
     },
     {
       "label": "Left Force ADC XH2.54 Ribbon Cable",
-      "href": "parts/left-force-adc-xh2-54-ribbon-cable.step"
+      "href": "parts/left-force-adc-xh2-54-ribbon-cable.stl"
     },
     {
       "label": "Left Outer Link",
-      "href": "parts/left-outer-link.step"
+      "href": "parts/left-outer-link.stl"
     },
     {
       "label": "Left Soldered FSR Lead Reference",
-      "href": "parts/left-soldered-fsr-lead-reference.step"
+      "href": "parts/left-soldered-fsr-lead-reference.stl"
     },
     {
       "label": "Lower FSR PCB Mount Screw M2.5 x 14",
-      "href": "parts/lower-fsr-pcb-mount-screw-m2p5-x-14.step"
+      "href": "parts/lower-fsr-pcb-mount-screw-m2p5-x-14.stl"
     },
     {
       "label": "Opposite Frame Mounted FSR Amplifier PCB",
-      "href": "parts/opposite-frame-mounted-fsr-amplifier-pcb.step"
+      "href": "parts/opposite-frame-mounted-fsr-amplifier-pcb.stl"
     },
     {
       "label": "Opposite FSR PCB Insulating Spacer",
-      "href": "parts/opposite-fsr-pcb-insulating-spacer.step"
+      "href": "parts/opposite-fsr-pcb-insulating-spacer.stl"
     },
     {
       "label": "Opposite FSR PCB Mount Screw M2.5 x 12",
-      "href": "parts/opposite-fsr-pcb-mount-screw-m2p5-x-12.step"
+      "href": "parts/opposite-fsr-pcb-mount-screw-m2p5-x-12.stl"
     },
     {
       "label": "Opposite FSR PCB Retaining Nut M2.5",
-      "href": "parts/opposite-fsr-pcb-retaining-nut-m2p5.step"
+      "href": "parts/opposite-fsr-pcb-retaining-nut-m2p5.stl"
     },
     {
       "label": "Opposite FSR PCB Retaining Washer",
-      "href": "parts/opposite-fsr-pcb-retaining-washer.step"
+      "href": "parts/opposite-fsr-pcb-retaining-washer.stl"
     },
     {
       "label": "Optical Shroud",
-      "href": "parts/optical-shroud.step"
+      "href": "parts/optical-shroud.stl"
     },
     {
       "label": "Optical Window Support",
-      "href": "parts/optical-window-support.step"
+      "href": "parts/optical-window-support.stl"
     },
     {
       "label": "Orange Pi 4 Pro Custom GPIO PCB",
-      "href": "parts/orange-pi-4-pro-custom-gpio-pcb.step"
+      "href": "parts/orange-pi-4-pro-custom-gpio-pcb.stl"
     },
     {
       "label": "Orange Pi 4 Pro Wristward Ports",
-      "href": "parts/orange-pi-4-pro-wristward-ports.step"
+      "href": "parts/orange-pi-4-pro-wristward-ports.stl"
     },
     {
       "label": "OV5647 Camera FPC",
-      "href": "parts/ov5647-camera-fpc.step"
+      "href": "parts/ov5647-camera-fpc.stl"
     },
     {
       "label": "OV5647 Fisheye Camera Exterior",
-      "href": "parts/ov5647-fisheye-camera-exterior.step"
+      "href": "parts/ov5647-fisheye-camera-exterior.stl"
     },
     {
       "label": "OV5647 USB Adapter PCB",
-      "href": "parts/ov5647-usb-adapter-pcb.step"
+      "href": "parts/ov5647-usb-adapter-pcb.stl"
     },
     {
       "label": "Pivot M2p5 Hex Nut",
-      "href": "parts/pivot-m2p5-hex-nut.step"
+      "href": "parts/pivot-m2p5-hex-nut.stl"
     },
     {
       "label": "Pushbutton XH2.54 Soldered Ribbon Cable",
-      "href": "parts/pushbutton-xh2-54-soldered-ribbon-cable.step"
+      "href": "parts/pushbutton-xh2-54-soldered-ribbon-cable.stl"
     },
     {
       "label": "Rear Pivot M2p5 Thrust Washer",
-      "href": "parts/rear-pivot-m2p5-thrust-washer.step"
+      "href": "parts/rear-pivot-m2p5-thrust-washer.stl"
     },
     {
       "label": "Rear Pivot Shoulder Bolt D3 L37p55 M2p5",
-      "href": "parts/rear-pivot-shoulder-bolt-d3-l37p55-m2p5.step"
+      "href": "parts/rear-pivot-shoulder-bolt-d3-l37p55-m2p5.stl"
     },
     {
       "label": "RGB LED XH2.54 Soldered Ribbon Cable",
-      "href": "parts/rgb-led-xh2-54-soldered-ribbon-cable.step"
+      "href": "parts/rgb-led-xh2-54-soldered-ribbon-cable.stl"
     },
     {
       "label": "Right Fingertip Support",
-      "href": "parts/right-fingertip-support.step"
+      "href": "parts/right-fingertip-support.stl"
     },
     {
       "label": "Right Force ADC XH2.54 Ribbon Cable",
-      "href": "parts/right-force-adc-xh2-54-ribbon-cable.step"
+      "href": "parts/right-force-adc-xh2-54-ribbon-cable.stl"
     },
     {
       "label": "Right Outer Link",
-      "href": "parts/right-outer-link.step"
+      "href": "parts/right-outer-link.stl"
     },
     {
       "label": "Right Soldered FSR Lead Reference",
-      "href": "parts/right-soldered-fsr-lead-reference.step"
+      "href": "parts/right-soldered-fsr-lead-reference.stl"
     },
     {
       "label": "Rotating Link",
-      "href": "parts/rotating-link.step"
+      "href": "parts/rotating-link.stl"
     },
     {
       "label": "Short Pivot M2 Hex Nut",
-      "href": "parts/short-pivot-m2-hex-nut.step"
+      "href": "parts/short-pivot-m2-hex-nut.stl"
     },
     {
       "label": "Short Pivot M2x22 Low Head Screw",
-      "href": "parts/short-pivot-m2x22-low-head-screw.step"
+      "href": "parts/short-pivot-m2x22-low-head-screw.stl"
     },
     {
       "label": "Sliding Bar Guide",
-      "href": "parts/sliding-bar-guide.step"
+      "href": "parts/sliding-bar-guide.stl"
     },
     {
       "label": "Tactile Contact Surface",
-      "href": "parts/tactile-contact-surface.step"
+      "href": "parts/tactile-contact-surface.stl"
     },
     {
       "label": "UMI Fingertip Back Cover",
-      "href": "parts/umi-fingertip-back-cover.step"
+      "href": "parts/umi-fingertip-back-cover.stl"
     },
     {
       "label": "Upper Arm Articulation",
-      "href": "parts/upper-arm-articulation.step"
+      "href": "parts/upper-arm-articulation.stl"
     },
     {
       "label": "Upper Arm Strap",
-      "href": "parts/upper-arm-strap.step"
+      "href": "parts/upper-arm-strap.stl"
     },
     {
       "label": "Upper Gripper Frame",
-      "href": "parts/upper-gripper-frame.step"
+      "href": "parts/upper-gripper-frame.stl"
     },
     {
       "label": "VIVE Tracker Mount",
-      "href": "parts/vive-tracker-mount.step"
+      "href": "parts/vive-tracker-mount.stl"
     },
     {
       "label": "VIVE Ultimate Tracker Exterior",
-      "href": "parts/vive-ultimate-tracker-exterior.step"
+      "href": "parts/vive-ultimate-tracker-exterior.stl"
     }
   ]
 }

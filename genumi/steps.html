@@ -2,36 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>InstaUMI · STEP downloads</title>
-  <meta name="description" content="Browse and download InstaUMI assembly and individual part STEP files.">
-  <link rel="canonical" href="https://lihongcs.github.io/genumi/steps.html">
-  <meta name="theme-color" content="#F4EFE6">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="viewer.css">
-  <link rel="stylesheet" href="steps.css">
-  <script type="module" src="steps.js"></script>
+  <title>InstaUMI · Hardware downloads</title>
+  <script>location.replace("stl.html" + location.search + location.hash);</script>
 </head>
 <body>
-  <header class="site-header wrap">
-    <a href="./"><span aria-hidden="true">←</span> InstaUMI project</a>
-    <a id="viewer-link" href="viewer.html">3D assembly viewer</a>
-  </header>
-  <main class="wrap">
-    <div class="viewer-heading">
-      <h1>STEP downloads</h1>
-      <nav id="variant-switcher" class="variant-switcher" aria-label="Gripper variant"></nav>
-    </div>
-    <section class="step-library" aria-labelledby="variant-name">
-      <h2 id="variant-name">Hardware files</h2>
-      <p id="variant-note" class="viewer-note" hidden></p>
-      <p id="library-status" role="status">Loading STEP files…</p>
-      <ul id="step-list" class="step-list" hidden></ul>
-    </section>
-    <noscript><p>The STEP list requires JavaScript. <a href="./#hardware">View hardware archives.</a></p></noscript>
-  </main>
+  <p><a href="stl.html">Browse InstaUMI STL downloads</a></p>
 </body>
 </html>

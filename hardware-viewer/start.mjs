@@ -14,7 +14,7 @@ export async function startViewer(root) {
     if (preview) preview.hidden = true;
     if (trigger) trigger.hidden = true;
   } catch (error) {
-    status.textContent = 'The 3D model could not be opened. Check WebGL or use the STEP downloads below.';
+    status.textContent = 'The 3D model could not be opened. Check WebGL or use the STL downloads below.';
     console.error(error);
     if (trigger) {
       trigger.disabled = false;
@@ -44,14 +44,14 @@ for (const root of document.querySelectorAll('[data-cad-viewer]')) {
 async function renderParts(root) {
   const manifest = new URL(root.dataset.parts, document.baseURI);
   try {
-    const response = await fetch(manifest);
+    const response = await fetch(manifest, { cache: 'no-cache' });
     if (!response.ok) return;
     const { parts } = await response.json();
     if (!Array.isArray(parts) || !parts.length) return;
     const list = root.querySelector('ul');
     for (const entry of parts) {
       const target = new URL(entry.href, manifest);
-      if (target.origin !== location.origin || !target.pathname.endsWith('.step')) continue;
+      if (target.origin !== location.origin || !target.pathname.toLowerCase().endsWith('.stl')) continue;
       const link = document.createElement('a');
       link.href = target.href;
       link.download = '';

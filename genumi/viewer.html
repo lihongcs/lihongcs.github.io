@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>InstaUMI · 3D assembly viewer</title>
-  <meta name="description" content="Explore InstaUMI hardware in 3D, inspect its modules, and download STEP files.">
+  <meta name="description" content="Explore InstaUMI hardware in 3D, inspect its modules, and download STL files.">
   <link rel="canonical" href="https://lihongcs.github.io/genumi/viewer.html">
   <meta name="theme-color" content="#F4EFE6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,14 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="viewer.css">
-  <script type="module" src="viewer.js"></script>
+  <script type="module" src="viewer.js?v=stl-downloads"></script>
 </head>
 <body>
   <header class="site-header viewer-wrap">
     <a href="./"><span aria-hidden="true">←</span> InstaUMI project</a>
     <nav aria-label="Viewer navigation">
       <a href="#modules">Modules</a>
-      <a id="step-library-link" href="steps.html">STEP library</a>
+      <a id="stl-library-link" href="stl.html">STL library</a>
     </nav>
   </header>
   <main class="viewer-wrap">
@@ -69,7 +69,7 @@
       </section>
       <section id="modules" class="module-panel" aria-labelledby="module-heading">
         <h2 id="module-heading">Modules</h2>
-        <a id="assembly-download" class="download" download hidden>Download assembly STEP <span aria-hidden="true">↓</span></a>
+        <a id="assembly-download" class="download" download hidden>Download assembly STL <span aria-hidden="true">↓</span></a>
         <p id="variant-note" class="viewer-note" hidden></p>
         <p id="module-empty" class="viewer-note" hidden>Module details are unavailable.</p>
         <ul id="module-list" class="module-list"></ul>
@@ -79,7 +79,7 @@
             <p id="module-description" hidden></p>
           </div>
           <div class="module-actions">
-            <a id="part-download" class="viewer-button" download hidden>Download STEP <span aria-hidden="true">↓</span></a>
+            <a id="part-download" class="viewer-button" download hidden>Download STL <span aria-hidden="true">↓</span></a>
             <button id="isolate-module" class="viewer-button" type="button" aria-pressed="false" hidden>Isolate module</button>
           </div>
         </div>
