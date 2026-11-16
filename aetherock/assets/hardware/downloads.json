@@ -121,6 +121,10 @@
       "href": "parts/orange-pi-4-pro-custom-gpio-pcb.step"
     },
     {
+      "label": "Orange Pi 4 Pro Wristward Ports",
+      "href": "parts/orange-pi-4-pro-wristward-ports.step"
+    },
+    {
       "label": "OV5647 Camera FPC",
       "href": "parts/ov5647-camera-fpc.step"
     },
