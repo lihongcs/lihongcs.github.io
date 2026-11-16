@@ -17,6 +17,10 @@
       "href": "parts/as5600-angle-encoder-custom-pcb.step"
     },
     {
+      "label": "AS5600 Encoder XH2.54 Ribbon Cable",
+      "href": "parts/as5600-encoder-xh2-54-ribbon-cable.step"
+    },
+    {
       "label": "Braided Sleeve",
       "href": "parts/braided-sleeve.step"
     },

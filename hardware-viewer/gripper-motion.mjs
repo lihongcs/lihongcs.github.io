@@ -124,22 +124,22 @@ function pivot(part, angle, x, z, dx = 0, dz = 0) {
   part.object.quaternion.copy(new Quaternion().setFromAxisAngle(axis, angle)).multiply(part.quaternion);
 }
 
-function flexibleLead(group) {
+function flexibleLead(group, movementAt) {
   const meshes = [];
   const world = new Vector3();
   group.traverse((mesh) => {
     if (!mesh.isMesh || !mesh.geometry?.attributes.position) return;
+    const restPosition = mesh.geometry.attributes.position;
+    const weights = new Float32Array(restPosition.count);
+    for (let index = 0; index < restPosition.count; index++) {
+      world.fromBufferAttribute(restPosition, index).applyMatrix4(mesh.matrixWorld);
+      const weight = Math.max(0, Math.min(1, movementAt(world)));
+      weights[index] = weight * weight * (3 - 2 * weight);
+    }
+    if (!weights.some((weight) => weight > 0)) return;
     mesh.geometry = mesh.geometry.clone();
     const position = mesh.geometry.attributes.position;
     const original = position.array.slice();
-    const weights = new Float32Array(position.count);
-    for (let index = 0; index < position.count; index++) {
-      world.fromBufferAttribute(position, index).applyMatrix4(mesh.matrixWorld);
-      // Exact rigid offsets at the two solder terminals, smoothly blended
-      // through the two flexible cables between the moving and fixed boards.
-      const t = Math.max(0, Math.min(1, (Math.abs(world.x) - 31.4) / (94.4 - 31.4)));
-      weights[index] = 1 - t * t * (3 - 2 * t);
-    }
     const toLocal = mesh.matrixWorld.clone().invert();
     const origin = new Vector3().applyMatrix4(toLocal);
     const x = new Vector3(1, 0, 0).applyMatrix4(toLocal).sub(origin);
@@ -177,8 +177,15 @@ export function createGripperMotion(model) {
   const draggable = new Map();
   const parts = [];
   const leads = [];
+  let encoderCable;
   for (const object of named) {
     const label = object.userData.label;
+    if (label === 'AS5600 Encoder XH2.54 Ribbon Cable') {
+      // The plug travels with the cassette. The ribbon flexes between the plug
+      // and its handoff to the fixed frame before entering the shared sleeve.
+      encoderCable = flexibleLead(object, ({ z }) => (z - 24) / (66 - 24));
+      continue;
+    }
     let kind;
     if (jawNames.has(label)) kind = 'jaw';
     else if (cassetteNames.has(label)) kind = 'cassette';
@@ -194,7 +201,7 @@ export function createGripperMotion(model) {
     if (label === 'GB Hex Nut M2' && Math.abs(middle.x) >= 10) continue;
 
     if (kind === 'lead') {
-      leads.push({ deform: flexibleLead(object), side });
+      leads.push({ deform: flexibleLead(object, ({ x }) => (94.4 - Math.abs(x)) / (94.4 - 31.4)), side });
     } else {
       if (kind === 'jaw') draggable.set(object, joints[side].side);
       parts.push({ part: capture(object), kind, side });
@@ -225,6 +232,7 @@ export function createGripperMotion(model) {
       }
     }
     for (const { deform, side } of leads) deform(pose.sides[side].dx, pose.dz);
+    encoderCable?.(0, pose.dz);
     model.updateMatrixWorld(true);
   }
 
