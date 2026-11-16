@@ -27,9 +27,9 @@
             -moz-osx-font-smoothing: grayscale;
         }
         .container {
-            max-width: 1164px;
+            width: min(78rem, calc(100% - clamp(2rem, 6vw, 6rem)));
             margin: 0 auto;
-            padding: 3rem 2rem 5rem;
+            padding-block: clamp(1.5rem, 3.5vw, 3rem) clamp(3rem, 6vw, 5rem);
         }
         .home-link {
             display: inline-block;
@@ -41,14 +41,14 @@
         .home-link:hover { border-color: var(--secondary-text); }
         a:focus-visible { outline: 2px solid var(--text-color); outline-offset: 5px; }
         .project-header {
-            max-width: 980px;
+            max-width: 70rem;
             margin: 2.5rem auto 2.5rem;
             text-align: center;
         }
         h1 {
             margin: 0 0 1.5rem;
             font-family: 'Newsreader', serif;
-            font-size: clamp(2rem, 4.2vw, 3rem);
+            font-size: clamp(2rem, 4.2vw, 3.6rem);
             font-weight: 500;
             line-height: 1.15;
             letter-spacing: -0.02em;
@@ -78,7 +78,6 @@
         }
         .teaser img { display: block; width: 100%; height: auto; }
         @media (max-width: 600px) {
-            .container { padding: 1.5rem 1.25rem 3rem; }
             .project-header { margin-top: 2rem; margin-bottom: 2rem; }
             .authors { font-size: 1rem; }
             .teaser a { padding: 0.5rem; border-radius: 8px; }

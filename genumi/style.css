@@ -1,10 +1,12 @@
 :root {
-  --background: #f4efe6;
-  --surface: #fbf8f3;
-  --text: #1a1815;
-  --muted: #60574e;
-  --border: #ddd2c4;
-  --accent: #352d24;
+  --background: #f7f8f5;
+  --surface: #fff;
+  --media: #edf0ea;
+  --text: #101413;
+  --muted: #4c5550;
+  --border: #d9dfd8;
+  --accent: #20483a;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -14,8 +16,8 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--text);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  line-height: 1.55;
 }
 
 a { color: inherit; text-underline-offset: .24em; }
@@ -25,7 +27,7 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
-.wrap { width: min(55rem, calc(100% - 3rem)); margin-inline: auto; }
+.wrap { width: min(78rem, calc(100% - clamp(2rem, 6vw, 6rem))); margin-inline: auto; }
 
 .site-header {
   display: flex;
@@ -33,37 +35,37 @@ a:focus-visible {
   align-items: baseline;
   flex-wrap: wrap;
   gap: .5rem 1.25rem;
-  padding-block: 1.35rem;
+  padding-block: 1.15rem;
   border-bottom: 1px solid var(--border);
-  font-size: .9rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 650;
 }
 
-.site-header a { text-decoration-color: var(--border); }
-.site-header a:hover { text-decoration-color: currentColor; }
+.site-header a { text-decoration: none; }
+.site-header a:hover { text-decoration: underline; }
 .site-header nav { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
 
 .intro {
   padding-block: clamp(2.5rem, 7vw, 4.75rem) clamp(2rem, 5vw, 3.75rem);
 }
 
-h1, h2, h3, .subtitle {
-  font-family: Newsreader, Georgia, serif;
-  font-weight: 500;
-  line-height: 1.12;
+h1, h2, h3 {
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -.04em;
   margin: 0;
 }
 
-h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
-.subtitle { margin-block: .7rem 1rem; font-size: clamp(1.65rem, 4vw, 2.45rem); }
-.lede { max-width: 41rem; margin: 0; color: var(--muted); font-size: 1.05rem; }
+h1 { font-size: clamp(3.15rem, 8vw, 6.75rem); letter-spacing: -.065em; }
+.subtitle { margin-block: .7rem 1rem; font-size: clamp(1.2rem, 2.5vw, 1.75rem); color: var(--muted); }
+.lede { max-width: 55ch; margin: 0; color: var(--muted); font-size: clamp(1.06rem, 1.7vw, 1.25rem); }
 .hardware { scroll-margin-top: 1rem; }
-.hardware h2 { margin-bottom: 1rem; font-size: 2rem; }
+.hardware h2 { margin-bottom: 1.25rem; font-size: clamp(1.9rem, 4vw, 3.25rem); }
 
 .variants {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1rem;
+  column-gap: clamp(1rem, 2.5vw, 1.8rem);
 }
 
 .variant {
@@ -72,7 +74,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   grid-template-rows: subgrid;
   min-width: 0;
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: .55rem;
   background: var(--surface);
 }
 
@@ -80,9 +82,9 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   margin: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
+  border-radius: calc(.55rem - 1px) calc(.55rem - 1px) 0 0;
   border-bottom: 1px solid var(--border);
-  background: #f8f7f3;
+  background: var(--media);
 }
 
 .variant-image {
@@ -98,8 +100,8 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 .variant-files { padding-inline: clamp(1rem, 3vw, 1.5rem); }
 
 .variant-overview { padding-top: 1.2rem; }
-.variant h3 { font-size: clamp(1.55rem, 3vw, 2rem); }
-.variant-overview p { margin: .45rem 0 0; color: var(--muted); font-size: .95rem; }
+.variant h3 { font-size: clamp(1.55rem, 3vw, 2.25rem); }
+.variant-overview p { max-width: 54ch; margin: .55rem 0 0; color: var(--muted); }
 
 .variant-actions {
   display: flex;
@@ -107,17 +109,17 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   align-items: center;
   gap: .45rem 1rem;
   padding-block: 1rem;
-  font-size: .86rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 650;
 }
 
 .variant-files {
   border-top: 1px solid var(--border);
   padding-block: .9rem 1.1rem;
-  font-size: .85rem;
+  font-size: 1rem;
 }
 
-.variant-files h4 { margin: 0 0 .45rem; font-weight: 600; }
+.variant-files h4 { margin: 0 0 .45rem; font-weight: 700; }
 .variant-files ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -129,7 +131,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 }
 
 .variant-actions a:not(.download),
-.variant-files a { text-decoration-color: #8a7561; }
+.variant-files a { text-decoration-color: var(--border); }
 .variant-actions a:not(.download):hover,
 .variant-files a:hover { text-decoration-color: currentColor; }
 
@@ -139,17 +141,17 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   gap: .65em;
   min-height: 2.75rem;
   padding: .55rem .95rem;
-  border-radius: .5rem;
+  border-radius: .35rem;
   background: var(--accent);
-  color: #fffaf3;
-  font-size: .9rem;
-  font-weight: 600;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
   text-decoration: none;
 }
 
-.download:hover { background: #514335; }
+.download:hover { background: #315c4b; }
 .download:focus-visible { outline-color: var(--accent); }
-.release-note { max-width: 46rem; margin: 1rem 0 0; color: var(--muted); font-size: .9rem; }
+.release-note { max-width: 74ch; margin: 1rem 0 0; color: var(--muted); }
 
 .references {
   display: flex;
@@ -160,7 +162,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   padding-block: 1rem 2rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: .85rem;
+  font-size: .95rem;
 }
 
 .references p { margin: 0; }
@@ -179,12 +181,12 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 }
 
 .download.secondary {
-  border: 1px solid #a89581;
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--accent);
 }
 
-.download.secondary:hover { background: #eae1d4; }
+.download.secondary:hover { background: var(--media); }
 
 .software {
   margin-top: clamp(3rem, 8vw, 5rem);
@@ -220,7 +222,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   letter-spacing: .04em;
 }
 
-.software-card h3, .guide h3 { font-size: clamp(1.65rem, 3.5vw, 2.15rem); }
+.software-card h3, .guide h3 { font-size: clamp(1.65rem, 3.5vw, 2.5rem); }
 .software-card p:not(.platform) { margin: .45rem 0 1rem; color: var(--muted); font-size: .92rem; }
 .software-card .download { margin-top: auto; }
 
@@ -245,18 +247,18 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 
 .guide {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
   gap: clamp(1rem, 4vw, 2.25rem);
   padding-block: clamp(1.5rem, 4vw, 2.5rem);
   border-bottom: 1px solid var(--border);
   scroll-margin-top: 1rem;
 }
 
-.guide-heading p { margin: .5rem 0 0; color: var(--muted); }
+.guide-heading p { max-width: 50ch; margin: .65rem 0 0; color: var(--muted); }
 .guide-content { min-width: 0; }
 .guide details { border-bottom: 1px solid var(--border); font-size: .9rem; }
 .guide details:last-child { border-bottom: 0; }
-.guide summary { padding-block: .58rem; font-weight: 600; cursor: pointer; }
+.guide summary { padding-block: .68rem; font-weight: 700; cursor: pointer; }
 .guide summary:hover { text-decoration: underline; }
 .guide details p { margin: .2rem 0 .85rem; color: var(--muted); }
 .guide code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
@@ -267,8 +269,8 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
   margin: .2rem 0 .85rem;
   padding: .9rem;
   border-radius: .55rem;
-  background: #27211b;
-  color: #fffaf3;
+  background: var(--text);
+  color: var(--background);
   font-size: .79rem;
   line-height: 1.55;
   tab-size: 2;
@@ -277,7 +279,7 @@ h1 { font-size: clamp(4rem, 11vw, 7rem); letter-spacing: -.055em; }
 
 .capture-list { margin: 0 0 .5rem; padding-left: 1.4rem; font-size: .94rem; }
 .capture-list li { padding: 0 0 .75rem .22rem; }
-.capture-list li::marker { color: #695242; font-weight: 600; }
+.capture-list li::marker { color: var(--accent); font-weight: 700; }
 
 @media (max-width: 40rem) {
   .software-grid, .guide { grid-template-columns: 1fr; }

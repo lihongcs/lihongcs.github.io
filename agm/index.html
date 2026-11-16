@@ -19,11 +19,11 @@
             padding: 0;
         }
         .container {
-            max-width: 800px;
+            width: min(75rem, calc(100% - clamp(2rem, 6vw, 6rem)));
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding-block: clamp(2.25rem, 6vw, 4rem);
         }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+        h1 { max-width: 35ch; font-size: clamp(1.85rem, 4.2vw, 3.5rem); font-weight: 700; line-height: 1.15; margin: 0 0 1rem; }
         .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
         .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
         .links a {
@@ -40,7 +40,7 @@
         .teaser { margin: 3rem 0; text-align: center; }
         .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
+        .abstract { max-width: 72ch; font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; overflow-wrap: anywhere; }
         .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
         .home-link:hover { color: var(--text-color); }
     </style>

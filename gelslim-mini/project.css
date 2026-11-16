@@ -1,0 +1,109 @@
+.tactile-project {
+  --bg-color: #f7f8f5;
+  --text-color: #101413;
+  --secondary-text: #4c5550;
+  --border-color: #d9dfd8;
+  --card-color: #fff;
+  --media-color: #edf0ea;
+  --accent: #20483a;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+.tactile-project .wrap {
+  max-width: min(78rem, calc(100% - clamp(2rem, 6vw, 6rem)));
+  padding-inline: 0;
+}
+
+.tactile-project .site-header { padding-top: 0; }
+
+.tactile-project .nav {
+  flex-wrap: wrap;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tactile-project :is(.nav-links a, .home-link, .text-link) {
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--text-color);
+}
+
+.tactile-project .nav-links { flex-wrap: wrap; }
+.tactile-project .nav-links a:first-child { display: inline; }
+
+.tactile-project :is(h1, h2, h3) {
+  font-family: var(--font-sans);
+  letter-spacing: -.035em;
+  font-weight: 750;
+}
+
+.tactile-project .tactile-banner { padding-top: clamp(2.75rem, 7vw, 5.5rem); }
+
+.tactile-project .tactile-banner h1 {
+  font-size: clamp(3.15rem, 8vw, 6.75rem);
+  line-height: 1;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+.tactile-project .tactile-banner .lede {
+  max-width: 54ch;
+  color: var(--secondary-text);
+  font-size: clamp(1.06rem, 1.7vw, 1.25rem);
+}
+
+.tactile-project h2 { font-size: clamp(1.9rem, 4vw, 3.25rem); }
+.tactile-project h3 { font-size: clamp(1.2rem, 2.4vw, 1.55rem); }
+.tactile-project .section { padding-top: clamp(1.75rem, 4vw, 3rem); }
+.tactile-project .cad-viewer { margin-top: 0; border-radius: .55rem; }
+.tactile-project .cad-heading { flex-wrap: wrap; }
+.tactile-project .cad-surface { background: var(--media-color); }
+.tactile-project .cad-viewer:not([data-cad-ready="true"]) .cad-surface { background: #f2efe7; }
+
+.tactile-project .cad-preview {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  padding: 0;
+  clip-path: inset(2px 0 0);
+}
+
+.tactile-project .cad-viewer :is(button, select) {
+  min-height: 2.65rem;
+  border-color: var(--border-color);
+  background: var(--card-color);
+  font-size: .95rem;
+  font-weight: 650;
+}
+
+.tactile-project .cad-viewer button:hover:not(:disabled) { background: var(--media-color); }
+
+.tactile-project .cad-viewer :is(button[aria-pressed="true"], .cad-launch) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.tactile-project .cad-viewer :is(button[aria-pressed="true"], .cad-launch):hover:not(:disabled) {
+  background: #315c4b;
+}
+
+.tactile-project .cad-viewer :focus-visible { outline-color: var(--accent); }
+
+.tactile-project :is(.cad-help, .cad-toolbar, .cad-downloads p, .cad-downloads details summary, .cad-downloads details ul, .tactile-info p) {
+  font-size: 1rem;
+}
+
+.tactile-project .tactile-info p { max-width: 46ch; }
+.tactile-project .tactile-download-notes { max-width: 78ch; }
+.tactile-project .footer { font-size: .95rem; }
+
+@media (max-width: 40rem) {
+  .tactile-project .nav { align-items: start; gap: .7rem 1rem; }
+  .tactile-project .footer { flex-wrap: wrap; }
+}

@@ -5,167 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hong Li</title>
     <script type="module" src="./hardware-viewer/project-previews.mjs?v=idle-rotation"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./datasets/datasets.css?v=rows">
+    <link rel="stylesheet" href="./fonts/inter.css">
+    <link rel="stylesheet" href="./datasets/datasets.css?v=wide-layout">
     <script src="./datasets/globe.js" defer></script>
     <style>
         :root {
-            --bg-color: #F4EFE6;
-            --text-color: #1A1815;
-            --secondary-text: #6A6258;
-            --border-color: #E2D9CD;
-        }
-        body {
-            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            --bg-color: #f7f8f5;
+            --surface-color: #ffffff;
+            --media-color: #edf0ea;
+            --text-color: #101413;
+            --secondary-text: #4c5550;
+            --border-color: #d9dfd8;
+            --accent-color: #20483a;
+            --page-gutter: clamp(1.15rem, 4.7vw, 4rem);
+            font-family: Inter, ui-sans-serif, system-ui, sans-serif;
             color: var(--text-color);
-            line-height: 1.6;
+            background: var(--bg-color);
+            font-synthesis: none;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; line-height: 1.55; }
+        a { color: var(--accent-color); text-underline-offset: .2em; }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 4px;
+        }
+        [id] { scroll-margin-top: 1.5rem; }
+        .container {
+            width: min(81rem, calc(100% - 2 * var(--page-gutter)));
+            margin-inline: auto;
+            padding-bottom: clamp(2.5rem, 6vw, 5rem);
+        }
+        .site-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .6rem 1.5rem;
+            padding-block: 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 650;
+            flex-wrap: wrap;
+        }
+        .site-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem clamp(.8rem, 3vw, 2rem);
+            list-style: none;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
+        .site-nav a { text-decoration: none; }
+        .site-nav a:hover { text-decoration: underline; }
+        .home-intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+            align-items: end;
+            gap: 1.35rem clamp(1.8rem, 5vw, 5rem);
+            padding-block: clamp(3.25rem, 8vw, 7.25rem) clamp(3.5rem, 7vw, 6.5rem);
         }
+        h1, h2, h3 { color: var(--text-color); }
         h1 {
-            font-family: 'Newsreader', serif;
-            font-size: 3.5rem;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
+            margin: 0;
+            font-size: clamp(3.5rem, 8.8vw, 8rem);
+            font-weight: 780;
+            line-height: .92;
+            letter-spacing: -.075em;
         }
         .bio {
-            font-size: 1.1rem;
+            max-width: 36ch;
+            margin: 0;
+            font-size: clamp(1.125rem, 1.75vw, 1.55rem);
+            line-height: 1.48;
             color: var(--secondary-text);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            line-height: 1.5;
         }
-        .bio a {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2px;
-            transition: border-color 0.2s ease;
-        }
-        .bio a:hover {
-            border-color: var(--text-color);
-        }
+        .bio strong { color: var(--text-color); font-weight: 680; }
+        .home-section + .home-section { margin-top: clamp(3.75rem, 8vw, 7rem); }
         h2 {
-            font-family: 'Newsreader', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            margin-top: 4rem;
-            margin-bottom: 2.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
+            margin: 0 0 clamp(1.1rem, 2.5vw, 2rem);
+            padding-block: .75rem .4rem;
+            border-top: 1px solid var(--border-color);
+            font-size: clamp(2.15rem, 4.25vw, 3.65rem);
+            font-weight: 740;
+            letter-spacing: -.057em;
+            line-height: 1.08;
         }
-        .paper-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-        .paper {
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            align-items: baseline;
-        }
-        .paper-year {
-            flex: 0 0 140px;
-            font-family: 'Newsreader', serif;
-            font-size: 1.15rem;
-            color: var(--text-color);
-            font-weight: 500;
-            white-space: nowrap;
-        }
-        .paper-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-        .paper-title,
-        .project-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0;
-            line-height: 1.4;
-            color: var(--text-color);
-        }
-        .paper-authors,
-        .project-description {
-            font-size: 1rem;
-            color: var(--secondary-text);
-            margin: 0;
-        }
-        .paper-authors strong {
-            color: var(--text-color);
-            font-weight: 600;
-        }
-        .paper-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.2rem;
-        }
-        .paper-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2px;
-            transition: border-color 0.2s ease;
-        }
-        .paper-links a:hover {
-            border-color: var(--text-color);
-        }
-        .project-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr);
-            gap: 1.25rem;
-        }
-        .project-grid .paper-links {
-            flex-wrap: wrap;
-            gap: .35rem .75rem;
-        }
+        .project-grid { display: grid; gap: clamp(.9rem, 2vw, 1.4rem); }
         .project-entry {
+            display: grid;
             min-width: 0;
+            overflow: hidden;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background: #FBF8F3;
-        }
-        .project-link {
-            color: inherit;
-            text-decoration: none;
-        }
-        .project-link:focus-visible {
-            outline: 2px solid var(--text-color);
-            outline-offset: 3px;
+            border-radius: 14px;
+            background: var(--surface-color);
         }
         .project-media {
             position: relative;
             aspect-ratio: 16 / 10;
+            min-width: 0;
             overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
-            border-radius: 11px 11px 0 0;
-            background: #F2EEE7;
+            background: var(--media-color);
             isolation: isolate;
         }
-        .project-image {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .project-image--genumi {
-            mix-blend-mode: multiply;
-        }
+        .project-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+        .project-image--genumi { mix-blend-mode: multiply; }
         .project-media canvas {
             position: absolute;
             inset: 0;
@@ -177,124 +120,129 @@
         }
         .project-media canvas.is-rotating { cursor: grabbing; }
         .project-media canvas:focus-visible {
-            outline: 2px solid var(--text-color);
+            outline: 2px solid var(--accent-color);
             outline-offset: -4px;
         }
         .project-preview-tools {
             position: absolute;
             z-index: 1;
-            right: .65rem;
-            bottom: .65rem;
-            left: .65rem;
+            inset: auto .75rem .75rem;
             display: none;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: .35rem;
             pointer-events: none;
         }
         [data-preview-state="ready"] .project-image { visibility: hidden; }
         [data-preview-state="ready"] .project-preview-tools { display: flex; }
-        .project-preview-tools > span,
+        .project-preview-tools > span { color: var(--secondary-text); font-size: .875rem; }
         .project-preview-tools button {
-            padding: .3rem .5rem;
+            min-height: 40px;
+            padding: .4rem .7rem;
             border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background: #FBF8F3;
-            color: var(--secondary-text);
-            font: 500 .72rem/1.3 'Inter', sans-serif;
-        }
-        .project-preview-tools button {
+            border-radius: 6px;
+            background: var(--surface-color);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: .875rem;
+            font-weight: 640;
+            line-height: 1.3;
             cursor: pointer;
             pointer-events: auto;
         }
-        .project-preview-actions {
-            display: flex;
-            gap: .35rem;
-        }
+        .project-preview-tools button:hover { background: var(--bg-color); }
+        .project-preview-actions { display: flex; gap: .375rem; }
         .project-copy {
-            padding: 1.1rem 1.25rem 1.25rem;
+            min-width: 0;
+            align-self: center;
+            padding: clamp(1.3rem, 4vw, 3.75rem);
         }
+        .project-title {
+            margin: 0;
+            font-size: clamp(1.8rem, 3.55vw, 3.35rem);
+            font-weight: 740;
+            line-height: 1.06;
+            letter-spacing: -.055em;
+        }
+        .project-link {
+            color: inherit;
+            text-decoration: none;
+        }
+        .project-link::after {
+            content: "↗" / "";
+            display: inline-block;
+            margin-inline-start: .28em;
+            color: var(--accent-color);
+            font-size: .58em;
+            font-weight: 600;
+            vertical-align: .22em;
+        }
+        .project-link:hover { text-decoration: underline; }
         .project-description {
-            margin-top: .45rem;
-        }
-        .project-link:hover,
-        .project-link:focus-visible {
-            text-decoration: underline;
-            text-underline-offset: .25em;
-        }
-        @media (min-width: 601px) {
-            .project-grid > .project-entry {
-                display: grid;
-                grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
-            }
-            .project-grid .project-media {
-                min-width: 0;
-                border-right: 1px solid var(--border-color);
-                border-bottom: 0;
-                border-radius: 11px 0 0 11px;
-            }
-            .project-grid .project-copy {
-                align-self: center;
-                padding: 1.35rem clamp(1.25rem, 3.5vw, 2rem);
-            }
-            .project-grid .project-title {
-                font-size: 1.25rem;
-            }
-        }
-        .paper.first-author {
-            background-color: #FBF8F3;
-            border-radius: 16px;
-            padding: 2rem;
-            margin-left: -2rem;
-            margin-right: -2rem;
-            box-shadow:
-                0 16px 40px rgba(163, 149, 134, 0.15),
-                0 4px 12px rgba(163, 149, 134, 0.1);
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .paper.first-author:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 24px 56px rgba(163, 149, 134, 0.25),
-                0 8px 16px rgba(163, 149, 134, 0.15);
-        }
-        .acknowledgment {
-            margin-top: 6rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 1rem;
+            max-width: 44ch;
+            margin: .85rem 0 0;
             color: var(--secondary-text);
-            text-align: left;
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
         }
-        @media (max-width: 600px) {
-            .paper {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .paper.first-author {
-                margin-left: -1rem;
-                margin-right: -1rem;
-                padding: 1.5rem;
-                border-radius: 12px;
-            }
-            .paper-year {
-                flex: auto;
-                font-size: 1rem;
-                color: var(--secondary-text);
-            }
+        .paper-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .4rem 1.1rem;
+            margin-top: .5rem;
+        }
+        .project-copy .paper-links { margin-top: clamp(.9rem, 2vw, 1.5rem); }
+        .paper-links a { font-weight: 660; }
+        .paper-list { border-bottom: 1px solid var(--border-color); }
+        .paper {
+            display: grid;
+            grid-template-columns: minmax(8.5rem, .15fr) minmax(0, 1fr);
+            gap: .4rem 1.5rem;
+            align-items: baseline;
+            padding: clamp(1.2rem, 2.35vw, 2rem) 0;
+            border-top: 1px solid var(--border-color);
+        }
+        .paper-year { color: var(--secondary-text); font-weight: 630; font-variant-numeric: tabular-nums; }
+        .paper-title { font-size: clamp(1.13rem, 1.85vw, 1.45rem); font-weight: 690; line-height: 1.35; margin: 0; }
+        .paper-authors { color: var(--secondary-text); font-size: 1rem; margin: .32rem 0 0; max-width: 86ch; }
+        .paper-authors strong { color: var(--text-color); font-weight: 680; }
+        .acknowledgment {
+            margin-top: clamp(2.5rem, 6vw, 4.25rem);
+            max-width: 73ch;
+            color: var(--secondary-text);
+        }
+        @media (min-width: 761px) {
+            .project-entry { grid-template-columns: minmax(0, 1.24fr) minmax(0, 1fr); }
+            .project-media { aspect-ratio: 16 / 9; border-right: 1px solid var(--border-color); }
+        }
+        @media (max-width: 760px) {
+            .home-intro, .paper { grid-template-columns: minmax(0, 1fr); }
+            .project-media { border-bottom: 1px solid var(--border-color); }
+            .paper-year { margin-bottom: .1rem; }
+        }
+        @media (max-width: 420px) {
+            .site-nav { font-size: .95rem; }
+            .project-preview-tools button { padding-inline: .5rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Hong Li</h1>
-    <p class="bio">
-        A third-year Ph.D. student at Shanghai Jiao Tong University, focusing on multi-modal learning (previously) and robotics.<br>
-        Email: <a href="mailto:hong_li@sjtu.edu.cn">hong_li@sjtu.edu.cn</a>
-    </p>
+<main class="container">
+    <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#datasets">Datasets</a></li>
+            <li><a href="#publications">Publications</a></li>
+        </ul>
+        <a href="mailto:hong_li@sjtu.edu.cn">hong_li@sjtu.edu.cn</a>
+    </nav>
+    <header class="home-intro">
+        <h1>Hong Li</h1>
+        <p class="bio">Third-year Ph.D. student at <strong>Shanghai Jiao Tong University</strong>. I work on robotics and previously studied multimodal learning.</p>
+    </header>
 
-    <section id="projects" aria-labelledby="projects-heading">
+    <section class="home-section" id="projects" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
         <div class="project-grid">
             <article class="project-entry">
@@ -321,8 +269,8 @@
             </article>
             <article class="project-entry">
                 <div class="project-media" data-project-preview="aetherock"
-                     data-model="./aetherock/assets/hardware/aetherock.glb?v=short-pivot-seats">
-                    <img class="project-image" src="./aetherock/assets/hardware/aetherock-preview.webp?v=short-pivot-seats" alt="AetheRock arm-worn robot teaching device" width="798" height="527" loading="lazy">
+                     data-model="./aetherock/assets/hardware/aetherock.glb?v=bde5690">
+                    <img class="project-image" src="./aetherock/assets/hardware/aetherock-preview.webp?v=bde5690" alt="AetheRock arm-worn robot teaching device" width="798" height="527" loading="lazy">
                     <div class="project-preview-tools">
                         <span id="project-aetherock-controls">Drag to rotate</span>
                         <div class="project-preview-actions">
@@ -359,7 +307,7 @@
         </div>
     </section>
 
-    <section id="datasets" aria-labelledby="datasets-heading">
+    <section class="home-section" id="datasets" aria-labelledby="datasets-heading">
         <h2 id="datasets-heading">Datasets</h2>
         <div class="project-grid">
             <article class="project-entry dataset-card" aria-labelledby="dataset-tac-dino">
@@ -369,7 +317,7 @@
                         <canvas class="dataset-canvas" tabindex="0" aria-label="Tac-DINO sample globe. Drag horizontally or use the left and right arrow keys to rotate." hidden></canvas>
                     </div>
                     <figcaption>
-                        <a href="https://huggingface.co/datasets/lihong-cs/Tac-DINO/viewer/contact_preview/samples">3D vision–tactile preview</a>
+                        <a href="https://huggingface.co/datasets/lihong-cs/Tac-DINO/viewer/contact_preview/samples">Browse samples</a>
                         <button class="dataset-toggle" type="button" aria-label="Pause Tac-DINO globe rotation" hidden>
                             <span aria-hidden="true">Pause</span>
                         </button>
@@ -396,7 +344,6 @@
                         <canvas class="dataset-canvas" tabindex="0" aria-label="Robot Data sample globe. Drag horizontally or use the left and right arrow keys to rotate." hidden></canvas>
                     </div>
                     <figcaption>
-                        <span>RoboPose &amp; AetheRock samples</span>
                         <button class="dataset-toggle" type="button" aria-label="Pause Robot Data globe rotation" hidden>
                             <span aria-hidden="true">Pause</span>
                         </button>
@@ -423,7 +370,8 @@
              Imagery by Hong Li et al., cropped and resized. License: https://creativecommons.org/licenses/by/4.0/ -->
     </section>
 
-    <h2>Publications</h2>
+    <section class="home-section" id="publications" aria-labelledby="publications-heading">
+    <h2 id="publications-heading">Publications</h2>
     <div class="paper-list">
 
         <!-- RoboPose temporarily hidden from the homepage.
@@ -534,7 +482,6 @@
                 <p class="paper-authors">Pengbo Hu *, Ji Qi *, Xingyu Li, <strong>Hong Li</strong>, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou</p>
                 <div class="paper-links">
                     <a href="https://arxiv.org/abs/2308.09658" target="_blank">arXiv</a>
-                    <a href="#" target="_blank">Code</a>
                 </div>
             </div>
         </div>
@@ -548,11 +495,12 @@
         </div>
 
     </div>
+    </section>
 
     <div class="acknowledgment">
         I am grateful for the advice of Yun Pei, Pengbo Hu, Xingyu Li, Yong-Lu Li, Yue Xu, Nan Xue.
     </div>
-</div>
+</main>
 
 </body>
 </html>
