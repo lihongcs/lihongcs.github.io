@@ -153,12 +153,20 @@
       "href": "parts/pivot-m2p5-hex-nut.step"
     },
     {
+      "label": "Pushbutton XH2.54 Soldered Ribbon Cable",
+      "href": "parts/pushbutton-xh2-54-soldered-ribbon-cable.step"
+    },
+    {
       "label": "Rear Pivot M2p5 Thrust Washer",
       "href": "parts/rear-pivot-m2p5-thrust-washer.step"
     },
     {
       "label": "Rear Pivot Shoulder Bolt D3 L37p55 M2p5",
       "href": "parts/rear-pivot-shoulder-bolt-d3-l37p55-m2p5.step"
+    },
+    {
+      "label": "RGB LED XH2.54 Soldered Ribbon Cable",
+      "href": "parts/rgb-led-xh2-54-soldered-ribbon-cable.step"
     },
     {
       "label": "Right Fingertip Support",

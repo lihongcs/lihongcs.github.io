@@ -78,7 +78,7 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="cad-viewer" data-cad-viewer data-cad-autoload data-model="assets/hardware/aetherock.glb?v=encoder-ribbon">
+    <div class="cad-viewer" data-cad-viewer data-cad-autoload data-model="assets/hardware/aetherock.glb?v=xh-soldered-controls">
       <div class="cad-heading">
         <h3>Wearable UMI assembly</h3>
         <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="cad-surface" data-cad-surface>
-        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=encoder-ribbon" alt="AetheRock wearable UMI assembly." loading="lazy">
+        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=xh-soldered-controls" alt="AetheRock wearable UMI assembly." loading="lazy">
         <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
       </div>
       <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -118,9 +118,9 @@
     <div class="cad-downloads" id="downloads">
       <h3>Download AetheRock CAD</h3>
       <ul>
-        <li><a href="assets/hardware/aetherock-wearable-assembly.step?v=encoder-ribbon" download>Wearable assembly (STEP)</a></li>
+        <li><a href="assets/hardware/aetherock-wearable-assembly.step?v=xh-soldered-controls" download>Wearable assembly (STEP)</a></li>
         <li><a href="assets/hardware/aetherock-adaptive-gripper-assembly.step?v=short-pivot-seats" download>Adaptive gripper assembly (STEP)</a></li>
-        <li><a href="assets/hardware/aetherock-handcap-step-parts.zip?v=encoder-ribbon" download>Individual STEP parts (ZIP)</a></li>
+        <li><a href="assets/hardware/aetherock-handcap-step-parts.zip?v=xh-soldered-controls" download>Individual STEP parts (ZIP)</a></li>
         <li><a href="assets/hardware/aetherock-handcap-solidworks.zip?v=remove-unused-wearable-mounts" download>Editable SolidWorks parts (ZIP)</a></li>
         <li><a href="assets/hardware/aetherock-handcap-pcb-sources.zip?v=xh-ribbon-routing" download>Original PCB designs for JLCEDA Pro (ZIP)</a></li>
       </ul>
@@ -131,7 +131,8 @@
       <p>The Orange Pi 4 Pro tray carries a separate FUN-001 tactile pushbutton and a 10 mm diffused common-cathode RGB LED module. The STEP parts use dimensions estimated from the prototype photos. <a href="https://item.taobao.com/item.htm?id=600330037429">Pushbutton listing</a> &middot; <a href="https://item.taobao.com/item.htm?id=659577810824">RGB LED listing</a></p>
       <p>Two blue-and-white 5-position XH2.54 ribbon cables connect the U5 force ADC headers to U2 and U3 on the Orange Pi GPIO interconnect. Both front looms pass through the existing side openings, then the cables run inside the frame to the shared black braided sleeve. The earlier adaptive gripper STEP uses the prior adapter revision. <a href="https://item.taobao.com/item.htm?id=607731675302">XH2.54 cable listing</a></p>
       <p>The four-position AS5600 encoder ribbon connects CN1 on the encoder daughterboard to CN1 on the Orange Pi GPIO interconnect. It shares the braided sleeve with the force sensor ribbons and leaves a flexible section at the moving encoder mount.</p>
-      <details data-parts="assets/hardware/downloads.json?v=encoder-ribbon" hidden>
+      <p>The three-position pushbutton ribbon plugs into CN2 on the GPIO interconnect, and the four-position RGB LED ribbon plugs into CN3. Each ribbon terminates in individually soldered wires at the control module.</p>
+      <details data-parts="assets/hardware/downloads.json?v=xh-soldered-controls" hidden>
         <summary>Browse individual STEP downloads</summary>
         <ul></ul>
       </details>
