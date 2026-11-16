@@ -26,6 +26,7 @@ export async function mountViewer(root) {
   const motionButton = root.querySelector('[data-cad-action="gripper"]');
   const motionControls = root.querySelector('[data-cad-motion]');
   const openingInput = root.querySelector('[data-cad-opening]');
+  const parallel = root.hasAttribute('data-cad-parallel');
   const scene = new Scene();
   scene.background = new Color(0xf2eee7);
 
@@ -72,6 +73,7 @@ export async function mountViewer(root) {
 
   let model;
   let radius = 1;
+  let framed = false;
   let selected = [];
   let solo = false;
   let explodedView;
@@ -101,6 +103,10 @@ export async function mountViewer(root) {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
+    if (!framed) {
+      framed = true;
+      viewpoint();
+    }
     render();
   }
 
@@ -171,13 +177,20 @@ export async function mountViewer(root) {
     const direction = {
       iso: root.dataset.cadView === 'contact'
         ? new Vector3(1, -1.18, -0.86)
-        : new Vector3(-1.4, 0.8, 1.18),
+        : new Vector3(parallel ? 1.4 : -1.4, 0.8, 1.18),
       top: new Vector3(0, 1, 0.0001),
       side: new Vector3(-1, 0.08, 0),
       electronics: new Vector3(-1.0, 1.18, 1.02),
     }[key];
     const visible = meshes.filter((mesh) => mesh.visible);
-    focus(visible, direction);
+    if (parallel) {
+      const targets = visible.map((mesh) => new Box3().setFromObject(mesh, true));
+      const bounds = new Box3();
+      for (const target of targets) bounds.union(target);
+      fitBounds(bounds, direction, 1.13, targets);
+    } else {
+      focus(visible, direction);
+    }
   }
 
   function gripView() {
@@ -338,7 +351,8 @@ export async function mountViewer(root) {
     const canvas = renderer.domElement;
     const { width, height } = canvas.getBoundingClientRect();
     const point = hit.point.clone().project(camera);
-    const shifted = hit.point.clone().add(new Vector3(side * gripper.getTravel(), 0, 0)).project(camera);
+    const displacement = gripper.getWorldDisplacement?.(side) ?? new Vector3(side * gripper.getTravel(), 0, 0);
+    const shifted = hit.point.clone().add(displacement).project(camera);
     const axis = new Vector2((shifted.x - point.x) * width / 2, (point.y - shifted.y) * height / 2);
     // At an almost end-on camera angle there is no useful projected slide axis.
     if (axis.length() < 8) return;
@@ -456,11 +470,11 @@ export async function mountViewer(root) {
 
     if (assemblyControls) {
       const [{ createExplodedView }, { createGripperMotion }] = await Promise.all([
-        import('./aetherock-explode.mjs?v=controller-io'),
-        import('./gripper-motion.mjs?v=encoder-ribbon'),
+        import('./aetherock-explode.mjs?v=parallel-stl'),
+        parallel ? import('./parallel-gripper-motion.mjs') : import('./gripper-motion.mjs?v=encoder-ribbon'),
       ]);
       model.updateMatrixWorld(true);
-      explodedView = createExplodedView(model);
+      explodedView = createExplodedView(model, parallel);
       gripper = createGripperMotion(model);
       if (gripper) {
         opening = gripper.initialOpening;
@@ -507,7 +521,6 @@ export async function mountViewer(root) {
     toolbar.hidden = false;
     root.dataset.cadReady = 'true';
     resize();
-    viewpoint();
     new ResizeObserver(resize).observe(surface);
 
     selector.addEventListener('change', () => select(selector.value));

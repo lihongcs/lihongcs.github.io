@@ -94,18 +94,45 @@ function fastenerSeparation(label, center, out) {
   return out(18, -24, 11);
 }
 
-export function createExplodedView(model) {
+const opticalStackOrder = new Map([
+  ['Tactile Contact Surface', -4],
+  ['Acrylic Contact Window', -3],
+  ['Gel Retainer Ring', -2],
+  ['Optical Shroud', -1],
+  ['Optical Window Support', 0],
+  ['OV5647 Fisheye Camera', 1],
+  ['Tactile Back Cover', 2],
+  ['OV5647 USB Adapter PCB', 3],
+  ['OV5647 Camera FPC', 4],
+]);
+
+function parallelSeparation(part, center, origin, scale) {
+  const { label, module, motion } = part.userData;
+  if (label === 'Parallel Gripper Frame') return new Vector3();
+  if (module === 'GelSlim Mini Tactile Sensor' && motion) {
+    const layer = opticalStackOrder.get(label.replace(/^(Left|Right) /, '')) ?? 0;
+    return new Vector3(motion * scale * (0.26 + 0.052 * layer), -scale * 0.14, scale * 0.16);
+  }
+  const direction = center.clone().sub(origin);
+  if (direction.lengthSq() <= Number.EPSILON) return new Vector3(0, scale * 0.15, 0);
+  return direction.multiplyScalar(0.78).addScaledVector(direction.clone().normalize(), scale * 0.12);
+}
+
+export function createExplodedView(model, parallel = false) {
   const localBox = new Box3();
   const center = new Vector3();
   const current = new Vector3();
   const offset = new Vector3();
   model.updateWorldMatrix(true, true);
-  const parts = model.children.filter((part) => part.userData.label).map((part) => ({
-    part,
-    shift: separation(part, localBox.setFromObject(part).getCenter(center)),
-    assembled: part.position.clone(),
-    last: part.position.clone(),
-  }));
+  const assemblyBounds = new Box3().setFromObject(model);
+  const origin = assemblyBounds.getCenter(new Vector3());
+  const scale = assemblyBounds.getSize(new Vector3()).length();
+  const parts = model.children.filter((part) => part.userData.label).map((part) => {
+    localBox.setFromObject(part).getCenter(center);
+    const shift = parallel ? parallelSeparation(part, center, origin, scale) : separation(part, center);
+    return { part, shift, assembled: part.position.clone(), last: part.position.clone() };
+  });
+  if (!parts.length) return null;
   let applied = 0;
 
   function partBounds(amount) {

@@ -14,11 +14,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=parallel-stl">
   <link rel="stylesheet" href="../project-hero.css">
   <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=inline-3d">
   <script src="script.js" defer></script>
-  <script type="module" src="../hardware-viewer/start.mjs?v=stl-downloads"></script>
+  <script type="module" src="../hardware-viewer/start.mjs?v=parallel-stl"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -78,65 +78,176 @@
   <section id="hardware" class="section tinted"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">02 / HARDWARE</p><h2>One interface. Three sensing modalities.</h2><p class="lede">Finger-operated gripper control brings force, wrist vision, and tactile observations into the same demonstration.</p></div>
     <figure class="paper-figure"><a href="assets/hardware.webp" target="_blank" rel="noopener"><img src="assets/hardware.webp" loading="lazy" alt="AetheRock gripper with visual, tactile and resistive force sensing, and adaptive and parallel gripper mechanisms."></a><figcaption>The collection module supports adaptive and parallel gripper designs. A magnetic rotary encoder measures gripper width.</figcaption></figure>
-    <div class="cad-viewer" data-cad-viewer data-cad-autoload data-model="assets/hardware/aetherock.glb?v=xh-soldered-controls-clear">
-      <div class="cad-heading">
-        <h3>Wearable UMI assembly</h3>
-        <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
-      </div>
-      <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
-        <div class="cad-actions" role="group" aria-label="Assembly demonstrations">
-          <button class="cad-demo-button" type="button" data-cad-action="explode" aria-pressed="false">Explode assembly</button>
-          <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
+    <nav class="gripper-tabs" data-gripper-tabs aria-label="Gripper variants">
+      <a href="#adaptive" id="tab-adaptive">Adaptive</a>
+      <a href="#parallel-v1" id="tab-parallel-v1">Parallel V1</a>
+      <a href="#parallel-v2" id="tab-parallel-v2">Parallel V2</a>
+    </nav>
+    <section id="adaptive" class="gripper-panel" aria-labelledby="tab-adaptive">
+      <div class="cad-viewer" data-cad-viewer data-cad-autoload data-model="assets/hardware/aetherock.glb?v=xh-soldered-controls-clear">
+        <div class="cad-heading">
+          <h3>Adaptive gripper assembly</h3>
+          <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
         </div>
-        <div class="cad-motion" data-cad-motion hidden>
-          <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help" data-cad-opening></label>
-          <p id="cad-motion-help">Drag either jaw in the model or use the slider.</p>
+        <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
+          <div class="cad-actions" role="group" aria-label="Assembly demonstrations">
+            <button class="cad-demo-button" type="button" data-cad-action="explode" aria-pressed="false">Explode assembly</button>
+            <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
+          </div>
+          <div class="cad-motion" data-cad-motion hidden>
+            <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help" data-cad-opening></label>
+            <p id="cad-motion-help">Drag either jaw in the model or use the slider.</p>
+          </div>
         </div>
-      </div>
-      <div class="cad-surface" data-cad-surface>
-        <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=xh-soldered-controls-clear" alt="AetheRock wearable UMI assembly." loading="lazy">
-        <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
-      </div>
-      <div class="cad-toolbar" data-cad-toolbar hidden>
-        <div class="cad-inputs">
-          <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+        <div class="cad-surface" data-cad-surface>
+          <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-preview.webp?v=xh-soldered-controls-clear" alt="AetheRock wearable UMI assembly." loading="lazy">
+          <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
         </div>
-        <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
-        <div class="cad-actions" aria-label="Assembly view controls">
-          <button type="button" data-cad-action="focus" disabled>Focus</button>
-          <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
-          <button type="button" data-cad-action="top">Top view</button>
-          <button type="button" data-cad-action="side">Side view</button>
-          <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
-          <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
-          <button type="button" data-cad-action="reset">Reset</button>
+        <div class="cad-toolbar" data-cad-toolbar hidden>
+          <div class="cad-inputs">
+            <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+          </div>
+          <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
+          <div class="cad-actions" aria-label="Assembly view controls">
+            <button type="button" data-cad-action="focus" disabled>Focus</button>
+            <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+            <button type="button" data-cad-action="top">Top view</button>
+            <button type="button" data-cad-action="side">Side view</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-cad-action="reset">Reset</button>
+          </div>
         </div>
+        <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
+        <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STL downloads are available below.</p></noscript>
       </div>
-      <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
-      <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STL downloads are available below.</p></noscript>
-    </div>
-    <div class="cad-downloads" id="downloads">
-      <h3>Download AetheRock CAD</h3>
-      <ul>
-        <li><a href="assets/hardware/aetherock-wearable-assembly.stl" download>Wearable assembly (STL)</a></li>
-        <li><a href="assets/hardware/aetherock-adaptive-gripper-assembly.stl" download>Adaptive gripper assembly (STL)</a></li>
-        <li><a href="assets/hardware/aetherock-handcap-stl-parts.zip" download>Individual STL parts (ZIP)</a></li>
-        <li><a href="assets/hardware/aetherock-handcap-solidworks.zip?v=remove-unused-wearable-mounts" download>Editable SolidWorks parts (ZIP)</a></li>
-        <li><a href="assets/hardware/aetherock-handcap-pcb-sources.zip?v=xh-ribbon-routing" download>Original PCB designs for JLCEDA Pro (ZIP)</a></li>
-      </ul>
-      <p>The assembly STL shows the 90° clockwise AS5600 connector orientation. Assembly STL files preserve the assembled positions of the parts. All STL coordinates are in millimeters. The JLCEDA download contains the original PCB layout. The public STL uses exterior references for the Hikrobot wrist camera, VIVE Ultimate Tracker, and OV5647 tactile cameras.</p>
-      <p>The viewer uses HTC’s official VIVE Ultimate Tracker geometry. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC model source</a></p>
-      <p>Each 22 × 22 mm fingertip film has a soldered lead pair routed to its voltage conversion module in the CAD. The wiring is a mechanical reference for a single force channel. The 4 × 4 array requires a matrix readout circuit for individual sensing points. <a href="https://item.taobao.com/item.htm?id=678907675185">Voltage conversion module listing</a></p>
-      <p>The Orange Pi 4 Pro model follows the V1.3.2 board drawing and prototype photos, with detailed connector openings, contacts, and visible components. <a href="https://drive.google.com/file/d/1Y0IVGWaeSwKd_PaWXpa6HuQZ4deNgu57/view">Orange Pi board drawing</a></p>
-      <p>The Orange Pi 4 Pro tray carries a separate FUN-001 tactile pushbutton and a 10 mm diffused common-cathode RGB LED module. The STL parts use dimensions estimated from the prototype photos. <a href="https://item.taobao.com/item.htm?id=600330037429">Pushbutton listing</a> &middot; <a href="https://item.taobao.com/item.htm?id=659577810824">RGB LED listing</a></p>
-      <p>Two blue-and-white 5-position XH2.54 ribbon cables connect the U5 force ADC headers to U2 and U3 on the Orange Pi GPIO interconnect. Both front looms pass through the existing side openings, then the cables run inside the frame to the shared black braided sleeve. The earlier adaptive gripper STL uses the prior adapter revision. <a href="https://item.taobao.com/item.htm?id=607731675302">XH2.54 cable listing</a></p>
-      <p>The four-position AS5600 encoder ribbon connects CN1 on the encoder daughterboard to CN1 on the Orange Pi GPIO interconnect. It shares the braided sleeve with the force sensor ribbons and leaves a flexible section at the moving encoder mount.</p>
-      <p>The three-position pushbutton ribbon plugs into CN2 on the GPIO interconnect, and the four-position RGB LED ribbon plugs into CN3. Each ribbon terminates in individually soldered wires at the control module.</p>
-      <details data-parts="assets/hardware/downloads.json?v=stl-downloads" hidden>
-        <summary>Browse individual STL downloads</summary>
-        <ul></ul>
-      </details>
-    </div>
+      <div class="cad-downloads" id="downloads">
+        <h3>Download AetheRock CAD</h3>
+        <ul>
+          <li><a href="assets/hardware/aetherock-wearable-assembly.stl" download>Wearable assembly (STL)</a></li>
+          <li><a href="assets/hardware/aetherock-adaptive-gripper-assembly.stl" download>Adaptive gripper assembly (STL)</a></li>
+          <li><a href="assets/hardware/aetherock-handcap-stl-parts.zip" download>Individual STL parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-handcap-solidworks.zip?v=remove-unused-wearable-mounts" download>Editable SolidWorks parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-handcap-pcb-sources.zip?v=xh-ribbon-routing" download>Original PCB designs for JLCEDA Pro (ZIP)</a></li>
+        </ul>
+        <p>The assembly STL shows the 90° clockwise AS5600 connector orientation. Assembly STL files preserve the assembled positions of the parts. All STL coordinates are in millimeters. The JLCEDA download contains the original PCB layout. The public STL uses exterior references for the Hikrobot wrist camera, VIVE Ultimate Tracker, and OV5647 tactile cameras.</p>
+        <p>The viewer uses HTC’s official VIVE Ultimate Tracker geometry. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC model source</a></p>
+        <p>Each 22 × 22 mm fingertip film has a soldered lead pair routed to its voltage conversion module in the CAD. The wiring is a mechanical reference for a single force channel. The 4 × 4 array requires a matrix readout circuit for individual sensing points. <a href="https://item.taobao.com/item.htm?id=678907675185">Voltage conversion module listing</a></p>
+        <p>The Orange Pi 4 Pro model follows the V1.3.2 board drawing and prototype photos, with detailed connector openings, contacts, and visible components. <a href="https://drive.google.com/file/d/1Y0IVGWaeSwKd_PaWXpa6HuQZ4deNgu57/view">Orange Pi board drawing</a></p>
+        <p>The Orange Pi 4 Pro tray carries a separate FUN-001 tactile pushbutton and a 10 mm diffused common-cathode RGB LED module. The STL parts use dimensions estimated from the prototype photos. <a href="https://item.taobao.com/item.htm?id=600330037429">Pushbutton listing</a> &middot; <a href="https://item.taobao.com/item.htm?id=659577810824">RGB LED listing</a></p>
+        <p>Two blue-and-white 5-position XH2.54 ribbon cables connect the U5 force ADC headers to U2 and U3 on the Orange Pi GPIO interconnect. Both front looms pass through the existing side openings, then the cables run inside the frame to the shared black braided sleeve. The earlier adaptive gripper STL uses the prior adapter revision. <a href="https://item.taobao.com/item.htm?id=607731675302">XH2.54 cable listing</a></p>
+        <p>The four-position AS5600 encoder ribbon connects CN1 on the encoder daughterboard to CN1 on the Orange Pi GPIO interconnect. It shares the braided sleeve with the force sensor ribbons and leaves a flexible section at the moving encoder mount.</p>
+        <p>The three-position pushbutton ribbon plugs into CN2 on the GPIO interconnect, and the four-position RGB LED ribbon plugs into CN3. Each ribbon terminates in individually soldered wires at the control module.</p>
+        <details data-parts="assets/hardware/downloads.json?v=stl-downloads" hidden>
+          <summary>Browse individual STL downloads</summary>
+          <ul></ul>
+        </details>
+      </div>
+    </section>
+    <section id="parallel-v1" class="gripper-panel" aria-labelledby="tab-parallel-v1">
+      <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-parallel data-model="assets/hardware/aetherock-parallel-v1.glb">
+        <div class="cad-heading">
+          <h3>Parallel gripper V1 assembly</h3>
+          <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
+        </div>
+        <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
+          <div class="cad-actions" role="group" aria-label="Assembly demonstrations">
+            <button class="cad-demo-button" type="button" data-cad-action="explode" aria-pressed="false">Explode assembly</button>
+            <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
+          </div>
+          <div class="cad-motion" data-cad-motion hidden>
+            <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help-v1" data-cad-opening></label>
+            <p id="cad-motion-help-v1">Drag either jaw in the model or use the slider.</p>
+          </div>
+        </div>
+        <div class="cad-surface" data-cad-surface>
+          <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-parallel-v1-preview.webp" alt="AetheRock parallel gripper V1 assembly." loading="lazy">
+          <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
+        </div>
+        <div class="cad-toolbar" data-cad-toolbar hidden>
+          <div class="cad-inputs">
+            <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+          </div>
+          <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
+          <div class="cad-actions" aria-label="Assembly view controls">
+            <button type="button" data-cad-action="focus" disabled>Focus</button>
+            <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+            <button type="button" data-cad-action="top">Top view</button>
+            <button type="button" data-cad-action="side">Side view</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-cad-action="reset">Reset</button>
+          </div>
+        </div>
+        <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
+        <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STL downloads are available below.</p></noscript>
+      </div>
+      <div class="cad-downloads">
+        <h3>Download Parallel V1 CAD</h3>
+        <ul>
+          <li><a href="assets/hardware/aetherock-parallel-v1-assembly.stl" download>Assembly (STL)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-v1-stl-parts.zip" download>Individual STL parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-v1-solidworks.zip" download>Editable SolidWorks source (ZIP)</a></li>
+        </ul>
+        <p>The V1 assembly was reconstructed from the original SolidWorks part files. The assembly STL includes camera and tracker fit references and assembly clearances for the rail and tactile housings. Dimensions are in millimeters. The interactive assembly uses <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC’s official VIVE Ultimate Tracker geometry</a>.</p>
+        <details data-parts="assets/hardware/aetherock-parallel-v1-downloads.json" hidden>
+          <summary>Browse individual STL downloads</summary>
+          <ul></ul>
+        </details>
+      </div>
+    </section>
+    <section id="parallel-v2" class="gripper-panel" aria-labelledby="tab-parallel-v2">
+      <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-parallel data-model="assets/hardware/aetherock-parallel-v2.glb">
+        <div class="cad-heading">
+          <h3>Parallel gripper V2 assembly</h3>
+          <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
+        </div>
+        <div class="cad-assembly-controls" data-cad-assembly-controls hidden>
+          <div class="cad-actions" role="group" aria-label="Assembly demonstrations">
+            <button class="cad-demo-button" type="button" data-cad-action="explode" aria-pressed="false">Explode assembly</button>
+            <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
+          </div>
+          <div class="cad-motion" data-cad-motion hidden>
+            <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help-v2" data-cad-opening></label>
+            <p id="cad-motion-help-v2">Drag either jaw in the model or use the slider.</p>
+          </div>
+        </div>
+        <div class="cad-surface" data-cad-surface>
+          <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-parallel-v2-preview.webp" alt="AetheRock parallel gripper V2 assembly." loading="lazy">
+          <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
+        </div>
+        <div class="cad-toolbar" data-cad-toolbar hidden>
+          <div class="cad-inputs">
+            <label>Part <select data-cad-parts><option value="">Full assembly</option></select></label>
+          </div>
+          <p class="cad-readout" aria-live="polite"><strong data-cad-name>Full assembly</strong><span data-cad-module></span></p>
+          <div class="cad-actions" aria-label="Assembly view controls">
+            <button type="button" data-cad-action="focus" disabled>Focus</button>
+            <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+            <button type="button" data-cad-action="top">Top view</button>
+            <button type="button" data-cad-action="side">Side view</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-in" aria-label="Zoom in">+</button>
+            <button class="cad-zoom" type="button" data-cad-action="zoom-out" aria-label="Zoom out">−</button>
+            <button type="button" data-cad-action="reset">Reset</button>
+          </div>
+        </div>
+        <p class="cad-help">Drag to orbit, scroll or pinch to zoom, and click a part to identify it. Use the arrow keys to orbit when the view has focus.</p>
+        <noscript><p class="cad-help">Enable JavaScript to use the 3D viewer. STL downloads are available below.</p></noscript>
+      </div>
+      <div class="cad-downloads">
+        <h3>Download Parallel V2 CAD</h3>
+        <ul>
+          <li><a href="assets/hardware/aetherock-parallel-v2-assembly.stl" download>Assembly (STL)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-v2-stl-parts.zip" download>Individual STL parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-v2-solidworks.zip" download>Editable SolidWorks source (ZIP)</a></li>
+        </ul>
+        <p>V2 uses the component placements saved in the original SolidWorks assembly. The assembly STL includes camera and tracker fit references and assembly clearances for the rail and tactile housings. Dimensions are in millimeters. The interactive assembly uses <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC’s official VIVE Ultimate Tracker geometry</a>.</p>
+        <details data-parts="assets/hardware/aetherock-parallel-v2-downloads.json" hidden>
+          <summary>Browse individual STL downloads</summary>
+          <ul></ul>
+        </details>
+      </div>
+    </section>
     <div class="split-copy"><div><p class="eyebrow">TACTILE SENSOR</p><h3>GelSlim Mini</h3></div><div><p>GelSlim Mini uses planar acrylic and a PDMS-based sensing surface with silver powder. Its detachable sensor stack mounts on either the UMI collection gripper or the robot gripper.</p><a class="text-link" href="../gelslim-mini/">Explore GelSlim Mini <span aria-hidden="true">↗</span></a></div></div>
   </div></section>
 

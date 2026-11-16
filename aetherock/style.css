@@ -80,6 +80,25 @@ h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: .75re
 }
 .paper-figure img { width: 100%; }
 .paper-figure a { display: block; }
+.gripper-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+.gripper-tabs a {
+  padding: .48rem .85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--card-color);
+  font-size: .88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.gripper-tabs a:hover { border-color: #765033; }
+.gripper-tabs a[aria-selected="true"] { background: #302823; border-color: #302823; color: #fff; }
+.gripper-tabs a:focus-visible { outline: 2px solid #ae5c23; outline-offset: 3px; }
+.gripper-panel > .cad-viewer { margin-top: .8rem; }
 .split-copy { display: grid; grid-template-columns: 1fr 1.7fr; gap: 2rem; margin: 3rem 0 1.5rem; }
 .split-copy h3 { font-family: 'Newsreader', serif; font-size: 1.75rem; font-weight: 500; }
 .split-copy p { color: var(--secondary-text); }

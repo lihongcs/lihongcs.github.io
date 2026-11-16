@@ -9,7 +9,7 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=encoder-ribbon');
+    const { mountViewer } = await import('./viewer.mjs?v=parallel-stl');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     if (trigger) trigger.hidden = true;
@@ -24,6 +24,66 @@ export async function startViewer(root) {
     root.dataset.cadLoading = 'false';
   }
 }
+
+function mountGripperTabs(list) {
+  const tabs = [...list.querySelectorAll('a[href^="#"]')];
+  const panels = tabs.map((tab) => document.getElementById(tab.hash.slice(1)));
+  list.setAttribute('role', 'tablist');
+
+  function activate(index) {
+    tabs.forEach((tab, position) => {
+      const selected = position === index;
+      tab.tabIndex = selected ? 0 : -1;
+      tab.setAttribute('aria-selected', String(selected));
+      panels[position].hidden = !selected;
+    });
+  }
+
+  function activateFromLocation() {
+    const index = panels.findIndex((panel) =>
+      panel.id === location.hash.slice(1) || panel.contains(document.getElementById(location.hash.slice(1))));
+    activate(Math.max(0, index));
+  }
+
+  function select(index) {
+    if (location.hash !== tabs[index].hash) history.pushState(null, '', tabs[index].hash);
+    activate(index);
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panels[index].id);
+    panels[index].setAttribute('role', 'tabpanel');
+    tab.addEventListener('click', (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      event.preventDefault();
+      select(index);
+    });
+    tab.addEventListener('keydown', (event) => {
+      const targets = {
+        ArrowRight: (index + 1) % tabs.length,
+        ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+        Home: 0,
+        End: tabs.length - 1,
+      };
+      if (event.key === ' ') {
+        event.preventDefault();
+        select(index);
+      } else if (Object.hasOwn(targets, event.key)) {
+        event.preventDefault();
+        const next = targets[event.key];
+        select(next);
+        tabs[next].focus();
+      }
+    });
+  });
+
+  activateFromLocation();
+  window.addEventListener('hashchange', activateFromLocation);
+  window.addEventListener('popstate', activateFromLocation);
+}
+
+for (const list of document.querySelectorAll('[data-gripper-tabs]')) mountGripperTabs(list);
 
 for (const root of document.querySelectorAll('[data-cad-viewer]')) {
   root.querySelector('[data-cad-start]')?.addEventListener('click', () => startViewer(root));
