@@ -142,6 +142,7 @@
     color: var(--text-color);
     font-weight: 650;
 }
+.dataset-sources dt { display: flex; flex-wrap: wrap; gap: .2rem .85rem; }
 
 .dataset-sources dd {
     margin: 0;

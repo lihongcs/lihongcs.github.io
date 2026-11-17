@@ -1,103 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoboPose | Rethinking Pose Tracker Utility: An Empirical Study of Trajectory Accuracy in Robot Manipulation</title>
-    <meta name="description" content="RoboPose — Rethinking Pose Tracker Utility: An Empirical Study of Trajectory Accuracy in Robot Manipulation. Hong Li, Yue Xu, Yankang Dong, Yujun Shen, Nan Xue, and Yong-Lu Li.">
-    <link rel="canonical" href="https://lihongcs.github.io/robopose">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #F4EFE6;
-            --text-color: #1A1815;
-            --secondary-text: #6A6258;
-            --border-color: #E2D9CD;
-        }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            background: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .container {
-            width: min(78rem, calc(100% - clamp(2rem, 6vw, 6rem)));
-            margin: 0 auto;
-            padding-block: clamp(1.5rem, 3.5vw, 3rem) clamp(3rem, 6vw, 5rem);
-        }
-        .home-link {
-            display: inline-block;
-            color: var(--secondary-text);
-            font-size: 0.95rem;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-        }
-        .home-link:hover { border-color: var(--secondary-text); }
-        a:focus-visible { outline: 2px solid var(--text-color); outline-offset: 5px; }
-        .project-header {
-            max-width: 70rem;
-            margin: 2.5rem auto 2.5rem;
-            text-align: center;
-        }
-        h1 {
-            margin: 0 0 1.5rem;
-            font-family: 'Newsreader', serif;
-            font-size: clamp(1.8rem, 3.35vw, 2.75rem);
-            font-weight: 500;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            text-wrap: balance;
-        }
-        .authors {
-            margin: 0;
-            color: var(--secondary-text);
-            font-size: 1.1rem;
-            line-height: 1.9;
-        }
-        .authors span { display: inline-block; }
-        .authors strong { color: var(--text-color); font-weight: 600; }
-        sup { font-size: 0.7em; line-height: 0; }
-        .contribution {
-            margin: 0.5rem 0 0;
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-        }
-        .teaser { margin: 0; }
-        .teaser a {
-            display: block;
-            background: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1rem;
-        }
-        .teaser img { display: block; width: 100%; height: auto; }
-        @media (max-width: 600px) {
-            .project-header { margin-top: 2rem; margin-bottom: 2rem; }
-            .authors { font-size: 1rem; }
-            .teaser a { padding: 0.5rem; border-radius: 8px; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoboPose | When Does Tracking Error Matter in UMI?</title>
+  <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
+  <link rel="canonical" href="https://lihongcs.github.io/robopose/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="project.css?v=applications">
+  <script type="module" src="trajectory.mjs"></script>
 </head>
 <body>
-<main class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <header class="project-header">
-        <h1>Rethinking Pose Tracker Utility: An Empirical Study of Trajectory Accuracy in Robot Manipulation</h1>
-        <p class="authors"><span><strong>Hong Li<sup>*</sup></strong>,</span> <span>Yue Xu<sup>*</sup>,</span> <span>Yankang Dong,</span> <span>Yujun Shen,</span> <span>Nan Xue,</span> <span>Yong-Lu Li</span></p>
-        <p class="contribution">* Equal contribution.</p>
+  <header class="site-header">
+    <nav class="wrap site-nav" aria-label="Project navigation">
+      <a href="../">← Hong Li</a>
+      <ul>
+        <li><a href="#trajectories">Trajectories</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#demos">Demos</a></li>
+        <li><a href="#dataset">Dataset</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <header class="hero">
+      <h1>RoboPose</h1>
+      <p class="paper-title">When Does Tracking Error Matter in UMI? An Empirical Study of Pose Noise and Manipulation Performance</p>
+      <p class="authors"><span><strong>Hong Li<sup>*</sup></strong>,</span> <span>Yue Xu<sup>*</sup>,</span> <span>Yankang Dong,</span> <span>Yujun Shen,</span> <span>Nan Xue,</span> <span>Yong-Lu Li</span></p>
+      <p class="equal-contribution">* Equal contribution</p>
+      <div class="actions">
+        <a class="action primary" href="#trajectories">Explore the trajectories <span aria-hidden="true">↓</span></a>
+        <a class="action" href="https://huggingface.co/datasets/lihong-cs/robopose">Open dataset <span aria-hidden="true">↗</span></a>
+      </div>
     </header>
-    <figure class="teaser">
-        <a href="teaser.png" target="_blank" rel="noopener" aria-label="Open the RoboPose teaser at full resolution">
-            <img src="teaser.png" width="5197" height="1952" alt="RoboPose overview: robot-mounted pose trackers, trajectory evaluation metrics, and the effect of pose noise on manipulation task performance.">
-        </a>
+
+    <figure class="overview">
+      <a href="teaser.png" aria-label="Open the full-resolution RoboPose overview">
+        <img src="media/overview.webp" width="2380" height="894" alt="RoboPose overview showing robot-mounted and handheld trackers, trajectory error metrics, and manipulation results across pose-noise levels." fetchpriority="high">
+      </a>
     </figure>
-    <!-- Abstract, paper, code, and other project content are intentionally left empty. -->
-</main>
+
+    <section class="section" id="trajectories" aria-labelledby="trajectory-heading">
+      <header class="section-heading">
+        <h2 id="trajectory-heading">One motion, six recorded trajectories</h2>
+        <p>Five pose trackers and the Flexiv robot end effector record the same motion. Their position tracks are synchronized and aligned to the Flexiv reference.</p>
+      </header>
+      <figure class="comparison-video">
+        <video controls playsinline preload="none" poster="media/trajectory-comparison.webp" width="1280" height="720" aria-label="Synchronized 3D comparison of the five pose trackers and Flexiv reference">
+          <source src="media/trajectory-comparison.mp4" type="video/mp4">
+          <a href="media/trajectory-comparison.mp4">Open the trajectory comparison video</a>
+        </video>
+      </figure>
+      <p class="takeaway"><strong>Takeaway</strong> In this clip, median 3D position difference from Flexiv was <b>5.3 mm</b> for HTC VIVE Ultimate and <b>41.8 mm</b> for Insta360 X5.</p>
+      <details class="trajectory-details">
+        <summary>Explore the trajectories in 3D</summary>
+        <figure class="trajectory" data-trajectory data-source="media/trajectory.json">
+          <div class="trajectory-stage">
+            <canvas data-trajectory-canvas tabindex="0" aria-label="Recorded 3D trajectories. Drag or use arrow keys to rotate." hidden></canvas>
+            <p data-trajectory-status role="status">Loading recorded trajectories…</p>
+            <noscript><p>Enable JavaScript to explore the recorded trajectories.</p></noscript>
+          </div>
+          <div class="trajectory-toolbar" data-trajectory-controls hidden>
+            <div class="trajectory-transport">
+              <button class="control control-primary" type="button" data-trajectory-play>Play</button>
+              <input type="range" data-trajectory-time aria-label="Recording time" value="0" min="0" max="21.85" step="0.01">
+              <output data-trajectory-clock>21.85 s</output>
+              <button class="control" type="button" data-trajectory-reset>Reset view</button>
+            </div>
+            <div class="trajectory-tracks" data-trajectory-tracks role="group" aria-label="Recorded paths"></div>
+          </div>
+          <figcaption>Drag to rotate and use the timeline to replay any point in the 21.85 s clip.</figcaption>
+        </figure>
+      </details>
+      <dl class="measurements">
+        <div><dt>Trajectory accuracy</dt><dd>Absolute and relative pose error (APE and RPE).</dd></div>
+        <div><dt>Action-horizon accuracy</dt><dd>UMI trajectory-relative pose error (UMI-TRPE).</dd></div>
+        <div><dt>Consistency</dt><dd>Pairwise rigid consistency error and return-to-origin error.</dd></div>
+      </dl>
+    </section>
+
+    <section class="section" id="results" aria-labelledby="results-heading">
+      <header class="section-heading">
+        <h2 id="results-heading">From tracking error to task progress</h2>
+        <p>We measure pose errors on recorded trajectories, then train policies on demonstrations with controlled translation and rotation perturbations.</p>
+      </header>
+      <div class="visual-grid">
+        <figure class="visual-card">
+          <div class="visual-copy">
+            <h3>Tracker accuracy</h3>
+            <p class="takeaway"><strong>Takeaway</strong> HTC VIVE Ultimate has the lowest error on <b>5 of 5 translation metrics</b> and <b>4 of 5 rotation metrics</b>. Meta Quest 3S leads on rotational return-to-origin error.</p>
+          </div>
+          <a class="plot" href="media/tracker-comparison.webp" aria-label="Open the full tracker accuracy figure">
+            <img src="media/tracker-comparison.webp" width="1760" height="2440" alt="Radar plots and numeric table comparing five trackers on five translation and five rotation metrics." loading="lazy">
+          </a>
+        </figure>
+        <figure class="visual-card">
+          <div class="visual-copy">
+            <h3>Policy sensitivity to pose noise</h3>
+            <p class="takeaway"><strong>Takeaway</strong> Across six RoboTwin tasks, normalized task progress fell from <b>76% at L8 to 37% at L9</b> and reached <b>14% of the no-noise baseline</b> at L10.</p>
+          </div>
+          <div class="visual-video">
+            <video controls playsinline preload="none" poster="media/pose-noise-comparison.webp" width="1280" height="720" aria-label="Animated comparison of RoboTwin task progress across pose-noise levels">
+              <source src="media/pose-noise-comparison.mp4" type="video/mp4">
+              <a href="media/pose-noise-comparison.mp4">Open the pose-noise comparison video</a>
+            </video>
+            <a href="media/pose-noise.webp">Open the full pose-noise figure</a>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="applications" aria-labelledby="applications-heading">
+      <header class="section-heading">
+        <h2 id="applications-heading">Applications</h2>
+        <p class="takeaway"><strong>Takeaway</strong> For real-robot manipulation, π₀.₅ uses recent observations and end-effector states to <b>directly predict a sequence of end-effector poses</b> relative to the latest observed pose.</p>
+      </header>
+      <div class="video-grid application-grid">
+        <figure>
+          <video controls playsinline preload="none" poster="media/app-moving-cup.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of moving a cup">
+            <source src="media/app-moving-cup.mp4" type="video/mp4">
+            <a href="media/app-moving-cup.mp4">Open the cup-moving demonstration</a>
+          </video>
+          <figcaption><strong>Move a cup</strong></figcaption>
+        </figure>
+        <figure>
+          <video controls playsinline preload="none" poster="media/app-stacking-cups.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of stacking cups">
+            <source src="media/app-stacking-cups.mp4" type="video/mp4">
+            <a href="media/app-stacking-cups.mp4">Open the cup-stacking demonstration</a>
+          </video>
+          <figcaption><strong>Stack cups</strong></figcaption>
+        </figure>
+        <figure>
+          <video controls playsinline preload="none" poster="media/app-toss.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of a toss">
+            <source src="media/app-toss.mp4" type="video/mp4">
+            <a href="media/app-toss.mp4">Open the tossing demonstration</a>
+          </video>
+          <figcaption><strong>Toss an object</strong></figcaption>
+        </figure>
+      </div>
+      <p class="media-credit">Full wrist-camera episodes from <a href="https://huggingface.co/datasets/lihong-cs/robopose">recorded UMI demonstrations</a> · 30 fps playback · CC BY 4.0</p>
+    </section>
+
+    <section class="section" id="demos" aria-labelledby="demos-heading">
+      <header class="section-heading">
+        <h2 id="demos-heading">Simulation examples</h2>
+        <p>Two selected successful RoboTwin rollouts under the training conditions shown below.</p>
+      </header>
+      <div class="video-grid">
+        <figure>
+          <video controls playsinline preload="none" poster="media/press-bell.webp" width="320" height="240" aria-label="RoboTwin policy presses a bell">
+            <source src="media/press-bell.mp4" type="video/mp4">
+            <a href="media/press-bell.mp4">Open the bell rollout</a>
+          </video>
+          <figcaption><strong>Press the bell</strong><span>Policy trained on unperturbed poses</span></figcaption>
+        </figure>
+        <figure>
+          <video controls playsinline preload="none" poster="media/move-card.webp" width="320" height="240" aria-label="RoboTwin policy moves a playing card">
+            <source src="media/move-card.mp4" type="video/mp4">
+            <a href="media/move-card.mp4">Open the playing-card rollout</a>
+          </video>
+          <figcaption><strong>Move a playing card away</strong><span>Policy trained with δL0 pose noise</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section dataset-section" id="dataset" aria-labelledby="dataset-heading">
+      <div>
+        <header class="section-heading">
+          <h2 id="dataset-heading">RoboPose dataset</h2>
+          <p>Real demonstrations of moving cups, stacking cups, and tossing, collected with handheld UMI and robot teleoperation. Archives include RGB images, end-effector poses and gripper signals.</p>
+        </header>
+        <dl class="dataset-stats">
+          <div><dt>Episodes</dt><dd>1,569</dd></div>
+          <div><dt>Timesteps</dt><dd>451,505</dd></div>
+          <div><dt>Source archives</dt><dd>5</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="action primary" href="https://huggingface.co/datasets/lihong-cs/robopose/viewer/frame_preview/preview">Browse real frames <span aria-hidden="true">↗</span></a>
+          <a class="action" href="https://huggingface.co/datasets/lihong-cs/robopose/viewer/episode_index/episodes">Episode index <span aria-hidden="true">↗</span></a>
+          <a class="action" href="https://huggingface.co/datasets/lihong-cs/robopose/tree/main">Original files <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="dataset-preview">
+        <a href="media/dataset-gallery.webp" aria-label="Open full-size RoboPose dataset gallery">
+          <img src="media/dataset-gallery.webp" width="1200" height="1436" alt="Stored RGB observations across the five released moving-cup, stack-cups and toss archives." loading="lazy">
+        </a>
+        <figcaption><a href="https://huggingface.co/datasets/lihong-cs/robopose">RoboPose gallery on Hugging Face</a> · CC BY 4.0</figcaption>
+      </figure>
+    </section>
+  </main>
 </body>
 </html>

@@ -1,10 +1,9 @@
 # RoboPose project page
 
-Static project page at `/robopose/`, linked from the homepage.
+The project page lives at `/robopose/`. Serve the site root over HTTP during local development so the trajectory module can fetch its data.
 
-- Title and author order follow the supplied paper metadata.
-- `teaser.png` is the original embedded image (`Im1.png`, 5197 x 1952) from page 1 of `ICRA_2027_lihong_pose_tracker_utility_submit.pdf`, supplied on September 14, 2026. It is extracted without altering the artwork or results.
-- Abstract, venue, paper/code links, and other sections are intentionally omitted for now.
-- No PDF manuscript is copied into the public website.
-
-To update the teaser later, replace `teaser.png` and adjust its intrinsic `width` and `height` in `index.html` if needed.
+- `teaser.png` is the original full-resolution overview figure. `media/overview.webp` is its smaller web rendition.
+- `media/trajectory.json` and the trajectory comparison video use one 21.85 s robot-mounted recording with 438 synchronized, aligned position samples per track. The position differences are Euclidean distances to the same-timestamp Flexiv end-effector sample.
+- The results figures summarize tracker accuracy and pose noise. The two RoboTwin clips are selected successful simulation reruns.
+- The pose noise animation shows the six-task mean of per-task progress relative to each task's no-noise baseline. Applications videos play complete released UMI wrist-camera episodes (moving cup 192, stack cups 200, toss 211) at an encoded rate of 30 fps.
+- Dataset counts and gallery come from the [public RoboPose dataset](https://huggingface.co/datasets/lihong-cs/robopose) under CC BY 4.0.
