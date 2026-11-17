@@ -7,7 +7,7 @@
   <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
   <link rel="canonical" href="https://lihongcs.github.io/robopose/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="project.css?v=poses">
+  <link rel="stylesheet" href="project.css?v=noise-levels">
   <script type="module" src="trajectory.mjs?v=poses"></script>
 </head>
 <body>
@@ -99,6 +99,7 @@
           <div class="visual-copy">
             <h3>Policy sensitivity to pose noise</h3>
             <p class="takeaway"><strong>Takeaway</strong> Across six RoboTwin tasks, normalized task progress fell from <b>76% at L8 to 37% at L9</b> and reached <b>14% of the no-noise baseline</b> at L10.</p>
+            <p><a href="#pose-noise-levels">See L8 and L9 on the same demonstration</a></p>
           </div>
           <div class="visual-video">
             <video controls playsinline preload="none" poster="media/pose-noise-comparison.webp" width="1280" height="720" aria-label="Animated comparison of RoboTwin task progress across pose-noise levels">
@@ -109,6 +110,35 @@
           </div>
         </figure>
       </div>
+
+      <section class="noise-levels" id="pose-noise-levels" aria-labelledby="noise-levels-heading">
+        <header class="section-heading">
+          <h3 id="noise-levels-heading">What L8 and L9 do to an end-effector pose</h3>
+          <p>The training sampler perturbs each 0.1 s relative end-effector step in translation and rotation, then composes the steps from the same starting pose. L8 uses near-zero-mean Gaussian noise. L9 uses Gaussian and Laplace distributions fitted to tracker errors, with directional bias.</p>
+        </header>
+        <figure class="comparison-video">
+          <video controls playsinline preload="none" poster="media/pose-noise-trajectories.webp" width="1280" height="720" aria-label="Synchronized clean, L8 and L9 end-effector paths and rotating XYZ axes on one demonstration">
+            <source src="media/pose-noise-trajectories.mp4" type="video/mp4">
+            <a href="media/pose-noise-trajectories.mp4">Open the clean and perturbed pose comparison</a>
+          </video>
+          <figcaption>One sampled realization per level on the same recorded UMI demonstration. The moving XYZ axes show the end-effector orientation at each frame.</figcaption>
+        </figure>
+
+        <div class="noise-metrics">
+          <table aria-describedby="noise-metrics-note">
+            <caption>Per-step noise and accumulated pose error</caption>
+            <thead>
+              <tr><th scope="col">Level</th><th scope="col">Per-step scale</th><th scope="col">Mean end error</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">L8</th><td>6.72 mm / 0.91°</td><td>85.5 mm / 10.6°</td></tr>
+              <tr><th scope="row">L9</th><td>5.47 mm / 0.59°</td><td>163.6 mm / 25.5°</td></tr>
+              <tr><th scope="row">L10</th><td>9.56 mm / 1.00°</td><td>490.9 mm / 46.5°</td></tr>
+            </tbody>
+          </table>
+          <p id="noise-metrics-note">Pairs show translation / rotation. Per-step scale is the largest central 68.27% half-width across axes. Mean end error comes from 100 handheld reference trajectories.</p>
+        </div>
+      </section>
     </section>
 
     <section class="section" id="applications" aria-labelledby="applications-heading">
