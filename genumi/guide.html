@@ -439,29 +439,37 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
 
         <section class="inference-mode" aria-labelledby="inference-sdk-title">
           <div class="inference-images">
-            <h4 id="inference-sdk-title">X5 USB Android · CameraSDK</h4>
+            <h4 id="inference-sdk-title">X5 USB Android · Direct dual-fisheye export</h4>
             <figure class="inference-preview">
-              <div class="inference-wrists">
-                <img src="assets/workflow/inference-sdk-left.webp" width="224" height="224" alt="Left wrist view exported from an X5 CameraSDK stream">
-                <img src="assets/workflow/inference-sdk-right.webp" width="224" height="224" alt="Right wrist view exported from an X5 CameraSDK stream">
-              </div>
-              <figcaption>Left and right wrist · 17 Aug check</figcaption>
+              <img src="assets/workflow/inference-android-dual.webp" width="1600" height="800" loading="lazy" alt="Side-by-side front and rear fisheye views from one X5 CameraSDK frame, with the rear lens partly obstructed">
+              <figcaption>Front (left) and rear (right) · 1920 × 1920 per lens</figcaption>
             </figure>
-            <p>H.264 dual fisheye · Linux optical-flow stitch · 2048 × 1024 panorama</p>
           </div>
           <div class="inference-timing">
-            <p class="inference-scope">Camera frame timestamp → image ready</p>
+            <p class="inference-scope">Latency · median / P95</p>
             <dl>
-              <div><dt>Front + rear fisheye</dt><dd><strong>181 / 195 ms</strong></dd></div>
-              <div><dt>Optical-flow panorama</dt><dd><strong>278 / 293 ms</strong></dd></div>
+              <div><dt>Camera timestamp → fisheye pair ready</dt><dd><strong>181 / 195 ms</strong></dd></div>
+              <div><dt>Host H.264 packet → fisheye pair ready</dt><dd>4.4 / 8.0 ms</dd></div>
             </dl>
-            <p class="inference-run">Median / P95 · 17 Nov 2026 · 687 fisheye pairs and 690 panoramas</p>
-            <p class="inference-scope">Host receives H.264 packet → image ready</p>
+            <p class="inference-run">17 Nov 2026 · 687 pairs · NVDEC with host readback</p>
+          </div>
+        </section>
+
+        <section class="inference-mode" aria-labelledby="inference-sdk-panorama-title">
+          <div class="inference-images">
+            <h4 id="inference-sdk-panorama-title">X5 USB Android · Dual fisheye + optical-flow stitch</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-android-optflow.webp" width="1600" height="800" loading="lazy" alt="Optical-flow panorama from the same X5 frame, with the front view centered">
+              <figcaption>360° panorama from the same frame · 2048 × 1024 · front centered</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Latency · median / P95</p>
             <dl>
-              <div><dt>Decode fisheye pair (2 × 1920 × 1920)</dt><dd>4.4 / 8.0 ms</dd></div>
-              <div><dt>Decode + stitch panorama (2048 × 1024)</dt><dd>103 / 140 ms</dd></div>
+              <div><dt>Camera timestamp → panorama ready</dt><dd><strong>278 / 293 ms</strong></dd></div>
+              <div><dt>Host H.264 packet → panorama ready</dt><dd>103 / 140 ms</dd></div>
             </dl>
-            <p class="inference-run">One X5 · 3840 × 1920 at 29.97 fps · RTX 4080 SUPER. Fisheye uses NVDEC with host readback. Panorama uses MediaSDK OPTFLOW.</p>
+            <p class="inference-run">17 Nov 2026 · 690 panoramas · MediaSDK OPTFLOW</p>
           </div>
         </section>
 
@@ -479,10 +487,11 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
           </div>
         </section>
       </div>
-      <p class="inference-notes">The August panorama and CameraSDK runs used the same bimanual π0.5 checkpoint with different GPU settings. Their previews show 224 × 224 front fisheye frames from separate camera checks, with faces masked.</p>
+      <p class="inference-notes">X5 USB Android benchmarks used one X5 streaming 3840 × 1920 H.264 at 29.97 fps to an RTX 4080 SUPER.</p>
 
       <section class="inference-boundary" aria-labelledby="inference-boundary-title">
         <h4 id="inference-boundary-title">August bimanual timing</h4>
+        <p>The panorama and CameraSDK runs used the same bimanual π0.5 checkpoint with different GPU settings. The Webcam panorama preview shows masked 224 × 224 front fisheye views.</p>
         <ol>
           <li>Both latest 224 × 224 views available</li>
           <li>Assemble current and prior views with robot state</li>
