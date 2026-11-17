@@ -7,7 +7,7 @@
   <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
   <link rel="canonical" href="https://lihongcs.github.io/robopose/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="project.css?v=noise-levels">
+  <link rel="stylesheet" href="project.css?v=noise-sweep">
   <script type="module" src="trajectory.mjs?v=poses"></script>
 </head>
 <body>
@@ -85,59 +85,62 @@
         <h2 id="results-heading">From tracking error to task progress</h2>
         <p>We measure pose errors on recorded trajectories, then train policies on demonstrations with controlled translation and rotation perturbations.</p>
       </header>
-      <div class="visual-grid">
-        <figure class="visual-card">
-          <div class="visual-copy">
-            <h3>Tracker accuracy</h3>
-            <p class="takeaway"><strong>Takeaway</strong> HTC VIVE Ultimate has the lowest error on <b>5 of 5 translation metrics</b> and <b>4 of 5 rotation metrics</b>. Meta Quest 3S leads on rotational return-to-origin error.</p>
-          </div>
-          <a class="plot" href="media/tracker-comparison.webp" aria-label="Open the full tracker accuracy figure">
-            <img src="media/tracker-comparison.webp" width="1760" height="2440" alt="Radar plots and numeric table comparing five trackers on five translation and five rotation metrics." loading="lazy">
-          </a>
-        </figure>
-        <figure class="visual-card">
-          <div class="visual-copy">
-            <h3>Policy sensitivity to pose noise</h3>
-            <p class="takeaway"><strong>Takeaway</strong> Across six RoboTwin tasks, normalized task progress fell from <b>76% at L8 to 37% at L9</b> and reached <b>14% of the no-noise baseline</b> at L10.</p>
-            <p><a href="#pose-noise-levels">See L8 and L9 on the same demonstration</a></p>
-          </div>
-          <div class="visual-video">
-            <video controls playsinline preload="none" poster="media/pose-noise-comparison.webp" width="1280" height="720" aria-label="Animated comparison of RoboTwin task progress across pose-noise levels">
-              <source src="media/pose-noise-comparison.mp4" type="video/mp4">
-              <a href="media/pose-noise-comparison.mp4">Open the pose-noise comparison video</a>
-            </video>
-            <a href="media/pose-noise.webp">Open the full pose-noise figure</a>
-          </div>
-        </figure>
-      </div>
-
-      <section class="noise-levels" id="pose-noise-levels" aria-labelledby="noise-levels-heading">
-        <header class="section-heading">
-          <h3 id="noise-levels-heading">What L8 and L9 do to an end-effector pose</h3>
-          <p>The training sampler perturbs each 0.1 s relative end-effector step in translation and rotation, then composes the steps from the same starting pose. L8 uses near-zero-mean Gaussian noise. L9 uses Gaussian and Laplace distributions fitted to tracker errors, with directional bias.</p>
-        </header>
-        <figure class="comparison-video">
-          <video controls playsinline preload="none" poster="media/pose-noise-trajectories.webp" width="1280" height="720" aria-label="Synchronized clean, L8 and L9 end-effector paths and rotating XYZ axes on one demonstration">
-            <source src="media/pose-noise-trajectories.mp4" type="video/mp4">
-            <a href="media/pose-noise-trajectories.mp4">Open the clean and perturbed pose comparison</a>
+      <figure class="visual-card" id="tracker-accuracy" aria-labelledby="tracker-accuracy-heading">
+        <div class="visual-copy">
+          <h3 id="tracker-accuracy-heading">Tracker accuracy</h3>
+          <p class="takeaway"><strong>Takeaway</strong> <b>HTC VIVE Ultimate performed best overall</b> among the five trackers, with the lowest error on 5 of 5 translation metrics and 4 of 5 rotation metrics.</p>
+        </div>
+        <div class="visual-video">
+          <video controls playsinline preload="none" poster="media/tracker-summary.webp" width="1600" height="900" aria-label="How tracker benchmark tables are combined into the overall accuracy summary" aria-describedby="tracker-summary-caption">
+            <source src="media/tracker-summary.mp4" type="video/mp4">
+            <a href="media/tracker-summary.mp4">Open the tracker accuracy summary video</a>
           </video>
-          <figcaption>One sampled realization per level on the same recorded UMI demonstration. The moving XYZ axes show the end-effector orientation at each frame.</figcaption>
-        </figure>
+        </div>
+        <figcaption id="tracker-summary-caption">
+          <p>The video builds the summary from the normal conditions in Table II and the diverse conditions from the benchmark. It averages pose errors across robot-mounted and handheld tests, with return-to-origin error averaged across the two robot-mounted conditions. Meta Quest 3S leads on rotational return-to-origin error.</p>
+          <p><a href="media/tracker-comparison.webp">Open the full tracker accuracy figure</a></p>
+        </figcaption>
+      </figure>
 
-        <div class="noise-metrics">
+      <section class="visual-card" id="pose-noise-levels" aria-labelledby="noise-levels-heading">
+        <div class="visual-copy">
+          <h3 id="noise-levels-heading">Policy sensitivity to pose noise</h3>
+          <p class="takeaway"><strong>Takeaway</strong> Across six RoboTwin tasks, normalized task progress fell from <b>76% at L8 to 37% at L9</b> and reached <b>14% of the no-noise baseline</b> at L10.</p>
+        </div>
+        <figure>
+          <div class="visual-video">
+            <video controls playsinline preload="none" poster="media/pose-noise-sweep.webp" width="1600" height="900" aria-label="Synchronized per-level pose noise, end-effector pose and RoboTwin policy performance from Clean through L10" aria-describedby="noise-sweep-caption">
+              <source src="media/pose-noise-sweep.mp4" type="video/mp4">
+              <a href="media/pose-noise-sweep.mp4">Open the pose-noise and policy performance video</a>
+            </video>
+          </div>
+          <figcaption id="noise-sweep-caption">Each level replays the same recorded UMI motion with its own noise sample. The translation and rotation curves show the injected perturbations and the resulting error from the clean trajectory. The highlighted point shows measured policy progress across six RoboTwin tasks.</figcaption>
+        </figure>
+        <details class="noise-metrics">
+          <summary>Noise settings and policy progress by level</summary>
           <table aria-describedby="noise-metrics-note">
-            <caption>Per-step noise and accumulated pose error</caption>
             <thead>
-              <tr><th scope="col">Level</th><th scope="col">Per-step scale</th><th scope="col">Mean end error</th></tr>
+              <tr><th scope="col">Level</th><th scope="col">Per-step noise scale</th><th scope="col">Progress vs. clean</th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row">L8</th><td>6.72 mm / 0.91°</td><td>85.5 mm / 10.6°</td></tr>
-              <tr><th scope="row">L9</th><td>5.47 mm / 0.59°</td><td>163.6 mm / 25.5°</td></tr>
-              <tr><th scope="row">L10</th><td>9.56 mm / 1.00°</td><td>490.9 mm / 46.5°</td></tr>
+              <tr><th scope="row">Clean</th><td>0.00 mm / 0.00°</td><td>100.0%</td></tr>
+              <tr><th scope="row">L0</th><td>0.23 mm / 0.03°</td><td>99.1%</td></tr>
+              <tr><th scope="row">L1</th><td>0.50 mm / 0.06°</td><td>98.1%</td></tr>
+              <tr><th scope="row">L2</th><td>0.76 mm / 0.08°</td><td>95.1%</td></tr>
+              <tr><th scope="row">L3</th><td>1.46 mm / 0.21°</td><td>90.0%</td></tr>
+              <tr><th scope="row">L4</th><td>3.36 mm / 0.52°</td><td>93.9%</td></tr>
+              <tr><th scope="row">L5</th><td>3.80 mm / 0.55°</td><td>92.5%</td></tr>
+              <tr><th scope="row">L6</th><td>4.30 mm / 0.64°</td><td>89.6%</td></tr>
+              <tr><th scope="row">L7</th><td>4.58 mm / 0.72°</td><td>87.5%</td></tr>
+              <tr><th scope="row">L8</th><td>6.72 mm / 0.91°</td><td>76.0%</td></tr>
+              <tr><th scope="row">L9</th><td>5.47 mm / 0.59°</td><td>36.9%</td></tr>
+              <tr><th scope="row">L10</th><td>9.56 mm / 1.00°</td><td>14.2%</td></tr>
             </tbody>
           </table>
-          <p id="noise-metrics-note">Pairs show translation / rotation. Per-step scale is the largest central 68.27% half-width across axes. Mean end error comes from 100 handheld reference trajectories.</p>
-        </div>
+          <p id="noise-metrics-note">Training noise perturbs the translation and rotation of each relative end-effector step at 0.1 s intervals. The scale for each component is the largest central 68.27% interval half-width across axes. Policy progress averages the six per-task ratios to the clean policy, using 40 rollouts per task and condition.</p>
+          <p>L8 uses near-zero-mean Gaussian noise. L9 uses tracker-fitted Gaussian and Laplace noise with directional bias.</p>
+          <a href="media/pose-noise.webp">Open the full pose-noise figure</a>
+        </details>
       </section>
     </section>
 

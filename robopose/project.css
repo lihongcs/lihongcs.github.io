@@ -20,7 +20,7 @@ button, input { font: inherit; }
 :where(a, button, input, canvas):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 img, video { display: block; width: 100%; height: auto; }
 figure, p, dl, dd, h1, h2, h3 { margin: 0; }
-section[id] { scroll-margin-top: 1.5rem; }
+:is(section, figure)[id] { scroll-margin-top: 1.5rem; }
 
 .site-header { border-bottom: 1px solid var(--line); }
 .site-nav {
@@ -135,24 +135,24 @@ h2 { font-size: clamp(1.6rem, 2.7vw, 2.25rem); font-weight: 720; line-height: 1.
 .measurements dt { font-weight: 670; }
 .measurements dd { margin-top: .2rem; color: var(--muted); }
 
-.visual-grid, .video-grid, .dataset-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.85rem, 2.4vw, 1.6rem); }
-.visual-card { display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+.video-grid, .dataset-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.85rem, 2.4vw, 1.6rem); }
+.visual-card { overflow: hidden; }
+.visual-card + .visual-card { margin-top: clamp(1rem, 3vw, 2rem); }
 .visual-copy { padding: clamp(.95rem, 2.5vw, 1.35rem); }
-.visual-copy .takeaway + p { margin-top: .7rem; }
 h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 690; letter-spacing: -.02em; }
-.plot, .visual-video { padding: .65rem; border-top: 1px solid var(--line); }
-.plot { display: grid; align-items: center; }
-.plot img { height: clamp(280px, 36vw, 500px); object-fit: contain; object-position: center top; }
-.visual-video a { display: inline-block; margin: .65rem .4rem .35rem; }
-.noise-levels { margin-top: clamp(1.5rem, 3.5vw, 2.75rem); }
-.noise-levels figcaption { padding: .7rem 1rem; color: var(--muted); background: var(--surface); }
-.noise-metrics { max-width: 58rem; margin-top: 1rem; }
+.visual-video { padding: .65rem .65rem 0; border-top: 1px solid var(--line); }
+.visual-video video { border-radius: 6px; }
+.visual-card figcaption { padding: .75rem 1.1rem; color: var(--muted); }
+.visual-card figcaption p + p { margin-top: .5rem; }
+.noise-metrics { padding: .75rem 1.1rem 1.1rem; border-top: 1px solid var(--line); }
+.noise-metrics summary { width: fit-content; font-weight: 640; cursor: pointer; }
+.noise-metrics[open] summary { margin-bottom: .6rem; }
 .noise-metrics table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.noise-metrics caption { margin-bottom: .4rem; text-align: left; font-weight: 680; }
 .noise-metrics :is(th, td) { padding: .45rem clamp(.25rem, 1.2vw, .85rem); border-bottom: 1px solid var(--line); text-align: left; }
 .noise-metrics :is(th, td):first-child { padding-left: 0; }
 .noise-metrics thead { color: var(--muted); }
 .noise-metrics p { margin-top: .5rem; color: var(--muted); font-size: .9375rem; }
+.noise-metrics > a { display: inline-block; margin-top: .5rem; }
 .video-grid figure { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .video-grid video { aspect-ratio: 4 / 3; background: var(--media); }
 .video-grid figcaption { display: grid; gap: .2rem; padding: .9rem 1.1rem; }
@@ -170,9 +170,8 @@ h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 
 .dataset-preview img { max-height: 560px; object-fit: contain; }
 
 @media (max-width: 700px) {
-  .visual-grid, .video-grid, .dataset-section, .measurements { grid-template-columns: minmax(0, 1fr); }
+  .video-grid, .dataset-section, .measurements { grid-template-columns: minmax(0, 1fr); }
   .trajectory-tracks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .plot img { height: auto; max-height: 480px; }
 }
 @media (max-width: 500px) {
   .trajectory-transport { grid-template-columns: auto minmax(0, 1fr) auto; }
