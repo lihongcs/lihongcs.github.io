@@ -9,12 +9,14 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=parallel-stl');
+    const { mountViewer } = await import('./viewer.mjs?v=robopose');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     if (trigger) trigger.hidden = true;
   } catch (error) {
-    status.textContent = 'The 3D model could not be opened. Check WebGL or use the STL downloads below.';
+    status.textContent = preview
+      ? 'The interactive 3D model could not load. The assembly preview is still available.'
+      : 'The 3D model could not load. Check that WebGL is available and try again.';
     console.error(error);
     if (trigger) {
       trigger.disabled = false;

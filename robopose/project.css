@@ -80,6 +80,43 @@ sup { line-height: 0; }
 .section-heading { margin-bottom: 1.35rem; }
 h2 { font-size: var(--type-section); font-weight: 680; line-height: 1.2; letter-spacing: -.02em; }
 .section-heading p, .visual-copy p { max-width: 70ch; margin-top: .55rem; color: var(--muted); }
+.hardware-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.hardware-card {
+  --border-color: var(--line);
+  --card-color: var(--surface);
+  --text-color: var(--ink);
+  --secondary-text: var(--muted);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.hardware-card-heading { padding: .9rem 1rem .8rem; }
+.hardware-card-heading h3 { font-size: var(--type-subhead); line-height: 1.28; }
+.hardware-card-heading p { margin-top: .3rem; color: var(--muted); font-size: var(--type-support); }
+.hardware-card .cad-viewer { flex: 1; margin: 0; border: 0; border-radius: 0; }
+.hardware-card [data-cad-retry]:has([hidden]) { display: none; }
+.hardware-card .cad-launch { color: #fff; background: var(--accent); border-color: var(--accent); }
+.hardware-card .cad-surface { height: clamp(19rem, 32vw, 28rem); background: var(--media); }
+.hardware-card .cad-preview { padding: 0; }
+.hardware-card .cad-help { padding-bottom: .9rem; color: var(--muted); }
+.hardware-card .cad-readout { margin-block: .6rem; }
+.hardware-card .cad-actions { margin-bottom: .2rem; }
+.hardware-card .cad-actions button { min-height: 42px; }
+.hardware-download { padding: .65rem 1rem .8rem; border-top: 1px solid var(--line); font-weight: 640; font-size: var(--type-support); }
+.hardware-sources { margin-top: .85rem; font-size: var(--type-support); }
+.hardware-sources summary { width: fit-content; color: var(--accent); font-weight: 640; cursor: pointer; }
+.hardware-sources p { margin-top: .55rem; max-width: 76ch; color: var(--muted); }
+@media (max-width: 740px) {
+  .hardware-grid { grid-template-columns: minmax(0, 1fr); }
+}
 .takeaway {
   margin-top: .85rem;
   padding: .65rem .85rem;

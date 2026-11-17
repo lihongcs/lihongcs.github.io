@@ -28,7 +28,7 @@ export async function mountViewer(root) {
   const openingInput = root.querySelector('[data-cad-opening]');
   const parallel = root.hasAttribute('data-cad-parallel');
   const scene = new Scene();
-  scene.background = new Color(0xf2eee7);
+  scene.background = new Color(root.dataset.cadBackground || 0xf2eee7);
 
   const camera = new PerspectiveCamera(38, 1, 0.01, 2000);
   if (root.dataset.cadView === 'contact') camera.up.set(0, -1, 0);
@@ -174,8 +174,11 @@ export async function mountViewer(root) {
 
   function viewpoint(key = 'iso') {
     setViewUp(defaultUp);
+    const initial = model.userData.viewDirection;
+    const customView = Array.isArray(initial) && initial.length === 3 && initial.every(Number.isFinite)
+      && initial.some((axis) => axis !== 0);
     const direction = {
-      iso: root.dataset.cadView === 'contact'
+      iso: customView ? new Vector3().fromArray(initial) : root.dataset.cadView === 'contact'
         ? new Vector3(1, -1.18, -0.86)
         : new Vector3(parallel ? 1.4 : -1.4, 0.8, 1.18),
       top: new Vector3(0, 1, 0.0001),
@@ -183,7 +186,7 @@ export async function mountViewer(root) {
       electronics: new Vector3(-1.0, 1.18, 1.02),
     }[key];
     const visible = meshes.filter((mesh) => mesh.visible);
-    if (parallel) {
+    if (parallel || customView) {
       const targets = visible.map((mesh) => new Box3().setFromObject(mesh, true));
       const bounds = new Box3();
       for (const target of targets) bounds.union(target);
@@ -455,8 +458,9 @@ export async function mountViewer(root) {
 
     model.traverse((object) => {
       if (!object.isMesh || !object.geometry) return;
-      const named = object.userData.label ? object
-        : (object.parent?.userData.label ? object.parent : object);
+      let named = object;
+      while (named !== model && !named.userData.label) named = named.parent;
+      if (named === model) named = object;
       const label = labelFor(named);
       const module = named.userData.module || object.userData.module || '';
       const context = isContext(object) || isContext(named);
