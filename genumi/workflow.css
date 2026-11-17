@@ -770,8 +770,7 @@
 .inference-preview figcaption,
 .inference-run,
 .inference-notes,
-.inference-boundary p,
-.inference-phone {
+.inference-boundary p {
   margin: 0;
   color: var(--muted);
 }
@@ -809,6 +808,8 @@
   color: #234e4e;
   font-weight: 650;
 }
+
+.inference-run + .inference-scope { margin-top: .75rem; }
 
 .inference-result {
   display: flex;
@@ -867,8 +868,6 @@
   background: #e5ede8;
 }
 
-.inference-phone { margin-top: 1rem; }
-.inference-phone strong { color: var(--text); }
 
 .inference-matrix {
   display: grid;

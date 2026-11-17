@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#F7F8F5">
   <link rel="stylesheet" href="../fonts/inter.css">
   <link rel="stylesheet" href="style.css?v=compact-type">
-  <link rel="stylesheet" href="workflow.css?v=compact-type">
+  <link rel="stylesheet" href="workflow.css?v=x5-android-latency">
   <script type="module" src="slam-replay.mjs"></script>
 </head>
 <body>
@@ -450,12 +450,18 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
             <p>H.264 dual fisheye · Linux optical-flow stitch · 2048 × 1024 panorama</p>
           </div>
           <div class="inference-timing">
-            <p class="inference-result"><span><strong>211.9 ms</strong> Median</span><span><strong>225.9 ms</strong> P95</span></p>
+            <p class="inference-scope">Camera frame timestamp → image ready</p>
             <dl>
-              <div><dt>Policy request round trip</dt><dd>195.4 / 199.8 ms</dd></div>
-              <div><dt>Model compute within request</dt><dd>184.6 / 185.7 ms</dd></div>
+              <div><dt>Front + rear fisheye</dt><dd><strong>181 / 195 ms</strong></dd></div>
+              <div><dt>Optical-flow panorama</dt><dd><strong>278 / 293 ms</strong></dd></div>
             </dl>
-            <p class="inference-run">19 Aug 2026 · 103 logged steps</p>
+            <p class="inference-run">Median / P95 · 17 Nov 2026 · 687 fisheye pairs and 690 panoramas</p>
+            <p class="inference-scope">Host receives H.264 packet → image ready</p>
+            <dl>
+              <div><dt>Decode fisheye pair (2 × 1920 × 1920)</dt><dd>4.4 / 8.0 ms</dd></div>
+              <div><dt>Decode + stitch panorama (2048 × 1024)</dt><dd>103 / 140 ms</dd></div>
+            </dl>
+            <p class="inference-run">One X5 · 3840 × 1920 at 29.97 fps · RTX 4080 SUPER. Fisheye uses NVDEC with host readback. Panorama uses MediaSDK OPTFLOW.</p>
           </div>
         </section>
 
@@ -485,8 +491,6 @@ python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
         </ol>
         <p>Exposure, video transfer, decoding, stitching and projection happen before the timer starts. Action scheduling, dispatch and robot motion follow.</p>
       </section>
-      <p class="inference-phone"><strong>Android phone control</strong> · No historical latency measurement found.</p>
-
       <details class="processing-commands x5-webcam-notes">
         <summary>Can X5 Webcam stabilization be turned off?</summary>
         <p>Webcam overrides in-camera shooting settings. X5 stitches and stabilizes the 2880 × 1440 panorama in-camera. Both cameras accepted FlowState Off via CameraSDK. Persistence after switching back to Webcam is unverified. <a href="https://onlinemanual.insta360.com/x5/zh-cn/operating_tutorials/connect/webcam">X5 Webcam manual</a></p>
