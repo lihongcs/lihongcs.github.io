@@ -7,8 +7,8 @@
   <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
   <link rel="canonical" href="https://lihongcs.github.io/robopose/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="project.css?v=short-title">
-  <script type="module" src="trajectory.mjs"></script>
+  <link rel="stylesheet" href="project.css?v=poses">
+  <script type="module" src="trajectory.mjs?v=poses"></script>
 </head>
 <body>
   <header class="site-header">
@@ -43,21 +43,21 @@
 
     <section class="section" id="trajectories" aria-labelledby="trajectory-heading">
       <header class="section-heading">
-        <h2 id="trajectory-heading">One motion, six recorded trajectories</h2>
-        <p>Five pose trackers and the Flexiv robot end effector record the same motion. Their position tracks are synchronized and aligned to the Flexiv reference.</p>
+        <h2 id="trajectory-heading">One motion, six end-effector pose tracks</h2>
+        <p>Five trackers and the Flexiv robot record the same motion. Position and orientation are synchronized in the aligned Flexiv frame.</p>
       </header>
       <figure class="comparison-video">
-        <video controls playsinline preload="none" poster="media/trajectory-comparison.webp" width="1280" height="720" aria-label="Synchronized 3D comparison of the five pose trackers and Flexiv reference">
-          <source src="media/trajectory-comparison.mp4" type="video/mp4">
-          <a href="media/trajectory-comparison.mp4">Open the trajectory comparison video</a>
+        <video controls playsinline preload="none" poster="media/trajectory-comparison.webp?v=poses" width="1280" height="720" aria-label="Synchronized 3D positions and tool orientations for the five pose trackers and the Flexiv reference">
+          <source src="media/trajectory-comparison.mp4?v=poses" type="video/mp4">
+          <a href="media/trajectory-comparison.mp4?v=poses">Open the pose comparison video</a>
         </video>
       </figure>
-      <p class="takeaway"><strong>Takeaway</strong> In this clip, median 3D position difference from Flexiv was <b>5.3 mm</b> for HTC VIVE Ultimate and <b>41.8 mm</b> for Insta360 X5.</p>
+      <p class="takeaway"><strong>Takeaway</strong> The median position and rotation differences from Flexiv were <b>5.3 mm and 1.1°</b> for HTC VIVE Ultimate and <b>41.8 mm and 1.9°</b> for Insta360 X5.</p>
       <details class="trajectory-details">
-        <summary>Explore the trajectories in 3D</summary>
-        <figure class="trajectory" data-trajectory data-source="media/trajectory.json">
+        <summary>Explore the trajectories and tool orientations in 3D</summary>
+        <figure class="trajectory" data-trajectory data-source="media/trajectory.json?v=poses">
           <div class="trajectory-stage">
-            <canvas data-trajectory-canvas tabindex="0" aria-label="Recorded 3D trajectories. Drag or use arrow keys to rotate." hidden></canvas>
+            <canvas data-trajectory-canvas tabindex="0" aria-label="Recorded 3D paths and tool orientations. Drag or use arrow keys to rotate." hidden></canvas>
             <p data-trajectory-status role="status">Loading recorded trajectories…</p>
             <noscript><p>Enable JavaScript to explore the recorded trajectories.</p></noscript>
           </div>
@@ -68,9 +68,9 @@
               <output data-trajectory-clock>21.85 s</output>
               <button class="control" type="button" data-trajectory-reset>Reset view</button>
             </div>
-            <div class="trajectory-tracks" data-trajectory-tracks role="group" aria-label="Recorded paths"></div>
+            <div class="trajectory-tracks" data-trajectory-tracks role="group" aria-label="Recorded paths and pose differences from Flexiv"></div>
           </div>
-          <figcaption>Drag to rotate and use the timeline to replay any point in the 21.85 s clip.</figcaption>
+          <figcaption>Drag to rotate. The XYZ axes rotate with the tool, and the readings compare position and rotation with Flexiv at the current time.</figcaption>
         </figure>
       </details>
       <dl class="measurements">
@@ -118,47 +118,47 @@
       </header>
       <div class="video-grid application-grid">
         <figure>
-          <video controls playsinline preload="none" poster="media/app-moving-cup.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of moving a cup">
-            <source src="media/app-moving-cup.mp4" type="video/mp4">
-            <a href="media/app-moving-cup.mp4">Open the cup-moving demonstration</a>
+          <video controls playsinline preload="none" poster="media/app-moving-cup.webp?v=poses" width="640" height="360" aria-label="UMI cup-moving demonstration with synchronized end-effector pose">
+            <source src="media/app-moving-cup.mp4?v=poses" type="video/mp4">
+            <a href="media/app-moving-cup.mp4?v=poses">Open the cup-moving demonstration</a>
           </video>
           <figcaption><strong>Move a cup</strong></figcaption>
         </figure>
         <figure>
-          <video controls playsinline preload="none" poster="media/app-stacking-cups.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of stacking cups">
-            <source src="media/app-stacking-cups.mp4" type="video/mp4">
-            <a href="media/app-stacking-cups.mp4">Open the cup-stacking demonstration</a>
+          <video controls playsinline preload="none" poster="media/app-stacking-cups.webp?v=poses" width="640" height="360" aria-label="UMI cup-stacking demonstration with synchronized end-effector pose">
+            <source src="media/app-stacking-cups.mp4?v=poses" type="video/mp4">
+            <a href="media/app-stacking-cups.mp4?v=poses">Open the cup-stacking demonstration</a>
           </video>
           <figcaption><strong>Stack cups</strong></figcaption>
         </figure>
         <figure>
-          <video controls playsinline preload="none" poster="media/app-toss.webp" width="224" height="224" aria-label="UMI wrist-camera demonstration of a toss">
-            <source src="media/app-toss.mp4" type="video/mp4">
-            <a href="media/app-toss.mp4">Open the tossing demonstration</a>
+          <video controls playsinline preload="none" poster="media/app-toss.webp?v=poses" width="640" height="360" aria-label="UMI tossing demonstration with synchronized end-effector pose">
+            <source src="media/app-toss.mp4?v=poses" type="video/mp4">
+            <a href="media/app-toss.mp4?v=poses">Open the tossing demonstration</a>
           </video>
           <figcaption><strong>Toss an object</strong></figcaption>
         </figure>
       </div>
-      <p class="media-credit">Full wrist-camera episodes from <a href="https://huggingface.co/datasets/lihong-cs/robopose">recorded UMI demonstrations</a> · 30 fps playback · CC BY 4.0</p>
+      <p class="media-credit">Synchronized wrist views and end-effector poses from the <a href="https://huggingface.co/datasets/lihong-cs/robopose">recorded UMI demonstrations</a> · 30 fps playback · CC BY 4.0</p>
     </section>
 
     <section class="section" id="demos" aria-labelledby="demos-heading">
       <header class="section-heading">
         <h2 id="demos-heading">Simulation examples</h2>
-        <p>Two selected successful RoboTwin rollouts under the training conditions shown below.</p>
+        <p>Two successful RoboTwin rollouts with both policy end-effector poses shown in the simulation world frame.</p>
       </header>
       <div class="video-grid">
         <figure>
-          <video controls playsinline preload="none" poster="media/press-bell.webp" width="320" height="240" aria-label="RoboTwin policy presses a bell">
-            <source src="media/press-bell.mp4" type="video/mp4">
-            <a href="media/press-bell.mp4">Open the bell rollout</a>
+          <video controls playsinline preload="none" poster="media/press-bell.webp?v=poses" width="960" height="720" aria-label="RoboTwin bell rollout with left and right end-effector poses">
+            <source src="media/press-bell.mp4?v=poses" type="video/mp4">
+            <a href="media/press-bell.mp4?v=poses">Open the bell rollout</a>
           </video>
           <figcaption><strong>Press the bell</strong><span>Policy trained on unperturbed poses</span></figcaption>
         </figure>
         <figure>
-          <video controls playsinline preload="none" poster="media/move-card.webp" width="320" height="240" aria-label="RoboTwin policy moves a playing card">
-            <source src="media/move-card.mp4" type="video/mp4">
-            <a href="media/move-card.mp4">Open the playing-card rollout</a>
+          <video controls playsinline preload="none" poster="media/move-card.webp?v=poses" width="960" height="720" aria-label="RoboTwin card rollout with left and right end-effector poses">
+            <source src="media/move-card.mp4?v=poses" type="video/mp4">
+            <a href="media/move-card.mp4?v=poses">Open the playing-card rollout</a>
           </video>
           <figcaption><strong>Move a playing card away</strong><span>Policy trained with δL0 pose noise</span></figcaption>
         </figure>

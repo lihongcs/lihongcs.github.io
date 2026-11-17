@@ -9,6 +9,32 @@ const tracks = [
 const initialView = { azimuth: 0.5, elevation: 0.65 };
 const gridSpacing = 0.05;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+const axisColors = ["#a2463d", "#33735b", "#315e96"];
+const unitAxes = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+
+const dot = (a, b) => a.reduce((sum, component, index) => sum + component * b[index], 0);
+const mix = (a, b, fraction) => a.map((value, axis) => value + (b[axis] - value) * fraction);
+
+function interpolateOrientation(a, b, fraction) {
+  const end = dot(a, b) < 0 ? b.map((component) => -component) : b;
+  const blended = mix(a, end, fraction);
+  const length = Math.hypot(...blended);
+  return blended.map((component) => component / length);
+}
+
+function toolAxes([x, y, z, w]) {
+  return [
+    [1 - 2 * (y * y + z * z), 2 * (x * y + z * w), 2 * (x * z - y * w)],
+    [2 * (x * y - z * w), 1 - 2 * (x * x + z * z), 2 * (y * z + x * w)],
+    [2 * (x * z + y * w), 2 * (y * z - x * w), 1 - 2 * (x * x + y * y)],
+  ];
+}
+
+function poseDifference(reference, pose) {
+  const translation = Math.hypot(...pose.position.map((value, axis) => value - reference.position[axis])) * 1000;
+  const rotation = Math.acos(clamp(Math.abs(dot(reference.orientation, pose.orientation)), 0, 1)) * 360 / Math.PI;
+  return `${translation.toFixed(1)} mm · ${rotation.toFixed(1)}°`;
+}
 
 function makeLayout(positions) {
   const lower = [Infinity, Infinity, Infinity];
@@ -69,18 +95,25 @@ function line(context, points) {
   context.stroke();
 }
 
-function drawAxes(context, projection, width, height) {
-  const origin = [33, height - 26];
-  const axes = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+function drawTriad(context, projection, origin, axes, size, label = false, halo = false) {
   context.font = "600 11px Inter, system-ui, sans-serif";
-  context.lineWidth = 1.3;
   for (const [index, axis] of axes.entries()) {
     const [u, v] = projection.rotate(axis);
-    const end = [origin[0] + 21 * u, origin[1] - 21 * v];
-    context.strokeStyle = context.fillStyle = ["#a2463d", "#33735b", "#315e96"][index];
+    const end = [origin[0] + size * u, origin[1] - size * v];
+    if (halo) {
+      context.lineWidth = 4.6;
+      context.strokeStyle = "#fff";
+      line(context, [origin, end]);
+    }
+    context.lineWidth = halo ? 2.2 : 1.45;
+    context.strokeStyle = context.fillStyle = axisColors[index];
     line(context, [origin, end]);
-    context.fillText("XYZ"[index], end[0] + (u >= 0 ? 4 : -9), end[1] + (v >= 0 ? -3 : 8));
+    if (label) context.fillText("XYZ"[index], end[0] + (u >= 0 ? 4 : -9), end[1] + (v >= 0 ? -3 : 8));
   }
+}
+
+function drawAxes(context, projection, width, height) {
+  drawTriad(context, projection, [33, height - 26], unitAxes, 21, true);
 
   const spacing = gridSpacing * projection.scale;
   const right = width - 18;
@@ -107,11 +140,14 @@ async function initializeTrajectory(root) {
 
   const response = await fetch(root.dataset.source);
   if (!response.ok) throw new Error(`Trajectory data: ${response.status}`);
-  const { samplePeriod, positions } = await response.json();
+  const { samplePeriod, positions, orientations } = await response.json();
   const count = positions[0]?.length;
   if (!(samplePeriod > 0) || !(count > 1) || positions.length !== tracks.length ||
       positions.some((path) => path.length !== count || path.some((point) =>
-        point.length !== 3 || !point.every(Number.isFinite)))) {
+        point.length !== 3 || !point.every(Number.isFinite))) ||
+      orientations?.length !== tracks.length || orientations.some((path) =>
+        path.length !== count || path.some((q) => q.length !== 4 || !q.every(Number.isFinite) ||
+          Math.abs(Math.hypot(...q) - 1) > 0.0001))) {
     throw new Error("The trajectory data does not match its recorded sample layout");
   }
 
@@ -119,6 +155,7 @@ async function initializeTrajectory(root) {
   const duration = Number(((count - 1) * samplePeriod).toFixed(3));
   const selected = tracks.map(() => true);
   const view = { ...initialView };
+  const poseCards = [];
   let time = duration;
   let playbackOrigin = null;
   let request = 0;
@@ -160,14 +197,17 @@ async function initializeTrajectory(root) {
 
     const sample = clamp(time / samplePeriod, 0, count - 1);
     const index = Math.floor(sample);
+    const next = Math.min(index + 1, count - 1);
     const fraction = sample - index;
+    const poses = positions.map((path, track) => ({
+      position: mix(path[index], path[next], fraction),
+      orientation: interpolateOrientation(orientations[track][index], orientations[track][next], fraction),
+    }));
     const markers = [];
     for (const [track, points] of geometry.paths.entries()) {
       if (!selected[track]) continue;
       const segment = points.slice(0, index + 1);
-      const current = points[index];
-      const next = points[Math.min(index + 1, count - 1)];
-      const marker = current.map((value, dimension) => value + (next[dimension] - value) * fraction);
+      const marker = geometry.projection.project(poses[track].position);
       segment.push(marker);
       context.strokeStyle = tracks[track].color;
       if (time < duration) {
@@ -178,19 +218,30 @@ async function initializeTrajectory(root) {
       context.globalAlpha = 0.96;
       context.lineWidth = track === 0 ? 2.8 : 1.9;
       line(context, segment);
-      markers.push({ color: tracks[track].color, point: marker, radius: track === 0 ? 4.9 : 3.6 });
+      markers.push({ track, point: marker, radius: track === 0 ? 4.9 : 3.6 });
     }
     context.globalAlpha = 1;
-    for (const { point, color, radius } of markers) {
+    for (const { track, point, radius } of markers) {
       context.beginPath();
       context.arc(...point, radius, 0, Math.PI * 2);
-      context.fillStyle = color;
+      context.fillStyle = tracks[track].color;
       context.fill();
       context.lineWidth = 1.3;
       context.strokeStyle = "#fff";
       context.stroke();
     }
+    const focusPose = markers[0];
+    if (focusPose) {
+      drawTriad(context, geometry.projection, focusPose.point, toolAxes(poses[focusPose.track].orientation), 30, true, true);
+    }
     drawAxes(context, geometry.projection, width, height);
+
+    for (const [track, card] of poseCards.entries()) {
+      card.context.clearRect(0, 0, 36, 36);
+      drawTriad(card.context, geometry.projection, [18, 18], toolAxes(poses[track].orientation), 13);
+      const reading = poseDifference(poses[0], poses[track]);
+      if (card.value.textContent !== reading) card.value.textContent = reading;
+    }
 
     const seconds = time.toFixed(2);
     range.value = seconds;
@@ -267,11 +318,29 @@ async function initializeTrajectory(root) {
     button.type = "button";
     button.className = "trajectory-track";
     button.setAttribute("aria-pressed", "true");
+    button.setAttribute("aria-label", track.label);
     button.style.setProperty("--track-color", track.color);
     const swatch = document.createElement("span");
     swatch.className = "trajectory-swatch";
     swatch.setAttribute("aria-hidden", "true");
-    button.append(swatch, track.label);
+    const copy = document.createElement("span");
+    copy.className = "trajectory-pose-copy";
+    const name = document.createElement("span");
+    name.textContent = track.label;
+    const value = document.createElement("span");
+    value.className = "trajectory-pose-value";
+    value.id = `trajectory-pose-value-${index}`;
+    button.setAttribute("aria-describedby", value.id);
+    copy.append(name, value);
+    const triad = document.createElement("canvas");
+    triad.width = triad.height = 72;
+    triad.className = "trajectory-pose-axes";
+    triad.setAttribute("aria-hidden", "true");
+    const poseContext = triad.getContext("2d");
+    poseContext.scale(2, 2);
+    poseContext.lineCap = "round";
+    poseCards.push({ context: poseContext, value });
+    button.append(swatch, copy, triad);
     button.addEventListener("click", () => {
       selected[index] = !selected[index];
       button.setAttribute("aria-pressed", String(selected[index]));

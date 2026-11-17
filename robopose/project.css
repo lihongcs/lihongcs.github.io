@@ -112,11 +112,22 @@ h2 { font-size: clamp(1.6rem, 2.7vw, 2.25rem); font-weight: 720; line-height: 1.
 }
 .trajectory-transport input { min-width: 0; width: 100%; accent-color: var(--accent); }
 .trajectory-transport output { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.trajectory-tracks { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .7rem; }
-.trajectory-track { display: inline-flex; align-items: center; gap: .5rem; }
+.trajectory-tracks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; margin-top: .7rem; }
+.trajectory-track {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .45rem;
+  padding: .35rem .55rem;
+  text-align: start;
+  line-height: 1.25;
+}
 .trajectory-track[aria-pressed="false"] { color: var(--muted); background: var(--paper); }
-.trajectory-track[aria-pressed="false"] .trajectory-swatch { opacity: .35; }
+.trajectory-track[aria-pressed="false"] :is(.trajectory-swatch, .trajectory-pose-axes) { opacity: .35; }
 .trajectory-swatch { width: .7rem; height: .7rem; flex: none; border-radius: 50%; background: var(--track-color); }
+.trajectory-pose-copy { display: grid; gap: .15rem; }
+.trajectory-pose-value { color: var(--muted); font-size: .8125rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.trajectory-pose-axes { display: block; width: 36px; height: 36px; }
 .trajectory figcaption, .dataset-preview figcaption { padding: 0 1rem 1rem; color: var(--muted); font-size: .9375rem; }
 
 .measurements { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem 1.25rem; margin-top: 1.05rem; }
@@ -138,7 +149,7 @@ h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 
 .video-grid figcaption strong { font-size: 1.05rem; font-weight: 680; }
 .video-grid figcaption span { color: var(--muted); }
 .application-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.application-grid video { aspect-ratio: 1; }
+.application-grid video { aspect-ratio: 16 / 9; }
 .media-credit { margin-top: .55rem; color: var(--muted); font-size: .9375rem; }
 
 .dataset-section { align-items: start; margin-bottom: clamp(3rem, 6vw, 5rem); }
@@ -150,6 +161,7 @@ h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 
 
 @media (max-width: 700px) {
   .visual-grid, .video-grid, .dataset-section, .measurements { grid-template-columns: minmax(0, 1fr); }
+  .trajectory-tracks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plot img { height: auto; max-height: 480px; }
 }
 @media (max-width: 500px) {
