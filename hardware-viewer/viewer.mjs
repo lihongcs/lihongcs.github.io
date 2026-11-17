@@ -173,10 +173,16 @@ export async function mountViewer(root) {
   }
 
   function viewpoint(key = 'iso') {
-    setViewUp(defaultUp);
-    const initial = model.userData.viewDirection;
-    const customView = Array.isArray(initial) && initial.length === 3 && initial.every(Number.isFinite)
-      && initial.some((axis) => axis !== 0);
+    const fixtureOnly = contextToggle && !contextToggle.checked;
+    const hasDirection = (value) => Array.isArray(value) && value.length === 3
+      && value.every(Number.isFinite) && value.some((axis) => axis !== 0);
+    const fixtureUp = model.userData.fixtureUp;
+    setViewUp(key === 'iso' && fixtureOnly && hasDirection(fixtureUp)
+      ? new Vector3().fromArray(fixtureUp).normalize()
+      : defaultUp);
+    const initial = fixtureOnly ? model.userData.fixtureViewDirection ?? model.userData.viewDirection
+      : model.userData.viewDirection;
+    const customView = hasDirection(initial);
     const direction = {
       iso: customView ? new Vector3().fromArray(initial) : root.dataset.cadView === 'contact'
         ? new Vector3(1, -1.18, -0.86)
