@@ -144,7 +144,7 @@
               <tr><th scope="row">L10</th><td>9.56 mm / 1.00°</td><td>14.2%</td></tr>
             </tbody>
           </table>
-          <p id="noise-metrics-note">Training noise perturbs the translation and rotation of each relative end-effector step at 0.1 s intervals. The scale for each component is the largest central 68.27% interval half-width across axes. Policy progress averages the six per-task ratios to the clean policy, using 40 rollouts per task and condition.</p>
+          <p id="noise-metrics-note">Noise is applied every 0.1 s. The reported scale for each component is the largest central 68.27% interval half-width across axes.</p>
           <p>L8 uses near-zero-mean Gaussian noise. L9 uses tracker-fitted Gaussian and Laplace noise with directional bias.</p>
         </details>
       </section>
@@ -162,7 +162,6 @@
           </div>
           <figcaption id="noise-ablations-caption">
             <p class="takeaway"><strong>Takeaway</strong> With relative noise, mean pose error grew over the episode, reaching <b>491 mm and 46.5° at L10</b>. At the highest absolute noise level, policies retained <b>62% of clean task progress</b> with full noise, 77% with translation only and 80% with rotation only.</p>
-            <p>Pose errors average 100 handheld reference trajectories. Relative full-noise policy results cover six RoboTwin tasks, and the two relative ablations use the same three-task subset. All three absolute conditions cover six tasks.</p>
           </figcaption>
         </figure>
       </section>
