@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="391" viewBox="0 0 650 391" role="img" aria-labelledby="title desc">
+<title id="title">Success rate on real-robot tasks</title>
+<desc id="desc">UMI, teleoperation and overall results across seven relative-noise conditions. Overall success rate starts at 56% without injected noise and reaches 1% at L9.</desc>
+<rect width="650" height="391" fill="#ffffff"/>
+<g font-family="Inter, system-ui, sans-serif" fill="#171e1b">
+<text x="29" y="45" font-size="29" font-weight="700">Success rate</text>
+<path d="M82 329.0H611" stroke="#aab8b0"/>
+<text x="69" y="335.0" text-anchor="end" font-size="18" fill="#47554e">0%</text>
+<path d="M82 274.75H611" stroke="#dde5e0"/>
+<text x="69" y="280.75" text-anchor="end" font-size="18" fill="#47554e">25%</text>
+<path d="M82 220.5H611" stroke="#dde5e0"/>
+<text x="69" y="226.5" text-anchor="end" font-size="18" fill="#47554e">50%</text>
+<path d="M82 166.25H611" stroke="#dde5e0"/>
+<text x="69" y="172.25" text-anchor="end" font-size="18" fill="#47554e">75%</text>
+<path d="M82 112.0H611" stroke="#dde5e0"/>
+<text x="69" y="118.0" text-anchor="end" font-size="18" fill="#47554e">100%</text>
+<text x="82.0" y="363" text-anchor="middle" font-size="21" font-weight="600">Clean</text>
+<text x="170.17" y="363" text-anchor="middle" font-size="21" font-weight="600">L0</text>
+<text x="258.33" y="363" text-anchor="middle" font-size="21" font-weight="600">L1</text>
+<text x="346.5" y="363" text-anchor="middle" font-size="21" font-weight="600">L3</text>
+<text x="434.67" y="363" text-anchor="middle" font-size="21" font-weight="600">L5</text>
+<text x="522.83" y="363" text-anchor="middle" font-size="21" font-weight="600">L7</text>
+<text x="611.0" y="363" text-anchor="middle" font-size="21" font-weight="600">L9</text>
+<path d="M32 76h34" stroke="#306a9c" stroke-linecap="round" stroke-width="3.6"/>
+<circle cx="49" cy="76" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<text x="75" y="82" font-size="20" font-weight="650">UMI</text>
+<polyline points="82.0,249.43 170.17,249.43 258.33,253.05 346.5,267.52 434.67,271.13 522.83,274.75 611.0,325.38" fill="none" stroke="#306a9c" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.6"/>
+<circle cx="82.0" cy="249.43" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="170.17" cy="249.43" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="258.33" cy="253.05" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="346.5" cy="267.52" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="434.67" cy="271.13" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="522.83" cy="274.75" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<circle cx="611.0" cy="325.38" r="5.8" fill="#306a9c" stroke="#fff" stroke-width="1.6"/>
+<path d="M185 76h34" stroke="#964926" stroke-linecap="round" stroke-width="3.6" stroke-dasharray="3 7"/>
+<rect x="196.5" y="70.5" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<text x="228" y="82" font-size="20" font-weight="650">Teleoperation</text>
+<polyline points="82.0,144.55 170.17,182.53 258.33,182.53 346.5,258.48 434.67,312.73 522.83,323.57 611.0,329.0" fill="none" stroke="#964926" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.6" stroke-dasharray="3 7"/>
+<rect x="76.5" y="139.05" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="164.67" y="177.03" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="252.82999999999998" y="177.03" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="341.0" y="252.98000000000002" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="429.17" y="307.23" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="517.33" y="318.07" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<rect x="605.5" y="323.5" width="11" height="11" rx="1" fill="#964926" stroke="#fff" stroke-width="1.6"/>
+<path d="M397 76h34" stroke="#1b5140" stroke-linecap="round" stroke-width="3.6" stroke-dasharray="11 6"/>
+<path d="M414,69 421,76 414,83 407,76 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<text x="440" y="82" font-size="20" font-weight="650">Overall</text>
+<polyline points="82.0,207.48 170.17,222.67 258.33,224.84 346.5,263.9 434.67,287.77 522.83,294.28 611.0,326.83" fill="none" stroke="#1b5140" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.6" stroke-dasharray="11 6"/>
+<path d="M82.0,200.48 89.0,207.48 82.0,214.48 75.0,207.48 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M170.17,215.67 177.17,222.67 170.17,229.67 163.17,222.67 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M258.33,217.84 265.33,224.84 258.33,231.84 251.32999999999998,224.84 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M346.5,256.9 353.5,263.9 346.5,270.9 339.5,263.9 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M434.67,280.77 441.67,287.77 434.67,294.77 427.67,287.77 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M522.83,287.28 529.83,294.28 522.83,301.28 515.83,294.28 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+<path d="M611.0,319.83 618.0,326.83 611.0,333.83 604.0,326.83 Z" fill="#1b5140" stroke="#fff" stroke-width="1.6"/>
+</g>
+</svg>

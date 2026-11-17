@@ -7,7 +7,7 @@
   <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
   <link rel="canonical" href="https://lihongcs.github.io/robopose/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="project.css?v=centered-hero">
+  <link rel="stylesheet" href="project.css?v=noise-experiments">
   <script type="module" src="trajectory.mjs?v=poses"></script>
 </head>
 <body>
@@ -84,6 +84,13 @@
       <header class="section-heading">
         <h2 id="results-heading">From tracking error to task progress</h2>
         <p>We measure pose errors on recorded trajectories, then train policies on demonstrations with controlled translation and rotation perturbations.</p>
+        <nav class="result-links" aria-label="Experiment results">
+          <a href="#tracker-accuracy">Tracker accuracy</a>
+          <a href="#pose-noise-levels">Noise sweep</a>
+          <a href="#noise-ablations">Noise ablations</a>
+          <a href="#real-robot-results">Real-robot performance</a>
+          <a href="#noise-training-strategies">Training strategies</a>
+        </nav>
       </header>
       <figure class="visual-card" id="tracker-accuracy" aria-labelledby="tracker-accuracy-heading">
         <div class="visual-copy">
@@ -109,8 +116,8 @@
         <figure>
           <div class="visual-video">
             <video controls playsinline preload="none" poster="media/pose-noise-sweep-pose.webp" width="1600" height="900" aria-label="Large 3D end-effector view with synchronized pose noise curves and RoboTwin policy performance from Clean through L10" aria-describedby="noise-sweep-caption">
-              <source src="media/pose-noise-sweep-pose.mp4" type="video/mp4">
-              <a href="media/pose-noise-sweep-pose.mp4">Open the pose-noise and policy performance video</a>
+              <source src="media/pose-noise-sweep-slow.mp4" type="video/mp4">
+              <a href="media/pose-noise-sweep-slow.mp4">Open the pose-noise and policy performance video</a>
             </video>
           </div>
           <figcaption id="noise-sweep-caption">The 3D view fits the clean and perturbed end-effector trajectories together at each level. The local XYZ axes show their orientations at the current frame. The noise curves show injected perturbations and the resulting pose errors, alongside measured progress across six RoboTwin tasks.</figcaption>
@@ -140,6 +147,62 @@
           <p>L8 uses near-zero-mean Gaussian noise. L9 uses tracker-fitted Gaussian and Laplace noise with directional bias.</p>
           <a href="media/pose-noise.webp">Open the full pose-noise figure</a>
         </details>
+      </section>
+
+      <section class="visual-card" id="noise-ablations" aria-labelledby="noise-ablations-heading">
+        <header class="visual-copy">
+          <h3 id="noise-ablations-heading">Relative and absolute pose noise</h3>
+          <p class="takeaway"><strong>Takeaway</strong> With relative noise, mean pose error grew over the episode, reaching <b>491 mm and 46.5° at L10</b>. At the highest absolute noise level, policies retained <b>62% of clean task progress</b> with full noise, 77% with translation only and 80% with rotation only.</p>
+        </header>
+        <div class="result-chart-grid">
+          <figure aria-labelledby="relative-noise-heading">
+            <h4 id="relative-noise-heading">Relative noise</h4>
+            <a href="media/relative-noise-results.svg" aria-label="Open the full-size relative noise figure">
+              <img src="media/relative-noise-results.svg" width="804" height="1392" alt="Relative pose errors over episode progress at L0 through L10, with RoboTwin policy curves for full noise, translation only and rotation only." loading="lazy">
+            </a>
+            <figcaption>Relative noise is applied to pose increments. The full-noise policy curve covers six RoboTwin tasks. Both single-component curves use the same three-task subset.</figcaption>
+          </figure>
+          <figure aria-labelledby="absolute-noise-heading">
+            <h4 id="absolute-noise-heading">Absolute noise</h4>
+            <a href="media/absolute-noise-results.svg" aria-label="Open the full-size absolute noise figure">
+              <img src="media/absolute-noise-results.svg" width="804" height="1026" alt="Absolute pose errors over episode progress at abs L0 through abs L4, with six-task RoboTwin policy curves for full noise, translation only and rotation only." loading="lazy">
+            </a>
+            <figcaption>Absolute noise is applied to poses, with all three policy curves covering the same six RoboTwin tasks.</figcaption>
+          </figure>
+        </div>
+        <p class="result-chart-note">The error curves average 100 handheld reference episodes. Policy progress is normalized to the clean result for each task.</p>
+      </section>
+
+      <section class="visual-card" id="real-robot-results" aria-labelledby="real-robot-results-heading">
+        <header class="visual-copy">
+          <h3 id="real-robot-results-heading">Real-robot performance with UMI and teleoperation data</h3>
+          <p class="takeaway"><strong>Takeaway</strong> Across five real-robot task and data-source settings, overall success fell from <b>56% without injected noise to 1% at L9</b>. Mean task progress fell from <b>82.84% to 20.76%</b>.</p>
+        </header>
+        <div class="result-chart-grid">
+          <a href="media/real-robot-success-rate.svg" aria-label="Open the full-size real-robot success rate plot">
+            <img src="media/real-robot-success-rate.svg" width="650" height="391" alt="Real-robot success rates by noise level for UMI, teleoperation and all tasks combined." loading="lazy">
+          </a>
+          <a href="media/real-robot-task-progress.svg" aria-label="Open the full-size real-robot task progress plot">
+            <img src="media/real-robot-task-progress.svg" width="650" height="391" alt="Real-robot task progress by noise level for UMI, teleoperation and all tasks combined." loading="lazy">
+          </a>
+        </div>
+        <p class="result-chart-note">Each task has 20 trials per noise level. UMI covers moving a cup, stacking cups and tossing. Teleoperation covers moving a cup and stacking cups. The overall curves weight all five settings equally. <a href="media/real-robot-noise-results.csv" download>Download the per-task and aggregate results</a>.</p>
+      </section>
+
+      <section class="visual-card" id="noise-training-strategies" aria-labelledby="noise-training-strategies-heading">
+        <header class="visual-copy">
+          <h3 id="noise-training-strategies-heading">Mixing clean demonstrations and two-stage training</h3>
+          <p class="takeaway"><strong>Takeaway</strong> With full-trajectory supervision, mixing led at L0, L1, L4 and L6. Two-stage training reached <b>84.6% at L9 and 78.5% at L10</b>, up from 28.6% and 18.6% with noisy demonstrations alone.</p>
+        </header>
+        <div class="result-chart-grid">
+          <a href="media/noise-training-strategies-mix.webp" aria-label="Open the full-size mixed training figure">
+            <img src="media/noise-training-strategies-mix.webp" width="1000" height="1200" alt="RoboTwin task progress for mixed training across six noise levels and three clean-trajectory supervision windows, with clean-only and noisy-only baselines." loading="lazy">
+          </a>
+          <a href="media/noise-training-strategies-two-stage.webp" aria-label="Open the full-size two-stage training figure">
+            <img src="media/noise-training-strategies-two-stage.webp" width="1000" height="1200" alt="RoboTwin task progress for two-stage training, highlighting gains of 56.0 and 59.8 percentage points with complete trajectories at L9 and L10." loading="lazy">
+          </a>
+        </div>
+        <p class="result-chart-note">Mean task progress across three RoboTwin tasks. Mixing trains jointly on 200 noisy and 50 clean demonstrations. Two-stage training first uses the noisy demonstrations, then fine-tunes on the clean ones. The supervision windows refer to portions of each clean trajectory.</p>
       </section>
     </section>
 

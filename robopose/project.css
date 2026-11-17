@@ -148,6 +148,12 @@ h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 
 .visual-video video { border-radius: 6px; }
 .visual-card figcaption { padding: .75rem 1.1rem; color: var(--muted); }
 .visual-card figcaption p + p { margin-top: .5rem; }
+.result-links { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin-top: .8rem; font-weight: 640; }
+.result-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; align-items: start; padding: .65rem; border-top: 1px solid var(--line); }
+.result-chart-grid a { display: block; }
+.result-chart-grid img { border-radius: 6px; }
+.result-chart-grid h4 { margin: .4rem 1rem .35rem; font-size: 1.13rem; }
+.result-chart-note { padding: .75rem 1.1rem 1rem; border-top: 1px solid var(--line); color: var(--muted); }
 .noise-metrics { padding: .75rem 1.1rem 1.1rem; border-top: 1px solid var(--line); }
 .noise-metrics summary { width: fit-content; font-weight: 640; cursor: pointer; }
 .noise-metrics[open] summary { margin-bottom: .6rem; }
@@ -174,7 +180,7 @@ h3 { font-size: clamp(1.18rem, 1.65vw, 1.4rem); line-height: 1.25; font-weight: 
 .dataset-preview img { max-height: 560px; object-fit: contain; }
 
 @media (max-width: 700px) {
-  .video-grid, .dataset-section, .measurements { grid-template-columns: minmax(0, 1fr); }
+  .video-grid, .dataset-section, .measurements, .result-chart-grid { grid-template-columns: minmax(0, 1fr); }
   .trajectory-tracks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 500px) {
