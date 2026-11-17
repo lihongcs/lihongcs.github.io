@@ -6,7 +6,8 @@
     <title>Hong Li</title>
     <script type="module" src="./hardware-viewer/project-previews.mjs?v=idle-rotation"></script>
     <link rel="stylesheet" href="./fonts/inter.css">
-    <link rel="stylesheet" href="./datasets/datasets.css?v=robopose-link">
+    <link rel="stylesheet" href="./typography.css?v=reading-scale">
+    <link rel="stylesheet" href="./datasets/datasets.css?v=reading-scale">
     <script src="./datasets/globe.js" defer></script>
     <style>
         :root {
@@ -24,7 +25,7 @@
             font-synthesis: none;
         }
         *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; line-height: 1.55; }
+        body { margin: 0; font-size: var(--type-body); line-height: 1.55; }
         a { color: var(--accent-color); text-underline-offset: .2em; }
         a:focus-visible,
         button:focus-visible {
@@ -67,15 +68,15 @@
         h1, h2, h3 { color: var(--text-color); }
         h1 {
             margin: 0;
-            font-size: clamp(2.5rem, 4.7vw, 4rem);
-            font-weight: 720;
-            line-height: 1.02;
-            letter-spacing: -.048em;
+            font-size: var(--type-title);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -.025em;
         }
         .bio {
             max-width: 36ch;
             margin: 0;
-            font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+            font-size: var(--type-lead);
             line-height: 1.48;
             color: var(--secondary-text);
         }
@@ -85,10 +86,10 @@
             margin: 0 0 clamp(1rem, 1.85vw, 1.5rem);
             padding-block: .75rem .4rem;
             border-top: 1px solid var(--border-color);
-            font-size: clamp(1.65rem, 2.4vw, 2.15rem);
-            font-weight: 700;
-            letter-spacing: -.035em;
-            line-height: 1.08;
+            font-size: var(--type-section);
+            font-weight: 680;
+            letter-spacing: -.02em;
+            line-height: 1.2;
         }
         .project-grid { display: grid; gap: clamp(.9rem, 2vw, 1.4rem); }
         .project-entry {
@@ -135,7 +136,7 @@
         }
         [data-preview-state="ready"] .project-image { visibility: hidden; }
         [data-preview-state="ready"] .project-preview-tools { display: flex; }
-        .project-preview-tools > span { color: var(--secondary-text); font-size: .875rem; }
+        .project-preview-tools > span { color: var(--secondary-text); font-size: var(--type-support); }
         .project-preview-tools button {
             min-height: 40px;
             padding: .4rem .7rem;
@@ -144,7 +145,7 @@
             background: var(--surface-color);
             color: var(--text-color);
             font-family: inherit;
-            font-size: .875rem;
+            font-size: var(--type-support);
             font-weight: 640;
             line-height: 1.3;
             cursor: pointer;
@@ -159,10 +160,10 @@
         }
         .project-title {
             margin: 0;
-            font-size: clamp(1.375rem, 2.15vw, 1.875rem);
-            font-weight: 690;
-            line-height: 1.15;
-            letter-spacing: -.032em;
+            font-size: var(--type-subhead);
+            font-weight: 680;
+            line-height: 1.25;
+            letter-spacing: -.015em;
         }
         .project-link {
             color: inherit;
@@ -173,16 +174,15 @@
             display: inline-block;
             margin-inline-start: .28em;
             color: var(--accent-color);
-            font-size: .58em;
+            font-size: var(--type-support);
             font-weight: 600;
-            vertical-align: .22em;
         }
         .project-link:hover { text-decoration: underline; }
         .project-description {
             max-width: 44ch;
             margin: .85rem 0 0;
             color: var(--secondary-text);
-            font-size: clamp(1rem, 1.2vw, 1.075rem);
+            font-size: var(--type-body);
         }
         .paper-links {
             display: flex;
@@ -215,7 +215,7 @@
         .paper-preview:hover { border-color: var(--accent-color); }
         .paper-preview img { display: block; width: 100%; height: 100%; object-fit: contain; }
         .paper-year { margin: 0 0 .25rem; color: var(--secondary-text); font-weight: 630; font-variant-numeric: tabular-nums; }
-        .paper-title { font-size: clamp(1.13rem, 1.85vw, 1.45rem); font-weight: 690; line-height: 1.35; margin: 0; }
+        .paper-title { font-size: var(--type-subhead); font-weight: 680; line-height: 1.35; margin: 0; }
         .paper-authors { color: var(--secondary-text); font-size: 1rem; margin: .32rem 0 0; max-width: 86ch; }
         .paper-authors strong { color: var(--text-color); font-weight: 680; }
         .acknowledgment {
@@ -235,7 +235,6 @@
             .paper { grid-template-columns: minmax(0, 1fr); }
         }
         @media (max-width: 420px) {
-            .site-nav { font-size: .95rem; }
             .project-preview-tools button { padding-inline: .5rem; }
         }
     </style>

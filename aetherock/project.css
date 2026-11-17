@@ -14,7 +14,7 @@
   padding-inline: var(--content-gutter);
 }
 
-body { font-size: 1rem; }
+body { font-size: var(--type-body); }
 strong { font-weight: 700; }
 
 .site-header { padding-top: 0; }
@@ -25,11 +25,11 @@ strong { font-weight: 700; }
   border-bottom: 1px solid var(--border-color);
 }
 
-.home-link { font-size: 1rem; font-weight: 700; }
+.home-link { font-size: var(--type-body); font-weight: 700; }
 .nav-links { flex-wrap: wrap; gap: .45rem clamp(.9rem, 2.5vw, 2rem); }
 .nav-links a, .nav-links a:first-child {
   display: inline-block;
-  font-size: 1rem;
+  font-size: var(--type-body);
   font-weight: 550;
 }
 
@@ -52,7 +52,7 @@ strong { font-weight: 700; }
 
 .project-hero h1 {
   margin: 0 0 1.6rem;
-  font-size: clamp(2.625rem, 4.5vw, 4rem);
+  font-size: var(--type-title);
   overflow-wrap: anywhere;
 }
 
@@ -68,7 +68,7 @@ strong { font-weight: 700; }
   display: block;
   max-width: 42ch;
   margin-top: .55rem;
-  font-size: clamp(1.375rem, 2.3vw, 2rem);
+  font-size: var(--type-section);
   font-weight: 650;
   letter-spacing: -.045em;
   line-height: 1.15;
@@ -84,7 +84,7 @@ strong { font-weight: 700; }
 
 .project-authors {
   margin-bottom: .6rem;
-  font-size: clamp(1rem, 1.45vw, 1.12rem);
+  font-size: var(--type-body);
   line-height: 1.6;
 }
 
@@ -94,7 +94,7 @@ strong { font-weight: 700; }
   justify-content: flex-start;
   gap: .35rem 1.25rem;
   margin-bottom: 1.65rem;
-  font-size: .95rem;
+  font-size: var(--type-support);
   line-height: 1.55;
 }
 
@@ -124,7 +124,7 @@ strong { font-weight: 700; }
   border-radius: .35rem;
   background: transparent;
   color: var(--text-color);
-  font-size: .95rem;
+  font-size: var(--type-body);
   font-weight: 650;
   text-decoration: none;
 }
@@ -145,7 +145,7 @@ strong { font-weight: 700; }
   justify-content: flex-start;
   gap: .4rem 1.15rem;
   margin-top: 0;
-  font-size: .95rem;
+  font-size: var(--type-body);
   font-weight: 550;
 }
 
@@ -177,27 +177,27 @@ strong { font-weight: 700; }
   margin-bottom: .7rem;
   padding-bottom: 0;
   border: 0;
-  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  font-size: var(--type-section);
   text-wrap: balance;
 }
 
 .lede {
   max-width: 68ch;
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-size: var(--type-lead);
   line-height: 1.55;
 }
 
 .section h3 {
   color: var(--text-color);
   font-family: inherit;
-  font-size: clamp(1.16rem, 2vw, 1.4rem);
+  font-size: var(--type-subhead);
   font-weight: 700;
   letter-spacing: -.027em;
   line-height: 1.25;
 }
 
 .abstract p, .result-intro p, .small-note { max-width: 77ch; }
-.contribution-grid p, .method-steps p, .demo-card p { font-size: 1rem; }
+.contribution-grid p, .method-steps p, .demo-card p { font-size: var(--type-body); }
 
 .stats {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -205,12 +205,12 @@ strong { font-weight: 700; }
 }
 
 .stats strong {
-  font: 750 clamp(1.8rem, 4.5vw, 3.7rem)/1.1 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font: 750 var(--type-section)/1.1 'Inter', ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -.052em;
 }
 
-.stats strong span { font-size: .52em; }
-.stats p { max-width: 24ch; margin: .65rem 0 0; font-size: .95rem; }
+.stats strong span { font-size: var(--type-support); }
+.stats p { max-width: 24ch; margin: .65rem 0 0; font-size: var(--type-support); }
 .stats p br { display: none; }
 
 .paper-figure {
@@ -220,18 +220,18 @@ strong { font-weight: 700; }
   box-shadow: none;
 }
 
-.paper-figure figcaption, .small-note, .data-details p { font-size: .95rem; }
+.paper-figure figcaption, .small-note, .data-details p { font-size: var(--type-support); }
 .method-steps article { border-top: 1px solid var(--border-color); padding-top: .9rem; }
 .method-steps h3 { margin-top: 0; }
 
-.cad-viewer :is(.cad-toolbar, .cad-assembly-controls, .cad-help),
+.cad-viewer :is(.cad-toolbar, .cad-assembly-controls, .cad-help, .cad-status, select),
 .cad-downloads p,
-.cad-downloads details summary {
-  font-size: .94rem;
+.cad-downloads details :is(summary, ul) {
+  font-size: var(--type-support);
 }
 
 .cad-viewer .cad-surface { background: #e4e9e2; }
-.gripper-tabs a { font-size: .95rem; }
+.gripper-tabs a { font-size: var(--type-body); }
 .gripper-tabs a:hover { border-color: var(--accent-color); }
 .gripper-tabs a[aria-selected="true"],
 .cad-viewer button[aria-pressed="true"] {
@@ -249,8 +249,9 @@ strong { font-weight: 700; }
 .cad-build-notes summary { color: var(--accent-color); }
 .cad-build-notes p:first-of-type { margin-top: .75rem; }
 
-.chart-label, .task-buttons button, .bar-row, table, caption, thead th { font-size: .92rem; }
+.chart-label, .task-buttons button, .bar-row, table, caption, thead th { font-size: var(--type-support); }
 .chart-label, caption, thead th { color: var(--text-color); font-weight: 650; }
+.bar-row { grid-template-columns: 115px minmax(0, 1fr) 3.4rem; }
 .bar-track { background: #e4e7e0; }
 .bar-fill { background: #a0aaa0; }
 .bar-row.ours .bar-fill { background: var(--accent-color); }
@@ -259,15 +260,13 @@ tr.ours { background: #e9eee7; }
 .demo-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .65rem 1.5rem; }
 .demo-heading .button { margin-bottom: 1rem; }
 :focus-visible { outline-color: var(--accent-color); }
-.button, .text-link { font-size: 1rem; font-weight: 650; }
-.video-meta, .full-video p { font-size: .92rem; }
-.footer { font-size: .95rem; }
-.footer .wordmark { font-family: inherit; font-size: 1.05rem; font-weight: 700; }
+.button, .text-link { font-size: var(--type-body); font-weight: 650; }
+.video-meta, .full-video :is(p, summary), .footer { font-size: var(--type-support); }
+.footer .wordmark { font-family: inherit; font-size: var(--type-body); font-weight: 700; }
 
 @media (max-width: 680px) {
   .nav { gap: .7rem; padding-block: .85rem; }
   .nav-links { row-gap: .3rem; }
-  .nav-links a, .nav-links a:first-child { font-size: .94rem; }
   .project-hero h1 { letter-spacing: -.043em; }
   .project-affiliations { gap: .25rem 1rem; }
   .stats { grid-template-columns: 1fr; }

@@ -8,6 +8,7 @@
   --accent: #20483a;
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   font-family: var(--font-sans);
+  font-size: var(--type-body);
   line-height: 1.55;
 }
 
@@ -25,7 +26,7 @@
 }
 
 .tactile-project :is(.nav-links a, .home-link, .text-link) {
-  font-size: 1rem;
+  font-size: var(--type-body);
   font-weight: 650;
   color: var(--text-color);
 }
@@ -42,7 +43,7 @@
 .tactile-project .tactile-banner { padding-top: clamp(2rem, 5vw, 3.5rem); }
 
 .tactile-project .tactile-banner h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--type-title);
   line-height: 1.08;
   letter-spacing: -.05em;
   text-wrap: balance;
@@ -51,11 +52,11 @@
 .tactile-project .tactile-banner .lede {
   max-width: 54ch;
   color: var(--secondary-text);
-  font-size: clamp(1.06rem, 1.7vw, 1.25rem);
+  font-size: var(--type-lead);
 }
 
-.tactile-project h2 { font-size: clamp(1.65rem, 3.5vw, 2.25rem); }
-.tactile-project h3 { font-size: clamp(1.2rem, 2.4vw, 1.55rem); }
+.tactile-project h2 { font-size: var(--type-section); }
+.tactile-project h3 { font-size: var(--type-subhead); }
 .tactile-project .section { padding-top: clamp(1.75rem, 4vw, 3rem); }
 .tactile-project .cad-viewer { margin-top: 0; border-radius: .55rem; }
 .tactile-project .cad-heading { flex-wrap: wrap; }
@@ -77,7 +78,7 @@
   min-height: 2.65rem;
   border-color: var(--border-color);
   background: var(--card-color);
-  font-size: .95rem;
+  font-size: var(--type-body);
   font-weight: 650;
 }
 
@@ -95,13 +96,12 @@
 
 .tactile-project .cad-viewer :focus-visible { outline-color: var(--accent); }
 
-.tactile-project :is(.cad-help, .cad-toolbar, .cad-downloads p, .cad-downloads details summary, .cad-downloads details ul, .tactile-info p) {
-  font-size: 1rem;
+.tactile-project :is(.cad-help, .cad-status, .cad-toolbar, .cad-downloads p, .cad-downloads details summary, .cad-downloads details ul, .tactile-info p, .footer) {
+  font-size: var(--type-support);
 }
 
 .tactile-project .tactile-info p { max-width: 46ch; }
 .tactile-project .tactile-download-notes { max-width: 78ch; }
-.tactile-project .footer { font-size: .95rem; }
 
 @media (max-width: 40rem) {
   .tactile-project .nav { align-items: start; gap: .7rem 1rem; }

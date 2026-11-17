@@ -7,7 +7,8 @@
   <meta name="description" content="RoboPose studies pose tracker accuracy and how tracking errors affect robot manipulation. Explore trajectory comparisons, real-world applications and the RoboPose dataset.">
   <link rel="canonical" href="https://lihongcs.github.io/robopose/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="project.css?v=noise-experiments">
+  <link rel="stylesheet" href="../typography.css?v=reading-scale">
+  <link rel="stylesheet" href="project.css?v=reading-scale">
   <script type="module" src="trajectory.mjs?v=poses"></script>
 </head>
 <body>
@@ -145,64 +146,61 @@
           </table>
           <p id="noise-metrics-note">Training noise perturbs the translation and rotation of each relative end-effector step at 0.1 s intervals. The scale for each component is the largest central 68.27% interval half-width across axes. Policy progress averages the six per-task ratios to the clean policy, using 40 rollouts per task and condition.</p>
           <p>L8 uses near-zero-mean Gaussian noise. L9 uses tracker-fitted Gaussian and Laplace noise with directional bias.</p>
-          <a href="media/pose-noise.webp">Open the full pose-noise figure</a>
         </details>
       </section>
 
       <section class="visual-card" id="noise-ablations" aria-labelledby="noise-ablations-heading">
         <header class="visual-copy">
           <h3 id="noise-ablations-heading">Relative and absolute pose noise</h3>
-          <p class="takeaway"><strong>Takeaway</strong> With relative noise, mean pose error grew over the episode, reaching <b>491 mm and 46.5° at L10</b>. At the highest absolute noise level, policies retained <b>62% of clean task progress</b> with full noise, 77% with translation only and 80% with rotation only.</p>
         </header>
-        <div class="result-chart-grid">
-          <figure aria-labelledby="relative-noise-heading">
-            <h4 id="relative-noise-heading">Relative noise</h4>
-            <a href="media/relative-noise-results.svg" aria-label="Open the full-size relative noise figure">
-              <img src="media/relative-noise-results.svg" width="804" height="1392" alt="Relative pose errors over episode progress at L0 through L10, with RoboTwin policy curves for full noise, translation only and rotation only." loading="lazy">
-            </a>
-            <figcaption>Relative noise is applied to pose increments. The full-noise policy curve covers six RoboTwin tasks. Both single-component curves use the same three-task subset.</figcaption>
-          </figure>
-          <figure aria-labelledby="absolute-noise-heading">
-            <h4 id="absolute-noise-heading">Absolute noise</h4>
-            <a href="media/absolute-noise-results.svg" aria-label="Open the full-size absolute noise figure">
-              <img src="media/absolute-noise-results.svg" width="804" height="1026" alt="Absolute pose errors over episode progress at abs L0 through abs L4, with six-task RoboTwin policy curves for full noise, translation only and rotation only." loading="lazy">
-            </a>
-            <figcaption>Absolute noise is applied to poses, with all three policy curves covering the same six RoboTwin tasks.</figcaption>
-          </figure>
-        </div>
-        <p class="result-chart-note">The error curves average 100 handheld reference episodes. Policy progress is normalized to the clean result for each task.</p>
+        <figure>
+          <div class="visual-video">
+            <video controls playsinline preload="none" poster="media/noise-ablation-comparison.webp" width="1600" height="900" aria-label="Animated pose error and policy progress under relative and absolute pose noise" aria-describedby="noise-ablations-caption">
+              <source src="media/noise-ablation-comparison.mp4" type="video/mp4">
+              <a href="media/noise-ablation-comparison.mp4">Open the noise ablation video</a>
+            </video>
+          </div>
+          <figcaption id="noise-ablations-caption">
+            <p class="takeaway"><strong>Takeaway</strong> With relative noise, mean pose error grew over the episode, reaching <b>491 mm and 46.5° at L10</b>. At the highest absolute noise level, policies retained <b>62% of clean task progress</b> with full noise, 77% with translation only and 80% with rotation only.</p>
+            <p>Pose errors average 100 handheld reference trajectories. Relative full-noise policy results cover six RoboTwin tasks, and the two relative ablations use the same three-task subset. All three absolute conditions cover six tasks.</p>
+          </figcaption>
+        </figure>
       </section>
 
       <section class="visual-card" id="real-robot-results" aria-labelledby="real-robot-results-heading">
         <header class="visual-copy">
           <h3 id="real-robot-results-heading">Real-robot performance with UMI and teleoperation data</h3>
-          <p class="takeaway"><strong>Takeaway</strong> Across five real-robot task and data-source settings, overall success fell from <b>56% without injected noise to 1% at L9</b>. Mean task progress fell from <b>82.84% to 20.76%</b>.</p>
         </header>
-        <div class="result-chart-grid">
-          <a href="media/real-robot-success-rate.svg" aria-label="Open the full-size real-robot success rate plot">
-            <img src="media/real-robot-success-rate.svg" width="650" height="391" alt="Real-robot success rates by noise level for UMI, teleoperation and all tasks combined." loading="lazy">
-          </a>
-          <a href="media/real-robot-task-progress.svg" aria-label="Open the full-size real-robot task progress plot">
-            <img src="media/real-robot-task-progress.svg" width="650" height="391" alt="Real-robot task progress by noise level for UMI, teleoperation and all tasks combined." loading="lazy">
-          </a>
-        </div>
-        <p class="result-chart-note">Each task has 20 trials per noise level. UMI covers moving a cup, stacking cups and tossing. Teleoperation covers moving a cup and stacking cups. The overall curves weight all five settings equally. <a href="media/real-robot-noise-results.csv" download>Download the per-task and aggregate results</a>.</p>
+        <figure>
+          <div class="visual-video">
+            <video controls playsinline preload="none" poster="media/real-robot-noise-comparison.webp" width="1600" height="900" aria-label="Success rate and task progress across seven real-robot noise conditions" aria-describedby="real-robot-results-caption">
+              <source src="media/real-robot-noise-comparison.mp4" type="video/mp4">
+              <a href="media/real-robot-noise-comparison.mp4">Open the real-robot comparison video</a>
+            </video>
+          </div>
+          <figcaption id="real-robot-results-caption">
+            <p class="takeaway"><strong>Takeaway</strong> Overall success fell from <b>56% without injected noise to 1% at L9</b>. Mean task progress fell from <b>82.84% to 20.76%</b>.</p>
+            <p>Each noise level has 20 trials per task and data source. The overall curves give equal weight to the three UMI tasks and two teleoperation tasks. <a href="media/real-robot-noise-results.csv" download>Download the per-task and aggregate results</a>.</p>
+          </figcaption>
+        </figure>
       </section>
 
       <section class="visual-card" id="noise-training-strategies" aria-labelledby="noise-training-strategies-heading">
         <header class="visual-copy">
           <h3 id="noise-training-strategies-heading">Mixing clean demonstrations and two-stage training</h3>
-          <p class="takeaway"><strong>Takeaway</strong> With full-trajectory supervision, mixing led at L0, L1, L4 and L6. Two-stage training reached <b>84.6% at L9 and 78.5% at L10</b>, up from 28.6% and 18.6% with noisy demonstrations alone.</p>
         </header>
-        <div class="result-chart-grid">
-          <a href="media/noise-training-strategies-mix.webp" aria-label="Open the full-size mixed training figure">
-            <img src="media/noise-training-strategies-mix.webp" width="1000" height="1200" alt="RoboTwin task progress for mixed training across six noise levels and three clean-trajectory supervision windows, with clean-only and noisy-only baselines." loading="lazy">
-          </a>
-          <a href="media/noise-training-strategies-two-stage.webp" aria-label="Open the full-size two-stage training figure">
-            <img src="media/noise-training-strategies-two-stage.webp" width="1000" height="1200" alt="RoboTwin task progress for two-stage training, highlighting gains of 56.0 and 59.8 percentage points with complete trajectories at L9 and L10." loading="lazy">
-          </a>
-        </div>
-        <p class="result-chart-note">Mean task progress across three RoboTwin tasks. Mixing trains jointly on 200 noisy and 50 clean demonstrations. Two-stage training first uses the noisy demonstrations, then fine-tunes on the clean ones. The supervision windows refer to portions of each clean trajectory.</p>
+        <figure>
+          <div class="visual-video">
+            <video controls playsinline preload="none" poster="media/noise-training-comparison.webp" width="1600" height="900" aria-label="Animated comparison of mixed and two-stage training across six noise levels and three clean-trajectory windows" aria-describedby="noise-training-caption">
+              <source src="media/noise-training-comparison.mp4" type="video/mp4">
+              <a href="media/noise-training-comparison.mp4">Open the training strategy comparison video</a>
+            </video>
+          </div>
+          <figcaption id="noise-training-caption">
+            <p class="takeaway"><strong>Takeaway</strong> With full-trajectory supervision, mixing led at L0, L1, L4 and L6. Two-stage training reached <b>84.6% at L9 and 78.5% at L10</b>, up from 28.6% and 18.6% with noisy demonstrations alone.</p>
+            <p>Mean task progress across three RoboTwin tasks. Mixing trains jointly on 200 noisy and 50 clean demonstrations. Two-stage training first uses the noisy demonstrations, then fine-tunes on the clean ones.</p>
+          </figcaption>
+        </figure>
       </section>
     </section>
 

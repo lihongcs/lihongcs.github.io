@@ -1,0 +1,8 @@
+:root {
+  --type-title: clamp(2.125rem, 1.8rem + 1vw, 2.75rem);
+  --type-section: clamp(1.5rem, 1.32rem + .55vw, 1.875rem);
+  --type-subhead: 1.25rem;
+  --type-lead: 1.125rem;
+  --type-body: 1rem;
+  --type-support: 1rem;
+}

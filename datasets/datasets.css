@@ -44,7 +44,7 @@
     width: 100%;
     min-height: 44px;
     color: var(--secondary-text);
-    font-size: .9375rem;
+    font-size: var(--type-support);
 }
 
 .dataset-figure a {
@@ -104,14 +104,14 @@
 
 .dataset-stats dt {
     color: var(--secondary-text);
-    font-size: .9375rem;
+    font-size: var(--type-support);
     line-height: 1.4;
 }
 
 .dataset-stats dd {
     order: -1;
     margin: 0;
-    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-size: var(--type-section);
     font-weight: 720;
     line-height: 1.12;
     letter-spacing: -.04em;
@@ -131,7 +131,7 @@
     gap: 0.2rem 0.75rem;
     padding: 0.4rem 0;
     border-top: 1px solid var(--border-color);
-    font-size: 1rem;
+    font-size: var(--type-body);
 }
 
 .dataset-sources div:last-child {

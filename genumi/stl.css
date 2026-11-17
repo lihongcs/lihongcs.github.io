@@ -6,7 +6,7 @@
   background: var(--surface);
 }
 
-.stl-library h2 { font-size: 1.75rem; }
+.stl-library h2 { font-size: var(--type-section); }
 .stl-library [role="status"] { color: var(--muted); }
 
 .stl-list {
@@ -24,11 +24,11 @@
   border-top: 1px solid var(--border);
 }
 
-.stl-list strong { display: block; font-size: .95rem; }
+.stl-list strong { display: block; font-size: var(--type-body); }
 .stl-list small {
   display: block;
   color: var(--muted);
-  font-size: .8rem;
+  font-size: var(--type-support);
   overflow-wrap: anywhere;
 }
 

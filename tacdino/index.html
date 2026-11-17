@@ -11,8 +11,9 @@
   <meta property="og:url" content="https://lihongcs.github.io/tacdino/">
   <link rel="canonical" href="https://lihongcs.github.io/tacdino/">
   <link rel="stylesheet" href="../fonts/inter.css">
-  <link rel="stylesheet" href="../project-hero.css">
-  <link rel="stylesheet" href="style.css?v=compact-type">
+  <link rel="stylesheet" href="../typography.css?v=reading-scale">
+  <link rel="stylesheet" href="../project-hero.css?v=reading-scale">
+  <link rel="stylesheet" href="style.css?v=reading-scale">
   <script src="site.js" defer></script>
 </head>
 <body>
@@ -96,7 +97,7 @@
         <div><h3>DINO supervision</h3><p>A global RGB teacher supervises local tactile representations. The training objective retains global DINO, iBOT, and KoLeo terms alongside local-to-global distillation.</p></div>
         <div><h3>Geometry-relation distillation</h3><p>Reconstructed tactile depth and point clouds provide geometric relations that supervise RGB–tactile matching. These auxiliary tactile geometry observations are used only during training.</p></div>
       </div>
-      <div class="split media-split"><div class="side-copy"><h3>Geometry as supervision.</h3><p>The teacher transfers similarity relationships from depth and point clouds, rather than requiring reconstructed tactile geometry as input at test time.</p><p class="note">The animation shows the reconstructed contact depth and pointmap associated with a tactile observation.</p></div><figure class="loop-figure"><video class="loop-video" muted loop playsinline controls preload="none" poster="media/tactile-geometry.jpg" data-src="media/tactile-geometry.mp4" aria-label="Tactile image with reconstructed depth and pointmap"></video></figure></div>
+      <div class="split media-split"><div class="side-copy"><h3>Geometry as supervision.</h3><p>The teacher transfers similarity relationships from depth and point clouds, rather than requiring reconstructed tactile geometry as input at test time.</p></div><figure class="loop-figure"><video class="loop-video" muted loop playsinline controls preload="none" poster="media/tactile-geometry.jpg" data-src="media/tactile-geometry.mp4" aria-label="Tactile image with reconstructed depth and pointmap"></video></figure></div>
     </div></section>
     <section class="section wrap" id="results">
       <h2>Does patch alignment help?</h2><p class="lead narrow">The same contrastive objective. A more precise contact correspondence.</p><p class="narrow">On Touch3D, Patch Tac + CL improves the four-metric average from <strong>32.30 to 37.62</strong> compared with object-aligned Tac + CL. ObjectFolder Real is evaluated without training on that dataset.</p>
