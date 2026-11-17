@@ -9,9 +9,10 @@
   <link rel="stylesheet" href="../fonts/inter.css">
   <link rel="stylesheet" href="../typography.css?v=reading-scale">
   <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=robopose">
-  <link rel="stylesheet" href="project.css?v=hardware">
-  <script type="module" src="../hardware-viewer/start.mjs?v=robopose"></script>
+  <link rel="stylesheet" href="project.css?v=arcap">
+  <script type="module" src="../hardware-viewer/start.mjs?v=reference-import"></script>
   <script type="module" src="trajectory.mjs?v=poses"></script>
+  <script type="module" src="hardware-references.mjs"></script>
 </head>
 <body>
   <header class="site-header">
@@ -57,12 +58,12 @@
             <h3 id="robot-mounted-hardware-title">Robot-mounted OmniIMU</h3>
             <p>Tracking fixture mounted at the tool flange of the Flexiv Rizon 4.</p>
           </header>
-          <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-background="#edf0ea" data-model="media/hardware/robot-mounted.glb?v=baton-seat">
+          <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-reference-import data-cad-background="#edf0ea" data-model="media/hardware/robot-mounted.glb?v=arcap">
             <div class="cad-heading" data-cad-retry>
               <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
             </div>
             <div class="cad-surface" data-cad-surface>
-              <img class="cad-preview" data-cad-preview src="media/hardware/robot-mounted.webp?v=baton-seat" alt="Robot-mounted OmniIMU, shown with its tracker mounts." loading="lazy">
+              <img class="cad-preview" data-cad-preview src="media/hardware/robot-mounted.webp?v=arcap" alt="Robot-mounted OmniIMU, shown with its tracker mounts." loading="lazy">
               <p class="cad-status" data-cad-status role="status" hidden></p>
             </div>
             <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -86,12 +87,12 @@
             <h3 id="handheld-hardware-title">Handheld OmniIMU</h3>
             <p>Tracker rack with a grip for recording demonstrations by hand.</p>
           </header>
-          <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-background="#edf0ea" data-model="media/hardware/handheld.glb">
+          <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-reference-import data-cad-background="#edf0ea" data-model="media/hardware/handheld.glb?v=arcap">
             <div class="cad-heading" data-cad-retry>
               <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
             </div>
             <div class="cad-surface" data-cad-surface>
-              <img class="cad-preview" data-cad-preview src="media/hardware/handheld.webp" alt="Handheld OmniIMU, shown with its tracker mounts." loading="lazy">
+              <img class="cad-preview" data-cad-preview src="media/hardware/handheld.webp?v=arcap" alt="Handheld OmniIMU, shown with its tracker mounts." loading="lazy">
               <p class="cad-status" data-cad-status role="status" hidden></p>
             </div>
             <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -102,6 +103,7 @@
               <div class="cad-actions" aria-label="Assembly view controls">
                 <button type="button" data-cad-action="focus" disabled>Focus</button>
                 <button type="button" data-cad-action="isolate" aria-pressed="false" disabled>Isolate</button>
+                <button type="button" data-cad-action="opposite">Quest side</button>
                 <button type="button" data-cad-action="reset">Reset view</button>
               </div>
             </div>
@@ -112,8 +114,13 @@
       </div>
       <details class="hardware-sources">
         <summary>3D model sources</summary>
-        <p>The fixtures use the project’s OmniIMU SolidWorks geometry. Some robot-side mounting details and the illustrated arm pose were reconstructed from the overview photo. The STL packages contain the original project fixture parts. The robot arm and Grav gripper use <a href="https://github.com/flexivrobotics/flexiv_description/tree/2fc4f62329fa95e0280b7a1e45c4392397b401fb">Flexiv’s robot descriptions</a> under the <a href="media/hardware/flexiv-license.txt">Apache 2.0 license</a>. The left Touch Plus controller uses the <a href="https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus">WebXR input-profile asset</a> under the <a href="media/hardware/webxr-license.txt">MIT license</a>.</p>
-        <p>The <a href="https://support.apple.com/en-us/111829">iPhone 15 Pro</a> and <a href="https://en.hessian-matrix.com/products/">RoboBaton Mini</a> are dimensioned exterior models. The Insta360 X5 uses the project’s camera scan calibrated to <a href="https://www.insta360.com/specs/x5">Insta360’s specifications</a>. The HTC VIVE Ultimate Tracker exterior is based on the dimensions and mounting interface in <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC’s CAD reference</a>.</p>
+        <div class="hardware-reference-import" data-vive-import hidden>
+          <p><a href="https://dl.vive.com/3d-files/ultimate_tracker_3d.zip">Download HTC’s original CAD</a> and select its ZIP or OBJ to use the manufacturer’s geometry in both assemblies. The file is opened locally in your browser.</p>
+          <label>HTC VIVE Ultimate Tracker CAD <input type="file" accept=".zip,.obj" data-vive-file></label>
+          <p role="status" data-vive-status></p>
+        </div>
+        <p>The fixtures use the project’s OmniIMU SolidWorks geometry. Some robot-side mounting details and the illustrated arm pose were reconstructed from the overview photo. On both rigs, the OmniIMU <a href="https://github.com/Ericcsr/ARCap#setup-hardware">ARCap-derived support</a> replaces the Touch Plus battery cover. The STL packages contain the original project fixture parts. The robot arm and Grav gripper use <a href="https://github.com/flexivrobotics/flexiv_description/tree/2fc4f62329fa95e0280b7a1e45c4392397b401fb">Flexiv’s robot descriptions</a> under the <a href="media/hardware/flexiv-license.txt">Apache 2.0 license</a>. The left Touch Plus controller uses the <a href="https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/meta-quest-touch-plus">WebXR input-profile asset</a> under the <a href="media/hardware/webxr-license.txt">MIT license</a>.</p>
+        <p>The <a href="https://support.apple.com/en-us/111829">iPhone 15 Pro</a> and <a href="https://en.hessian-matrix.com/products/">RoboBaton Mini</a> are dimensioned exterior models. The Insta360 X5 uses the project’s high-resolution camera scan calibrated to <a href="https://www.insta360.com/specs/x5">Insta360’s specifications</a>. The HTC VIVE Ultimate Tracker exterior is based on the dimensions and mounting interface in <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC’s CAD reference</a>.</p>
       </details>
     </section>
 

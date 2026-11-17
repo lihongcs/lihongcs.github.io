@@ -9,7 +9,7 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=robopose');
+    const { mountViewer } = await import('./viewer.mjs?v=reference-import');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     if (trigger) trigger.hidden = true;

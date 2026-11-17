@@ -184,6 +184,7 @@ export async function mountViewer(root) {
       top: new Vector3(0, 1, 0.0001),
       side: new Vector3(-1, 0.08, 0),
       electronics: new Vector3(-1.0, 1.18, 1.02),
+      opposite: new Vector3(-1, 1.1, 1),
     }[key];
     const visible = meshes.filter((mesh) => mesh.visible);
     if (parallel || customView) {
@@ -520,10 +521,49 @@ export async function mountViewer(root) {
         for (const option of selector.querySelectorAll('[data-context="true"]')) option.disabled = true;
       }
     }
+    function replaceReference(label, replacement) {
+      const entry = [...groups].find(([, group]) => group.label === label);
+      if (!entry) return false;
+      const [key, group] = entry;
+      const original = group.meshes;
+      const anchor = original[0];
+      const updated = [];
+      replacement.traverse((object) => { if (object.isMesh && object.geometry) updated.push(object); });
+      if (!updated.length) return false;
+      // Keep the original reference node's placement, even for a single-primitive mesh.
+      let mount = anchor;
+      while (mount !== model && mount.userData.label !== label) mount = mount.parent;
+      if (mount === model) return false;
+      if (original.includes(mount)) {
+        replacement.applyMatrix4(mount.matrix);
+        mount.parent.add(replacement);
+      } else {
+        mount.add(replacement);
+      }
+      for (const mesh of original) {
+        mesh.removeFromParent();
+        meshes.splice(meshes.indexOf(mesh), 1);
+        meshKeys.delete(mesh);
+        for (const [material] of mesh.userData.highlightMaterials) material.dispose();
+      }
+      for (const mesh of updated) {
+        if (group.context) mesh.userData.context = true;
+        trackMesh(mesh, key);
+      }
+      group.meshes = updated;
+      if (selector.value === key) selected = updated;
+      model.updateMatrixWorld(true);
+      applySelection();
+      return true;
+    }
+
     applySelection();
     status.hidden = true;
     toolbar.hidden = false;
     root.dataset.cadReady = 'true';
+    if (root.hasAttribute('data-cad-reference-import')) {
+      root.dispatchEvent(new CustomEvent('cadready', { detail: { replaceReference } }));
+    }
     resize();
     new ResizeObserver(resize).observe(surface);
 

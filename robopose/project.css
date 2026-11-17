@@ -114,6 +114,11 @@ h2 { font-size: var(--type-section); font-weight: 680; line-height: 1.2; letter-
 .hardware-sources { margin-top: .85rem; font-size: var(--type-support); }
 .hardware-sources summary { width: fit-content; color: var(--accent); font-weight: 640; cursor: pointer; }
 .hardware-sources p { margin-top: .55rem; max-width: 76ch; color: var(--muted); }
+.hardware-reference-import { margin-top: .65rem; padding: .75rem; border: 1px solid var(--line); border-radius: 6px; }
+.hardware-reference-import p:first-child { margin-top: 0; }
+.hardware-reference-import label { display: flex; flex-wrap: wrap; gap: .45rem .75rem; margin-top: .65rem; }
+.hardware-reference-import input { max-width: 100%; }
+.hardware-reference-import [role="status"]:empty { display: none; }
 @media (max-width: 740px) {
   .hardware-grid { grid-template-columns: minmax(0, 1fr); }
 }
