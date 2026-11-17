@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: 1.25rem 2rem;
   flex-wrap: wrap;
-  padding-block: clamp(2.75rem, 7vw, 5.5rem) clamp(2.25rem, 5vw, 3.75rem);
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.8rem, 4vw, 2.75rem);
 }
 
 .workflow-intro .subtitle {
@@ -37,7 +37,7 @@
 }
 
 .workflow-heading h2 {
-  font-size: clamp(1.9rem, 4vw, 3.25rem);
+  font-size: clamp(1.65rem, 3.5vw, 2.25rem);
   line-height: 1.05;
 }
 
@@ -175,7 +175,7 @@
 }
 
 .workflow-stage h3 {
-  font-size: clamp(1.5rem, 3.8vw, 2.25rem);
+  font-size: clamp(1.45rem, 3vw, 1.875rem);
   line-height: 1.15;
 }
 
@@ -208,7 +208,6 @@
 
 .guide-intro h1 {
   max-width: 16ch;
-  font-size: clamp(2.85rem, 8vw, 6.25rem);
   text-wrap: balance;
 }
 

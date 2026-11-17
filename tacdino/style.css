@@ -36,7 +36,7 @@ p { margin: 0 0 20px; }
 strong { font-weight: 700; }
 h1, h2 { font-weight: 750; }
 h2 {
-  font-size: clamp(1.9rem, 3.8vw, 3.15rem);
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
   letter-spacing: -.048em;
   line-height: 1.1;
   margin: 0 0 1.65rem;
@@ -68,19 +68,19 @@ h3 { font-size: 1.22rem; line-height: 1.35; font-weight: 700; margin: 0 0 12px; 
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-bottom: 1px solid var(--border-color); padding: 2px 0; background: none; color: var(--text-color); font-size: .9rem; text-decoration: none; }
 .button:hover { border-color: var(--text-color); }
 
-.project-hero { padding-block: clamp(2.8rem, 6vw, 5rem) 1rem; text-align: left; }
+.project-hero { padding-block: clamp(2.25rem, 4vw, 3.5rem) 1rem; text-align: left; }
 .project-hero h1 {
   max-width: 22ch;
   margin: 0 0 1.35rem;
-  font-size: clamp(3.05rem, 7.3vw, 6.3rem);
+  font-size: clamp(2.625rem, 4.5vw, 4rem);
   line-height: .98;
-  letter-spacing: -.067em;
+  letter-spacing: -.055em;
   text-wrap: initial;
 }
 .project-hero h1 span {
   display: block;
   margin-top: .37em;
-  font-size: .43em;
+  font-size: clamp(1.375rem, 2.3vw, 2rem);
   letter-spacing: -.039em;
   line-height: 1.12;
   white-space: normal;
