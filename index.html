@@ -196,13 +196,25 @@
         .paper-list { border-bottom: 1px solid var(--border-color); }
         .paper {
             display: grid;
-            grid-template-columns: minmax(8.5rem, .15fr) minmax(0, 1fr);
-            gap: .4rem 1.5rem;
-            align-items: baseline;
+            grid-template-columns: clamp(11rem, 23vw, 17rem) minmax(0, 1fr);
+            gap: .85rem clamp(1rem, 3vw, 2.25rem);
+            align-items: start;
             padding: clamp(1.2rem, 2.35vw, 2rem) 0;
             border-top: 1px solid var(--border-color);
         }
-        .paper-year { color: var(--secondary-text); font-weight: 630; font-variant-numeric: tabular-nums; }
+        .paper-preview {
+            display: block;
+            width: 100%;
+            max-width: 25rem;
+            aspect-ratio: 16 / 9;
+            padding: .4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--surface-color);
+        }
+        .paper-preview:hover { border-color: var(--accent-color); }
+        .paper-preview img { display: block; width: 100%; height: 100%; object-fit: contain; }
+        .paper-year { margin: 0 0 .25rem; color: var(--secondary-text); font-weight: 630; font-variant-numeric: tabular-nums; }
         .paper-title { font-size: clamp(1.13rem, 1.85vw, 1.45rem); font-weight: 690; line-height: 1.35; margin: 0; }
         .paper-authors { color: var(--secondary-text); font-size: 1rem; margin: .32rem 0 0; max-width: 86ch; }
         .paper-authors strong { color: var(--text-color); font-weight: 680; }
@@ -216,9 +228,11 @@
             .project-media { aspect-ratio: 2 / 1; border-right: 1px solid var(--border-color); }
         }
         @media (max-width: 760px) {
-            .home-intro, .paper { grid-template-columns: minmax(0, 1fr); }
+            .home-intro { grid-template-columns: minmax(0, 1fr); }
             .project-media { border-bottom: 1px solid var(--border-color); }
-            .paper-year { margin-bottom: .1rem; }
+        }
+        @media (max-width: 620px) {
+            .paper { grid-template-columns: minmax(0, 1fr); }
         }
         @media (max-width: 420px) {
             .site-nav { font-size: .95rem; }
@@ -388,8 +402,11 @@
         -->
 
         <div class="paper first-author">
-            <div class="paper-year">ArXiv 2026.06</div>
+            <a class="paper-preview" href="./tacdino/media/methods.webp">
+                <img src="./publications/tac-dino.webp" width="720" height="362" loading="lazy" decoding="async" alt="GeoTAC training framework for aligning tactile, RGB, depth, and pointmap observations">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ArXiv 2026.06</div>
                 <h3 class="paper-title">Tac-DINO: Learning Tactile Features with Patch Alignment</h3>
                 <p class="paper-authors"><strong>Hong Li</strong>, Yankang Dong, Yue Xu, Yihan Tang, Jiamin Qiu, Qihang Yao, Xing Zhu, Yujun Shen, Nan Xue, Yong-Lu Li</p>
                 <div class="paper-links">
@@ -402,8 +419,11 @@
         </div>
 
         <div class="paper first-author">
-            <div class="paper-year">ArXiv 2026.06</div>
+            <a class="paper-preview" href="./aetherock/assets/methods.webp">
+                <img src="./publications/aetherock.webp" width="720" height="326" loading="lazy" decoding="async" alt="ForceVT architecture for force-guided vision and tactile learning">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ArXiv 2026.06</div>
                 <h3 class="paper-title">AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning</h3>
                 <p class="paper-authors"><strong>Hong Li</strong>, Yue Xu, Yihan Tang, Yankang Dong, Chenyuan Liu, Chenyang Yu, Xuyang Li, Siyuan Huang, Yujun Shen, Nan Xue, Yong-Lu Li</p>
                 <div class="paper-links">
@@ -415,8 +435,11 @@
         </div>
 
         <div class="paper">
-            <div class="paper-year">ArXiv 2026.06</div>
+            <a class="paper-preview" href="./egoguide/overview.webp">
+                <img src="./publications/egoguide.webp" width="720" height="295" loading="lazy" decoding="async" alt="EgoGuide collection feedback, wearable hardware, and wrist and head camera policy branches">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ArXiv 2026.06</div>
                 <h3 class="paper-title">EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning</h3>
                 <p class="paper-authors">Yue Xu, Mingtao Nie, Tianle Li, <strong>Hong Li</strong>, Yibo Luo, Siyuan Huang, Yong-Lu Li</p>
                 <div class="paper-links">
@@ -427,8 +450,11 @@
         </div>
 
         <div class="paper">
-            <div class="paper-year">ICLR 2026</div>
+            <a class="paper-preview" href="./beyond_static/scene-dynamic-field.webp">
+                <img src="./beyond_static/scene-dynamic-field.webp" width="658" height="568" loading="lazy" decoding="async" alt="Scene Dynamic Field converts simulated particle velocities into a visual motion prompt">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ICLR 2026</div>
                 <h3 class="paper-title">Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models</h3>
                 <p class="paper-authors">Nanxi Li, Xiang Wang, Yuanjie Chen, Haode Zhang, <strong>Hong Li</strong>, Yong-Lu Li</p>
                 <div class="paper-links">
@@ -440,8 +466,11 @@
         </div>
 
         <div class="paper first-author">
-            <div class="paper-year">ICLR 2025</div>
+            <a class="paper-preview" href="./llm_inception/media/benchmark.webp">
+                <img src="./publications/labyrinth.webp" width="720" height="314" loading="lazy" decoding="async" alt="Single-step, synchronous, and asynchronous association benchmark examples">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ICLR 2025</div>
                 <h3 class="paper-title">The Labyrinth of Links: Navigating the Associative Maze of Multi-modal LLMs</h3>
                 <p class="paper-authors"><strong>Hong Li</strong>, Nanxi Li, Yuanjie Chen, Jianbin Zhu, Qinlu Guo, Cewu Lu, Yong-Lu Li</p>
                 <div class="paper-links">
@@ -453,8 +482,11 @@
         </div>
 
         <div class="paper first-author">
-            <div class="paper-year">ArXiv 2024.10</div>
+            <a class="paper-preview" href="./atlas/media/method.webp">
+                <img src="./publications/atlas.webp" width="720" height="273" loading="lazy" decoding="async" alt="ATLAS transformer combines earlier adapters, then learns a new adapter">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ArXiv 2024.10</div>
                 <h3 class="paper-title">ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy</h3>
                 <p class="paper-authors"><strong>Hong Li *</strong>, Zhiquan Tan *, Xingyu Li *, Weiran Huang</p>
                 <div class="paper-links">
@@ -466,8 +498,11 @@
         </div>
 
         <div class="paper first-author">
-            <div class="paper-year">ICCV 2023</div>
+            <a class="paper-preview" href="./agm/media/method.webp">
+                <img src="./publications/agm.webp" width="720" height="283" loading="lazy" decoding="async" alt="AGM measures each modality’s contribution and rescales its gradient during training">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ICCV 2023</div>
                 <h3 class="paper-title">Boosting Multi-modal Model Performance with Adaptive Gradient Modulation</h3>
                 <p class="paper-authors"><strong>Hong Li *</strong>, Xingyu Li *, Pengbo Hu, Yinuo Lei, Chunxiao Li, Yi Zhou</p>
                 <div class="paper-links">
@@ -479,8 +514,11 @@
         </div>
 
         <div class="paper">
-            <div class="paper-year">ArXiv 2023.08</div>
+            <a class="paper-preview" href="./tomt/benchmark.webp">
+                <img src="./publications/tomt.webp" width="720" height="551" loading="lazy" decoding="async" alt="Tree-of-Mixed-Thought example reasoning plans and scene graph tools">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">ArXiv 2023.08</div>
                 <h3 class="paper-title">Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</h3>
                 <p class="paper-authors">Pengbo Hu *, Ji Qi *, Xingyu Li, <strong>Hong Li</strong>, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou</p>
                 <div class="paper-links">
@@ -491,8 +529,11 @@
         </div>
 
         <div class="paper">
-            <div class="paper-year">IEEE Access 2020</div>
+            <a class="paper-preview" href="./publications/colorectal.webp" title="Pei et al., IEEE Access (2020), Figure 1. CC BY 4.0, margins cropped.">
+                <img src="./publications/colorectal.webp" width="720" height="575" loading="lazy" decoding="async" alt="Encoder, dual-attention module, and decoder for colorectal tumor segmentation">
+            </a>
             <div class="paper-content">
+                <div class="paper-year">IEEE Access 2020</div>
                 <h3 class="paper-title">Colorectal tumor segmentation of CT scans based on a convolutional neural network with an attention mechanism</h3>
                 <p class="paper-authors">Yun Pei, Lin Mu, Yu Fu, Kan He, <strong>Hong Li</strong>, Shuxu Guo, Xiaoming Liu, Mingyang Li, Huimao Zhang, Xueyan Li</p>
                 <div class="paper-links">
