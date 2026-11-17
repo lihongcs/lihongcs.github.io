@@ -758,8 +758,7 @@
   border-top: 1px solid var(--border);
 }
 
-.inference-mode h4,
-.inference-boundary h4 {
+.inference-mode h4 {
   margin: 0 0 .25rem;
   font-size: clamp(1.2rem, 2vw, 1.45rem);
   font-weight: 750;
@@ -769,8 +768,7 @@
 .inference-images p,
 .inference-preview figcaption,
 .inference-run,
-.inference-notes,
-.inference-boundary p {
+.inference-notes {
   margin: 0;
   color: var(--muted);
 }
@@ -780,12 +778,6 @@
 
 .inference-preview {
   margin: .55rem 0 0;
-}
-
-.inference-wrists {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .45rem;
 }
 
 .inference-preview img {
@@ -841,34 +833,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.inference-untimed {
-  margin: 0 0 .55rem;
-  font-weight: 650;
-}
-
-.inference-boundary {
-  margin-top: 1.2rem;
-  padding: 1rem clamp(1rem, 3vw, 1.5rem);
-  border-left: 3px solid #285e60;
-  background: var(--surface);
-}
-
-.inference-boundary ol {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .55rem;
-  margin: .75rem 0;
-  padding: 0;
-  list-style: none;
-}
-
-.inference-boundary li {
-  padding: .5rem .65rem;
-  border-top: 2px solid #285e60;
-  background: #e5ede8;
-}
-
-
 .inference-matrix {
   display: grid;
   grid-template-areas: "matrix-image matrix-description";
@@ -892,7 +856,6 @@
   .inference-mode { grid-template-columns: minmax(0, 1fr); row-gap: 1rem; }
   .inference-mode:first-of-type { border-top: 0; }
   .inference-timing { padding: .85rem 0 0; border-left: 0; border-top: 1px solid var(--border); }
-  .inference-boundary ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .inference-matrix {
     grid-template-areas: "matrix-description" "matrix-image";
     grid-template-columns: minmax(0, 1fr);
