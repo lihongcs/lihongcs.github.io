@@ -108,12 +108,12 @@
         </div>
         <figure>
           <div class="visual-video">
-            <video controls playsinline preload="none" poster="media/pose-noise-sweep.webp" width="1600" height="900" aria-label="Synchronized per-level pose noise, end-effector pose and RoboTwin policy performance from Clean through L10" aria-describedby="noise-sweep-caption">
-              <source src="media/pose-noise-sweep.mp4" type="video/mp4">
-              <a href="media/pose-noise-sweep.mp4">Open the pose-noise and policy performance video</a>
+            <video controls playsinline preload="none" poster="media/pose-noise-sweep-pose.webp" width="1600" height="900" aria-label="Large 3D end-effector view with synchronized pose noise curves and RoboTwin policy performance from Clean through L10" aria-describedby="noise-sweep-caption">
+              <source src="media/pose-noise-sweep-pose.mp4" type="video/mp4">
+              <a href="media/pose-noise-sweep-pose.mp4">Open the pose-noise and policy performance video</a>
             </video>
           </div>
-          <figcaption id="noise-sweep-caption">Each level replays the same recorded UMI motion with its own noise sample. The translation and rotation curves show the injected perturbations and the resulting error from the clean trajectory. The highlighted point shows measured policy progress across six RoboTwin tasks.</figcaption>
+          <figcaption id="noise-sweep-caption">The 3D view fits the clean and perturbed end-effector trajectories together at each level. The local XYZ axes show their orientations at the current frame. The noise curves show injected perturbations and the resulting pose errors, alongside measured progress across six RoboTwin tasks.</figcaption>
         </figure>
         <details class="noise-metrics">
           <summary>Noise settings and policy progress by level</summary>
