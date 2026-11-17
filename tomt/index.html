@@ -1,69 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tree-of-Mixed-Thought | Hong Li</title>
+  <meta name="description" content="A visual reasoning benchmark and two methods that combine one-shot plan generation with tree search.">
+  <link rel="canonical" href="https://lihongcs.github.io/tomt/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</h1>
-    <div class="authors">Pengbo Hu, Ji Qi, Xingyu Li, <strong>Hong Li</strong>, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou</div>
-    <div class="venue">ArXiv 2023</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2308.09658v2" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2308.09658v2" target="_blank">PDF</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="../images/tomt/tomt.png" alt="Teaser">
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#method">Method</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning</h1>
+      <p class="research-authors">Pengbo Hu<sup>*</sup>, Ji Qi<sup>*</sup>, Xingyu Li, <strong>Hong Li</strong>, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou</p>
+      <p class="research-affiliations">arXiv 2023 · <sup>*</sup> Equal contribution</p>
+      <nav class="research-links" aria-label="Paper resources">
+        <a href="https://arxiv.org/abs/2308.09658">arXiv</a>
+        <a href="https://arxiv.org/pdf/2308.09658">PDF</a>
+      </nav>
+      <p>Tree-of-Mixed-Thought plans how to answer a visual question by combining quick proposals for several reasoning steps with depth-first search that checks and revises the plan.</p>
+    </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        There emerges a promising trend of using large language models (LLMs) to generate code-like plans for complex inference tasks such as visual reasoning. This paradigm, known as LLM-based planning, provides flexibility in problem solving and endows better interpretability. However, current research is mostly limited to basic scenarios of simple questions that can be straightforward answered in a few inference steps. Planning for the more challenging multi-hop visual reasoning tasks remains under-explored. Specifically, under multi-hop reasoning situations, the trade-off between accuracy and the complexity of plan-searching becomes prominent. The prevailing algorithms either address the efficiency issue by employing the fast one-stop generation or adopt a complex iterative generation method to improve accuracy. Both fail to balance the need for efficiency and performance. Drawing inspiration from the dual system of cognition in the human brain, the fast and the slow think processes, we propose a hierarchical plan-searching algorithm that integrates the one-stop reasoning (fast) and the Tree-of-thought (slow). Our approach succeeds in performance while significantly saving inference steps. Moreover, we repurpose the PTR and the CLEVER datasets, developing a systematic framework for evaluating the performance and efficiency of LLMs-based plan-search algorithms under reasoning tasks at different levels of difficulty. Extensive experiments demonstrate the superiority of our proposed algorithm in terms of performance and efficiency. The dataset and code will be release soon.
-    </div>
-</div>
+    <section class="research-section" id="method">
+      <h2>Method</h2>
+      <div class="research-grid">
+        <article>
+          <h3>ToT-One-Stop</h3>
+          <p>Propose all remaining steps at an eligible search node. If the plan fails validation, resume search one step at a time.</p>
+        </article>
+        <article>
+          <h3>ToT-Block</h3>
+          <p>Propose a fixed number of steps per node, reducing the depth of the search needed to build a complete plan.</p>
+        </article>
+      </div>
+      <p>Both methods check whether the proposed tools can run with the specified arguments and whether those arguments match objects and attributes in the scene graph.</p>
+    </section>
+
+    <section class="research-section" id="benchmark">
+      <h2>Multi-hop reasoning benchmark</h2>
+      <p>The benchmark groups nine question types from PTR and CLEVR by sequential reasoning, parallel reasoning, backtracking and multiple backtracks. It uses 100 test questions per type and provides scene-graph tools for object attributes, spatial relations and counting.</p>
+      <figure class="research-figure">
+        <a href="../images/tomt/tomt.png" aria-label="Open the full-resolution benchmark figure">
+          <img src="benchmark.webp" width="1600" height="1224" alt="Four question structures with examples of their reasoning plans and the scene-graph tools available to the planner." loading="lazy">
+        </a>
+        <figcaption>Benchmark structures and available tools from Figure 1.</figcaption>
+      </figure>
+    </section>
+
+    <section class="research-section" id="results">
+      <h2>Accuracy and search steps</h2>
+      <p class="research-takeaway"><strong>Takeaway</strong> ToT-One-Stop used fewer search steps in all nine question types and improved accuracy in eight. On long spatial relations, accuracy fell from 56% to 53% as search steps dropped from 15.90 to 9.63.</p>
+      <div class="research-table" role="region" aria-label="Reasoning benchmark results" tabindex="0">
+        <table>
+          <caption>Paper Table 1. Each cell shows accuracy and, where reported, mean search steps.</caption>
+          <thead>
+            <tr><th scope="col">Question type</th><th scope="col">One-Stop</th><th scope="col">Tree-of-Thought</th><th scope="col">ToT-One-Stop</th><th scope="col">ToT-Block</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Short spatial relation</th><td>39.33%</td><td>52.66% · 5.48</td><td>56.66% · 3.04</td><td>59.33% · 3.30</td></tr>
+            <tr><th scope="row">Long spatial relation</th><td>7.66%</td><td>56.00% · 15.90</td><td>53.00% · 9.63</td><td>55.00% · 10.49</td></tr>
+            <tr><th scope="row">Sum</th><td>86.00%</td><td>98.66% · 6.39</td><td>100.00% · 2.47</td><td>93.44% · 3.22</td></tr>
+            <tr><th scope="row">Compare</th><td>52.00%</td><td>59.66% · 6.91</td><td>63.00% · 2.39</td><td>59.00% · 3.89</td></tr>
+            <tr><th scope="row">Logic</th><td>31.00%</td><td>65.00% · 12.81</td><td>69.00% · 5.50</td><td>70.66% · 7.67</td></tr>
+            <tr><th scope="row">Query part</th><td>74.00%</td><td>77.00% · 5.06</td><td>78.66% · 2.08</td><td>78.33% · 3.12</td></tr>
+            <tr><th scope="row">Exist</th><td>53.00%</td><td>82.00% · 7.58</td><td>90.33% · 4.40</td><td>86.33% · 5.25</td></tr>
+            <tr><th scope="row">Count</th><td>72.66%</td><td>85.66% · 8.25</td><td>90.00% · 3.77</td><td>92.00% · 5.13</td></tr>
+            <tr><th scope="row">Analogy</th><td>70.33%</td><td>89.66% · 8.57</td><td>93.00% · 3.12</td><td>92.33% · 4.37</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

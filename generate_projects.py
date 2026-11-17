@@ -8,11 +8,11 @@ import re
 papers = {
     "tacdino": {"arxiv_id": "2606.12069", "title": "Tac-DINO: Learning Tactile Features with Patch Alignment", "authors": "Hong Li, Yankang Dong, Yue Xu, Yihan Tang, Jiamin Qiu, Qihang Yao, Xing Zhu, Yujun Shen, Nan Xue, Yong-Lu Li", "venue": "ArXiv 2026", "manual_page": True},
     "aetherock": {"arxiv_id": "2606.09777", "title": "AetheRock: An Arm-Worn Robot Teaching System for Force-Guided Vision-Tactile Learning", "authors": "Hong Li, Y. Xu, Y. Tang, Y. Dong, C. Liu, C. Yu, X. Li, S. Huang, Y. Shen, N. Xue, ...", "venue": "ArXiv 2026", "manual_page": True},
-    "egoguide": {"arxiv_id": "2606.14665", "title": "EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning", "authors": "Y. Xu, M. Nie, T. Li, Hong Li, Y. Luo, S. Huang, Y.-L. Li", "venue": "ArXiv 2026"},
-    "beyond_static": {"arxiv_id": "2604.03302", "title": "Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models", "authors": "N. Li, X. Wang, Y. Chen, H. Zhang, Hong Li, Y.-L. Li", "venue": "ArXiv 2026"},
-    "atlas": {"arxiv_id": "2410.10923", "title": "ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy", "authors": "Hong Li, Zhiquan Tan, Xingyu Li, Weiran Huang", "venue": "ArXiv 2024", "local_teaser": "../images/atlas/fig-methods-revision.png"},
-    "tomt": {"arxiv_id": "2308.09658", "title": "Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning", "authors": "Pengbo Hu, Ji Qi, Xingyu Li, Hong Li, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou", "venue": "ArXiv 2023", "local_teaser": "../images/tomt/tomt.png"},
-    "agm": {"arxiv_id": "2308.07686", "title": "Boosting Multi-modal Model Performance with Adaptive Gradient Modulation", "authors": "Hong Li, Xingyu Li, Pengbo Hu, Yinuo Lei, Chunxiao Li, Yi Zhou", "venue": "ICCV 2023", "local_teaser": "../images/agm/agm.png"}
+    "egoguide": {"arxiv_id": "2606.14665", "title": "EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning", "authors": "Y. Xu, M. Nie, T. Li, Hong Li, Y. Luo, S. Huang, Y.-L. Li", "venue": "ArXiv 2026", "manual_page": True},
+    "beyond_static": {"arxiv_id": "2604.03302", "title": "Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models", "authors": "N. Li, X. Wang, Y. Chen, H. Zhang, Hong Li, Y.-L. Li", "venue": "ArXiv 2026", "manual_page": True},
+    "atlas": {"arxiv_id": "2410.10923", "title": "ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy", "authors": "Hong Li, Zhiquan Tan, Xingyu Li, Weiran Huang", "venue": "ArXiv 2024", "local_teaser": "../images/atlas/fig-methods-revision.png", "manual_page": True},
+    "tomt": {"arxiv_id": "2308.09658", "title": "Tree-of-Mixed-Thought: Combining Fast and Slow Thinking for Multi-hop Visual Reasoning", "authors": "Pengbo Hu, Ji Qi, Xingyu Li, Hong Li, Xinqi Wang, Bing Quan, Ruiyu Wang, Yi Zhou", "venue": "ArXiv 2023", "local_teaser": "../images/tomt/tomt.png", "manual_page": True},
+    "agm": {"arxiv_id": "2308.07686", "title": "Boosting Multi-modal Model Performance with Adaptive Gradient Modulation", "authors": "Hong Li, Xingyu Li, Pengbo Hu, Yinuo Lei, Chunxiao Li, Yi Zhou", "venue": "ICCV 2023", "local_teaser": "../images/agm/agm.png", "manual_page": True}
 }
 
 # Add Colorectal tumor segmentation manually since it's not on arXiv
@@ -20,6 +20,7 @@ papers["colorectal"] = {
     "title": "Colorectal tumor segmentation of CT scans based on a convolutional neural network with an attention mechanism",
     "authors": "Y. Pei, L. Mu, Y. Fu, K. He, Hong Li, S. Guo, X. Liu, M. Li, H. Zhang, X. Li",
     "venue": "IEEE Access 2020",
+    "manual_page": True,
     "abstract": "Colorectal cancer is one of the most common digestive system tumors. Automatic segmentation of colorectal tumors in CT scans can help doctors make accurate diagnoses and treatment plans. In this paper, we propose a novel convolutional neural network with an attention mechanism for colorectal tumor segmentation. Experimental results demonstrate the effectiveness of our proposed method."
 }
 
@@ -119,7 +120,7 @@ def get_largest_image(pdf_path, output_path):
     return False
 
 for key, paper in papers.items():
-    # Preserve the curated demo player and canonical project route.
+    # Preserve curated project pages when regenerating paper stubs.
     if paper.get("manual_page") and os.path.exists(f"{key}/index.html"):
         print(f"Skipping manually maintained page: {key}")
         continue

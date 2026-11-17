@@ -1,69 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: min(75rem, calc(100% - clamp(2rem, 6vw, 6rem)));
-            margin: 0 auto;
-            padding-block: clamp(2.25rem, 6vw, 4rem);
-        }
-        h1 { max-width: 35ch; font-size: clamp(1.75rem, 3.2vw, 2.65rem); font-weight: 700; line-height: 1.18; margin: 0 0 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { max-width: 72ch; font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; overflow-wrap: anywhere; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy</title>
+  <meta name="description" content="ATLAS recombines earlier task adapters and learns new adapters to improve continual learning and transfer across vision, language, and vision-language tasks.">
+  <link rel="canonical" href="https://lihongcs.github.io/atlas/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy</h1>
-    <div class="authors"><strong>Hong Li</strong>, Zhiquan Tan, Xingyu Li, Weiran Huang</div>
-    <div class="venue">ArXiv 2024</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2410.10923v1" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2410.10923v1" target="_blank">PDF</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="../images/atlas/fig-methods-revision.png" alt="Teaser">
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>ATLAS: Adapter-Based Multi-Modal Continual Learning with a Two-Stage Learning Strategy</h1>
+      <p class="research-authors"><strong>Hong Li<sup>*</sup></strong>, Zhiquan Tan<sup>*</sup>, Xingyu Li<sup>*</sup>, Weiran Huang</p>
+      <p class="research-affiliations">arXiv · October 2024 · * Equal contribution</p>
+      <nav class="research-links" aria-label="Project resources">
+        <a href="https://arxiv.org/abs/2410.10923">Paper</a>
+        <a href="https://arxiv.org/pdf/2410.10923">PDF</a>
+        <a href="https://github.com/lihongcs/ATLAS">Code</a>
+      </nav>
+    </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        While vision-and-language models significantly advance in many fields, the challenge of continual learning is unsolved. Parameter-efficient modules like adapters and prompts present a promising way to alleviate catastrophic forgetting. However, existing works usually learn individual adapters for each task, which may result in redundant knowledge among adapters. Moreover, they continue to use the original pre-trained model to initialize the downstream model, leading to negligible changes in the model's generalization compared to the original model. In addition, there is still a lack of research investigating the consequences of integrating a multi-modal model into the updating procedure for both uni-modal and multi-modal tasks and the subsequent impacts it has on downstream tasks. In this paper, we propose an adapter-based two-stage learning paradigm, a multi-modal continual learning scheme that consists of experience-based learning and novel knowledge expansion, which helps the model fully use experience knowledge and compensate for novel knowledge. Extensive experiments demonstrate that our method is proficient for continual learning. It expands the distribution of representation upstream while also minimizing the negative impact of forgetting previous tasks. Additionally, it enhances the generalization capability for downstream tasks. Furthermore, we incorporate both multi-modal and uni-modal tasks into upstream continual learning. We observe that learning from upstream tasks can help with downstream tasks. Our code will be available at: https://github.com/lihong2303/ATLAS.
-    </div>
-</div>
+    <section class="research-section" id="method" aria-labelledby="method-heading">
+      <h2 id="method-heading">Reuse earlier adapters, then learn what is missing</h2>
+      <p>ATLAS adapts a vision-language model to a sequence of tasks using the current task's examples. A frozen ViLT backbone supplies the representation, and small task adapters accumulate reusable knowledge across vision, language, and vision-language tasks.</p>
+      <figure class="research-figure">
+        <a href="../images/atlas/fig-methods-revision.png" aria-label="Open the full-resolution ATLAS method diagram">
+          <img src="media/method.webp" width="2280" height="864" alt="The ATLAS transformer first combines frozen earlier adapters, then learns a new adapter alongside that combination.">
+        </a>
+      </figure>
+      <div class="research-grid">
+        <div>
+          <h3>Experience-based learning</h3>
+          <p>For each example, attention and cosine similarity estimate how much each earlier adapter contributes. ATLAS learns the weights for combining the frozen adapters.</p>
+        </div>
+        <div>
+          <h3>Novel knowledge expansion</h3>
+          <p>A new task adapter learns what the first stage missed. Orthogonality regularization encourages adapter keys and task queries to capture distinct information.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-section" id="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">Continual learning and downstream transfer</h2>
+      <p>The main experiment trains on SNLI-VE, PIQA, iNaturalist 2019, VQAv2, and SST-2 in that order. The upstream evaluation measures retention on earlier tasks. Downstream experiments evaluate transfer to VCR, NLVR2, CommonsenseQA, and Places365.</p>
+      <p class="research-takeaway"><strong>Takeaway</strong> After five upstream tasks, average downstream accuracy rose from <b>45.81% to 49.09%</b> in the standard setting and from <b>39.09% to 42.57%</b> in low-shot linear probing, relative to the corresponding pretrained-model baselines.</p>
+      <div class="research-table" tabindex="0" role="region" aria-label="ATLAS downstream results">
+        <table>
+          <caption>Mean accuracy across four downstream tasks after five upstream tasks</caption>
+          <thead>
+            <tr><th scope="col">Evaluation</th><th scope="col">Comparison baseline</th><th scope="col">Baseline</th><th scope="col">ATLAS</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Standard</th><td>Pretrained ViLT, linear probing</td><td>45.81%</td><td>49.09%</td></tr>
+            <tr><th scope="row">Low-shot probing</th><td>Pretrained ViLT, linear probing</td><td>39.09%</td><td>42.57%</td></tr>
+            <tr><th scope="row">Low-shot adapter learning</th><td>Task-specific adapter</td><td>41.39%</td><td>44.10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="research-figure">
+        <a href="media/continual-learning.webp" aria-label="Open the full-size ATLAS upstream benchmark figure">
+          <img src="media/continual-learning.webp" width="2600" height="583" loading="lazy" alt="Five upstream accuracy charts comparing linear probing, fine-tuning, and accuracy throughout the ATLAS training sequence.">
+        </a>
+        <figcaption>Upstream accuracy before and after adding each task adapter. <a href="https://arxiv.org/html/2410.10923v1#S5">Paper Figure 3 and Tables 1–3</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></figcaption>
+      </figure>
+    </section>
+  </main>
 </body>
 </html>

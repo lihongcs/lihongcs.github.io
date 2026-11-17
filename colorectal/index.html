@@ -1,68 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorectal tumor segmentation of CT scans based on a convolutional neural network with an attention mechanism</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colorectal Tumor Segmentation of CT Scans | Hong Li</title>
+  <meta name="description" content="A dual-attention encoder–decoder for colorectal tumor segmentation on CT slices, evaluated against radiologist annotations.">
+  <link rel="canonical" href="https://lihongcs.github.io/colorectal/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>Colorectal tumor segmentation of CT scans based on a convolutional neural network with an attention mechanism</h1>
-    <div class="authors">Y. Pei, L. Mu, Y. Fu, K. He, <strong>Hong Li</strong>, S. Guo, X. Liu, M. Li, H. Zhang, X. Li</div>
-    <div class="venue">IEEE Access 2020</div>
-    <div class="links">
-        
-    </div>
-    
-    <div class="teaser">
-        <div style="padding: 3rem; background: #f5f5f5; border-radius: 12px; color: #888;">[Teaser Image Not Available]</div>
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>Colorectal Tumor Segmentation of CT Scans Based on a Convolutional Neural Network With an Attention Mechanism</h1>
+      <p class="research-authors">Yun Pei<sup>*</sup>, Lin Mu<sup>*</sup>, Yu Fu, Kan He, <strong>Hong Li</strong>, Shuxu Guo, Xiaoming Liu, Mingyang Li, Huimao Zhang, Xueyan Li</p>
+      <p class="research-affiliations">IEEE Access 2020 · <sup>*</sup> Equal contribution</p>
+      <nav class="research-links" aria-label="Paper resources">
+        <a href="https://doi.org/10.1109/ACCESS.2020.2982543">IEEE Access</a>
+        <a href="https://ieeexplore.ieee.org/ielx7/6287639/8948470/09044355.pdf">PDF</a>
+      </nav>
+      <p>The study evaluates a convolutional encoder–decoder that predicts tumor masks on CT slices using attention across pixel positions and feature channels.</p>
+    </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        Colorectal cancer is one of the most common digestive system tumors. Automatic segmentation of colorectal tumors in CT scans can help doctors make accurate diagnoses and treatment plans. In this paper, we propose a novel convolutional neural network with an attention mechanism for colorectal tumor segmentation. Experimental results demonstrate the effectiveness of our proposed method.
-    </div>
-</div>
+    <section class="research-section" id="method">
+      <h2>From CT slice to tumor mask</h2>
+      <ol>
+        <li><strong>Encode</strong> a 512 × 512 CT slice into feature maps.</li>
+        <li><strong>Combine</strong> position attention, channel attention and local encoder features.</li>
+        <li><strong>Decode</strong> the fused features through upsampling and skip connections to predict a tumor mask at the input resolution.</li>
+      </ol>
+      <p>The model uses a Dice loss to train against masks annotated by two radiologists and checked by a senior radiologist.</p>
+    </section>
+
+    <section class="research-section" id="results">
+      <h2>Segmentation results</h2>
+      <p>The study used 1,131 CT slices from 158 patients at the First Hospital of Jilin University. It allocated 904 slices to training and 227 to testing.</p>
+      <p class="research-takeaway"><strong>Takeaway</strong> The dual-attention network reached a Dice score of <strong>70.89%</strong>, up 1.46 percentage points from U-Net and 0.66 from CE-Net. CE-Net had the highest precision.</p>
+      <div class="research-table" role="region" aria-label="Segmentation benchmark results" tabindex="0">
+        <table>
+          <caption>Held-out results from Table 1.</caption>
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col">Dice</th><th scope="col">Jaccard</th><th scope="col">Recall</th><th scope="col">Precision</th><th scope="col">F1</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">U-Net</th><td>69.43%</td><td>56.22%</td><td>76.47%</td><td>67.02%</td><td>69.74%</td></tr>
+            <tr><th scope="row">CE-Net</th><td>70.23%</td><td>56.90%</td><td>75.11%</td><td>68.92%</td><td>70.85%</td></tr>
+            <tr><th scope="row">Dual attention</th><td>70.89%</td><td>57.82%</td><td>78.85%</td><td>67.48%</td><td>70.89%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><a href="https://ieeexplore.ieee.org/ielx7/6287639/8948470/09044355.pdf#page=6">See the segmentation masks in Figure 4</a>.</p>
+    </section>
+  </main>
 </body>
 </html>

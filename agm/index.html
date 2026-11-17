@@ -1,69 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boosting Multi-modal Model Performance with Adaptive Gradient Modulation</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: min(75rem, calc(100% - clamp(2rem, 6vw, 6rem)));
-            margin: 0 auto;
-            padding-block: clamp(2.25rem, 6vw, 4rem);
-        }
-        h1 { max-width: 35ch; font-size: clamp(1.75rem, 3.2vw, 2.65rem); font-weight: 700; line-height: 1.18; margin: 0 0 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { max-width: 72ch; font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; overflow-wrap: anywhere; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boosting Multi-modal Model Performance with Adaptive Gradient Modulation</title>
+  <meta name="description" content="Adaptive Gradient Modulation reweights modality-specific training gradients and improves multimodal accuracy across several fusion strategies.">
+  <link rel="canonical" href="https://lihongcs.github.io/agm/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>Boosting Multi-modal Model Performance with Adaptive Gradient Modulation</h1>
-    <div class="authors"><strong>Hong Li</strong>, Xingyu Li, Pengbo Hu, Yinuo Lei, Chunxiao Li, Yi Zhou</div>
-    <div class="venue">ICCV 2023</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2308.07686v1" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2308.07686v1" target="_blank">PDF</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="../images/agm/agm.png" alt="Teaser">
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>Boosting Multi-modal Model Performance with Adaptive Gradient Modulation</h1>
+      <p class="research-authors"><strong>Hong Li<sup>*</sup></strong>, Xingyu Li<sup>*</sup>, Pengbo Hu, Yinuo Lei, Chunxiao Li, Yi Zhou</p>
+      <p class="research-affiliations">ICCV 2023 · * Equal contribution</p>
+      <nav class="research-links" aria-label="Project resources">
+        <a href="https://openaccess.thecvf.com/content/ICCV2023/html/Li_Boosting_Multi-modal_Model_Performance_with_Adaptive_Gradient_Modulation_ICCV_2023_paper.html">Paper</a>
+        <a href="https://arxiv.org/abs/2308.07686">arXiv</a>
+        <a href="https://github.com/lihongcs/AGM">Code</a>
+        <a href="https://openaccess.thecvf.com/content/ICCV2023/supplemental/Li_Boosting_Multi-modal_Model_ICCV_2023_supplemental.pdf">Supplement</a>
+      </nav>
+    </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        While the field of multi-modal learning keeps growing fast, the deficiency of the standard joint training paradigm has become clear through recent studies. They attribute the sub-optimal performance of the jointly trained model to the modality competition phenomenon. Existing works attempt to improve the jointly trained model by modulating the training process. Despite their effectiveness, those methods can only apply to late fusion models. More importantly, the mechanism of the modality competition remains unexplored. In this paper, we first propose an adaptive gradient modulation method that can boost the performance of multi-modal models with various fusion strategies. Extensive experiments show that our method surpasses all existing modulation methods. Furthermore, to have a quantitative understanding of the modality competition and the mechanism behind the effectiveness of our modulation method, we introduce a novel metric to measure the competition strength. This metric is built on the mono-modal concept, a function that is designed to represent the competition-less state of a modality. Through systematic investigation, our results confirm the intuition that the modulation encourages the model to rely on the more informative modality. In addition, we find that the jointly trained model typically has a preferred modality on which the competition is weaker than other modalities. However, this preferred modality need not dominate others. Our code will be available at https://github.com/lihong2303/AGM_ICCV2023.
-    </div>
-</div>
+    <section class="research-section" id="method" aria-labelledby="method-heading">
+      <h2 id="method-heading">Reweighting gradients by modality</h2>
+      <p>Joint training can leave useful signals underused when modalities compete during optimization. Adaptive Gradient Modulation (AGM) estimates each modality's contribution to the fused prediction and adjusts how strongly that contribution updates the model.</p>
+      <figure class="research-figure">
+        <a href="../images/agm/agm.png" aria-label="Open the full-resolution AGM method diagram">
+          <img src="media/method.webp" width="2400" height="944" alt="The AGM pipeline compares full and masked inputs, attributes scores to audio and vision, and rescales their backward gradients.">
+        </a>
+      </figure>
+      <div class="research-grid">
+        <div>
+          <h3>Estimate modality contributions</h3>
+          <p>Shapley-based attribution uses predictions with subsets of inputs masked to separate individual modality responses, including in models that combine inputs before classification.</p>
+        </div>
+        <div>
+          <h3>Adjust the training update</h3>
+          <p>Per-modality cross-entropy is compared with a running reference. That discrepancy determines how much each modality's gradient contributes to the update.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-section" id="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">Accuracy and modality competition</h2>
+      <p class="research-takeaway"><strong>Takeaway</strong> AGM raised early-fusion CREMA-D accuracy from <b>61.88% to 81.46%</b>, a gain of 19.58 percentage points over joint training. The study also reports improvements with late fusion, FiLM, and specialized fusion networks.</p>
+      <div class="research-table" tabindex="0" role="region" aria-label="AGM benchmark results">
+        <table>
+          <caption>Multimodal accuracy of each reported baseline and its AGM counterpart</caption>
+          <thead>
+            <tr><th scope="col">Dataset</th><th scope="col">Setup</th><th scope="col">Baseline</th><th scope="col">AGM</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">AV-MNIST</th><td>Late fusion</td><td>69.77%</td><td>72.14%</td></tr>
+            <tr><th scope="row">AV-MNIST</th><td>Early fusion</td><td>71.15%</td><td>72.26%</td></tr>
+            <tr><th scope="row">UR-Funny</th><td>Late fusion</td><td>64.50%</td><td>65.97%</td></tr>
+            <tr><th scope="row">UR-Funny</th><td>Early fusion</td><td>65.15%</td><td>66.07%</td></tr>
+            <tr><th scope="row">CREMA-D</th><td>Late fusion</td><td>61.14%</td><td>78.48%</td></tr>
+            <tr><th scope="row">CREMA-D</th><td>Early fusion</td><td>61.88%</td><td>81.46%</td></tr>
+            <tr><th scope="row">AVE</th><td>PSP</td><td>76.02%</td><td>77.11%</td></tr>
+            <tr><th scope="row">CMU-MOSEI</th><td>TBJE</td><td>80.91%</td><td>81.76%</td></tr>
+            <tr><th scope="row">Kinetics-Sound</th><td>Late fusion</td><td>52.78%</td><td>56.93%</td></tr>
+            <tr><th scope="row">Kinetics-Sound</th><td>FiLM</td><td>51.17%</td><td>55.73%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What changes during training?</h3>
+      <p>The competition metric measures how well a linear probe on the joint model's features can recover a separately trained single-modality predictor. In AV-MNIST, AGM reduced measured competition for both modalities and helped the model learn from audio earlier.</p>
+      <figure class="research-figure">
+        <a href="media/training-dynamics.webp" aria-label="Open the full-size AV-MNIST training curves">
+          <img src="media/training-dynamics.webp" width="1372" height="484" loading="lazy" alt="AV-MNIST training curves compare accuracy and modality competition in joint training and AGM.">
+        </a>
+        <figcaption>AV-MNIST with addition fusion. <a href="https://arxiv.org/html/2308.07686v1#S4">Paper Figure 2 and benchmark tables</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></figcaption>
+      </figure>
+    </section>
+  </main>
 </body>
 </html>

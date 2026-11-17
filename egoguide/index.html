@@ -1,69 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EgoGuide | Egocentric Guidance for Robot-Free Demonstrations</title>
+  <meta name="description" content="EgoGuide uses AR coverage feedback and a gated egocentric policy to learn robot manipulation from fewer handheld demonstrations.">
+  <link rel="canonical" href="https://lihongcs.github.io/egoguide/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning</h1>
-    <div class="authors">Y. Xu, M. Nie, T. Li, <strong>Hong Li</strong>, Y. Luo, S. Huang, Y.-L. Li</div>
-    <div class="venue">ArXiv 2026</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2606.14665v1" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2606.14665v1" target="_blank">PDF</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="teaser.png" alt="Teaser">
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#demo">Demo</a>
+    </nav>
+  </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        Robot learning from real-world demonstrations is currently constrained by data scaling. Universal Manipulation Interface (UMI) provides an efficient robot-free data collection interface, yet current UMI-style pipelines often collect redundant demonstrations and lack global scene context. To improve data efficiency, we present EgoGuide, a collection interface that records synchronized wrist and head/egocentric observations and couples them with online visual-geometric data quality guidance. We also introduce a Gated Egocentric Residual Policy for robust learning from a viewpoint-varying egocentric camera, allowing head/egocentric context to correct ambiguous local observations while preserving stable wrist-view control. Real-world experiments show that EgoGuide reduces the required number of data episodes and improves data efficiency. The residual policy further improves robustness under visual occlusion. Project Page: https://silicx.github.io/EgoGuide
-    </div>
-</div>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>EgoGuide: Egocentric Guidance for Efficient Robot-Free Demonstration Collection and Learning</h1>
+      <p class="research-authors">Yue Xu, Mingtao Nie, Tianle Li, <strong>Hong Li</strong>, Yibo Luo, Siyuan Huang, Yong-Lu Li</p>
+      <p class="research-affiliations">Shanghai Jiao Tong University · Shanghai Innovation Institute · Beijing Institute for General Artificial Intelligence</p>
+      <nav class="research-links" aria-label="Paper and project resources">
+        <a href="https://arxiv.org/abs/2606.14665">arXiv</a>
+        <a href="https://silicx.github.io/EgoGuide/">Project site</a>
+      </nav>
+    </header>
+
+    <figure class="research-figure">
+      <a href="overview.webp" aria-label="Open the full EgoGuide overview">
+        <img src="overview.webp" width="1760" height="720" alt="EgoGuide's AR collection feedback, headset and handheld gripper, and wrist and head camera policy branches" fetchpriority="high">
+      </a>
+      <figcaption>System overview from the <a href="https://silicx.github.io/EgoGuide/">EgoGuide project site</a>.</figcaption>
+    </figure>
+
+    <section class="research-section" id="method" aria-labelledby="method-heading">
+      <h2 id="method-heading">Guide collection and correct actions with scene context</h2>
+      <div class="research-grid">
+        <div>
+          <h3>Coverage feedback in AR</h3>
+          <p>The handheld gripper and headset record synchronized camera views, poses, and gripper width. Before recording, the headset shows which wrist views, head views, and wrist poses are underrepresented. Collectors can also start midway through a task to cover missed states.</p>
+        </div>
+        <div>
+          <h3>Gated egocentric residual policy</h3>
+          <p>A wrist-camera policy predicts the action. A separate branch uses the head camera and scene context to adjust that action when the wrist view is occluded or ambiguous.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-section" id="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">Real-robot results</h2>
+      <p>Each policy ran 20 trials on a Flexiv Rizon 4 with randomized object positions. Tasks included picking a cube, sorting peppers, storing garlic in a drawer, and rotating a Rubik’s Cube.</p>
+      <p class="research-takeaway"><strong>Takeaway</strong> With 200 pepper-sorting demonstrations, guided collection raised success from <strong>10% to 50%</strong>. Unguided collection needed 400 demonstrations to reach 50%.</p>
+      <figure class="research-figure">
+        <a href="results.webp" aria-label="Open the full pepper sorting chart">
+          <img src="results.webp" width="1600" height="513" alt="Pepper sorting curves comparing success and progress by dataset size and success by total collection time" loading="lazy">
+        </a>
+        <figcaption>Pepper sorting with the same wrist-only policy trained on guided or unguided data. <a href="https://arxiv.org/html/2606.14665v1#S5.F4">Figure 4</a></figcaption>
+      </figure>
+      <p>In a separate policy comparison with the same 400 pepper-sorting demonstrations, the gated head-camera branch improved success from 75% to 80% and task progress from 77.5% to 87.5%. <a href="https://arxiv.org/html/2606.14665v1#S5.T2">Table 2</a></p>
+    </section>
+
+    <section class="research-section" id="demo" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">Robot demonstrations</h2>
+      <figure class="research-figure">
+        <video controls playsinline preload="none" poster="demo-poster.webp" width="1920" height="1080" aria-label="EgoGuide robot demonstrations from the authors">
+          <source src="https://silicx.github.io/EgoGuide/static/videos/egoguide_demo_1080p.mp4" type="video/mp4">
+          <a href="https://silicx.github.io/EgoGuide/#demo-video">Watch the official EgoGuide demonstration</a>
+        </video>
+        <figcaption>Guided and unguided pepper-sorting rollouts from the <a href="https://silicx.github.io/EgoGuide/#demo-video">EgoGuide project site</a>.</figcaption>
+      </figure>
+    </section>
+  </main>
 </body>
 </html>

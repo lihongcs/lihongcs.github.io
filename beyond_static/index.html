@@ -1,69 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models</title>
-    <style>
-        :root {
-            --bg-color: #FAF9F6;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1 { font-size: 2.2rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
-        .authors { font-size: 1.1rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .venue { font-size: 1rem; font-style: italic; color: var(--secondary-text); margin-bottom: 2rem; }
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border: 1px solid #e7e5e4;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-        }
-        .links a:hover { background: var(--text-color); color: var(--bg-color); }
-        .teaser { margin: 3rem 0; text-align: center; }
-        .teaser img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid #e7e5e4; padding-bottom: 0.5rem; }
-        .abstract { font-size: 1.05rem; color: var(--secondary-text); line-height: 1.7; }
-        .home-link { display: block; margin-bottom: 3rem; text-decoration: none; color: var(--secondary-text); font-weight: 500; }
-        .home-link:hover { color: var(--text-color); }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beyond Static Vision | Scene Dynamic Field</title>
+  <meta name="description" content="Scene Dynamic Field uses simulator-derived motion cues to improve intuitive physics understanding in multimodal models.">
+  <link rel="canonical" href="https://lihongcs.github.io/beyond_static/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
-<div class="container">
-    <a href="../index.html" class="home-link">← Back to Home</a>
-    <h1>Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models</h1>
-    <div class="authors">N. Li, X. Wang, Y. Chen, H. Zhang, <strong>Hong Li</strong>, Y.-L. Li</div>
-    <div class="venue">ArXiv 2026</div>
-    <div class="links">
-        <a href="http://arxiv.org/abs/2604.03302v1" target="_blank">arXiv</a>
-        <a href="https://arxiv.org/pdf/2604.03302v1" target="_blank">PDF</a>
-    </div>
-    
-    <div class="teaser">
-        <img src="teaser.png" alt="Teaser">
-    </div>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
 
-    <h2>Abstract</h2>
-    <div class="abstract">
-        While Multimodal Large Language Models (MLLMs) have demonstrated impressive capabilities in image and video understanding, their ability to comprehend the physical world has become an increasingly important research focus. Despite their improvements, current MLLMs struggle significantly with high-level physics reasoning. In this work, we investigate the first step of physical reasoning, i.e., intuitive physics understanding, revealing substantial limitations in understanding the dynamics of continuum objects. To isolate and evaluate this specific capability, we introduce two fundamental benchmark tasks: Next Frame Selection (NFS) and Temporal Coherence Verification (TCV). Our experiments demonstrate that even state-of-the-art MLLMs perform poorly on these foundational tasks. To address this limitation, we propose Scene Dynamic Field (SDF), a concise approach that leverages physics simulators within a multi-task fine-tuning framework. SDF substantially improves performance, achieving up to 20.7% gains on fluid tasks while showing strong generalization to unseen physical domains. This work not only highlights a critical gap in current MLLMs but also presents a promising cost-efficient approach for developing more physically grounded MLLMs. Our code and data are available at https://github.com/andylinx/Scene-Dynamic-Field.
-    </div>
-</div>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>Beyond Static Vision: Scene Dynamic Field Unlocks Intuitive Physics Understanding in Multi-modal Large Language Models</h1>
+      <p class="research-authors">Nanxi Li, Xiang Wang, Yuanjie Chen, Haode Zhang, <strong>Hong Li</strong>, Yong-Lu Li</p>
+      <p class="research-affiliations">ICLR 2026 · Shanghai Jiao Tong University · Tianjin University · Shanghai Innovation Institute</p>
+      <nav class="research-links" aria-label="Paper, code and data">
+        <a href="https://openreview.net/pdf?id=Ax02eR2c3d">ICLR paper</a>
+        <a href="https://arxiv.org/abs/2604.03302">arXiv</a>
+        <a href="https://github.com/andylinx/Scene-Dynamic-Field">Code &amp; data</a>
+      </nav>
+    </header>
+
+    <section class="research-section" id="benchmark" aria-labelledby="benchmark-heading">
+      <h2 id="benchmark-heading">Two tests of physical dynamics</h2>
+      <div class="research-grid">
+        <div>
+          <h3>Next Frame Selection</h3>
+          <p>Choose the frame that actually follows the observed video sequence.</p>
+        </div>
+        <div>
+          <h3>Temporal Coherence Verification</h3>
+          <p>Decide whether a video sequence contains a frame that disrupts the motion.</p>
+        </div>
+      </div>
+      <figure class="research-figure">
+        <a href="benchmark.webp" aria-label="Open the full physics benchmark overview">
+          <img src="benchmark.webp" width="1760" height="915" alt="Next-frame selection and temporal-coherence examples plus an overview of Scene Dynamic Field training and transfer" fetchpriority="high">
+        </a>
+        <figcaption>Benchmark and training overview. <a href="https://arxiv.org/html/2604.03302v1#S1.F1">Figure 1</a> · CC BY 4.0</figcaption>
+      </figure>
+    </section>
+
+    <section class="research-section" id="method" aria-labelledby="method-heading">
+      <h2 id="method-heading">Scene Dynamic Field</h2>
+      <div class="research-grid">
+        <div>
+          <p>The method renders the motion of simulated liquid particles as an image cue. Color intensity encodes particle speed, with a stronger contribution from particles closer to the camera.</p>
+          <p>Models are fine-tuned on three tasks: recognizing the motion cues, using them to reason about the next frame, and answering the original benchmarks. The tests include real footage and physical phenomena absent from the fluid training set.</p>
+        </div>
+        <figure class="research-figure">
+          <a href="scene-dynamic-field.webp" aria-label="Open the full Scene Dynamic Field illustration">
+            <img src="scene-dynamic-field.webp" width="658" height="568" alt="Simulation particle velocities are used to produce a color-coded visual prompt showing motion in a liquid" loading="lazy">
+          </a>
+          <figcaption>Rendering simulator motion as a visual prompt. <a href="https://arxiv.org/html/2604.03302v1#S4.F2">Figure 2</a> · CC BY 4.0</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="research-section" id="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">Benchmark and transfer results</h2>
+      <p class="research-takeaway"><strong>Takeaway</strong> On fluid next-frame selection, GLM4.1V improved from <strong>25.4% to 46.1%</strong> accuracy after SDF training, a gain of <strong>20.7 percentage points</strong>. Qwen2-VL rose from 26.8% to 41.2%.</p>
+      <figure class="research-figure">
+        <a href="results.webp" aria-label="Open the full Scene Dynamic Field results chart">
+          <img src="results.webp" width="1800" height="571" alt="Accuracy on fluid and transfer tests, comparing zero-shot, reasoning prompts, standard fine-tuning, and Scene Dynamic Field" loading="lazy">
+        </a>
+        <figcaption>Both models transferred better to cloth, sand, smoke, and plasticine with SDF than with standard fine-tuning. <a href="https://arxiv.org/html/2604.03302v1#S4.F4">Figure 4</a> · CC BY 4.0</figcaption>
+      </figure>
+    </section>
+  </main>
 </body>
 </html>

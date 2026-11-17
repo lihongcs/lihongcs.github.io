@@ -1,160 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Labyrinth of Links</title>
-    <style>
-        :root {
-            --bg-color: #F0ECE5;
-            --text-color: #1c1917;
-            --secondary-text: #57534e;
-        }
-        body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-        }
-        .container {
-            width: min(75rem, calc(100% - clamp(2rem, 6vw, 6rem)));
-            margin: 0 auto;
-            padding-block: clamp(2.75rem, 7vw, 5rem);
-        }
-        h1 {
-            max-width: 33ch;
-            font-size: clamp(1.8rem, 3.35vw, 2.75rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin: 0 0 1.5rem;
-        }
-        h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        p {
-            max-width: 68ch;
-            font-size: 1.125rem;
-            color: var(--secondary-text);
-            margin-bottom: 1.5rem;
-        }
-        .authors {
-            font-size: 1.125rem;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
-        .affiliations {
-            font-size: 1rem;
-            color: var(--secondary-text);
-            margin-bottom: 2rem;
-        }
-        .links {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-        .links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid #e7e5e4;
-            padding: 0.5rem 1.2rem;
-            border-radius: 9999px;
-            transition: all 0.2s ease;
-        }
-        .links a:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-        .media {
-            margin: 3rem 0;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        .media video, .media img {
-            width: 100%;
-            display: block;
-            background-color: #fff;
-        }
-        .image-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .image-item img {
-            width: 100%;
-            border-radius: 12px;
-        }
-        .image-caption {
-            text-align: center;
-            font-size: 1rem;
-            color: var(--secondary-text);
-            margin-top: 0.75rem;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Labyrinth of Links: Navigating the Associative Maze of Multi-modal LLMs</title>
+  <meta name="description" content="An ICLR 2025 benchmark for testing how multimodal models use memory to connect observations through shared concepts.">
+  <link rel="canonical" href="https://lihongcs.github.io/llm_inception/">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../research.css">
 </head>
 <body>
+  <header>
+    <nav class="research-wrap research-nav" aria-label="Project navigation">
+      <a href="../#publications">← Hong Li</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#results">Results</a>
+      <a href="#demo">Demo</a>
+    </nav>
+  </header>
 
-<div class="container">
-    <h1>The Labyrinth of Links: Navigating the Associative Maze of Multi-modal LLMs</h1>
-    <div class="authors">Hong Li, Nanxi Li, Yuanjie Chen, Jianbin Zhu, Yong-Lu Li</div>
-    <div class="affiliations">MVIG-RHOS, Shanghai Jiao Tong University</div>
+  <main class="research-wrap">
+    <header class="research-hero">
+      <h1>The Labyrinth of Links: Navigating the Associative Maze of Multi-modal LLMs</h1>
+      <p class="research-authors"><strong>Hong Li</strong>, Nanxi Li, Yuanjie Chen, Jianbin Zhu, Qinlu Guo, Cewu Lu, Yong-Lu Li</p>
+      <p class="research-affiliations">Shanghai Jiao Tong University · Shanghai Innovation Institute · ICLR 2025</p>
+      <nav class="research-links" aria-label="Project resources">
+        <a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/79cbf4f96c2bcc67267421154da689dd-Abstract-Conference.html">Paper</a>
+        <a href="https://github.com/lihongcs/LLM_Inception">Code</a>
+        <a href="https://github.com/lihongcs/LLM_Inception/blob/main/data/Data.md">Dataset instructions</a>
+        <a href="https://huggingface.co/spaces/lihong-cs/MLLM_Association">Interactive demo</a>
+      </nav>
+      <p>Can a multimodal model use earlier observations to recognize a shared concept and keep following it as new observations arrive? The benchmark tests this with visual attributes, affordances, and actions.</p>
+    </header>
 
-    <div class="links">
-        <a href="https://arxiv.org/pdf/2410.01417" target="_blank">Paper</a>
-        <a href="https://huggingface.co/spaces/LIHONG2303/MLLM_Association" target="_blank">Demo</a>
-        <a href="https://github.com/lihong2303/MLLMs_Association" target="_blank">Code</a>
-        <a href="https://drive.google.com/file/d/1IWvjJKI-0t_tHqN_QpM3xwdOPNwBePh9/view?usp=sharing" target="_blank">Data</a>
-    </div>
+    <figure class="research-figure">
+      <a href="../images/llm_inception/teaser_figure.png"><img src="media/teaser.webp" width="1800" height="920" alt="Overview of the association task, its memory and deduction steps, and the human and model benchmark results."></a>
+    </figure>
 
+    <section class="research-section" id="benchmark" aria-labelledby="benchmark-heading">
+      <h2 id="benchmark-heading">Association benchmark</h2>
+      <p>The benchmark builds paired observations from OCL attributes and affordances and Pangea actions, then filters unclear examples through image checks, model verification, and human review.</p>
+      <ol>
+        <li><strong>Single-step</strong> selects the related observation using a fixed, correct memory. The metric is success ratio.</li>
+        <li><strong>Synchronous</strong> keeps one shared concept throughout a chain and updates memory after each decision.</li>
+        <li><strong>Asynchronous</strong> switches between two concepts and requires recalling an earlier step. Both chain tasks measure mean and maximum uninterrupted steps.</li>
+      </ol>
+      <figure class="research-figure">
+        <a href="static/images/association-methods-1.png"><img src="media/benchmark.webp" width="1800" height="785" alt="Three benchmark settings with example single-step, same-concept and switching-concept associations." loading="lazy"></a>
+      </figure>
+    </section>
 
+    <section class="research-section" id="results" aria-labelledby="results-heading">
+      <h2 id="results-heading">What happens as the chain grows?</h2>
+      <p>The study compares structured, natural-language, and chain memory with a no-memory baseline. Natural-language memory generally helped. Mixtures of experts improved asynchronous chains over the tested individual open models.</p>
+      <p class="research-takeaway"><strong>Takeaway</strong> In synchronous attribute association, human experts averaged <b>350 consecutive steps</b>. The tested open models averaged <b>fewer than 20</b>.</p>
+      <p><a href="https://proceedings.iclr.cc/paper_files/paper/2025/file/79cbf4f96c2bcc67267421154da689dd-Paper-Conference.pdf#page=8">See synchronous and asynchronous results in the paper</a></p>
+    </section>
 
-    <h2>Abstract</h2>
-    <p>Multi-modal Large Language Models (MLLMs) have exhibited powerful capability across various tasks. However, recently more and more deficiencies of MLLMs have been found compared to human intelligence, e.g., hallucination. To pave the way toward human intelligence, the community dedicated efforts to building larger benchmarks with more complex tasks. Here, we aim to benchmark an essential but usually overlooked ability of intelligence, i.e., association. To comprehensively investigate MLLMs's performance on association, we devise a standard association benchmark based on adjective and verb association semantic concepts. Instead of costly data annotation and organization, we propose a convenient annotation-free reconstruction method transforming the general dataset for our association tasks. Furthermore, we employ two strategies to comprehensively investigate the MLLMs' ability and potential, and an adapted tuning-free prompt engineering method, a complex Mix-of-Expert (MOE) model to investigate the MLLM's zero-shot capability. Our systematic investigation shows that current open-source MLLMs consistently exhibit poor capability in association tasks. Even the currently state-of-the-art MLLM and GPT-4V(vision) also have a significant gap compared to humans.</p>
-
-    <h2>What is Association?</h2>
-    <p>In the process of human thinking, there is a psychological process of automatically or consciously connecting to other relevant concepts, situations, or memories through a certain concept, personal experience, or external stimulus.</p>
-
-    <div class="image-grid">
-        <div class="image-item">
-            <img src="static/images/association-fig1.png" alt="Visual Association">
-            <div class="image-caption">Visual Association</div>
+    <section class="research-section" id="demo" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">Demo</h2>
+      <figure class="research-figure">
+        <video controls playsinline preload="none" poster="media/demo-poster.webp" width="1280" height="720" aria-label="Original Labyrinth of Links benchmark demonstration">
+          <source src="https://mvig-rhos.com/media/demo_small.mp4" type="video/mp4">
+          <a href="https://mvig-rhos.com/media/demo_small.mp4">Open the demonstration video</a>
+        </video>
+      </figure>
+      <details>
+        <summary>Association examples and applications</summary>
+        <div class="research-grid">
+          <figure class="research-figure">
+            <a href="static/images/association-fig1.png"><img src="media/visual.webp" width="1050" height="638" alt="A coffee shop image recalls a past activity at that location." loading="lazy"></a>
+            <figcaption>Visual association</figcaption>
+          </figure>
+          <figure class="research-figure">
+            <a href="static/images/association-fig2.png"><img src="media/semantic.webp" width="1050" height="638" alt="The word summer evokes a beach and a cold drink." loading="lazy"></a>
+            <figcaption>Semantic association</figcaption>
+          </figure>
+          <figure class="research-figure">
+            <a href="static/images/association-fig3.png"><img src="media/scenario.webp" width="1050" height="638" alt="A former school evokes playing football during childhood." loading="lazy"></a>
+            <figcaption>Scenario association</figcaption>
+          </figure>
+          <figure class="research-figure">
+            <a href="static/images/association-fig4.png"><img src="media/creative.webp" width="1050" height="644" alt="Solar panels and a car suggest a solar-powered car." loading="lazy"></a>
+            <figcaption>Creative association</figcaption>
+          </figure>
         </div>
-        <div class="image-item">
-            <img src="static/images/association-fig2.png" alt="Semantic Association">
-            <div class="image-caption">Semantic Association</div>
-        </div>
-        <div class="image-item">
-            <img src="static/images/association-fig3.png" alt="Scenario Association">
-            <div class="image-caption">Scenario Association</div>
-        </div>
-        <div class="image-item">
-            <img src="static/images/association-fig4.png" alt="Creative Association">
-            <div class="image-caption">Creative Association</div>
-        </div>
-    </div>
+        <figure class="research-figure">
+          <a href="static/images/association-application-fig1.png"><img src="media/applications.webp" width="1800" height="675" alt="Conceptual examples of association in learning and memory, decision-making, and creative thinking." loading="lazy"></a>
+          <figcaption>Illustrated applications in learning, decision-making, and creative thinking.</figcaption>
+        </figure>
+      </details>
+    </section>
 
-    <h2>Association Application</h2>
-    <div class="media">
-        <img src="static/images/association-application-fig1.png" alt="Association Application">
-    </div>
-
-    <h2>Our Benchmark</h2>
-    <div class="media">
-        <img src="static/images/association-methods-1.png" alt="Association Benchmark">
-    </div>
-
-</div>
-
+    <section class="research-section" id="BibTeX" aria-labelledby="citation-heading">
+      <h2 id="citation-heading">Citation</h2>
+      <details>
+        <summary>BibTeX</summary>
+        <pre><code>@inproceedings{li2025labyrinth,
+  title     = {The Labyrinth of Links: Navigating the Associative Maze of Multi-modal {LLMs}},
+  author    = {Li, Hong and Li, Nanxi and Chen, Yuanjie and Zhu, Jianbin and Guo, Qinlu and Lu, Cewu and Li, Yong-Lu},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2025},
+  url       = {https://openreview.net/forum?id=vJ0axKTh7t}
+}</code></pre>
+      </details>
+    </section>
+  </main>
 </body>
 </html>
