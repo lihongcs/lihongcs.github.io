@@ -37,15 +37,7 @@ section[id] { scroll-margin-top: 1.5rem; }
 
 .hero { padding-block: clamp(2.5rem, 5.6vw, 4.75rem) clamp(1.6rem, 3.6vw, 3rem); }
 h1 { font-size: clamp(2.625rem, 4.5vw, 4rem); font-weight: 740; line-height: 1.02; letter-spacing: -.055em; }
-.paper-title {
-  max-width: 56ch;
-  margin: .65rem 0 1.1rem;
-  font-size: clamp(1.2rem, 2.3vw, 2rem);
-  font-weight: 680;
-  line-height: 1.22;
-  letter-spacing: -.026em;
-  text-wrap: pretty;
-}
+.hero .authors { margin-top: .75rem; }
 .authors, .equal-contribution { color: var(--muted); }
 .authors span { display: inline-block; }
 .authors strong { color: var(--ink); font-weight: 680; }
