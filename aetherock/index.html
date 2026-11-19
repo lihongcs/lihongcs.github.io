@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../hardware-viewer/viewer.css?v=reading-scale">
   <link rel="stylesheet" href="project.css?v=reading-scale">
   <script src="script.js" defer></script>
-  <script type="module" src="../hardware-viewer/start.mjs?v=parallel-force"></script>
+  <script type="module" src="../hardware-viewer/start.mjs?v=linked-stroke"></script>
 </head>
 <body>
 <a class="skip" href="#overview">Skip to content</a>
@@ -149,7 +149,7 @@
     </section>
     <section id="parallel" class="gripper-panel" aria-labelledby="tab-parallel">
       <span id="parallel-v1"></span><span id="parallel-v2"></span>
-      <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-parallel data-model="assets/hardware/aetherock-parallel.glb">
+      <div class="cad-viewer" data-cad-viewer data-cad-autoload data-cad-parallel data-model="assets/hardware/aetherock-parallel.glb?v=linked-stroke">
         <div class="cad-heading">
           <h3>Parallel gripper assembly</h3>
           <button class="cad-launch" type="button" data-cad-start hidden>Retry 3D viewer</button>
@@ -160,12 +160,13 @@
             <button class="cad-demo-button" type="button" data-cad-action="gripper" aria-pressed="false">Gripper motion</button>
           </div>
           <div class="cad-motion" data-cad-motion hidden>
-            <label>Jaw opening <input type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help-parallel" data-cad-opening></label>
+            <label>Jaw opening <input id="parallel-opening" type="range" min="0" max="100" step="1" aria-describedby="cad-motion-help-parallel" data-cad-opening></label>
+            <output for="parallel-opening"></output>
             <p id="cad-motion-help-parallel">Drag either jaw in the model or use the slider.</p>
           </div>
         </div>
         <div class="cad-surface" data-cad-surface>
-          <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-parallel-preview.webp" alt="AetheRock parallel gripper assembly." loading="lazy">
+          <img class="cad-preview" data-cad-preview src="assets/hardware/aetherock-parallel-preview.webp?v=linked-stroke" alt="AetheRock parallel gripper assembly." loading="lazy">
           <p class="cad-status" data-cad-status aria-live="polite" hidden></p>
         </div>
         <div class="cad-toolbar" data-cad-toolbar hidden>
@@ -189,12 +190,12 @@
       <div class="cad-downloads">
         <h3>Download parallel gripper CAD</h3>
         <ul>
-          <li><a href="assets/hardware/aetherock-parallel-assembly.stl" download>Assembly (STL)</a></li>
-          <li><a href="assets/hardware/aetherock-parallel-stl-parts.zip" download>Individual STL parts (ZIP)</a></li>
-          <li><a href="assets/hardware/aetherock-parallel-solidworks.zip" download>Editable SolidWorks parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-assembly.stl?v=linked-stroke" download>Assembly (STL)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-stl-parts.zip?v=linked-stroke" download>Individual STL parts (ZIP)</a></li>
+          <li><a href="assets/hardware/aetherock-parallel-solidworks.zip?v=linked-stroke" download>Editable SolidWorks parts (ZIP)</a></li>
         </ul>
-        <p>The parallel gripper carries the revised Hikrobot camera mount, two GelSlim Mini sensors, and 22 × 22 mm fingertip force films. The 3D viewer demonstrates jaw travel along the rail. The assembly STL includes fitted electronics and wiring references. Dimensions are in millimeters. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC VIVE Ultimate Tracker model source</a></p>
-        <details data-parts="assets/hardware/aetherock-parallel-downloads.json" hidden>
+        <p>The parallel gripper carries the revised Hikrobot camera mount, two GelSlim Mini sensors, and 22 × 22 mm fingertip force films. The 3D viewer shows the rotor and hinged links driving the jaws from contact to a 100 mm pad opening. The linkage geometry is reconstructed from the original mounting points. The assembly STL includes fitted electronics and wiring references. <a href="https://business.vive.com/uk/product/vive-ultimate-tracker/">HTC VIVE Ultimate Tracker model source</a></p>
+        <details data-parts="assets/hardware/aetherock-parallel-downloads.json?v=linked-stroke" hidden>
           <summary>Browse individual STL downloads</summary>
           <ul></ul>
         </details>

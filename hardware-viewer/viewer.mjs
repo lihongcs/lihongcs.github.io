@@ -256,7 +256,16 @@ export async function mountViewer(root) {
   function setOpening(value) {
     opening = Math.max(0, Math.min(1, value));
     openingInput.value = String(Math.round(opening * 100));
+    updateOpeningLabel();
     applyPose();
+  }
+
+  function updateOpeningLabel() {
+    if (!gripper.openingWidth) return;
+    const label = `${gripper.openingWidth(opening).toFixed(1)} mm`;
+    openingInput.setAttribute('aria-valuetext', label);
+    const output = motionControls.querySelector('output');
+    if (output) output.textContent = label;
   }
 
   function toggleMotion(active) {
@@ -482,7 +491,7 @@ export async function mountViewer(root) {
     if (assemblyControls) {
       const [{ createExplodedView }, { createGripperMotion }] = await Promise.all([
         import('./aetherock-explode.mjs?v=parallel-stl'),
-        parallel ? import('./parallel-gripper-motion.mjs?v=force-leads') : import('./gripper-motion.mjs?v=encoder-ribbon'),
+        parallel ? import('./parallel-gripper-motion.mjs?v=linked-stroke') : import('./gripper-motion.mjs?v=encoder-ribbon'),
       ]);
       model.updateMatrixWorld(true);
       explodedView = createExplodedView(model, parallel);
@@ -491,6 +500,7 @@ export async function mountViewer(root) {
         opening = gripper.initialOpening;
         posedOpening = opening;
         openingInput.value = String(Math.round(opening * 100));
+        updateOpeningLabel();
         openingInput.addEventListener('input', () => setOpening(openingInput.valueAsNumber / 100));
       }
       explodeButton.hidden = !explodedView;

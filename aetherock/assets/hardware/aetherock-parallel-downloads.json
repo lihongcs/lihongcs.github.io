@@ -33,6 +33,14 @@
       "href": "parts/parallel/left-jaw-and-trigger.stl"
     },
     {
+      "label": "Left Jaw Pivot Shoulder Pin",
+      "href": "parts/parallel/left-jaw-pivot-shoulder-pin.stl"
+    },
+    {
+      "label": "Left Jaw Pivot Spacer",
+      "href": "parts/parallel/left-jaw-pivot-spacer.stl"
+    },
+    {
       "label": "Left Optical Shroud",
       "href": "parts/parallel/left-optical-shroud.stl"
     },
@@ -41,8 +49,16 @@
       "href": "parts/parallel/left-optical-window-support.stl"
     },
     {
+      "label": "Left Parallel Drive Link",
+      "href": "parts/parallel/left-parallel-drive-link.stl"
+    },
+    {
       "label": "Left Rail Carriage",
       "href": "parts/parallel/left-rail-carriage.stl"
+    },
+    {
+      "label": "Left Rotor Pivot Shoulder Pin",
+      "href": "parts/parallel/left-rotor-pivot-shoulder-pin.stl"
     },
     {
       "label": "Left Tactile Back Cover",
@@ -81,6 +97,14 @@
       "href": "parts/parallel/right-jaw-and-trigger.stl"
     },
     {
+      "label": "Right Jaw Pivot Shoulder Pin",
+      "href": "parts/parallel/right-jaw-pivot-shoulder-pin.stl"
+    },
+    {
+      "label": "Right Jaw Pivot Spacer",
+      "href": "parts/parallel/right-jaw-pivot-spacer.stl"
+    },
+    {
       "label": "Right Optical Shroud",
       "href": "parts/parallel/right-optical-shroud.stl"
     },
@@ -89,8 +113,16 @@
       "href": "parts/parallel/right-optical-window-support.stl"
     },
     {
+      "label": "Right Parallel Drive Link",
+      "href": "parts/parallel/right-parallel-drive-link.stl"
+    },
+    {
       "label": "Right Rail Carriage",
       "href": "parts/parallel/right-rail-carriage.stl"
+    },
+    {
+      "label": "Right Rotor Pivot Shoulder Pin",
+      "href": "parts/parallel/right-rotor-pivot-shoulder-pin.stl"
     },
     {
       "label": "Right Tactile Back Cover",
