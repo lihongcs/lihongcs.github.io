@@ -1,4 +1,5 @@
 import { Vector3 } from './vendor/three-cad.mjs';
+import { flexibleLead } from './flexible-lead.mjs';
 
 export function createGripperMotion(model) {
   const motion = model.userData.parallelMotion;
@@ -12,14 +13,25 @@ export function createGripperMotion(model) {
   axis.normalize();
 
   const moving = new Map();
+  const leads = [];
+  model.updateMatrixWorld(true);
+  const worldOrigin = model.localToWorld(new Vector3());
+  const travel = model.localToWorld(axis.clone()).sub(worldOrigin);
   for (const part of model.children) {
     const side = part.userData.motion;
     if (side === -1 || side === 1) moving.set(part, { side, assembled: part.position.clone() });
+    const lead = part.userData.flexibleLead;
+    if (lead) {
+      const from = model.localToWorld(new Vector3().fromArray(lead.movingEnd));
+      const to = model.localToWorld(new Vector3().fromArray(lead.fixedEnd));
+      const length = to.sub(from).dot(travel);
+      const deform = flexibleLead(part, (position) => 1 - position.sub(from).dot(travel) / length);
+      leads.push({ deform, side: lead.side });
+    }
   }
   if (![-1, 1].every((side) => [...moving.values()].some((part) => part.side === side))) return null;
 
-  const worldOrigin = model.localToWorld(new Vector3());
-  const worldTravel = model.localToWorld(axis.clone().multiplyScalar(range)).sub(worldOrigin);
+  const worldTravel = travel.clone().multiplyScalar(range);
 
   return {
     initialOpening: -minimum / range,
@@ -28,6 +40,9 @@ export function createGripperMotion(model) {
       const displacement = minimum + opening * range;
       for (const [part, { side, assembled }] of moving) {
         part.position.copy(assembled).addScaledVector(axis, displacement * side);
+      }
+      for (const { deform, side } of leads) {
+        deform(travel.x * displacement * side, travel.z * displacement * side);
       }
     },
     directionFor(object) {

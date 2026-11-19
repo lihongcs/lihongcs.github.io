@@ -9,7 +9,7 @@ export async function startViewer(root) {
   status.textContent = 'Loading 3D model…';
 
   try {
-    const { mountViewer } = await import('./viewer.mjs?v=fixture-views');
+    const { mountViewer } = await import('./viewer.mjs?v=parallel-force');
     await mountViewer(root);
     if (preview) preview.hidden = true;
     if (trigger) trigger.hidden = true;

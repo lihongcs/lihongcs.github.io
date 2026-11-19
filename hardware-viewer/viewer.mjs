@@ -482,7 +482,7 @@ export async function mountViewer(root) {
     if (assemblyControls) {
       const [{ createExplodedView }, { createGripperMotion }] = await Promise.all([
         import('./aetherock-explode.mjs?v=parallel-stl'),
-        parallel ? import('./parallel-gripper-motion.mjs') : import('./gripper-motion.mjs?v=encoder-ribbon'),
+        parallel ? import('./parallel-gripper-motion.mjs?v=force-leads') : import('./gripper-motion.mjs?v=encoder-ribbon'),
       ]);
       model.updateMatrixWorld(true);
       explodedView = createExplodedView(model, parallel);

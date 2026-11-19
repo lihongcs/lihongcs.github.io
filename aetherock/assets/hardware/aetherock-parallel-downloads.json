@@ -1,0 +1,108 @@
+{
+  "parts": [
+    {
+      "label": "Center Encoder Rotor",
+      "href": "parts/parallel/center-encoder-rotor.stl"
+    },
+    {
+      "label": "Forearm Pivot Arm",
+      "href": "parts/parallel/forearm-pivot-arm.stl"
+    },
+    {
+      "label": "Forearm Support",
+      "href": "parts/parallel/forearm-support.stl"
+    },
+    {
+      "label": "Hikrobot Camera Mount",
+      "href": "parts/parallel/hikrobot-camera-mount.stl"
+    },
+    {
+      "label": "Left Acrylic Contact Window",
+      "href": "parts/parallel/left-acrylic-contact-window.stl"
+    },
+    {
+      "label": "Left Force PCB Spacer",
+      "href": "parts/parallel/left-force-pcb-spacer.stl"
+    },
+    {
+      "label": "Left Gel Retainer Ring",
+      "href": "parts/parallel/left-gel-retainer-ring.stl"
+    },
+    {
+      "label": "Left Jaw and Trigger",
+      "href": "parts/parallel/left-jaw-and-trigger.stl"
+    },
+    {
+      "label": "Left Optical Shroud",
+      "href": "parts/parallel/left-optical-shroud.stl"
+    },
+    {
+      "label": "Left Optical Window Support",
+      "href": "parts/parallel/left-optical-window-support.stl"
+    },
+    {
+      "label": "Left Rail Carriage",
+      "href": "parts/parallel/left-rail-carriage.stl"
+    },
+    {
+      "label": "Left Tactile Back Cover",
+      "href": "parts/parallel/left-tactile-back-cover.stl"
+    },
+    {
+      "label": "Left Tactile Contact Surface",
+      "href": "parts/parallel/left-tactile-contact-surface.stl"
+    },
+    {
+      "label": "Linear Guide Rail",
+      "href": "parts/parallel/linear-guide-rail.stl"
+    },
+    {
+      "label": "Parallel Gripper Frame",
+      "href": "parts/parallel/parallel-gripper-frame.stl"
+    },
+    {
+      "label": "Parallel Gripper Side Cover",
+      "href": "parts/parallel/parallel-gripper-side-cover.stl"
+    },
+    {
+      "label": "Right Acrylic Contact Window",
+      "href": "parts/parallel/right-acrylic-contact-window.stl"
+    },
+    {
+      "label": "Right Force PCB Spacer",
+      "href": "parts/parallel/right-force-pcb-spacer.stl"
+    },
+    {
+      "label": "Right Gel Retainer Ring",
+      "href": "parts/parallel/right-gel-retainer-ring.stl"
+    },
+    {
+      "label": "Right Jaw and Trigger",
+      "href": "parts/parallel/right-jaw-and-trigger.stl"
+    },
+    {
+      "label": "Right Optical Shroud",
+      "href": "parts/parallel/right-optical-shroud.stl"
+    },
+    {
+      "label": "Right Optical Window Support",
+      "href": "parts/parallel/right-optical-window-support.stl"
+    },
+    {
+      "label": "Right Rail Carriage",
+      "href": "parts/parallel/right-rail-carriage.stl"
+    },
+    {
+      "label": "Right Tactile Back Cover",
+      "href": "parts/parallel/right-tactile-back-cover.stl"
+    },
+    {
+      "label": "Right Tactile Contact Surface",
+      "href": "parts/parallel/right-tactile-contact-surface.stl"
+    },
+    {
+      "label": "VIVE Tracker Mount",
+      "href": "parts/parallel/vive-tracker-mount.stl"
+    }
+  ]
+}
