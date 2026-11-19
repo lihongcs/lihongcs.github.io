@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InstaUMI · 3D assembly viewer</title>
+  <meta name="description" content="Explore InstaUMI hardware in 3D, inspect its modules, and download STL files.">
+  <link rel="canonical" href="https://lihongcs.github.io/instaumi/viewer.html">
+  <meta name="theme-color" content="#F7F8F5">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../typography.css?v=reading-scale">
+  <link rel="stylesheet" href="style.css?v=reading-scale">
+  <link rel="stylesheet" href="viewer.css?v=reading-scale">
+  <script type="module" src="viewer.js?v=stl-downloads"></script>
+</head>
+<body>
+  <header class="site-header viewer-wrap">
+    <a href="./"><span aria-hidden="true">←</span> InstaUMI project</a>
+    <nav aria-label="Viewer navigation">
+      <a href="#modules">Modules</a>
+      <a id="stl-library-link" href="stl.html">STL library</a>
+    </nav>
+  </header>
+  <main class="viewer-wrap">
+    <div class="viewer-heading">
+      <h1>InstaUMI 3D assembly</h1>
+      <nav id="variant-switcher" class="variant-switcher" aria-label="Gripper variant"></nav>
+    </div>
+    <div class="viewer-layout">
+      <section class="model-panel" aria-label="Assembly preview">
+        <div class="model-toolbar">
+          <h2 id="variant-name">Assembly</h2>
+          <div class="joint-actions">
+            <a id="joint-motion-link" class="viewer-button" href="#joint-motion" hidden>Joint motion</a>
+            <button id="reset-view" class="viewer-button" type="button" disabled>Reset view</button>
+            <button id="explode-view" class="viewer-button" type="button" aria-controls="viewport" aria-pressed="false" hidden>Explode</button>
+          </div>
+        </div>
+        <nav id="view-switcher" class="variant-switcher view-switcher" aria-label="Assembly view" hidden></nav>
+        <div id="viewport" class="viewport">
+          <img id="fallback-preview" alt="SolidWorks assembly preview" hidden>
+          <p id="model-status" class="model-status" role="status">Loading assembly details…</p>
+          <p id="model-selection" class="model-selection" hidden></p>
+        </div>
+        <p id="model-instructions" class="model-instructions" hidden>
+          <span id="orbit-instructions">Drag to orbit.</span> Scroll or pinch to zoom. Right-drag or use two fingers to pan. Click a part to select it.
+          <span class="sr-only">With the model focused, use the arrow keys to orbit and plus or minus to zoom.</span>
+        </p>
+        <section id="joint-motion" class="joint-motion" aria-labelledby="joint-motion-title" hidden>
+          <div class="joint-toolbar">
+            <h3 id="joint-motion-title">Joint motion</h3>
+            <div class="joint-actions" role="group" aria-label="Joint motion controls">
+              <button id="joint-drag" class="viewer-button" type="button" aria-pressed="true">Drag to drive</button>
+              <button id="joint-play" class="viewer-button" type="button">Play</button>
+              <button id="joint-reset" class="viewer-button" type="button">Reset joints</button>
+            </div>
+          </div>
+          <div class="joint-slider-heading">
+            <label id="joint-angle-label" for="joint-angle">Joint angle</label>
+            <span id="joint-angle-value" aria-hidden="true">0°</span>
+          </div>
+          <input id="joint-angle" type="range" aria-describedby="joint-motion-note">
+          <div class="joint-range" aria-hidden="true">
+            <span id="joint-range-min"></span><span id="joint-range-max"></span>
+          </div>
+          <p id="joint-motion-note" class="viewer-note">Kinematic preview based on the assembly geometry.</p>
+        </section>
+      </section>
+      <section id="modules" class="module-panel" aria-labelledby="module-heading">
+        <h2 id="module-heading">Modules</h2>
+        <a id="assembly-download" class="download" download hidden>Download assembly STL <span aria-hidden="true">↓</span></a>
+        <p id="variant-note" class="viewer-note" hidden></p>
+        <p id="module-empty" class="viewer-note" hidden>Module details are unavailable.</p>
+        <ul id="module-list" class="module-list"></ul>
+        <div id="module-detail" class="module-detail" hidden>
+          <div aria-live="polite">
+            <h3 id="module-name"></h3>
+            <p id="module-description" hidden></p>
+          </div>
+          <div class="module-actions">
+            <a id="part-download" class="viewer-button" download hidden>Download STL <span aria-hidden="true">↓</span></a>
+            <button id="isolate-module" class="viewer-button" type="button" aria-pressed="false" hidden>Isolate module</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <noscript><p>The interactive viewer requires JavaScript. <a href="./#hardware">View hardware downloads.</a></p></noscript>
+  </main>
+</body>
+</html>

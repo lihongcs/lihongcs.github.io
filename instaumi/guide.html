@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InstaUMI setup and processing guide</title>
+  <meta name="description" content="InstaUMI pairs handheld grippers with Insta360 and VIVE to collect manipulation demonstrations and export LeRobot datasets.">
+  <link rel="canonical" href="https://lihongcs.github.io/instaumi/guide.html">
+  <meta property="og:title" content="InstaUMI setup and processing guide">
+  <meta property="og:image" content="https://lihongcs.github.io/instaumi/assets/flexiv-assembly-clean.webp">
+  <meta name="theme-color" content="#F7F8F5">
+  <link rel="stylesheet" href="../fonts/inter.css">
+  <link rel="stylesheet" href="../typography.css?v=reading-scale">
+  <link rel="stylesheet" href="style.css?v=reading-scale">
+  <link rel="stylesheet" href="workflow.css?v=reading-scale">
+  <script type="module" src="slam-replay.mjs"></script>
+</head>
+<body>
+  <header class="site-header wrap">
+    <a href="../#projects"><span aria-hidden="true">←</span> Hong Li</a>
+    <nav aria-label="InstaUMI navigation">
+      <a href="./#software">Workflow</a>
+      <a href="./#hardware">Hardware</a>
+      <a href="https://github.com/lihongcs/InstaUMI">Source code</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <section class="intro guide-intro" aria-labelledby="title">
+      <h1 id="title">InstaUMI guide</h1>
+      <p class="lede">Set up, capture, and process X3 and X5 recordings.</p>
+      <nav class="guide-links" aria-label="Guide sections">
+        <a href="#setup">Shared setup</a>
+        <a href="#x5">X5 wireless</a>
+        <a href="#x3">X3 wired</a>
+        <a href="#panoramic-slam">Panoramic SLAM</a>
+        <a href="#inference">Inference latency</a>
+      </nav>
+    </section>
+
+    <article class="guide" id="setup" aria-labelledby="setup-title">
+        <div class="guide-heading">
+          <h3 id="setup-title">Set up InstaDataCap</h3>
+          <p>Start with Ubuntu 24.04. The same InstaDataCap interface supports the X5 wireless and X3 wired workflows.</p>
+        </div>
+        <div class="guide-content">
+          <details open>
+            <summary>Open the capture interface</summary>
+            <p>Clone <a href="https://github.com/lihongcs/InstaUMI">InstaUMI</a> and run this from the repository root. The dry run writes a simulated session so you can practice recording and marking episodes.</p>
+            <pre tabindex="0"><code>python3 -m datacap.webapp --dry-run --host 127.0.0.1 --port 8788</code></pre>
+            <p>Open <a href="http://127.0.0.1:8788/">http://127.0.0.1:8788/</a> on the capture computer.</p>
+          </details>
+          <details>
+            <summary>Set up X5 cameras and VIVE trackers</summary>
+            <pre tabindex="0"><code>sudo apt install bluez python3-dbus python3-gi python3-venv \
+  libhidapi-hidraw0 libhidapi-libusb0 ffmpeg
+python3 -m venv datacap/.venv
+source datacap/.venv/bin/activate
+bash datacap/tools/install_hardware_access.sh
+cp datacap/config.example.json datacap/config.json</code></pre>
+            <p>Set the capture directory, camera roles and tracker roles in <code>datacap/config.json</code>. For real tracker capture, follow the <a href="https://github.com/lihongcs/InstaUMI/tree/main/datacap">DataCap README</a> to install a compatible tracker backend and set up device roles. Use <code>Bluetooth Control</code> for X5. Set <code>insta.name_prefixes</code> to <code>["X5 "]</code> or enter your own camera BLE addresses. For X3, follow the <a href="#x3">wired setup</a>.</p>
+            <pre tabindex="0"><code>python3 -m datacap.webapp --config datacap/config.json --host 127.0.0.1</code></pre>
+          </details>
+          <details class="system-screenshots" id="screenshots">
+            <summary>View the InstaDataCap interface</summary>
+            <figure>
+              <a href="assets/instadatacap-dashboard.webp" aria-label="Open the full-size InstaDataCap screenshot">
+                <img src="assets/instadatacap-dashboard.webp" width="2160" height="1560" loading="lazy"
+                  alt="InstaDataCap during a simulated dual-arm session, with capture controls and tracker status">
+              </a>
+              <figcaption>Interface reference · Simulated devices</figcaption>
+            </figure>
+          </details>
+        </div>
+    </article>
+
+    <div id="x5"></div>
+    <article class="guide" id="capture" aria-labelledby="capture-title">
+        <div class="guide-heading">
+          <h3 id="capture-title">Collect a session</h3>
+          <figure class="capture-sample" id="raw-sample" aria-labelledby="raw-sample-title">
+            <figcaption>
+              <h4 id="raw-sample-title">Cloth folding · Episode 150</h4>
+              <p>Latest complete capture · 17 Aug 2026<br>Final demonstration · 10.74 s</p>
+            </figcaption>
+            <div class="capture-sample-views" aria-hidden="true">
+              <span>Left wrist</span>
+              <span>Right wrist</span>
+            </div>
+            <video controls muted playsinline preload="none" width="1200" height="600"
+              poster="assets/workflow/x5-latest-episode.webp" aria-label="Complete final cloth-folding demonstration, with left and right views from the original Insta360 recordings">
+              <source src="assets/workflow/x5-latest-episode.mp4" type="video/mp4">
+              <a href="assets/workflow/x5-latest-episode.mp4">Download the full demonstration video</a>
+            </video>
+            <div class="capture-sample-timeline" role="group" aria-label="Final 90 seconds of the capture. Episode 149 runs from 44.22 to 57.24 seconds. Episode 150 runs from 65.39 to 76.13 seconds.">
+              <p class="capture-sample-timeline-title">Episode markers · final 90 seconds</p>
+              <div class="capture-sample-axis" aria-hidden="true">
+                <span>0 s</span><span>30 s</span><span>60 s</span><span>90 s</span>
+              </div>
+              <div class="capture-sample-track" aria-hidden="true">
+                <span class="sample-episode" style="--offset: 49.13%; --span: 14.47%"></span>
+                <span class="sample-episode sample-episode-playing" style="--offset: 72.65%; --span: 11.94%"></span>
+              </div>
+              <div class="capture-sample-key" aria-hidden="true">
+                <span>Episode 150 · video</span>
+                <span>Episode 149</span>
+              </div>
+            </div>
+          </figure>
+        </div>
+        <div class="guide-content">
+          <ol class="capture-list">
+            <li><strong>Check device roles.</strong> Choose <em>Dual arm · 2 Trackers</em> or <em>Single arm · Right side</em>, set the task and destination, connect the cameras, and verify live tracker poses on the correct sides.</li>
+            <li><strong>Start capture and record a sync motion.</strong> For X5 with HTC, rotate each rigid camera–tracker assembly on several axes for 5–10 seconds with irregular motion. Repeat every 10–15 minutes and before ending capture.</li>
+            <li><strong>Mark episodes.</strong> Use <em>Start episode</em> and <em>End episode</em> for each demonstration. Finish with <em>End capture</em> to close out the session.</li>
+            <li><strong>Bring the original X5 media into the session.</strong> Keep all INSV chapters and sidecars with the correct camera role. Keep the transfer manifest, tracker CSVs and timestamp log with the session.</li>
+          </ol>
+          <details>
+            <summary>Bimanual X5 session layout</summary>
+            <pre tabindex="0"><code>capture/
+├── manifest.json
+├── timestamp_log.jsonl
+├── htc_left.csv
+├── htc_right.csv
+└── insta/
+    ├── transfer_manifest.json
+    ├── insta_left/
+    └── insta_right/</code></pre>
+          </details>
+        </div>
+    </article>
+
+    <article class="guide processing-guide" id="processing" aria-labelledby="processing-title">
+      <header>
+        <h3 id="processing-title">Post-process and validate</h3>
+        <p class="processing-caption">Bimanual X5 + VIVE · Cloth-folding benchmark</p>
+      </header>
+
+      <div class="processing-benchmark" aria-label="Benchmark workload, timing and resource use">
+        <dl class="processing-benchmark-formats">
+          <div>
+            <dt>Source video</dt>
+            <dd>11.88 GB</dd>
+            <dd class="processing-format-detail">Left 9 min 22.09 s · Right 9 min 22.04 s</dd>
+            <dd class="processing-format-detail">Two 1920 × 1920 H.264 fisheye streams per INSV at 59.94 fps.</dd>
+            <dd class="processing-format-detail">Marked recording · 5 min 32 s</dd>
+          </div>
+          <div>
+            <dt>LeRobot output</dt>
+            <dd>4.93 GB</dd>
+            <dd class="processing-format-detail">25 episodes · 9,944 frames at 30 Hz</dd>
+            <dd class="processing-format-detail">v2.1 Parquet · six 224 × 224 PNG-encoded RGB views per frame</dd>
+            <dd class="processing-format-detail">20-D state and action vectors</dd>
+          </div>
+        </dl>
+        <dl class="processing-benchmark-resources">
+          <div><dt>Wall time</dt><dd>25 min 28.76 s</dd></div>
+          <div><dt>CPU time</dt><dd>101.4 core·min</dd></div>
+          <div><dt>Peak RAM</dt><dd>3.65 GiB</dd></div>
+          <div><dt>Peak VRAM</dt><dd>2.98 GiB</dd></div>
+        </dl>
+        <div class="processing-duration-bar" role="img" aria-label="Processing time by stage. Stage 01 2.8%, stage 03 38.9%, stage 05 58.2%."
+          style="--stage-01: 43.29fr; --stage-03: 595.27fr; --stage-05: 890.20fr">
+          <span>01</span><span>03</span><span>05</span>
+        </div>
+        <p>Intel i7-14700K · RTX 4080 SUPER · HDD. Stages 01–05 timed on a fresh run.</p>
+        <p>CPU time sums all cores. Process RAM and VRAM peaks were sampled about every 2 s. Peak GPU utilization was 90%.</p>
+      </div>
+
+      <section class="processing-stage" id="x5-sync-guide" aria-labelledby="x5-sync-title">
+        <h4 id="x5-sync-title">01 · Extract and align</h4>
+        <img src="assets/workflow/x5-bench-sync.webp" width="1200" height="800" loading="lazy"
+          alt="Measured camera clock offsets across the sample. Fit residual p95 is 0.25 ms on the left and 0.29 ms on the right.">
+        <div class="processing-stage-content">
+          <p>Align the wrist cameras and VIVE trackers by matching angular motion.</p>
+          <dl>
+            <div><dt>Input</dt><dd>Two INSV files, VIVE pose CSVs and <code>timestamp_log.jsonl</code>.</dd></div>
+            <div><dt>Output</dt><dd>Two calibrated timestamp CSVs and <code>calibration.json</code>.</dd></div>
+            <div><dt>Time</dt><dd>43.29 s</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="processing-stage" id="x5-gripper-guide" aria-labelledby="x5-gripper-title">
+        <h4 id="x5-gripper-title">03 · Measure gripper opening</h4>
+        <figure class="processing-stage-media">
+          <video controls playsinline preload="none" width="1200" height="800"
+            src="assets/workflow/x5-bench-gripper.mp4" poster="assets/workflow/x5-bench-gripper.webp?v=bimanual"
+            aria-label="Left and right gripper close-ups with detected ArUco markers and synchronized gripper opening in millimetres">
+            <a href="assets/workflow/x5-bench-gripper.mp4">Watch the gripper opening video</a>
+          </video>
+          <figcaption>13.10 s · Calibrated opening for both wrists. Dashed segments hold the last estimate. Calibration tops out at 85 mm.</figcaption>
+        </figure>
+        <div class="processing-stage-content">
+          <p>Convert the distance between ArUco tags to gripper opening in metres.</p>
+          <dl>
+            <div><dt>Input</dt><dd>INSV wrist frames, aligned timestamps, episode markers and a gripper calibration curve.</dd></div>
+            <div><dt>Output</dt><dd>One <code>gripper_width.csv</code> per wrist.</dd></div>
+            <div><dt>Time</dt><dd>9 min 55.27 s for the full benchmark.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="processing-stage" id="x5-export-guide" aria-labelledby="x5-export-title">
+        <h4 id="x5-export-title">05 · Export wrist views</h4>
+        <div class="export-stitch-time">
+          <p>Optical-flow stitching</p>
+          <strong><time datetime="PT4M12.67S">4 min 12.67 s</time></strong>
+          <p>Parallel CUDA stitching, H.265 encoding and verification for two 9 min 22 s videos.</p>
+          <p>Included in the <time datetime="PT14M50.20S">14 min 50.20 s</time> six-view export.</p>
+        </div>
+        <div class="processing-stage-content">
+          <p>Export native fisheye videos or synchronized LeRobot episodes.</p>
+          <dl>
+            <div><dt>Input</dt><dd>X5 INSV files for both wrists.</dd></div>
+            <div><dt>LeRobot</dt><dd>Also uses VIVE pose and gripper-width CSVs, aligned timestamps and episode markers.</dd></div>
+          </dl>
+          <p class="export-formats-link"><a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-native-fisheye-views">Native fisheye export commands</a></p>
+        </div>
+        <ul class="export-views" role="list" aria-label="Wrist image layouts for both cameras">
+          <li>
+            <figure>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-front.mp4" poster="assets/workflow/x5-export-front.webp?v=video"
+                aria-label="Front fisheye video from both wrists">
+                <a href="assets/workflow/x5-export-front.mp4">Watch the front fisheye video</a>
+              </video>
+              <figcaption>
+                <h5>Front 180°</h5>
+                <p>2 native MP4 views per chapter</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-front-rear.mp4" poster="assets/workflow/x5-export-front-rear.webp?v=video"
+                aria-label="Front and rear fisheye video from both wrists, with rear faces masked">
+                <a href="assets/workflow/x5-export-front-rear.mp4">Watch the front and rear video</a>
+              </video>
+              <figcaption>
+                <h5>Front 180° + rear 180°</h5>
+                <p>4 native MP4 views per chapter</p>
+                <p>Rear faces masked</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <video controls playsinline preload="none" width="1200" height="800"
+                src="assets/workflow/x5-export-surround.mp4" poster="assets/workflow/x5-export-surround.webp?v=video"
+                aria-label="Front and stitched side-view video from both wrists">
+                <a href="assets/workflow/x5-export-surround.mp4">Watch the front and side-view video</a>
+              </video>
+              <figcaption>
+                <h5>Front 180° + two 90° sides</h5>
+                <p>6 PNG views per frame · LeRobot v2.1 Parquet</p>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <section class="processing-check" aria-labelledby="processing-check-title">
+        <h4 id="processing-check-title">Validate export</h4>
+        <p>Accepted all 9,944 frames in 2.48 s. Some VIVE sampling gaps exceeded the soft threshold.</p>
+      </section>
+
+      <details class="processing-commands">
+        <summary>Install and run the LeRobot pipeline</summary>
+        <p>Run from the repository root on Ubuntu. Use FFmpeg and PyAV with <code>v360</code>, and Insta360 MediaSDK with a compatible NVIDIA driver. <a href="https://github.com/lihongcs/InstaUMI/tree/main/dataprocess#export-lerobot-v21">Gripper calibration instructions</a></p>
+        <pre tabindex="0"><code>python3 -m venv .venv-processing
+source .venv-processing/bin/activate
+python -m pip install -r dataprocess/requirements.txt
+export PYTHON="$(command -v python)"
+MEDIASDK_ROOT=/path/to/MediaSDK \
+  bash dataprocess/_01_raw_extrect/insta360_pano_export/scripts/build_ubuntu.sh
+bash dataprocess/run_bimanual_htc.sh \
+  /absolute/path/to/capture 'Task description'</code></pre>
+      </details>
+    </article>
+
+    <article class="guide processing-guide" id="panoramic-slam" aria-labelledby="panoramic-slam-title">
+      <header>
+        <h3 id="panoramic-slam-title">Panoramic SLAM</h3>
+        <p class="processing-caption">Stella VSLAM tracks ORB features in each X5 wrist camera’s 360° equirectangular video. <a href="https://stella-cv.readthedocs.io/en/stable/overview.html">Algorithm documentation</a></p>
+      </header>
+
+      <div class="processing-benchmark slam-benchmark">
+        <dl>
+          <div>
+            <dt>Input per wrist</dt>
+            <dd><time datetime="PT60.06S">60.06 s</time></dd>
+            <dd class="processing-format-detail">HEVC MP4 · 2048 × 1024 · 59.94 fps · 3,600 frames</dd>
+          </div>
+          <div>
+            <dt>SLAM wall time</dt>
+            <dd class="slam-times">
+              <span><span class="slam-time-label">Left</span><time datetime="PT72.22S">72.22 s</time></span>
+              <span><span class="slam-time-label">Right</span><time datetime="PT75.42S">75.42 s</time></span>
+            </dd>
+            <dd class="processing-format-detail">Intel Core i7-14700K · separate runs</dd>
+          </div>
+        </dl>
+      </div>
+
+      <figure class="slam-video" data-slam-replay>
+        <video data-slam-fallback controls playsinline preload="none" width="1600" height="736"
+          src="assets/workflow/slam-world-replay.mp4?v=depth" poster="assets/workflow/slam-world-replay.webp?v=depth"
+          aria-label="Both wrist panoramas and an operator-facing comparison of SLAM and HTC end-effector trajectories in VIVE world coordinates">
+          <a href="assets/workflow/slam-world-replay.mp4?v=depth">Watch the SLAM and HTC comparison</a>
+        </video>
+        <div class="slam-interactive" data-slam-interactive hidden>
+          <video data-slam-wrists controls playsinline preload="none" width="640" height="736"
+            src="assets/workflow/slam-world-wrists.mp4" poster="assets/workflow/slam-world-wrists.webp"
+            aria-label="Synchronized left and right wrist panoramas. Playback also advances the 3D trajectories."></video>
+          <div class="slam-orbit">
+            <div class="slam-scene" data-slam-scene>
+              <span class="slam-direction" data-slam-forward aria-hidden="true">Forward</span>
+              <span class="slam-direction" data-slam-up aria-hidden="true">Up</span>
+              <div class="slam-orbit-controls">
+                <span>Drag to rotate</span>
+                <button type="button" data-slam-reset>Reset view</button>
+              </div>
+            </div>
+            <div class="slam-orbit-key">
+              <span class="slam-left">Left <strong data-slam-left>—</strong></span>
+              <span class="slam-right">Right <strong data-slam-right>—</strong></span>
+              <span class="slam-key-solid">SLAM</span>
+              <span class="slam-key-dashed">HTC</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <h4>SLAM vs HTC end-effector replay</h4>
+          <p>13.10 s · Both wrist panoramas. The default view looks forward from the operator’s side.</p>
+          <a data-slam-mp4 href="assets/workflow/slam-world-replay.mp4?v=depth" hidden>Open replay MP4</a>
+        </figcaption>
+      </figure>
+
+      <dl class="slam-files">
+        <div><dt>TUM trajectories <code>.txt</code></dt><dd>Position and quaternion · left 3,543 poses, 22 keyframes · right 3,540 poses, 17 keyframes</dd></div>
+        <div><dt>MessagePack maps <code>.msgpack</code></dt><dd>Sparse 3D landmarks · left 1,911 · right 1,673</dd></div>
+      </dl>
+      <p class="processing-caption">Timing covers MP4 decoding, tracking, mapping and file output. Stitching and metric scale calibration are separate steps.</p>
+
+      <details class="processing-commands">
+        <summary>World coordinates and end-effector conversion</summary>
+        <p>SLAM estimates the X5 camera’s optical centre from video. HTC VIVE records the tracker pose. A calibrated wrist mount and the Stage 05 VIVE-to-Flexiv conversion let both paths describe the same end-effector point.</p>
+        <p>Solid paths show SLAM estimates and dashed paths show HTC references. The readout gives their 3D position difference in millimetres. Height lines extend to the ground grid, which uses 10 cm cells in the VIVE world. Red, green and blue show the local +X, +Y and +Z axes of the SLAM-derived pose.</p>
+        <p>Against HTC poses from this held-out episode, position RMSE was 3.8 mm per wrist. Orientation RMSE was 0.22° left and 0.35° right across 390 and 392 valid poses respectively.</p>
+      </details>
+
+      <details class="processing-commands">
+        <summary>Run Stella VSLAM on a panorama</summary>
+        <p>Use a Stella runner with FFmpeg pipe support and match the <code>equirectangular</code> camera config to each video’s size and frame rate. The runs used all 3,600 frames per wrist and an 8,000-keypoint limit. CPU time and peak RSS were 4.85 core·min and 0.54 GiB on the left, and 5.00 core·min and 0.48 GiB on the right. The pose counts exclude the record emitted after each video’s last frame. <a href="https://stella-cv.readthedocs.io/en/stable/simple_tutorial.html">Stella VSLAM setup</a></p>
+        <pre tabindex="0"><code>mkdir -p stella_eval
+STELLA_FFMPEG_PIPE=1 /usr/bin/time -v run_video_slam \
+  -v orb_vocab.fbow -c camera.yaml -m panorama.mp4 \
+  --viewer none --no-sleep --auto-term --wait-loop-ba \
+  --frame-skip 1 --start-timestamp 0 \
+  --eval-log-dir stella_eval --map-db-out stella-map.msgpack</code></pre>
+      </details>
+    </article>
+
+    <article class="guide" id="x3" aria-labelledby="x3-title">
+        <div class="guide-heading">
+          <h3 id="x3-title">X3 wired workflow</h3>
+          <p>Use USB Webcam mode to record 1920 × 1080 dual-fisheye MJPEG at 30 Hz directly to the Ubuntu computer.</p>
+        </div>
+        <div class="guide-content">
+          <details open>
+            <summary>Connect each X3</summary>
+            <p>Run the commands from the repository root. Set each camera to USB Webcam mode. Assign a distinct <code>video-index0</code> device path to each camera role in the config.</p>
+            <pre tabindex="0"><code>sudo apt install g++ pkg-config libavcodec-dev libavutil-dev libswscale-dev
+bash datacap/camera_usb/build_worker.sh
+cp datacap/config.usb_webcam.example.json datacap/config.usb_webcam.json
+ls -l /dev/v4l/by-path/*video-index0
+python3 -m datacap.webapp --config datacap/config.usb_webcam.json</code></pre>
+          </details>
+          <details id="x3-record">
+            <summary>Preview, record, and mark episodes</summary>
+            <p>Choose <strong>Wired USB</strong> and start the preview. Check the camera and tracker roles. Start capture, mark the start and end of each episode, then end capture.</p>
+            <p>Keep the capture folder together. It contains <code>uvc_capture_complete.json</code>, event and tracker logs, and per-camera <code>video.mjpeg</code> and <code>frames.jsonl</code> files.</p>
+          </details>
+          <details id="x3-processing">
+            <summary>Validate and remux a capture</summary>
+            <p>Run Stage 01 from the repository root. It checks the packet index, camera roles, and shared host timestamps, then writes 30 Hz MP4 and timing reports under <code>capture/tmp/</code>.</p>
+            <pre tabindex="0"><code>INPUT_DIR=/absolute/path/to/usb-capture \
+  bash dataprocess/_01_raw_extrect/run_01_raw_extract_biarm.sh</code></pre>
+            <p>The documented X3 path ends at Stage 01. It writes <code>native_flat_master.mp4</code> with the original stacked lenses.</p>
+          </details>
+        </div>
+    </article>
+
+    <article class="guide processing-guide" id="inference" aria-labelledby="inference-title">
+      <header>
+        <h3 id="inference-title">Inference views and latency</h3>
+        <p>All four previews use the same left-wrist X5 frame from the cloth-folding training set. Latency was measured separately with one X5.</p>
+      </header>
+
+      <div class="inference-modes">
+        <div class="inference-column-headings">
+          <span>Camera output previews</span>
+          <span>Latency</span>
+        </div>
+        <section class="inference-mode" id="inference-x5-flat" aria-labelledby="inference-x5-flat-title">
+          <div class="inference-images">
+            <h4 id="inference-x5-flat-title">X5 USB Webcam · Flat</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-training-flat.webp" width="1920" height="1080" loading="lazy" alt="Forward rectilinear projection of the single-camera X5 training frame">
+              <figcaption>Forward 16:9 projection · 1920 × 1080</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Frame request → decoded image</p>
+            <p class="inference-result"><span><strong>19.5 ms</strong> Median</span><span><strong>34.7 ms</strong> P95</span></p>
+            <p class="inference-run">Includes waiting for the next frame and decoding MJPEG at full resolution.</p>
+            <p class="inference-run">16 Nov 2026 · 200 requests · 30 fps</p>
+          </div>
+        </section>
+
+        <section class="inference-mode" aria-labelledby="inference-webcam-title">
+          <div class="inference-images">
+            <h4 id="inference-webcam-title">X5 USB Webcam · Panorama</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-training-webcam-pano.webp" width="2880" height="1440" loading="lazy" alt="Equirectangular training panorama resampled to the 2880 by 1440 Webcam output size">
+              <figcaption>360° training panorama resampled to 2880 × 1440</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Frame request → decoded image</p>
+            <p class="inference-result"><span><strong>22.8 ms</strong> Median</span><span><strong>44.5 ms</strong> P95</span></p>
+            <p class="inference-run">Includes waiting for the next frame and decoding MJPEG at full resolution.</p>
+            <p class="inference-run">16 Nov 2026 · 200 requests</p>
+          </div>
+        </section>
+
+        <section class="inference-mode" aria-labelledby="inference-sdk-title">
+          <div class="inference-images">
+            <h4 id="inference-sdk-title">X5 USB Android · Direct dual-fisheye export</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-training-dual.webp" width="3840" height="1920" loading="lazy" alt="Front and rear fisheye lenses from the same X5 training frame, shown side by side">
+              <figcaption>Front (left) and rear (right) · 1920 × 1920 per lens</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Latency · median / P95</p>
+            <dl>
+              <div><dt>Camera timestamp → fisheye pair ready</dt><dd><strong>181 / 195 ms</strong></dd></div>
+              <div><dt>Host H.264 packet → fisheye pair ready</dt><dd>4.4 / 8.0 ms</dd></div>
+            </dl>
+            <p class="inference-run">17 Nov 2026 · 687 pairs · NVDEC with host readback</p>
+          </div>
+        </section>
+
+        <section class="inference-mode" aria-labelledby="inference-sdk-panorama-title">
+          <div class="inference-images">
+            <h4 id="inference-sdk-panorama-title">X5 USB Android · Dual fisheye + optical-flow stitch</h4>
+            <figure class="inference-preview">
+              <img src="assets/workflow/inference-training-optflow.webp" width="2048" height="1024" loading="lazy" alt="The same X5 training frame stitched into an equirectangular panorama with optical flow">
+              <figcaption>360° optical-flow stitch · 2048 × 1024</figcaption>
+            </figure>
+          </div>
+          <div class="inference-timing">
+            <p class="inference-scope">Latency · median / P95</p>
+            <dl>
+              <div><dt>Camera timestamp → panorama ready</dt><dd><strong>278 / 293 ms</strong></dd></div>
+              <div><dt>Host H.264 packet → panorama ready</dt><dd>103 / 140 ms</dd></div>
+            </dl>
+            <p class="inference-run">17 Nov 2026 · 690 panoramas · MediaSDK OPTFLOW</p>
+          </div>
+        </section>
+      </div>
+      <p class="inference-notes">X5 USB Android benchmarks used one X5 streaming 3840 × 1920 H.264 at 29.97 fps to an RTX 4080 SUPER.</p>
+
+      <details class="processing-commands x5-webcam-notes">
+        <summary>Can X5 Webcam stabilization be turned off?</summary>
+        <p>Webcam overrides in-camera shooting settings. X5 stitches and stabilizes the 2880 × 1440 panorama in-camera. Both cameras accepted FlowState Off via CameraSDK. Persistence after switching back to Webcam is unverified. <a href="https://onlinemanual.insta360.com/x5/zh-cn/operating_tutorials/connect/webcam">X5 Webcam manual</a></p>
+        <p>The August X5 test captured two stacked lenses at 1920 × 1080 and preserved camera roll. Per-lens stabilization remains unverified. The November flat-mode test captured a single 16:9 view at the same resolution. X3 Webcam has no FlowState. <a href="https://onlinemanual.insta360.com/app/en-us/operation-tutorial/live/live-streaming#:~:text=X3%20and%20X2%20do%20not%20support%20FlowState%20Stabilization">Insta360 stabilization FAQ</a></p>
+      </details>
+
+      <section class="inference-matrix" aria-labelledby="x5-matrix-title">
+        <div>
+          <h4 id="x5-matrix-title">X5 dataset export matrix</h4>
+          <p>Two wrists × front and rear 180° views, exported from INSV. Rear faces are masked.</p>
+          <a href="#x5-export-guide">See all three X5 exports</a>
+        </div>
+        <figure class="inference-preview">
+          <a href="assets/workflow/x5-export-front-rear.webp?v=video" aria-label="Open the full-size X5 export matrix"><img src="assets/workflow/x5-export-front-rear.webp?v=video" width="1200" height="800" loading="lazy" alt="Real 2 by 2 X5 dataset frame with the left and right wrists in rows and front and rear fisheyes in columns"></a>
+        </figure>
+      </section>
+    </article>
+
+    <footer class="references">
+      <p>Based on the <a href="https://umi-gripper.github.io/">Universal Manipulation Interface</a>.</p>
+      <ul aria-label="Reference grippers">
+        <li><a href="https://www.flexiv.com/product/grav">Flexiv Grav</a></li>
+        <li><a href="https://robotiq.com/products/adaptive-grippers">Robotiq 2F-85</a></li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>
